@@ -1,11 +1,40 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=https://actus.13080.fr/village/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirection...</title>
+
+  <!-- Matomo -->
+  <script>
+    var _paq = window._paq = window._paq || [];
+
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+
+    (function() {
+      var u = "https://vigie.siweb.13080.fr/";
+      _paq.push(['setTrackerUrl', u + 'matomo.php']);
+      _paq.push(['setSiteId', '18']);
+
+      var d = document;
+      var g = d.createElement('script');
+      var s = d.getElementsByTagName('script')[0];
+
+      g.async = true;
+      g.src = u + 'matomo.js';
+      s.parentNode.insertBefore(g, s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+
+  <!-- Redirection après un court délai pour permettre à Matomo d'enregistrer la visite -->
+  <meta http-equiv="refresh" content="1; url=https://actus.13080.fr/village/">
 </head>
+
 <body>
   <p>Redirection en cours...</p>
 </body>
 </html>
+```
