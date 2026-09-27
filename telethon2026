@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Téléthon Luynes 2026 — 4 et 5 décembre</title>
+<meta name="description" content="Le Téléthon s'installe à Luynes (Aix-en-Provence) les 4 et 5 décembre 2026 : animations, marche solidaire, buvette et spectacles place du village.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☀️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bleu-nuit:#0B2A63;
+    --bleu-nuit-2:#081E49;
+    --bleu:#1B5FD6;
+    --soleil:#FDB627;
+    --soleil-2:#F7941E;
+    --pierre:#FBF7ED;
+    --pierre-2:#F1E8D3;
+    --encre:#152037;
+    --encre-douce:#4B5468;
+    --blanc:#FFFEFB;
+    --line: rgba(21,32,55,.13);
+    --focus:#0B2A63;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --pierre:#12151C; --pierre-2:#191D26; --blanc:#0D0F14;
+      --encre:#F1EFE8; --encre-douce:#B9BFCE; --line:rgba(241,239,232,.16);
+    }
+  }
+  :root[data-theme="dark"]{
+    --pierre:#12151C; --pierre-2:#191D26; --blanc:#0D0F14;
+    --encre:#F1EFE8; --encre-douce:#B9BFCE; --line:rgba(241,239,232,.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px));}
+  body{
+    font-family:'Outfit',system-ui,sans-serif;
+    background:var(--pierre);
+    color:var(--encre);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .wrap{max-width:1120px;margin-inline:auto;padding-inline:24px;}
+  :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px;}
+  .skip{position:absolute;left:-999px;top:0;background:var(--soleil);color:var(--bleu-nuit-2);padding:12px 18px;font-weight:600;z-index:200;border-radius:0 0 8px 0;}
+  .skip:focus{left:0;}
+
+  /* Motif rayons — clin d'œil au soleil du Téléthon et à la lumière de Provence */
+  .rays{width:100%;height:34px;display:block;}
+  .rays path{fill:none;stroke-width:2;}
+
+  header{
+    position:sticky;top:0;z-index:100;
+    background:color-mix(in srgb, var(--pierre) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding-top:env(safe-area-inset-top,0px);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding-block:14px;gap:16px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.05rem;letter-spacing:.01em;white-space:nowrap;}
+  .brand .pt{width:12px;height:12px;border-radius:50%;background:var(--soleil);flex:none;}
+  nav ul{list-style:none;display:flex;gap:28px;}
+  nav a{text-decoration:none;font-weight:500;font-size:.95rem;color:var(--encre-douce);transition:color .15s;}
+  nav a:hover{color:var(--encre);}
+  .nav-cta{background:var(--bleu-nuit);color:var(--pierre);padding:10px 20px;border-radius:100px;font-weight:600;font-size:.9rem;text-decoration:none;flex:none;}
+  .nav-cta:hover{background:var(--soleil);color:var(--bleu-nuit-2);}
+  .burger{display:none;background:none;border:0;cursor:pointer;padding:8px;}
+  .burger span{display:block;width:24px;height:2px;background:var(--encre);margin:5px 0;border-radius:2px;}
+
+  .hero{
+    background:radial-gradient(120% 140% at 15% -10%, #123B8A 0%, var(--bleu-nuit) 45%, var(--bleu-nuit-2) 100%);
+    color:var(--pierre);
+    position:relative;
+    overflow:clip;
+    padding-block:72px 0;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding-bottom:64px;}
+  .kicker{font-size:1rem;color:var(--soleil);font-weight:600;margin-bottom:18px;}
+  .hero h1{
+    font-size:clamp(2.4rem, 5.4vw, 4.1rem);
+    font-weight:800;
+    line-height:1.03;
+    letter-spacing:-.01em;
+  }
+  .hero h1 em{font-style:normal;color:var(--soleil);}
+  .hero p.lede{
+    margin-top:22px;font-size:1.18rem;color:#D9E1F5;max-width:46ch;font-weight:300;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:100px;
+    font-weight:600;font-size:1rem;text-decoration:none;border:1px solid transparent;cursor:pointer;
+    transition:transform .15s, background .15s, color .15s;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--soleil);color:var(--bleu-nuit-2);}
+  .btn-primary:hover{background:#FFC85C;}
+  .btn-ghost{background:transparent;color:var(--pierre);border-color:rgba(251,247,237,.4);}
+  .btn-ghost:hover{border-color:var(--pierre);}
+
+  .hero-card{
+    background:rgba(251,247,237,.07);
+    border:1px solid rgba(251,247,237,.2);
+    border-radius:20px;
+    padding:30px;
+    backdrop-filter:blur(6px);
+  }
+  .hero-card .when{font-size:.9rem;color:#B7C3E2;font-weight:500;}
+  .hero-card .date{font-size:2rem;font-weight:800;margin-top:4px;color:var(--pierre);}
+  .hero-card hr{border:none;border-top:1px solid rgba(251,247,237,.2);margin:20px 0;}
+  .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .hero-stats div b{display:block;font-size:1.6rem;font-weight:800;color:var(--soleil);}
+  .hero-stats div span{font-size:.85rem;color:#C6CFE6;}
+
+  .rays.top{color:var(--pierre);opacity:.55;}
+
+  section{padding-block:88px;}
+  .head{max-width:64ch;margin-bottom:52px;}
+  .head .tag{color:var(--bleu);font-weight:600;font-size:.95rem;margin-bottom:10px;}
+  .head h2{font-size:clamp(1.8rem,3.4vw,2.5rem);font-weight:700;letter-spacing:-.01em;}
+  .head p{margin-top:14px;color:var(--encre-douce);font-size:1.06rem;max-width:58ch;}
+
+  .day-toggle{display:flex;gap:10px;margin-bottom:40px;}
+  .day-btn{
+    padding:10px 20px;border-radius:100px;border:1px solid var(--line);background:var(--blanc);
+    font-family:inherit;font-weight:600;font-size:.95rem;cursor:pointer;color:var(--encre-douce);
+  }
+  .day-btn[aria-selected="true"]{background:var(--bleu-nuit);color:var(--pierre);border-color:var(--bleu-nuit);}
+  .timeline{border-left:2px solid var(--line);padding-left:28px;display:grid;gap:0;}
+  .tl-item{position:relative;padding-block:22px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:96px 1fr;gap:20px;}
+  .tl-item:last-child{border-bottom:none;}
+  .tl-item::before{content:"";position:absolute;left:-33px;top:30px;width:10px;height:10px;border-radius:50%;background:var(--soleil-2);}
+  .tl-item time{font-weight:700;color:var(--encre);font-variant-numeric:tabular-nums;}
+  .tl-item h3{font-size:1.08rem;font-weight:600;margin-bottom:4px;}
+  .tl-item p{color:var(--encre-douce);font-size:.98rem;}
+  [hidden]{display:none !important;}
+
+  .anim-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:20px;}
+  .anim{border-top:3px solid var(--soleil);padding-top:18px;}
+  .anim:nth-child(3n+2){border-top-color:var(--bleu);}
+  .anim:nth-child(3n){border-top-color:var(--bleu-nuit);}
+  .anim h3{font-size:1.15rem;font-weight:700;margin-bottom:8px;}
+  .anim p{color:var(--encre-douce);font-size:.96rem;}
+  .anim.big{grid-column:span 3;}
+  .anim.small{grid-column:span 2;}
+
+  .voies{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;}
+  .voie{padding:34px 30px;border-right:1px solid var(--line);}
+  .voie:last-child{border-right:none;}
+  .voie h3{font-size:1.2rem;font-weight:700;margin-bottom:10px;}
+  .voie p{color:var(--encre-douce);font-size:.97rem;margin-bottom:18px;}
+  .voie a.link{font-weight:600;color:var(--bleu);text-decoration:none;border-bottom:2px solid currentColor;}
+  .voie a.link:hover{color:var(--bleu-nuit);}
+
+  .infos{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+  .infos dl{display:grid;grid-template-columns:auto 1fr;gap:14px 22px;font-size:1rem;}
+  .infos dt{color:var(--encre-douce);font-weight:500;}
+  .infos dd{font-weight:600;}
+  .map-frame{aspect-ratio:4/3;border-radius:18px;background:var(--bleu-nuit);position:relative;overflow:hidden;border:1px solid var(--line);}
+  .map-frame svg{position:absolute;inset:0;width:100%;height:100%;}
+  .map-pin{position:absolute;left:52%;top:46%;width:16px;height:16px;background:var(--soleil);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 0 0 4px rgba(253,182,39,.3);}
+
+  .don{
+    background:var(--bleu-nuit);color:var(--pierre);border-radius:24px;padding:56px;
+    display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;
+  }
+  .don h2{font-size:clamp(1.6rem,3vw,2.1rem);font-weight:700;}
+  .don p{margin-top:14px;color:#D9E1F5;max-width:48ch;}
+  .don .btn-primary{margin-top:0;}
+
+  footer{border-top:1px solid var(--line);padding-block:44px;}
+  .foot-grid{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:.9rem;color:var(--encre-douce);}
+  .foot-grid a{text-decoration:none;color:var(--encre-douce);}
+  .foot-grid a:hover{color:var(--encre);}
+
+  @media (max-width:920px){
+    .hero-grid{grid-template-columns:1fr;}
+    .anim-grid{grid-template-columns:repeat(2,1fr);}
+    .anim.big,.anim.small{grid-column:span 2;}
+    .voies{grid-template-columns:1fr;}
+    .voie{border-right:none;border-bottom:1px solid var(--line);}
+    .voie:last-child{border-bottom:none;}
+    .infos{grid-template-columns:1fr;}
+    .don{grid-template-columns:1fr;padding:36px 28px;text-align:left;}
+    nav ul{display:none;}
+    .burger{display:block;}
+  }
+  @media (max-width:560px){
+    .anim-grid{grid-template-columns:1fr;}
+    .anim.big,.anim.small{grid-column:span 1;}
+    .tl-item{grid-template-columns:1fr;gap:4px;}
+    .nav-cta{padding:9px 16px;font-size:.85rem;}
+    section{padding-block:64px;}
+    .hero{padding-top:48px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Aller au contenu</a>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="pt" aria-hidden="true"></span>Téléthon Luynes</div>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="#programme">Programme</a></li>
+        <li><a href="#animations">Animations</a></li>
+        <li><a href="#participer">Participer</a></li>
+        <li><a href="#infos">Infos pratiques</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="#don">Faire un don</a>
+    <button class="burger" aria-label="Ouvrir le menu" hidden><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker">40ᵉ édition — village de Luynes, Aix-en-Provence</p>
+        <h1>Un week-end pour <em>allumer</em> la solidarité</h1>
+        <p class="lede">Les habitants de Luynes se réunissent place du village, à l'ombre des platanes, pour deux jours d'animations, de rencontres et de dons au profit de la recherche contre les maladies rares.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#don">Je fais un don</a>
+          <a class="btn btn-ghost" href="#programme">Voir le programme</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <p class="when">Rendez-vous</p>
+        <p class="date">4 &amp; 5 décembre 2026</p>
+        <hr>
+        <div class="hero-stats">
+          <div><b>30</b><span>associations locales mobilisées</span></div>
+          <div><b>1987</b><span>naissance du Téléthon en France</span></div>
+          <div><b>2</b><span>jours d'animations à Luynes</span></div>
+          <div><b>100%</b><span>des dons reversés à l'AFM-Téléthon</span></div>
+        </div>
+      </div>
+    </div>
+    <svg class="rays top" viewBox="0 0 1200 34" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 34 L20 4 M40 34 L60 0 M80 34 L100 4 M120 34 L140 0 M160 34 L180 4 M200 34 L220 0 M240 34 L260 4 M280 34 L300 0 M320 34 L340 4 M360 34 L380 0 M400 34 L420 4 M440 34 L460 0 M480 34 L500 4 M520 34 L540 0 M560 34 L580 4 M600 34 L620 0 M640 34 L660 4 M680 34 L700 0 M720 34 L740 4 M760 34 L780 0 M800 34 L820 4 M840 34 L860 0 M880 34 L900 4 M920 34 L940 0 M960 34 L980 4 M1000 34 L1020 0 M1040 34 L1060 4 M1080 34 L1100 0 M1120 34 L1140 4 M1160 34 L1180 0" stroke="currentColor"/>
+    </svg>
+  </section>
+
+  <section id="programme">
+    <div class="wrap">
+      <div class="head">
+        <p class="tag">Deux jours, un même élan</p>
+        <h2>Le programme du week-end</h2>
+        <p>Toutes les animations se tiennent place du village et sur le cours ombragé de platanes, au cœur de Luynes.</p>
+      </div>
+
+      <div class="day-toggle" role="tablist" aria-label="Choisir un jour">
+        <button class="day-btn" role="tab" id="tab-ven" aria-selected="true" aria-controls="panel-ven">Vendredi 4 décembre</button>
+        <button class="day-btn" role="tab" id="tab-sam" aria-selected="false" aria-controls="panel-sam">Samedi 5 décembre</button>
+      </div>
+
+      <div class="timeline" id="panel-ven" role="tabpanel" aria-labelledby="tab-ven">
+        <div class="tl-item"><time>18h00</time><div><h3>Ouverture &amp; lâcher de ballons de baudruche solidaires</h3><p>Discours d'ouverture par la municipalité, place du village.</p></div></div>
+        <div class="tl-item"><time>19h00</time><div><h3>Repas solidaire</h3><p>Soupe et plat unique préparés par les associations, salle des fêtes, sur inscription.</p></div></div>
+        <div class="tl-item"><time>20h30</time><div><h3>Concert des chorales locales</h3><p>Les chorales de Luynes et des quartiers voisins se produisent sous les platanes illuminés.</p></div></div>
+        <div class="tl-item"><time>22h00</time><div><h3>Veillée &amp; compteur des dons</h3><p>Suivi en direct du montant collecté, retransmis sur grand écran.</p></div></div>
+      </div>
+
+      <div class="timeline" id="panel-sam" role="tabpanel" aria-labelledby="tab-sam" hidden>
+        <div class="tl-item"><time>09h00</time><div><h3>Marche &amp; course solidaires</h3><p>Départ place du village, parcours de 5 ou 10 km à travers les rues du quartier.</p></div></div>
+        <div class="tl-item"><time>11h00</time><div><h3>Marché des associations</h3><p>Stands, tombola, vente d'objets faits main au profit du Téléthon.</p></div></div>
+        <div class="tl-item"><time>14h00</time><div><h3>Défi sportif en famille</h3><p>Relais et jeux collectifs animés par les clubs sportifs de Luynes.</p></div></div>
+        <div class="tl-item"><time>17h30</time><div><h3>Annonce du montant collecté</h3><p>Clôture de l'édition et remerciements à tous les bénévoles et donateurs.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="animations" style="background:var(--pierre-2)">
+    <div class="wrap">
+      <div class="head">
+        <p class="tag">Pour tous les âges</p>
+        <h2>Des animations pour chacun</h2>
+        <p>Petits et grands trouveront leur moment fort du week-end.</p>
+      </div>
+      <div class="anim-grid">
+        <div class="anim big"><h3>Marche solidaire dans les rues de Luynes</h3><p>Un parcours balisé de 5 ou 10 km au départ de la place du village, ouvert à tous les niveaux, inscription sur place.</p></div>
+        <div class="anim small"><h3>Ateliers enfants</h3><p>Fresque collective et jeux en bois toute la journée du samedi.</p></div>
+        <div class="anim small"><h3>Buvette &amp; gourmandises</h3><p>Tenue par les parents d'élèves des écoles de Luynes.</p></div>
+        <div class="anim small"><h3>Tombola solidaire</h3><p>Lots offerts par les commerçants du village, tirage samedi 17h.</p></div>
+        <div class="anim big"><h3>Spectacle des chorales sous les platanes</h3><p>Un moment suspendu, vendredi soir, en plein cœur du village illuminé.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="participer">
+    <div class="wrap">
+      <div class="head">
+        <p class="tag">Trois façons d'agir</p>
+        <h2>Comment participer</h2>
+      </div>
+      <div class="voies">
+        <div class="voie">
+          <h3>Faire un don</h3>
+          <p>Chaque euro compte pour financer la recherche sur les maladies rares et génétiques.</p>
+          <a class="link" href="#don">Faire un don en ligne</a>
+        </div>
+        <div class="voie">
+          <h3>Devenir bénévole</h3>
+          <p>Montage, buvette, accueil du public : l'équipe cherche des bras pour les deux journées.</p>
+          <a class="link" href="mailto:telethon.luynes@exemple.fr">Rejoindre l'équipe</a>
+        </div>
+        <div class="voie">
+          <h3>Venir sur place</h3>
+          <p>Le plus simple reste de venir passer un moment avec nous, en famille ou entre amis.</p>
+          <a class="link" href="#infos">Voir le lieu</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="infos" style="background:var(--pierre-2)">
+    <div class="wrap infos">
+      <div>
+        <div class="head" style="margin-bottom:28px;">
+          <p class="tag">S'y rendre</p>
+          <h2>Infos pratiques</h2>
+        </div>
+        <dl>
+          <dt>Lieu</dt><dd>Place du village, 13080 Luynes (Aix-en-Provence)</dd>
+          <dt>Horaires</dt><dd>Vendredi 18h – 23h · Samedi 9h – 18h</dd>
+          <dt>Accès</dt><dd>Parking place du village, ligne de bus depuis le centre d'Aix</dd>
+          <dt>Accessibilité</dt><dd>Sites accessibles aux personnes à mobilité réduite</dd>
+          <dt>Contact</dt><dd><a href="mailto:telethon.luynes@exemple.fr">telethon.luynes@exemple.fr</a></dd>
+        </dl>
+      </div>
+      <div class="map-frame" role="img" aria-label="Plan schématique indiquant la place du village à Luynes, Aix-en-Provence, lieu du Téléthon">
+        <svg viewBox="0 0 400 300" aria-hidden="true">
+          <rect width="400" height="300" fill="#0B2A63"/>
+          <path d="M0 220 L400 210" stroke="#1B5FD6" stroke-width="10"/>
+          <path d="M40 0 V300 M110 0 V300 M180 0 V300 M250 0 V300 M320 0 V300" stroke="#163C86" stroke-width="6"/>
+          <circle cx="200" cy="150" r="26" fill="#FDB627" opacity=".85"/>
+        </svg>
+        <span class="map-pin" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="don">
+    <div class="wrap">
+      <div class="don">
+        <div>
+          <h2>Votre don finance la recherche, dès aujourd'hui</h2>
+          <p>100 % des sommes collectées à Luynes sont reversées à l'AFM-Téléthon pour soutenir la recherche sur les maladies rares et les familles concernées.</p>
+        </div>
+        <a class="btn btn-primary" href="https://www.telethon.fr/faire-un-don" target="_blank" rel="noopener">Faire un don sur telethon.fr</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span>Téléthon Luynes — organisé par le comité des fêtes et les associations du village.</span>
+    <a href="https://www.telethon.fr" target="_blank" rel="noopener">AFM-Téléthon national</a>
+  </div>
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('[role="tab"]');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.setAttribute('aria-selected','false'));
+      tab.setAttribute('aria-selected','true');
+      document.querySelectorAll('[role="tabpanel"]').forEach(p => p.hidden = true);
+      document.getElementById(tab.getAttribute('aria-controls')).hidden = false;
+    });
+  });
+</script>
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://vigie.siweb.13080.fr/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '18']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+</body>
+</html>
