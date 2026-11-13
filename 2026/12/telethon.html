@@ -99,9 +99,16 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 .map{border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);background:#eee}
 .map iframe{display:block;width:100%;height:380px;border:0}
 
-@media(max-width:900px){nav a:not(.keep){display:none}}
+.burger{display:none;width:46px;height:46px;border:1px solid var(--line);border-radius:14px;background:#fff;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0}
+.burger span{display:block;width:20px;height:2px;border-radius:2px;background:var(--ink);transition:transform .2s,opacity .2s}
+.burger[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger[aria-expanded=true] span:nth-child(2){opacity:0}.burger[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.legend{min-width:0}
+@media(max-width:900px){.burger{display:flex}
+ nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:8px 16px 14px;background:rgba(255,249,242,.98);border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(63,40,16,.12)}
+ nav.open{display:flex}nav a{padding:14px 12px;font-size:1.05rem;border-radius:12px}}
 @media(max-width:800px){.lieu,.steps{grid-template-columns:1fr}.strip{grid-template-columns:1fr}.contact{padding:22px}
  .spine{left:12px}.node{grid-template-columns:34px 1fr;row-gap:6px}.dot{grid-row:1;grid-column:1;margin:8px 0 0 4px;width:18px;height:18px}.hr{grid-row:1;grid-column:2;text-align:left;font-size:1.9rem;padding:0}.cards{grid-column:2}}
+@media(max-width:800px){.bar{gap:8px;padding:8px 0}.tabs{width:100%}.tab{padding:10px 8px}.legend{width:100%;padding-bottom:2px}.lg{padding:7px 12px;font-size:.88rem}.hero .container{padding:48px 0 32px}.sec{padding:44px 0}}
 @media(max-width:480px){.days{grid-template-columns:1fr}.org{flex-direction:column;text-align:center}.tab{padding:12px 18px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 </style>
@@ -109,7 +116,8 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 <body>
 <header><div class="container">
  <a class="brand" href="/"><img class="logo" src="https://hive.forms.usercontent.microsoft/images/775dabcb-7e15-4658-a8f9-1fa4fe7a9420/0722fc0d-08df-49f3-b822-4a568599971b/T8O9F5KIH1WU2VB4FCT15414Z8/0334595a-3f1f-46ba-b666-992adfab60d0" alt="Logo Luynes en Fêtes" />Luynes en Fêtes</a>
- <nav aria-label="Sections"><a href="#programme" class="keep">Programme</a><a href="#billetterie" class="keep">Billetterie</a><a href="#associations">Associations</a><a href="#don" class="keep">Don</a><a href="#contact">Contact</a></nav>
+ <button class="burger" id="bg" type="button" aria-expanded="false" aria-controls="nv" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
+ <nav id="nv" aria-label="Sections"><a href="#programme" class="keep">Programme</a><a href="#billetterie" class="keep">Billetterie</a><a href="#associations">Associations</a><a href="#don" class="keep">Don</a><a href="#contact">Contact</a></nav>
 </div></header>
 
 <main>
@@ -167,7 +175,7 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 <section class="sec" id="contact"><div class="container">
  <div class="contact">
   <div><h2>Une question ?</h2><p>Écrivez au comité des fêtes pour un renseignement ou pour donner un coup de main.</p></div>
-  <div class="cbtns"><button class="btn btn-p" type="button" id="wr">Écrire au comité</button><button class="btn btn-s" type="button" id="sh">Afficher l’adresse e-mail</button><div id="msg" role="status"></div></div>
+  <div class="cbtns"><button class="btn btn-p" type="button" id="wr">Écrire au comité</button><button class="btn btn-s" type="button" id="sh">Afficher l’adresse e-mail</button><a class="btn btn-s" id="tel" href="#">Appeler le 06 XX XX XX XX</a><div id="msg" role="status"></div></div>
  </div>
 </div></section>
 
@@ -175,7 +183,7 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
  <h2>Lieu</h2>
  <p class="lead">Espace Ughetti, à Luynes.</p>
  <div class="lieu">
-  <div><address>Espace Ughetti<br>Allée Serge Attard<br>Rue André Claverie<br>13080 Luynes</address>
+  <div><address>Espace Ughetti<br>Allée Serge Attard / Rue André Claverie<br>Luynes<br>13080 Aix-en-Provence</address>
   <a class="btn btn-p" target="_blank" rel="noreferrer" href="https://maps.app.goo.gl/Q3UA2Ws4CXG31pKu6">Itinéraire</a></div>
   <div class="map"><iframe title="Carte de l’Espace Ughetti" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=5.4135%2C43.4786%2C5.4235%2C43.4857&amp;layer=mapnik&amp;marker=43.482143594%2C5.418548888"></iframe></div>
  </div>
@@ -216,6 +224,9 @@ $("legend").onclick=e=>{const b=e.target.closest(".lg");if(!b)return;cat=cat===b
 function setDay(d){day=d;document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x.dataset.d===d));draw()}
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>setDay(t.dataset.d));
 document.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",()=>setDay(a.dataset.go)));
+const bg=$("bg"),nv=$("nv");
+bg.onclick=()=>{const o=nv.classList.toggle("open");bg.setAttribute("aria-expanded",o);bg.setAttribute("aria-label",o?"Fermer le menu":"Ouvrir le menu")};
+nv.addEventListener("click",e=>{if(e.target.closest("a")){nv.classList.remove("open");bg.setAttribute("aria-expanded","false")}});
 draw();
 const T=new Date("2026-12-05T10:00:00+01:00"),E=new Date("2026-12-06T18:00:00+01:00"),now=new Date();
 if(now<T){const j=Math.ceil((T-now)/864e5);$("cd").textContent=j>1?`Dans ${j} jours`:"C’est demain"}
