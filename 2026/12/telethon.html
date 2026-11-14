@@ -112,7 +112,7 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 .contact{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;padding:34px;border-radius:32px;background:linear-gradient(135deg,rgba(248,224,194,.8),#fff);border:1px solid var(--line);box-shadow:var(--shadow)}
 .contact p{margin:0;line-height:1.7;max-width:46ch}
 .cbtns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.cbtns #msg{width:100%;font-weight:600;color:var(--ink)}
-.lieu{display:grid;grid-template-columns:1fr 1.4fr;gap:32px;align-items:center}
+.lieu{display:block}
 .lieu address{font-style:normal;font-size:1.25rem;line-height:1.7;color:var(--ink);margin:0 0 24px}
 .map{border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);background:#eee}
 .map iframe{display:block;width:100%;height:380px;border:0}
@@ -125,7 +125,7 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
  nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:8px 16px 14px;background:rgba(255,249,242,.98);border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(63,40,16,.12)}
  nav.open{display:flex}nav a{padding:14px 12px;font-size:1.05rem;border-radius:12px}
  .hgrid{grid-template-columns:1fr}.visu{max-width:300px;order:-1;justify-self:start}}
-@media(max-width:800px){.lieu,.steps{grid-template-columns:1fr}.orgs{grid-template-columns:1fr}.strip{grid-template-columns:1fr}.contact{padding:22px}
+@media(max-width:800px){.steps{grid-template-columns:1fr}.orgs{grid-template-columns:1fr}.strip{grid-template-columns:1fr}.contact{padding:22px}
  .spine{left:12px}.node{grid-template-columns:34px 1fr;row-gap:6px}.dot{grid-row:1;grid-column:1;margin:8px 0 0 4px;width:18px;height:18px}.hr{grid-row:1;grid-column:2;text-align:left;font-size:1.9rem;padding:0}.cards{grid-column:2}}
 @media(max-width:800px){.bar{gap:8px;padding:8px 0}.tabs{width:100%}.tab{padding:10px 8px}.legend{width:100%;padding-bottom:2px}.lg{padding:7px 12px;font-size:.88rem}.hero .container{padding:48px 0 32px}.sec{padding:44px 0}}
 @media(max-width:480px){.days{grid-template-columns:1fr}.tab{padding:12px 18px}.visu{max-width:220px}}
@@ -156,7 +156,7 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 </head>
 <body>
 <header><div class="container">
- <a class="brand" href="/"><img class="logo" src="https://hive.forms.usercontent.microsoft/images/775dabcb-7e15-4658-a8f9-1fa4fe7a9420/0722fc0d-08df-49f3-b822-4a568599971b/T8O9F5KIH1WU2VB4FCT15414Z8/0334595a-3f1f-46ba-b666-992adfab60d0" alt="Logo Luynes en Fêtes" />Luynes en Fêtes</a>
+ <a class="brand" href="/"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" />Luynes en Fêtes</a>
  <button class="burger" id="bg" type="button" aria-expanded="false" aria-controls="nv" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
  <nav id="nv" aria-label="Sections"><a href="#programme" class="keep">Programme</a><a href="#billetterie" class="keep">Billetterie</a><a href="#associations">Associations</a><a href="#don" class="keep">Don</a><a href="#contact">Contact</a></nav>
 </div></header>
@@ -205,7 +205,7 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
  <p class="lead">Elles se mobilisent pour le Téléthon, au profit de l’AFM-Téléthon.</p>
  <div class="orgs">
   <div class="org"><small>Organisateur</small><img src="/files/logos/lef.jpeg" alt="Logo Luynes en Fêtes" /><b>Luynes en Fêtes</b></div>
-  <div class="org"><small>Organisateur</small><img src="https://www.aixenprovence.fr/local/cache-vignettes/L1199xH630/f39fc0207b50495515902f20e30b1b-15bea.png" alt="Logo Ville d’Aix-en-Provence" /><b>Ville d’Aix-en-Provence</b></div>
+  <div class="org"><small>Soutien institutionnel</small><img src="https://www.aixenprovence.fr/local/cache-vignettes/L1199xH630/f39fc0207b50495515902f20e30b1b-15bea.png" alt="Logo Ville d’Aix-en-Provence" /><b>Ville d’Aix-en-Provence</b></div>
   <div class="org"><small>Partenaire institutionnel</small><img src="https://www.afm-telethon.fr/sites/default/files/media/images/AFM_TELETHON_millesime_2026_Q.jpg" alt="Logo AFM-Téléthon 2026" /><b>AFM-Téléthon</b></div>
  </div>
  <ul class="tiles"><li>Festi Luynes</li><li>Union Cycliste de Luynes</li><li>ADAVA</li><li>FreeSon</li><li>Rythm&amp;Fit</li><li>Planet Jeunes</li><li>Mon Tir Sportif</li><li>Luynes Sports</li><li>Paroisse de Luynes</li><li>Le Corps au Présent</li><li>Pizza Verte</li><li>Boulangerie L’Orge</li></ul>
@@ -232,7 +232,6 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
  <div class="lieu">
   <div><address>Espace Ughetti<br>Allée Serge Attard / Rue André Claverie<br>Luynes<br>13080 Aix-en-Provence</address>
   <a class="btn btn-p" target="_blank" rel="noreferrer" href="https://maps.app.goo.gl/Q3UA2Ws4CXG31pKu6">Itinéraire</a></div>
-  <div class="map"><iframe title="Carte de l’Espace Ughetti" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=5.4135%2C43.4786%2C5.4235%2C43.4857&amp;layer=mapnik&amp;marker=43.482143594%2C5.418548888"></iframe></div>
  </div>
 </div></section>
 </main>
