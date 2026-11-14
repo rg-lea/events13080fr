@@ -24,7 +24,7 @@
 <style>
 :root{--brand-dark:#c2792a;--brand:#ffb763;--brand-soft:#f8e0c2;--ink:#2f2418;--text:#4b3a29;--muted:rgba(75,58,41,.72);--line:rgba(95,68,37,.16);--shadow:0 14px 36px rgba(63,40,16,.09);
 --c-jeton:#b0703a;--c-pass:#9aa3ae;--c-fort:#e0b11f;--ok:#2e7d32}
-.t-jeton{--t:var(--c-jeton);--tc:#fff}.t-pass{--t:var(--c-pass);--tc:var(--ink)}.t-fort{--t:var(--c-fort);--tc:var(--ink)}
+.t-jeton{--t:var(--c-jeton);--tc:#fff}.t-pass{--t:var(--c-pass);--tc:var(--ink)}.t-fort{--t:var(--c-fort);--tc:var(--ink)}.t-free{--t:var(--ok);--tc:#fff}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{margin:0;font-family:"Outfit",sans-serif;color:var(--text);background:linear-gradient(180deg,#fffaf4,#fff6eb);overflow-x:hidden}
 a{color:inherit;text-decoration:none}img{display:block;max-width:100%}button{font:inherit;cursor:pointer}
@@ -236,7 +236,7 @@ dialog.wz[open]{display:flex;flex-direction:column}
 <li class="t-pass"><div class="h"><b>10h – 12h</b><b>13h – 16h</b></div><div class="i"><h4>Karts à pédales</h4><span class="p">Boulodrome, avec l’ADAVA</span><p>Pilotez un kart sur un circuit sécurisé.</p><span class="tg">Pass multi-activités</span></div></li>
 <li class="t-pass"><div class="h"><b>10h – 12h</b><b>14h – 16h</b></div><div class="i"><h4>Planet Jeunes</h4><span class="p">Salle Ughetti</span><p>Atelier créatif, crêpes et kermesse pour les enfants.</p><span class="tg">Pass multi-activités</span></div></li>
 <li class="t-jeton"><div class="h"><b>14h – 16h</b></div><div class="i"><h4>Ballons sculptés</h4><span class="p">Devant la salle Ughetti</span><p>Des animateurs sculptent des ballons à rapporter à la maison.</p><span class="tg">1 jeton le ballon</span></div></li>
-<li class="t-fort"><div class="h"><b>15h – 16h</b></div><div class="i"><h4>Spectacle Rythm&amp;Fit</h4><span class="p">Salle principale</span><p>Accueil à 14h30. Les adhérents de Rythm&amp;Fit présentent leur spectacle de danse.</p><span class="tg">Pass temps fort</span></div></li>
+<li class="t-free"><div class="h"><b>15h – 16h</b></div><div class="i"><h4>Spectacle Rythm&amp;Fit</h4><span class="p">Salle principale</span><p>Accueil à 14h30. Les adhérents de Rythm&amp;Fit présentent leur spectacle de danse.</p><span class="tg">Gratuit</span></div></li>
 <li class="t-fort"><div class="h"><b>17h – 18h</b></div><div class="i"><h4>Concert FreeSon</h4><span class="p">Salle principale</span><p>Du jazz vocal pour clôturer le week-end.</p><span class="tg">Pass temps fort</span></div></li>
 </ul></div>
   <div class="pgf"><span class="k t-jeton"><i></i>Jetons</span><span class="k t-pass"><i></i>Pass multi-activités</span><span class="k t-fort"><i></i>Pass temps fort</span><a href="#billetterie">Comprendre les tarifs</a></div>
@@ -249,7 +249,7 @@ dialog.wz[open]{display:flex;flex-direction:column}
  <div class="tarifs">
   <div class="tf t-jeton"><span class="tn">Jetons</span><h3>Pour les petits achats</h3><p class="px">1 jeton = 1 €</p><ul><li>Cafés</li><li>Ballons sculptés : 1 jeton</li><li>Porte-clés : 5 jetons</li></ul></div>
   <div class="tf t-pass"><span class="tn">Pass multi-activités</span><h3>Toutes les activités du jour</h3><p class="px">10 € par participant et par jour</p><ul><li>Karts à pédales, Planet Jeunes, maquillage</li><li>Tir laser, code de la route, tandem</li><li>Sorties VTT et route</li><li>Samedi, dimanche ou les deux jours</li></ul></div>
-  <div class="tf t-fort"><span class="tn">Pass temps fort</span><h3>Une animation, un pass</h3><p class="px">Tarif propre à chaque temps fort</p><ul><li>Massage de 20 minutes · samedi</li><li>Spectacle de danse Rythm&amp;Fit · dimanche</li><li>Concert de FreeSon · dimanche</li><li>Ateliers pizza et cookies<br><span class="ins">Inscription obligatoire, places limitées</span></li></ul></div>
+  <div class="tf t-fort"><span class="tn">Pass temps fort</span><h3>Une animation, un pass</h3><p class="px">Tarif propre à chaque temps fort</p><ul><li>Massage de 20 minutes · samedi</li><li>Concert de FreeSon · dimanche</li><li>Ateliers pizza et cookies<br><span class="ins">Inscription obligatoire, places limitées</span></li></ul></div>
  </div>
  <div class="fam"><span style="font-size:2rem" aria-hidden="true">👨‍👩‍👧‍👦</span><div><b>Gratuité famille, appliquée automatiquement.</b> Pour un même pass multi-activités ou un même pass temps fort, à partir du 3<sup>e</sup> enfant d’une même famille, c’est gratuit. Rien à choisir, la billetterie s’en charge.</div></div>
  <p class="fisc"><b>Bon à savoir :</b> les jetons et les pass sont un droit d’accès aux animations. Ils <b>ne donnent pas droit à un reçu fiscal</b> (réduction d’impôt), à la différence d’un <a href="#don" style="text-decoration:underline">don</a>. À l’inverse, un don ne donne pas accès aux activités du Téléthon, pour des raisons légales.</p>
@@ -281,7 +281,7 @@ dialog.wz[open]{display:flex;flex-direction:column}
 <section class="sec" id="don"><div class="container">
  <div class="donbox">
   <div><h2>Faire un don en ligne</h2><p>Vous ne pouvez pas venir ou vous souhaitez aller plus loin ? Soutenez l’AFM-Téléthon directement depuis la page dédiée à l’édition de Luynes.</p><p class="sm">Un don ouvre droit à un reçu fiscal, mais ne donne pas accès aux activités du Téléthon (raisons légales). Pour participer aux animations, passez par la billetterie.</p></div>
-  <a class="btn" href="#">Faire un don au Téléthon</a>
+  <a class="btn" target="_blank" rel="noreferrer" href="https://mapage.telethon.fr/animation/13080-2026">Faire un don au Téléthon</a>
  </div>
 </div></section>
 
@@ -321,7 +321,7 @@ dlg.addEventListener("click",e=>{if(e.target===dlg||e.target.closest(".pgf a"))d
 
 /* ================= BILLETTERIE : assistant en 4 étapes =================
    Les clés HelloAsso restent dans le flux Power Automate, jamais ici. Les prix affichés servent à l’affichage : le flux recalcule tout.
-   Pour ouvrir un tarif (pizza, cookies, danse) : renseigner p (prix en €) et j (jours), et ajouter la même ligne dans l’action « Tarifs » du flux. */
+   Pour ouvrir un tarif (pizza, cookies) : renseigner p (prix en €) et j (jours), et ajouter la même ligne dans l’action « Tarifs » du flux. */
 const API_URL="https://default403611541d9141c3b14ddd403256e1.be.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/07/workflows/9cd451be8db54573bfd8199d474255f2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bKay8rC9da6iQXNhUXjylN9sOkI-9PxD0ikvq8_hjjs";
 const LS="telethon2026-commande";
 const PR=[
@@ -329,7 +329,6 @@ const PR=[
 {id:"pass",g:"pass",n:"Pass multi-activités",d:"",dj:{sam:"Karts à pédales, Planet Jeunes, maquillage… et les activités annoncées au programme du samedi.",dim:"Karts à pédales, Planet Jeunes… et les activités annoncées au programme du dimanche."},p:10,j:["sam","dim"]},
 {id:"massage",g:"fort",n:"Massage de 20 minutes",d:"Tête ou pieds, à 10h, 12h, 14h et 16h, salle Ughetti",p:10,j:["sam"]},
 {id:"concert",g:"fort",n:"Concert FreeSon",d:"Jazz vocal, 17h – 18h",p:10,j:["dim"]},
-{id:"danse",g:"fort",n:"Spectacle Rythm&Fit",d:"Dimanche, 15h – 16h",p:null,j:["dim"]},
 {id:"pizza",g:"fort",n:"Atelier pizza",d:"Inscription obligatoire, places limitées",p:null,j:[]},
 {id:"cookies",g:"fort",n:"Atelier cookies",d:"Inscription obligatoire, places limitées",p:null,j:[]}];
 const GR=[["jeton","Jetons","1 jeton = 1 €"],["pass","Pass multi-activités","10 € par participant et par jour"],["fort","Pass temps fort","Un pass par participant et par animation"]];
