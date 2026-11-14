@@ -221,7 +221,7 @@ dialog.wz[open]{display:flex;flex-direction:column}
   <button class="pickb" type="button" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></button>
   <button class="pickb" type="button" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></button>
  </div>
- <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-pass"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-pass"><i></i><span>Atelier code de la route</span></li><li class="t-pass"><i></i><span>Découverte du tandem</span></li><li class="t-pass"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-fort"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Inscription obligatoire · places limitées</em></li><li class="t-fort"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Inscription obligatoire · places limitées</em></li></ul></div>
+ <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-pass"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-pass"><i></i><span>Atelier code de la route <small>Sporting Auto Moto École</small></span></li><li class="t-pass"><i></i><span>Découverte du tandem <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-fort"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Inscription obligatoire · places limitées</em></li><li class="t-fort"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Inscription obligatoire · places limitées</em></li></ul></div>
  <dialog class="pg" id="pg" aria-labelledby="pgt">
   <div class="pgh"><h3 id="pgt"></h3><button class="x" type="button" id="pgx" aria-label="Fermer">&times;</button></div>
   <div class="pgb" data-d="sam"><ul class="ag">
@@ -273,7 +273,7 @@ dialog.wz[open]{display:flex;flex-direction:column}
   <div class="org"><small>Soutien institutionnel</small><img src="https://www.aixenprovence.fr/local/cache-vignettes/L1199xH630/f39fc0207b50495515902f20e30b1b-15bea.png" alt="Logo Ville d’Aix-en-Provence" /><b>Ville d’Aix-en-Provence</b></div>
   <div class="org"><small>Partenaire institutionnel</small><img src="https://www.afm-telethon.fr/sites/default/files/media/images/AFM_TELETHON_millesime_2026_Q.jpg" alt="Logo AFM-Téléthon 2026" /><b>AFM-Téléthon</b></div>
  </div>
- <ul class="tiles"><li>Festi Luynes</li><li>Union Cycliste de Luynes</li><li>ADAVA</li><li>FreeSon</li><li>Rythm&amp;Fit</li><li>Planet Jeunes</li><li>Mon Tir Sportif</li><li>Luynes Sports</li><li>Paroisse de Luynes</li><li>Le Corps au Présent</li><li>Pizza Verte</li><li>Boulangerie L’Orge</li></ul>
+ <ul class="tiles"><li>Festi Luynes</li><li>Union Cycliste de Luynes</li><li>ADAVA</li><li>FreeSon</li><li>Rythm&amp;Fit</li><li>Planet Jeunes</li><li>Mon Tir Sportif</li><li>Sporting Auto Moto École</li><li>Luynes Sports</li><li>Paroisse de Luynes</li><li>Le Corps au Présent</li><li>Pizza Verte</li><li>Boulangerie L’Orge</li></ul>
  <p class="small">Avec le soutien de</p>
  <ul class="tiles o"><li>Arena Aix</li><li>Sodexo</li></ul>
 </div></section>
@@ -393,7 +393,7 @@ function err2(){for(const[i,x]of X.entries()){const w=i?label(x):"Vos coordonné
  const np=parts().length;if(!np)return "Il faut au moins un participant.";if(np<need())return "Il faut au moins "+need()+" participants pour ce panier : ajoutez des participants ou réduisez les quantités.";
  const bad=X.find(x=>x.role==="accompagnant"&&!X.some(m=>m.resp===x.id));if(bad)return label(bad)+" n’accompagne aucun mineur : passez-le en participant ou retirez-le.";return ""}
 /* ---- étape 3 ---- */
-function v3(){auto();const L=price();
+function v3(){const L=price();
  let o=`<h2 class="wt">Pour qui ?</h2><p class="ws">Attribuez chaque achat au bon participant. Nous avons pré-rempli : corrigez si besoin.</p>`;
  keys().forEach(([s,p,j])=>{const r=Q[s]-got(s),t=p.g==="jeton"?p.n:p.g==="pass"?"Pass multi-activités · "+JL[j]:p.n+" · "+JL[j];
   o+=`<div class="card t-${p.g}" style="border-left:8px solid var(--t)"><div class="ch"><b>${t}</b><span class="${r?"ko":"okc"}">${r?"Il en reste "+r+" à attribuer":"✓ Tout est attribué"}</span></div>`;
@@ -416,7 +416,7 @@ function v4(){const L=price(),T=total(),p0=X[0];
 /* ---- navigation ---- */
 const VIEWS=[0,v1,v2,v3,v4];
 let shown=0;
-function show(n){wb.classList.toggle("go",n!==shown);shown=n;step=n;$("bm").textContent="";if(n>=3)norm();wb.innerHTML=VIEWS[n]();wb.scrollTop=0;
+function show(n){const was=shown;wb.classList.toggle("go",n!==shown);shown=n;step=n;if(n===3&&was!==3)auto();$("bm").textContent="";if(n>=3)norm();wb.innerHTML=VIEWS[n]();wb.scrollTop=0;
  $("pg4").querySelectorAll("i").forEach((e,i)=>e.classList.toggle("on",i<n));$("bb").hidden=n===1;
  $("bn").textContent=n===4?"Payer "+eur(total()):n===3?"Relire ma commande":"Continuer";upd()}
 function upd(){$("bt").textContent=eur(total());if(step===1)$("bn").disabled=!keys().length;else $("bn").disabled=false}
