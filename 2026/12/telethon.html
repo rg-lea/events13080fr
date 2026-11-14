@@ -566,11 +566,11 @@ nv.addEventListener("click",e=>{if(e.target.closest("a")){nv.classList.remove("o
 const T=new Date("2026-12-05T10:00:00+01:00"),FIN=new Date("2026-12-06T18:00:00+01:00");
 let iv;
 function tick(){const n=new Date(),c=$("cd");
- if(n<T){const m=Math.floor((T-n)/6e4),j=Math.floor(m/1440),h=Math.floor(m%1440/60),mn=m%60;
-  c.textContent=j>=1?`Dans ${j} jour${j>1?"s":""} ${h} h`:h>=1?`Dans ${h} h ${mn} min`:`Dans ${mn} min`}
+ if(n<T){const t=Math.floor((T-n)/1e3),j=Math.floor(t/86400),h=Math.floor(t%86400/3600),m=Math.floor(t%3600/60),sc=t%60,p=x=>String(x).padStart(2,"0");
+  c.textContent="Dans "+(j?j+" j ":"")+p(h)+" h "+p(m)+" min "+p(sc)+" s";c.style.fontVariantNumeric="tabular-nums"}
  else if(n<FIN)c.textContent="C’est maintenant";
  else{c.textContent="Merci à tous";clearInterval(iv)}}
-tick();iv=setInterval(tick,3e4);
+tick();iv=setInterval(tick,1e3);
 document.addEventListener("visibilitychange",tick);
 /* contact : l’adresse n’existe jamais en clair dans le code, elle est assemblée au clic */
 const mail=()=>["comite","luynesenfetes","fr"].reduce((a,p,i)=>a+(i?(i===1?"@":"."):"")+p,"");
