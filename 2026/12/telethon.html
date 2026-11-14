@@ -23,8 +23,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
 :root{--brand-dark:#c2792a;--brand:#ffb763;--brand-soft:#f8e0c2;--ink:#2f2418;--text:#4b3a29;--muted:rgba(75,58,41,.72);--line:rgba(95,68,37,.16);--shadow:0 14px 36px rgba(63,40,16,.09);
---c-jeton:#b0703a;--c-pass:#9aa3ae;--c-fort:#e0b11f;--ok:#2e7d32}
-.t-jeton{--t:var(--c-jeton);--tc:#fff}.t-pass{--t:var(--c-pass);--tc:var(--ink)}.t-fort{--t:var(--c-fort);--tc:var(--ink)}.t-free{--t:var(--ok);--tc:#fff}
+--c-jeton:#b0703a;--c-pass:#9aa3ae;--c-fort:#e0b11f;--c-tombola:#8e5ea2;--ok:#2e7d32}
+.t-jeton{--t:var(--c-jeton);--tc:#fff}.t-pass{--t:var(--c-pass);--tc:var(--ink)}.t-fort{--t:var(--c-fort);--tc:var(--ink)}.t-free{--t:var(--ok);--tc:#fff}.t-tombola{--t:var(--c-tombola);--tc:#fff}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px;scrollbar-gutter:stable}
 html.lk{overflow:hidden}dialog{overscroll-behavior:contain}.pgb,.wzb{overscroll-behavior:contain}
 body{margin:0;font-family:"Outfit",sans-serif;color:var(--text);background:linear-gradient(180deg,#fffaf4,#fff6eb);overflow-x:hidden}
@@ -200,7 +200,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 <header><div class="container">
  <a class="brand" href="/"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" />Luynes en Fêtes</a>
  <button class="burger" id="bg" type="button" aria-expanded="false" aria-controls="nv" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
- <nav id="nv" aria-label="Sections"><a href="#programme" class="keep">Programme</a><a href="#billetterie" class="keep">Billetterie</a><a href="#tombola" class="keep">Tombola</a><a href="#associations">Associations</a><a href="#don" class="keep">Don</a><a href="#contact">Contact</a></nav>
+ <nav id="nv" aria-label="Sections"><a href="#programme" class="keep">Programme</a><a href="#tombola" class="keep">Tombola</a><a href="#billetterie" class="keep">Billetterie</a><a href="#associations">Associations</a><a href="#don" class="keep">Don</a><a href="#contact">Contact</a></nav>
 </div></header>
 
 <main>
@@ -248,6 +248,14 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
  </dialog>
 </div></section>
 
+<section class="sec" id="tombola"><div class="container">
+ <div class="tombola">
+  <div><h2>Tombola</h2><p class="lead"><b>1 carnet de 5 tickets = 10 €.</b> Tentez de gagner l’un de ces lots :</p>
+   <ul class="lots"><li><b>10 places Arena Aix</b><span>2 lots de 5 places</span></li><li><b>Urban Jump</b><span>1 heure de trampoline et une place pour l’Urban Quiz</span></li></ul></div>
+  <a class="btn btn-p big" href="#billetterie">Prendre mes tickets</a>
+ </div>
+</div></section>
+
 <section class="sec" id="billetterie"><div class="container">
  <h2>Billetterie en ligne</h2>
  <p class="lead">Réglez à l’avance, retirez tout en un seul passage à la caisse centrale. Chaque achat soutient l’AFM-Téléthon.</p>
@@ -258,16 +266,8 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
  </div>
  <div class="fam"><span style="font-size:2rem" aria-hidden="true">👨‍👩‍👧‍👦</span><div><b>Gratuité famille.</b> Pour un lot de pass multi-activités ou un lot de tickets temps fort, à partir du 3<sup>e</sup> enfant d’une même famille (sur justificatif), c’est gratuit. La billetterie s’en charge.</div></div>
  <p class="fisc"><b>Bon à savoir :</b> les jetons, les pass et les tickets sont un droit d’accès aux animations. Ils <b>ne donnent pas droit à un reçu fiscal</b> (réduction d’impôt), à la différence d’un <a href="#don" style="text-decoration:underline">don</a>. À l’inverse, un don ne donne pas accès aux activités du Téléthon, pour des raisons légales.</p>
- <div class="steps"><div><b>1</b><span>Choisissez jetons, pass et tickets</span></div><div><b>2</b><span>Indiquez les participants et les accompagnants</span></div><div><b>3</b><span>Attribuez chaque achat, puis relisez</span></div><div><b>4</b><span>Payez, puis retirez tout à la caisse centrale, salle Ughetti</span></div></div>
- <div class="ticket"><p>Quelques minutes suffisent. Vous recevez une confirmation détaillée par e-mail.</p><button class="btn btn-p big" type="button" data-bil>Ouvrir la billetterie</button></div>
-</div></section>
-
-<section class="sec" id="tombola"><div class="container">
- <div class="tombola">
-  <div><h2>Tombola</h2><p class="lead">Tentez de gagner l’un de ces lots :</p>
-   <ul class="lots"><li><b>10 places Arena Aix</b><span>2 lots de 5 places</span></li><li><b>Urban Jump</b><span>1 heure de trampoline et une place pour l’Urban Quiz</span></li></ul></div>
-  <a class="btn btn-p big" href="#">Prendre mes tickets</a>
- </div>
+ <div class="steps"><div><b>1</b><span>Choisissez vos jetons, pass et tickets</span></div><div><b>2</b><span>Ajoutez les participants et les accompagnants</span></div><div><b>3</b><span>Attribuez chaque achat, puis vérifiez votre panier</span></div><div><b>4</b><span>Payez, puis retirez tout à la caisse centrale</span></div></div>
+ <div class="ticket"><p>Commandez en 3 minutes ! Vous recevez une confirmation détaillée par e-mail.</p><button class="btn btn-p big" type="button" data-bil>Ouvrir la billetterie</button></div>
 </div></section>
 
 <section class="sec" id="associations"><div class="container">
@@ -280,12 +280,12 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
  </div>
  <ul class="tiles"><li><a href="https://www.facebook.com/p/FestiLuynes-61574032326122/" target="_blank" rel="noopener noreferrer">Festi Luynes</a></li><li><a href="https://www.ucluynes.fr/" target="_blank" rel="noopener noreferrer">Union Cycliste de Luynes</a></li><li><a href="https://adava.fr/wp/" target="_blank" rel="noopener noreferrer">ADAVA</a></li><li><a href="https://freesonjazzvocal.fr/" target="_blank" rel="noopener noreferrer">FreeSon</a></li><li><a href="https://www.rythmnfitaluynes.com/" target="_blank" rel="noopener noreferrer">Rythm&amp;Fit</a></li><li>Planet Jeunes</li><li><a href="https://www.montirsportif.fr/" target="_blank" rel="noopener noreferrer">Mon Tir Sportif</a></li><li>Sporting Auto Moto École</li><li>Luynes Sports</li><li>Paroisse de Luynes</li><li><a href="https://pompiers13.org/nous-connaitre/centres-dincendie-etde-secours/luynes/" target="_blank" rel="noopener noreferrer">Pompiers de Luynes</a></li><li><a href="https://lecorpsaupresent.fr/" target="_blank" rel="noopener noreferrer">Le Corps au Présent</a></li><li><a href="https://www.facebook.com/lapizzaverte/?locale=fr_FR" target="_blank" rel="noopener noreferrer">Pizza Verte</a></li><li><a href="https://www.facebook.com/profile.php?id=100087905621188" target="_blank" rel="noopener noreferrer">Boulangerie L’Orge</a></li></ul>
  <p class="small">Avec le soutien de</p>
- <ul class="tiles o"><li><a href="https://www.arenaaix.com/" target="_blank" rel="noopener noreferrer">Arena Aix</a></li><li>Sodexo</li></ul>
+ <ul class="tiles o"><li><a href="https://www.arenaaix.com/" target="_blank" rel="noopener noreferrer">Arena Aix</a></li><li>Sodexo</li><li>Urban Jump Aix-en-Provence</li></ul>
 </div></section>
 
 <section class="sec" id="don"><div class="container">
  <div class="donbox">
-  <div><h2>Faire un don en ligne</h2><p>Vous ne pouvez pas venir ou vous souhaitez aller plus loin ? Soutenez l’AFM-Téléthon directement depuis la page dédiée à l’édition de Luynes.</p><p class="sm">Un don ouvre droit à un reçu fiscal, mais ne donne pas accès aux activités du Téléthon (raisons légales). Pour participer aux animations, passez par la billetterie.</p></div>
+  <div><h2>Faire un don en ligne</h2><p>Vous ne pouvez pas venir ou vous souhaitez aller plus loin ? Soutenez l’AFM-Téléthon depuis la page dédiée à l’édition de Luynes. La collecte se fait directement sur le réseau du Téléthon.</p><p><b>Nous nous fixons un objectif de 500 € !</b> La collecte en ligne se termine le <b>31 décembre 2026</b>.</p><p class="sm">Un don ouvre droit à un reçu fiscal, mais ne donne pas accès aux activités du Téléthon (raisons légales). Pour participer aux animations, passez par la billetterie.</p></div>
   <a class="btn" target="_blank" rel="noreferrer" href="https://mapage.telethon.fr/animation/13080-2026">Faire un don au Téléthon</a>
  </div>
 </div></section>
@@ -334,10 +334,12 @@ const PR=[
 {id:"pass",g:"pass",n:"Pass multi-activités",d:"",dj:{sam:"Karts à pédales, Planet Jeunes, maquillage… et les activités annoncées au programme du samedi.",dim:"Karts à pédales, Planet Jeunes… et les activités annoncées au programme du dimanche."},p:10,j:["sam","dim"]},
 {id:"massage",g:"fort",n:"Massage de 20 minutes",d:"Tête ou pieds, à 10h, 12h, 14h et 16h, salle Ughetti",p:10,j:["sam"]},
 {id:"concert",g:"fort",n:"Concert FreeSon",d:"Jazz vocal, 17h – 18h",p:10,j:["dim"]},
+{id:"tombola",g:"tombola",n:"Carnets de tombola",d:"1 carnet = 5 tickets de tombola. Tirage au sort pour gagner l’un des lots.",p:10,j:["tombola"]},
 {id:"pizza",g:"fort",n:"Atelier pizza",d:"Inscription obligatoire, places limitées",p:null,j:[]},
 {id:"cookies",g:"fort",n:"Atelier cookies",d:"Inscription obligatoire, places limitées",p:null,j:[]}];
-const GR=[["jeton","Jetons","1 jeton = 1 €"],["pass","Pass multi-activités","10 € par participant et par jour"],["fort","Ticket temps fort","Un ticket par participant et par animation"]];
-const JL={tous:"samedi et dimanche",sam:"samedi 5 décembre",dim:"dimanche 6 décembre"};
+const multi=p=>p.g==="jeton"||p.g==="tombola";
+const GR=[["jeton","Jetons","1 jeton = 1 €"],["pass","Pass multi-activités","10 € par participant et par jour"],["fort","Ticket temps fort","Un ticket par participant et par animation"],["tombola","Tombola","1 carnet de 5 tickets = 10 €"]];
+const JL={tombola:"",tous:"samedi et dimanche",sam:"samedi 5 décembre",dim:"dimanche 6 décembre"};
 const AGES=[["m11","Moins de 11 ans"],["m18","11 - 17 ans"],["a26","18 - 26 ans"],["a59","27 - 59 ans"],["p60","60 ans et plus"]];
 const AL=Object.fromEntries(AGES);
 const eur=x=>x.toLocaleString("fr-FR")+" €",esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -349,21 +351,21 @@ const minor=x=>x.age==="m11"||x.age==="m18",isAdult=x=>x.age&&!minor(x);
 const parts=()=>X.filter(x=>x.role==="participant"),adults=()=>X.filter(isAdult);
 const label=x=>((x.prenom||"")+" "+(x.nom||"")).trim()||(x===X[0]?"Vous":x.role==="participant"?"Participant "+(X.indexOf(x)+1):"Accompagnant "+(X.indexOf(x)+1));
 const keys=()=>{const k=[];PR.filter(p=>p.p!=null).forEach(p=>p.j.forEach(j=>{const s=p.id+":"+j;if(Q[s])k.push([s,p,j])}));return k};
-const need=()=>Math.max(0,...keys().filter(k=>k[1].g!=="jeton").map(k=>Q[k[0]]));
+const need=()=>Math.max(0,...keys().filter(k=>!multi(k[1])).map(k=>Q[k[0]]));
 const got=s=>sum(Object.values(A[s]||{}));
 /* répartition : on garde seulement les participants, un seul pass ou ticket par participant et par jour, jamais plus que la quantité achetée */
-function norm(){const ids=parts().map(x=>x.id);keys().forEach(([s,p])=>{const a=A[s]=A[s]||{};Object.keys(a).forEach(i=>{if(!ids.includes(+i))delete a[i]});let r=Q[s];ids.forEach(i=>{let n=Math.min(a[i]||0,p.g==="jeton"?99:1,r);a[i]=n;r-=n})});
+function norm(){const ids=parts().map(x=>x.id);keys().forEach(([s,p])=>{const a=A[s]=A[s]||{};Object.keys(a).forEach(i=>{if(!ids.includes(+i))delete a[i]});let r=Q[s];ids.forEach(i=>{let n=Math.min(a[i]||0,multi(p)?99:1,r);a[i]=n;r-=n})});
  Object.keys(A).forEach(s=>{if(!Q[s])delete A[s]})}
-function auto(){norm();const ids=parts().map(x=>x.id);keys().forEach(([s,p])=>{if(got(s))return;let r=Q[s];if(p.g==="jeton"){A[s][ids[0]]=r;return}ids.forEach(i=>{if(r>0){A[s][i]=1;r--}})})}
+function auto(){norm();const ids=parts().map(x=>x.id);keys().forEach(([s,p])=>{if(got(s))return;let r=Q[s];if(multi(p)){A[s][ids[0]]=r;return}ids.forEach(i=>{if(r>0){A[s][i]=1;r--}})})}
 /* lignes de commande, dans l’ordre envoyé au flux ; gratuité : à partir du 3e enfant d’une même famille pour un même pass ou ticket et un même jour */
 function price(){const seen={},L=[];parts().forEach(x=>PR.filter(p=>p.p!=null).forEach(p=>p.j.forEach(j=>{const n=(A[p.id+":"+j]||{})[x.id]||0;if(!n)return;
- let free=false,rk=0;if(p.g!=="jeton"&&minor(x)){const k=p.id+"."+j+"."+x.resp;rk=seen[k]=(seen[k]||0)+1;free=rk>=3}
+ let free=false,rk=0;if(!multi(p)&&minor(x)){const k=p.id+"."+j+"."+x.resp;rk=seen[k]=(seen[k]||0)+1;free=rk>=3}
  L.push({x,p,j,n,free,rk,c:free?0:n*p.p})})));return L}
 const total=()=>sum(price().map(l=>l.c))+sum(keys().map(([s,p])=>Math.max(0,Q[s]-got(s))*p.p));
 /* ---- étape 1 ---- */
 function rowHtml(p,j,t,desc){const s=p.id+":"+j,q=Q[s]||0;
- return `<div class="rw"><div><b>${t}</b><small>${desc}</small><span class="px">${eur(p.p)}${p.g==="jeton"?"":" par participant"}</span></div><div class="st"><button type="button" data-q="${s}|-1" aria-label="Retirer" ${q?"":"disabled"}>−</button><output>${q}</output><button type="button" data-q="${s}|1" aria-label="Ajouter" ${q>=(p.g==="jeton"?99:20)?"disabled":""}>+</button></div></div>`}
-function v1(){let o=`<h2 class="wt">Vos courses</h2><p class="ws">Choisissez vos jetons, vos pass et vos tickets, et le jour qui vous convient. Vous direz ensuite qui en profite.</p>`;
+ return `<div class="rw"><div><b>${t}</b><small>${desc}</small><span class="px">${eur(p.p)}${p.g==="jeton"?"":p.g==="tombola"?" le carnet":" par participant"}</span></div><div class="st"><button type="button" data-q="${s}|-1" aria-label="Retirer" ${q?"":"disabled"}>−</button><output>${q}</output><button type="button" data-q="${s}|1" aria-label="Ajouter" ${q>=(multi(p)?99:20)?"disabled":""}>+</button></div></div>`}
+function v1(){let o=`<h2 class="wt">Vos courses</h2><p class="ws">Choisissez vos jetons, vos pass, vos tickets et vos carnets de tombola, et le jour qui vous convient. Vous direz ensuite qui en profite.</p>`;
  GR.forEach(g=>{o+=`<section class="grp t-${g[0]}"><div class="gh"><span class="tn">${g[1]}</span><small>${g[2]}</small></div>`;
   PR.filter(p=>p.g===g[0]).forEach(p=>{
    if(p.p==null){o+=`<div class="rw off"><div><b>${p.n}</b><small>${p.d}</small><span class="px">Bientôt disponible</span></div></div>`;return}
@@ -401,10 +403,10 @@ function err2(){fixResp();for(const[i,x]of X.entries()){const w=i?label(x):"Vos 
 /* ---- étape 3 ---- */
 function v3(){const L=price();
  let o=`<h2 class="wt">Pour qui ?</h2><p class="ws">Attribuez chaque achat au bon participant. Nous avons pré-rempli : corrigez si besoin.</p>`;
- keys().forEach(([s,p,j])=>{const r=Q[s]-got(s),t=p.g==="jeton"?p.n:p.g==="pass"?"Pass multi-activités · "+JL[j]:p.n+" · "+JL[j];
+ keys().forEach(([s,p,j])=>{const r=Q[s]-got(s),t=multi(p)?p.n:p.g==="pass"?"Pass multi-activités · "+JL[j]:p.n+" · "+JL[j];
   o+=`<div class="card t-${p.g}" style="border-left:8px solid var(--t)"><div class="ch"><b>${t}</b><span class="${r?"ko":"okc"}">${r?"Il en reste "+r+" à attribuer":"✓ Tout est attribué"}</span></div>`;
   parts().forEach(x=>{const n=A[s][x.id]||0,f=L.find(l=>l.x===x&&l.p===p&&l.j===j&&l.free);
-   o+=`<div class="who"><span>${esc(label(x))}${f?`<span class="free">Offert · ${f.rk}<sup>e</sup> enfant</span>`:""}</span><div class="st"><button type="button" data-a="${s}|${x.id}|-1" aria-label="Retirer" ${n?"":"disabled"}>−</button><output>${n}</output><button type="button" data-a="${s}|${x.id}|1" aria-label="Ajouter" ${r>0&&(p.g==="jeton"||!n)?"":"disabled"}>+</button></div></div>`});o+=`</div>`});
+   o+=`<div class="who"><span>${esc(label(x))}${f?`<span class="free">Offert · ${f.rk}<sup>e</sup> enfant</span>`:""}</span><div class="st"><button type="button" data-a="${s}|${x.id}|-1" aria-label="Retirer" ${n?"":"disabled"}>−</button><output>${n}</output><button type="button" data-a="${s}|${x.id}|1" aria-label="Ajouter" ${r>0&&(multi(p)||!n)?"":"disabled"}>+</button></div></div>`});o+=`</div>`});
  return o}
 function err3(){const k=keys().find(([s])=>Q[s]-got(s)>0);if(k)return "Il reste des achats à attribuer ("+k[1].n+").";const x=parts().find(x=>!price().some(l=>l.x===x));return x?label(x)+" n’a rien : attribuez-lui un achat, ou passez-le en accompagnant/retirez-le à l’étape précédente.":""}
 /* ---- étape 4 ---- */
@@ -413,7 +415,7 @@ function v4(){const L=price(),T=total(),p0=X[0];
  <div class="card"><div class="ch"><b>Qui paie</b><button class="lnk" type="button" data-go="2">Modifier</button></div><p style="margin:0 0 12px;color:var(--ink)"><b>${esc(label(p0))}</b><br>${esc(p0.mail)}<br><small style="color:var(--muted)">La confirmation détaillée sera envoyée à cette adresse.</small></p></div>`;
  parts().forEach(x=>{const ls=L.filter(l=>l.x===x),rs=X.filter(a=>(x.accs||[]).includes(a.id));
   o+=`<div class="card"><div class="ch"><b>${esc(label(x))}</b><button class="lnk" type="button" data-go="3">Modifier</button></div><small style="display:block;margin:-6px 0 8px;color:var(--muted)">Participant · ${AL[x.age]}${rs.length?" · accompagné(e) par "+rs.map(a=>esc(label(a))).join(", "):""}</small>`;
-  ls.forEach(l=>{o+=`<div class="ln"><span>${l.n} × ${l.p.n}${l.p.g==="jeton"?"":" · "+JL[l.j]}</span><b>${l.free?"Offert":eur(l.c)}</b>${l.free?`<small><em>Gratuité famille : ${l.rk}<sup>e</sup> enfant pour ce ${l.p.g==="fort"?"ticket":"pass"} (sur justificatif)</em></small>`:""}</div>`});o+=`</div>`});
+  ls.forEach(l=>{o+=`<div class="ln"><span>${l.n} × ${l.p.n}${multi(l.p)?"":" · "+JL[l.j]}</span><b>${l.free?"Offert":eur(l.c)}</b>${l.free?`<small><em>Gratuité famille : ${l.rk}<sup>e</sup> enfant pour ce ${l.p.g==="fort"?"ticket":"pass"} (sur justificatif)</em></small>`:""}</div>`});o+=`</div>`});
  const ac=X.filter(x=>x.role==="accompagnant");
  if(ac.length)o+=`<div class="card"><div class="ch"><b>Accompagnants</b><button class="lnk" type="button" data-go="2">Modifier</button></div>${ac.map(a=>`<div class="ln"><span>${esc(label(a))}</span><b>Gratuit</b><small>Accompagne ${X.filter(m=>(m.accs||[]).includes(a.id)).map(m=>esc(label(m))).join(", ")}</small></div>`).join("")}</div>`;
  return o+`<div class="tt"><span>Total à payer</span><b>${eur(T)}</b></div>
