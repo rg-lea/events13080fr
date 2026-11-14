@@ -60,7 +60,7 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 /* le hero reste figé, le contenu remonte par-dessus */
 main>section:not(.hero){position:relative;z-index:1;background:#fff9f1}
 #programme{border-radius:36px 36px 0 0;box-shadow:0 -18px 40px rgba(47,36,24,.35),0 -2px 0 rgba(255,255,255,.55);padding-top:clamp(40px,5.5vw,72px)}
-@media(max-width:800px){#programme{border-radius:26px 26px 0 0}}
+@media(max-width:900px){.hero{position:relative;top:auto!important}#programme{border-radius:0;box-shadow:none}}
 /* programme */
 .pick{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:760px}
 .pickb{display:block;width:100%;text-align:left;border:0;border-radius:24px;padding:22px 26px;background:var(--brand-dark);color:#fff;box-shadow:0 12px 26px rgba(194,121,42,.3);transition:transform .2s}
