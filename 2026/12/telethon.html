@@ -103,6 +103,7 @@ dialog.pg::backdrop{background:rgba(47,36,24,.6);backdrop-filter:blur(3px)}
 #bm{flex:1 0 100%;order:3;margin:0;font-weight:600;color:var(--ink)}#bm:empty{display:none}
 .bwf2{padding:20px 22px}.bwf2 p{margin:0 0 14px}.bwf2 label{display:block;margin-bottom:12px;font-weight:600;color:var(--ink)}
 .bwf2 input{display:block;width:100%;margin-top:6px;padding:13px 14px;border:1px solid var(--line);border-radius:14px;font:inherit;background:#fff}
+.dbl{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:480px){.dbl{grid-template-columns:1fr;gap:0}}
 .rc{margin-top:6px;padding:14px 16px;border-radius:16px;background:#fff;border:1px solid var(--line);line-height:1.7}
 /* tombola */
 .tombola{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;padding:clamp(24px,4vw,40px);border-radius:32px;background:linear-gradient(135deg,var(--brand-soft),#fff);border:1px solid var(--line);box-shadow:var(--shadow)}
@@ -288,11 +289,15 @@ dialog.pg::backdrop{background:rgba(47,36,24,.6);backdrop-filter:blur(3px)}
  <div class="pgb" id="bs1"><div id="bl"></div></div>
  <div class="pgb bwf2" id="bs2" hidden>
   <p>Dernière étape : dites-nous à qui envoyer vos tickets.</p>
-  <label>Nom et prénom<input id="bnm" type="text" autocomplete="name" /></label>
+  <div class="dbl"><label>Prénom<input id="bpr" type="text" autocomplete="given-name" /></label><label>Nom<input id="bnm" type="text" autocomplete="family-name" /></label></div>
   <label>Adresse e-mail<input id="bem" type="email" autocomplete="email" /></label>
   <div id="brc" class="rc"></div>
  </div>
  <div class="bwf"><div class="tot">Total <b id="bt">0 €</b></div><p id="bm" role="status"></p><div class="bbt"><button class="btn btn-s" type="button" id="bb" hidden>Retour</button><button class="btn btn-p" type="button" id="bn" disabled>Continuer</button></div></div>
+</dialog>
+<dialog class="pg" id="bk" aria-labelledby="bkt">
+ <div class="pgh"><h3 id="bkt"></h3><button class="x" type="button" id="bkx" aria-label="Fermer">&times;</button></div>
+ <div class="pgb bwf2" id="bkb"></div>
 </dialog>
 </main>
 
@@ -303,9 +308,10 @@ function openDay(d){dlg.querySelectorAll(".pgb").forEach(b=>b.hidden=b.dataset.d
 document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();openDay(b.dataset.open)}));
 $("pgx").onclick=()=>dlg.close();
 dlg.addEventListener("click",e=>{if(e.target===dlg||e.target.closest(".pgf a"))dlg.close()});
-/* billetterie : widget. Les clés d’API ne vont JAMAIS ici : elles restent sur le serveur (voir API_URL). */
-const API_URL="";
-const P=[
+/* billetterie : widget.
+   >>> COLLEZ ICI, entre les guillemets, l’URL du flux Power Automate (« URL HTTP POST » du déclencheur). <<<
+   Les clés HelloAsso ne vont JAMAIS ici : elles restent dans le flux. Les prix ci-dessous servent à l’affichage ; le flux recalcule le montant de son côté. */
+const API_URL="https://default403611541d9141c3b14ddd403256e1.be.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/07/workflows/9cd451be8db54573bfd8199d474255f2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bKay8rC9da6iQXNhUXjylN9sOkI-9PxD0ikvq8_hjjs";const P=[
 {id:"jeton",t:"bronze",n:"Jetons",d:"1 jeton = 1 €",p:1},
 {id:"pass",t:"argent",n:"Pass activités",d:"Karts, Planet Jeunes, tir laser, code de la route, tandem, VTT, route, maquillage…",p:10},
 {id:"concert",t:"or",n:"Concert FreeSon",d:"Dimanche, 17h – 18h",p:10},
@@ -324,18 +330,34 @@ $("bl").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)re
 function bstep(n){$("bs1").hidden=n!==1;$("bs2").hidden=n!==2;$("bb").hidden=n!==2;$("bn").textContent=n===1?"Continuer":"Payer "+eur(total());$("bm").textContent="";
  if(n===2)$("brc").innerHTML=P.filter(x=>Q[x.id]).map(x=>`${Q[x.id]} × ${x.n} <b style="float:right">${eur(Q[x.id]*x.p)}</b><br>`).join("")}
 $("bb").onclick=()=>bstep(1);
+const nomOK=v=>/^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ' -]+$/.test(v);
+/* HelloAsso refuse certains caractères dans les noms : on nettoie. Le payeur peut corriger sur la page HelloAsso. */
+const propre=v=>v.trim().replace(/\s+/g," ").replace(/’/g,"'").replace(/[ÎÏ]/g,"I").replace(/[îï]/g,"i").replace(/[ÔÖ]/g,"O").replace(/[ôö]/g,"o").replace(/ÿ/g,"y");
 $("bn").onclick=async()=>{
  if(!$("bs1").hidden){bstep(2);return}
- const nom=$("bnm").value.trim(),mail=$("bem").value.trim();
- if(!nom||!/^\S+@\S+\.\S+$/.test(mail)){$("bm").textContent="Merci d’indiquer votre nom et une adresse e-mail valide.";return}
+ const prenom=propre($("bpr").value),nom=propre($("bnm").value),mail=$("bem").value.trim();
+ if(!nomOK(prenom)||!nomOK(nom)||prenom.toLowerCase()===nom.toLowerCase()){$("bm").textContent="Merci d’indiquer votre prénom et votre nom (lettres uniquement, sans chiffre).";return}
+ if(!/^\S+@\S+\.\S+$/.test(mail)){$("bm").textContent="Merci d’indiquer une adresse e-mail valide.";return}
  if(!API_URL){$("bm").textContent="Le paiement en ligne n’est pas encore branché.";return}
  $("bn").disabled=true;$("bm").textContent="Redirection vers le paiement…";
- try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({nom,mail,lignes:P.filter(x=>Q[x.id]).map(x=>({id:x.id,qte:Q[x.id]}))})});
-  const d=await r.json();if(d.url)location.href=d.url;else throw 0}
+ try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({prenom,nom,mail,lignes:P.filter(x=>Q[x.id]).map(x=>({id:x.id,qte:Q[x.id]}))})});
+  if(!r.ok)throw 0;const d=await r.json();
+  if(d&&typeof d.url==="string"&&new URL(d.url).hostname.endsWith("helloasso.com"))location.href=d.url;else throw 0}
  catch(_){$("bm").textContent="Une erreur est survenue. Réessayez dans un instant.";$("bn").disabled=false}
 };
+/* bouton « précédent » du navigateur depuis HelloAsso : on réactive le bouton */
+addEventListener("pageshow",e=>{if(e.persisted){$("bn").disabled=false;$("bm").textContent=""}});
 document.querySelectorAll("[data-bil]").forEach(b=>b.addEventListener("click",()=>{bview();bstep(1);bw.showModal()}));
 $("bwx").onclick=()=>bw.close();
+/* retour depuis HelloAsso : le flux ajoute ?type=return, ?type=error ou ?type=back à l’adresse de cette page */
+const bk=$("bk");$("bkx").onclick=()=>bk.close();bk.addEventListener("click",e=>{if(e.target===bk)bk.close()});
+(()=>{const q=new URLSearchParams(location.search),ty=q.get("type");if(!ty)return;
+ let t="",h="";
+ if(ty==="return"&&q.get("code")==="succeeded"){const o=(q.get("orderId")||"").replace(/\D/g,"");t="Merci !";h=`<p><b>Votre paiement a bien été reçu.</b> HelloAsso vous envoie une confirmation par e-mail.</p><p>Le jour J, présentez-vous à la caisse centrale, salle Ughetti, avec votre nom${o?` (commande n° ${o})`:""} pour retirer vos tickets et pass.</p>`}
+ else if(ty==="error"){t="Paiement non abouti";h="<p>Le paiement n’a pas pu aller à son terme. Avant de recommencer, vérifiez que vous n’avez pas reçu de confirmation par e-mail.</p>"}
+ history.replaceState(null,"",location.pathname+"#billetterie");
+ if(t){$("bkt").textContent=t;$("bkb").innerHTML=h;bk.showModal()}
+})();
 bw.addEventListener("click",e=>{if(e.target===bw)bw.close()});
 const bg=$("bg"),nv=$("nv");
 bg.onclick=()=>{const o=nv.classList.toggle("open");bg.setAttribute("aria-expanded",o);bg.setAttribute("aria-label",o?"Fermer le menu":"Ouvrir le menu")};
