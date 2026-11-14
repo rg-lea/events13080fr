@@ -57,33 +57,32 @@ h1{margin:0 0 16px;font-size:clamp(3.2rem,11vw,8rem);line-height:.9;letter-spaci
 h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spacing:-.045em;line-height:1.05}
 .lead{margin:0 0 26px;color:var(--muted);font-size:1.05rem}
 
-/* programme */
-.bar{position:sticky;top:65px;z-index:30;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between;padding:10px 0;background:linear-gradient(#fff9f1 82%,transparent)}
+/* programme : planning */
+.bar{position:sticky;top:65px;z-index:30;padding:10px 0 12px;background:linear-gradient(#fff9f1 82%,transparent)}
 .tabs{display:inline-grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border-radius:999px;background:#f3e3cd}
 .tab{border:0;background:none;border-radius:999px;padding:12px 26px;font-weight:700;color:var(--ink);font-size:1.02rem}
 .tab[aria-selected=true]{background:var(--brand-dark);color:#fff;box-shadow:0 8px 18px rgba(194,121,42,.28)}
-.legend{display:flex;gap:8px;overflow-x:auto;max-width:100%}
-.lg{flex:none;display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:600;font-size:.92rem;color:var(--ink)}
-.lg i{width:12px;height:12px;border-radius:4px;background:var(--c)}
-.lg[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0 34px}
 .strip div{padding:16px 18px;border-radius:18px;background:rgba(255,255,255,.75);border:1px solid var(--line)}
 .strip b{display:block;color:var(--ink);margin-bottom:2px}.strip span{font-size:.93rem;color:var(--muted);line-height:1.45}
-.tl{position:relative}
-.spine{position:absolute;left:132px;top:12px;bottom:12px;width:4px;border-radius:4px;background:linear-gradient(var(--brand-dark) var(--p,0%),var(--line) var(--p,0%))}
-.node{display:grid;grid-template-columns:112px 40px 1fr;align-items:start;padding:14px 0;animation:in .35s ease}
-@keyframes in{from{opacity:0;transform:translateY(8px)}}
-.hr{text-align:right;font-size:2.4rem;font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--muted);padding-top:12px;transition:color .3s}
-.dot{position:relative;z-index:1;width:20px;height:20px;border-radius:99px;background:#fff;border:4px solid var(--line);margin:16px 0 0 12px;transition:.3s}
-.node.lit .hr{color:var(--ink)}.node.lit .dot{border-color:var(--brand-dark);background:var(--brand-dark);box-shadow:0 0 0 6px rgba(194,121,42,.18)}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
-.c{background:#fff;border:1px solid var(--line);border-left:6px solid var(--c);border-radius:18px;padding:16px 18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:5px}
-.c h3{margin:0;color:var(--ink);font-size:1.15rem;letter-spacing:-.02em}
-.c .t{font-weight:700;font-size:.9rem;color:var(--brand-dark)}.c .p{font-size:.9rem;color:var(--muted)}
-.c p{margin:2px 0 0;font-size:.95rem;line-height:1.5}
-.c .pr{align-self:flex-start;margin-top:4px;padding:3px 12px;border-radius:999px;background:rgba(194,121,42,.12);color:var(--brand-dark);font-weight:700;font-size:.85rem}
-.c.show{grid-column:1/-1;background:var(--ink);color:#fff;border-color:var(--ink);padding:22px 26px}
-.c.show h3{color:#fff;font-size:1.7rem}.c.show .t{color:var(--brand)}.c.show .p{color:rgba(255,255,255,.75)}.c.show .pr{background:rgba(255,183,99,.2);color:var(--brand)}
+.pl{border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:var(--shadow);overflow:hidden}
+.ax,.ln summary{display:grid;grid-template-columns:260px 1fr;gap:18px;padding-left:24px;padding-right:24px}
+.ax{padding-top:12px;padding-bottom:10px;background:var(--brand-soft);border-bottom:1px solid var(--line);color:var(--ink);font-weight:700;font-size:.8rem}
+.tk{position:relative;height:16px;margin:0 10px}.tk span{position:absolute;top:0;transform:translateX(-50%)}
+.ln{border-bottom:1px solid var(--line)}.ln:last-child{border-bottom:0}
+.ln summary{list-style:none;cursor:pointer;align-items:center;padding-top:16px;padding-bottom:16px}
+.ln summary::-webkit-details-marker{display:none}
+.ln summary:hover,.ln[open] summary{background:rgba(248,224,194,.3)}
+.nm b{display:block;color:var(--ink);font-size:1.1rem;letter-spacing:-.02em;line-height:1.25}
+.nm b::after{content:" +";color:var(--brand-dark)}.ln[open] .nm b::after{content:" \2212"}
+.nm span{display:block;font-size:.88rem;color:var(--muted);line-height:1.4}
+.nm .ts{color:var(--brand-dark);font-weight:700;margin-top:2px}
+.nm em{display:inline-block;margin-top:6px;padding:2px 11px;border-radius:999px;background:rgba(194,121,42,.12);color:var(--brand-dark);font-style:normal;font-weight:700;font-size:.82rem}
+.tr{position:relative;height:36px;margin:0 10px;border-radius:10px;background:rgba(248,224,194,.35) linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/calc(100%/var(--n)) 100%}
+.bx{position:absolute;top:4px;bottom:4px;min-width:8px;border-radius:8px;background:var(--c);color:var(--tc,#fff);font-style:normal;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden}
+.dt{padding:2px 24px 18px 302px;line-height:1.55;background:rgba(248,224,194,.3)}
+.key{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px;font-size:.9rem;font-weight:600;color:var(--ink)}
+.key i{display:inline-block;width:12px;height:12px;border-radius:4px;background:var(--c);margin-right:7px}
 .soon{margin-top:18px;padding:18px 22px;border-radius:18px;background:rgba(255,255,255,.75);border:1px dashed var(--line);line-height:1.7}.soon b{color:var(--ink)}
 
 /* billetterie */
@@ -120,15 +119,15 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 .burger{display:none;width:46px;height:46px;border:1px solid var(--line);border-radius:14px;background:#fff;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0}
 .burger span{display:block;width:20px;height:2px;border-radius:2px;background:var(--ink);transition:transform .2s,opacity .2s}
 .burger[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}.burger[aria-expanded=true] span:nth-child(2){opacity:0}.burger[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.legend{min-width:0}
 @media(max-width:900px){.burger{display:flex}
  nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:8px 16px 14px;background:rgba(255,249,242,.98);border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(63,40,16,.12)}
  nav.open{display:flex}nav a{padding:14px 12px;font-size:1.05rem;border-radius:12px}
  .hgrid{grid-template-columns:1fr}.visu{max-width:300px;order:-1;justify-self:start}}
 @media(max-width:800px){.steps{grid-template-columns:1fr}.orgs{grid-template-columns:1fr}.strip{grid-template-columns:1fr}.contact{padding:22px}
- .spine{left:12px}.node{grid-template-columns:34px 1fr;row-gap:6px}.dot{grid-row:1;grid-column:1;margin:8px 0 0 4px;width:18px;height:18px}.hr{grid-row:1;grid-column:2;text-align:left;font-size:1.9rem;padding:0}.cards{grid-column:2}}
-@media(max-width:800px){.bar{gap:8px;padding:8px 0}.tabs{width:100%}.tab{padding:10px 8px}.legend{width:100%;padding-bottom:2px}.lg{padding:7px 12px;font-size:.88rem}.hero .container{padding:48px 0 32px}.sec{padding:44px 0}}
+ }
+@media(max-width:800px){.bar{gap:8px;padding:8px 0}.tabs{width:100%}.tab{padding:10px 8px}.hero .container{padding:48px 0 32px}.sec{padding:44px 0}}
 @media(max-width:480px){.days{grid-template-columns:1fr}.tab{padding:12px 18px}.visu{max-width:220px}}
+@media(max-width:800px){.ax{grid-template-columns:1fr;padding:10px 18px 8px}.ax>span{display:none}.ln summary{grid-template-columns:1fr;gap:10px;padding:14px 18px}.dt{padding:2px 18px 16px}.pl{border-radius:22px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 </style>
 <!-- Matomo -->
@@ -179,7 +178,7 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 
 <section class="sec" id="programme"><div class="container">
  <h2>Le programme</h2>
- <p class="lead">Faites défiler : la journée se déroule heure par heure.</p>
+ <p class="lead">Une ligne par animation, une barre par créneau. Touchez une ligne pour en savoir plus.</p>
  <div class="strip">
   <div><b>Marché de Noël</b><span>Exposants locaux sur l’esplanade, samedi et dimanche.</span></div>
   <div><b>Buvette et restauration</b><span>Pizza Verte, cookies L’Orge, crêpes, boissons chaudes.</span></div>
@@ -187,9 +186,9 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
  </div>
  <div class="bar">
   <div class="tabs" role="tablist" aria-label="Jour"><button class="tab" role="tab" data-d="sam" aria-selected="true">Samedi 5</button><button class="tab" role="tab" data-d="dim" aria-selected="false">Dimanche 6</button></div>
-  <div class="legend" id="legend" aria-label="Filtrer par catégorie"></div>
  </div>
- <div class="tl" id="tl"><div class="spine" id="spine"></div><div id="nodes"></div></div>
+ <div class="pl" id="pl" aria-live="polite"></div>
+ <div class="key" id="key"></div>
  <div class="soon"><b>Horaires à venir :</b> tir laser avec Mon Tir Sportif, atelier code de la route, découverte du tandem, sorties VTT et sorties route de l’Union Cycliste de Luynes.</div>
 </div></section>
 
@@ -238,7 +237,7 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 
 <script>
 const $=i=>document.getElementById(i);
-const CAT={sport:["Sport et vélo","var(--sport)"],atelier:["Enfants et ateliers","var(--atelier)"],show:["Spectacles","var(--show)"],bien:["Bien-être","var(--bien)"]};
+const CAT={sport:["Sport et vélo","var(--sport)","#fff"],atelier:["Enfants et ateliers","var(--atelier)","var(--ink)"],show:["Spectacles","var(--show)","#fff"],bien:["Bien-être","var(--bien)","#fff"]};
 /* s = créneaux [début, fin, texte d’horaire facultatif] */
 const A=[
 {n:"Karts à pédales",c:"sport",p:"Boulodrome, avec l’ADAVA",t:"Bracelet 10 €",d:"Pilotez un kart sur un circuit sécurisé.",s:{sam:[[10,12],[13,16]],dim:[[10,12],[13,16]]}},
@@ -246,27 +245,24 @@ const A=[
 {n:"Maquillage",c:"atelier",p:"Devant la salle Ughetti",t:"Bracelet 10 €",d:"Petits et grands se font transformer.",s:{sam:[[10,12],[14,16]]}},
 {n:"Porte-clés",c:"atelier",p:"Accueil de la salle Ughetti",t:"5 €",d:"Un porte-clés personnalisé, avec votre prénom ou le motif de votre choix.",s:{sam:[[10,12],[14,16]]}},
 {n:"Ballons sculptés",c:"atelier",p:"Devant la salle Ughetti",t:"1 € pièce",d:"Des animateurs sculptent des ballons à rapporter à la maison.",s:{sam:[[14,16]],dim:[[14,16]]}},
-{n:"Massages",c:"bien",p:"Salle Ughetti, avec Le Corps au Présent",t:"10 € les 20 minutes",d:"Au choix tête ou pieds.",s:{sam:[[10,10.34,"à 10h, 12h, 14h et 16h"]],dim:[[11,11.34,"à partir de 11h"]]}},
+{n:"Massages",c:"bien",p:"Salle Ughetti, avec Le Corps au Présent",t:"10 € les 20 minutes",d:"Au choix tête ou pieds.",s:{sam:[[10,10.34,"10h"],[12,12.34,"12h"],[14,14.34,"14h"],[16,16.34,"16h"]],dim:[[11,11.34,"à partir de 11h"]]}},
 {n:"Spectacle Rythm&Fit",c:"show",p:"Salle principale",t:"",d:"Les adhérents de Rythm&Fit présentent leur spectacle de danse.",s:{dim:[[14.5,16,"accueil à 14h30, spectacle de 15h à 16h"]]}},
 {n:"Concert FreeSon",c:"show",p:"Salle principale",t:"Entrée 10 €",d:"Du jazz vocal pour clôturer le week-end.",s:{dim:[[17,18]]}}
 ];
 let day="sam",cat=null;
 const f=x=>Math.floor(x)+"h"+(x%1?String(Math.round(x%1*60)).padStart(2,"0"):"");
+const ALL=A.flatMap(a=>Object.values(a.s).flat()),T0=Math.floor(Math.min(...ALL.map(z=>z[0]))),T1=Math.ceil(Math.max(...ALL.map(z=>z[1]))),N=T1-T0,pc=x=>(x-T0)/N*100;
+$("key").innerHTML=Object.values(CAT).map(v=>`<span style="--c:${v[1]}"><i></i>${v[0]}</span>`).join("");
 function draw(){
- const by={};
- A.filter(a=>!cat||a.c===cat).forEach(a=>(a.s[day]||[]).forEach(([x,y,l])=>(by[x]=by[x]||[]).push({a,x,y,l})));
- const ks=Object.keys(by).map(Number).sort((a,b)=>a-b);
- $("nodes").innerHTML=ks.map(k=>`<div class="node"><div class="hr">${f(k)}</div><div class="dot"></div><div class="cards">`+by[k].map(({a,y,l})=>`<article class="c ${a.c==="show"?"show":""}" style="--c:${CAT[a.c][1]}"><span class="t">${l||"de "+f(k)+" à "+f(y)}</span><h3>${a.n}</h3><span class="p">${a.p}</span><p>${a.d}</p>${a.t?`<span class="pr">${a.t}</span>`:""}</article>`).join("")+`</div></div>`).join("")||`<p>Aucune animation de ce type ce jour-là.</p>`;
- scrollFx();
+ const L=A.filter(a=>a.s[day]).sort((p,q)=>p.s[day][0][0]-q.s[day][0][0]);
+ const ticks=Array.from({length:N+1},(_,i)=>`<span style="left:${i/N*100}%">${T0+i}h</span>`).join("");
+ $("pl").style.setProperty("--n",N);
+ $("pl").innerHTML=`<div class="ax"><span></span><div class="tk">${ticks}</div></div>`+L.map(a=>{
+  const sl=a.s[day],c=CAT[a.c];
+  const txt=sl.map(([x,y,l])=>l||f(x)+"–"+f(y)).join(" · ");
+  const bars=sl.map(([x,y,l])=>`<i class="bx" style="left:${pc(x)}%;width:${pc(y)-pc(x)}%">${!l&&y-x>=2?f(x)+"–"+f(y):""}</i>`).join("");
+  return `<details class="ln" style="--c:${c[1]};--tc:${c[2]}"><summary><div class="nm"><b>${a.n}</b><span>${a.p}</span><span class="ts">${txt}</span>${a.t?`<em>${a.t}</em>`:""}</div><div class="tr">${bars}</div></summary><div class="dt">${a.d}</div></details>`}).join("");
 }
-function scrollFx(){
- const r=$("tl").getBoundingClientRect(),mid=innerHeight*.55;
- $("spine").style.setProperty("--p",Math.max(0,Math.min(100,(mid-r.top)/r.height*100))+"%");
- document.querySelectorAll(".node").forEach(n=>n.classList.toggle("lit",n.getBoundingClientRect().top<mid));
-}
-addEventListener("scroll",scrollFx,{passive:true});addEventListener("resize",scrollFx);
-$("legend").innerHTML=Object.entries(CAT).map(([k,v])=>`<button class="lg" data-c="${k}" aria-pressed="false" style="--c:${v[1]}"><i></i>${v[0]}</button>`).join("");
-$("legend").onclick=e=>{const b=e.target.closest(".lg");if(!b)return;cat=cat===b.dataset.c?null:b.dataset.c;document.querySelectorAll(".lg").forEach(x=>x.setAttribute("aria-pressed",x.dataset.c===cat));draw()};
 function setDay(d){day=d;document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x.dataset.d===d));draw()}
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>setDay(t.dataset.d));
 document.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",()=>setDay(a.dataset.go)));
