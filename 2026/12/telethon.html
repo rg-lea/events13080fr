@@ -165,10 +165,26 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 .contact p{margin:0;line-height:1.7;max-width:46ch}
 .cbtns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.cbtns #msg{width:100%;font-weight:600;color:var(--ink)}
 .lieu{display:grid;grid-template-columns:1fr 1.15fr;gap:32px;align-items:center}
+.lp>*+*{margin-top:18px}
+.zinfo{padding:18px 20px;border-radius:20px;background:#fff;border:1px solid var(--line);color:var(--ink);line-height:1.55;min-height:112px}
+.zinfo h3{margin:0 0 4px;font-size:1.25rem;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.zinfo h3 i{flex:none;width:14px;height:14px;border-radius:50%;background:var(--zc)}
+.zinfo p{margin:0;color:var(--text)}.zinfo .hint{color:var(--muted)}
+.zchips{display:flex;flex-wrap:wrap;gap:8px}
+.zc{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);font-weight:600;font-size:.95rem}
+.zc i{flex:none;width:11px;height:11px;border-radius:50%;background:var(--zc)}
+.zc:hover{background:var(--brand-soft)}.zc.on{background:var(--brand-dark);border-color:var(--brand-dark);color:#fff}
+.plan .z{cursor:pointer;outline:none}
+.plan .z .sh{stroke-width:4;stroke-linejoin:round;transition:filter .2s,stroke-width .2s,opacity .2s}
+.plan .z:hover .sh{filter:brightness(.94);stroke-width:6}
+.plan .z:focus-visible .sh{stroke:var(--brand-dark);stroke-width:8}
+.plan .z.on .sh{stroke:var(--brand-dark);stroke-width:8;filter:brightness(.93)}
+.plan.sel .z:not(.on){opacity:.6}
+.plan .dc{fill:#fbe9b4;stroke:#f3c443;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}
+.plan .dn{fill:none;stroke:#f3c443;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}
+.plan text{font-family:"Outfit",sans-serif;font-weight:700;font-size:27px;text-anchor:middle;fill:#8a5a14;paint-order:stroke;stroke:rgba(255,250,244,.9);stroke-width:6px;stroke-linejoin:round;pointer-events:none}
+.plan .melk{fill:#8f3cc0}
 .plan{width:100%;max-width:540px;justify-self:center;height:auto;padding:14px;border-radius:28px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}
-.plan text{font-family:"Outfit",sans-serif;font-weight:700;font-size:38px;text-anchor:middle;fill:#b9791a;paint-order:stroke;stroke:rgba(255,250,244,.85);stroke-width:7px;stroke-linejoin:round;pointer-events:none}
-.plan .melk{fill:#a23fd0;stroke:rgba(255,255,255,.9)}
-.plan .s{stroke-width:5;stroke-linejoin:round}
 @media(max-width:800px){.lieu{grid-template-columns:1fr;gap:22px}.plan{max-width:none}}
 .fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:55;display:inline-flex;align-items:center;gap:10px;padding:14px 22px 14px 18px;border:0;border-radius:999px;background:var(--brand-dark);color:#fff;font-weight:700;font-size:1.05rem;box-shadow:0 14px 30px rgba(63,40,16,.35);transition:transform .2s}
 .fab:hover{transform:translateY(-2px)}.fab svg{flex:none;width:26px;height:26px}
@@ -313,33 +329,28 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 <section class="sec" id="lieu"><div class="container">
  <h2>Lieu</h2>
  <div class="lieu">
-  <div><address>Espace Ughetti<br>Allée Serge Attard / Rue André Claverie<br>Luynes<br>13080 Aix-en-Provence</address>
-  <a class="btn btn-p" target="_blank" rel="noreferrer" href="https://maps.app.goo.gl/Q3UA2Ws4CXG31pKu6">Itinéraire</a></div>
-  <svg class="plan" viewBox="50 70 1000 1010" role="img" aria-labelledby="plt" xmlns="http://www.w3.org/2000/svg">
-   <title id="plt">Plan du site : salle Ughetti, parvis, city stade, circuit de karts à pédales, parking et parc Melkonian</title>
-   <!-- parc Melkonian -->
-   <polygon class="s" fill="#fbe9b4" stroke="#f3c443" points="72,204 97,206 135,640 108,687"/>
-   <polygon class="s" fill="#fbe9b4" stroke="#f3c443" points="97,206 130,200 172,161 1007,93 1026,618 627,628 135,640"/>
-   <circle class="s" cx="266" cy="318" r="48" fill="#f7dc8a" stroke="#f3c443"/>
-   <circle class="s" cx="787" cy="287" r="75" fill="#f7dc8a" stroke="#f3c443"/>
-   <!-- parvis et blocs -->
-   <polygon class="s" fill="#fbe9b4" stroke="#f3c443" points="135,640 625,628 628,737 388,733 388,895 336,893 338,683 247,686 108,688"/>
-   <polygon class="s" fill="#fbe9b4" stroke="#f3c443" points="108,688 247,686 265,892 262,965 116,961"/>
-   <polygon class="s" fill="#fbe9b4" stroke="#f3c443" points="247,686 338,683 336,893 265,892"/>
-   <!-- city stade -->
-   <polygon class="s" fill="#faf7ee" stroke="#f1e8d2" points="388,733 610,737 610,880 390,880"/>
-   <!-- parking -->
-   <polygon class="s" fill="#dccfa8" stroke="#a88f2c" points="627,628 1026,620 1026,805 1003,874 985,910 897,964 758,1020 735,995 700,960 630,893 628,737"/>
-   <!-- circuit de karts -->
-   <polygon class="s" fill="#cbcdd9" stroke="#7a84a3" points="336,895 630,896 735,985 708,1012 650,1026 492,1047 371,1051"/>
-   <!-- salle Ughetti -->
-   <polygon class="s" fill="#aba39a" stroke="#2b3a7a" points="346,377 432,393 503,405 554,397 556,573 508,578 506,628 440,631 361,628"/>
-   <text class="melk" x="843" y="462">Parc Melkonian</text>
-   <text x="481" y="523">Salle Ughetti</text>
-   <text x="489" y="710">Parvis</text>
-   <text x="522" y="830">City stade</text>
-   <text x="846" y="810">Parking</text>
-   <text x="592" y="990">Circuit de karts à pédales</text>
+  <div class="lp"><address>Espace Ughetti<br>Allée Serge Attard / Rue André Claverie<br>Luynes<br>13080 Aix-en-Provence</address>
+  <a class="btn btn-p" target="_blank" rel="noreferrer" href="https://maps.app.goo.gl/Q3UA2Ws4CXG31pKu6">Itinéraire</a>
+  <div class="zinfo" id="zi" aria-live="polite"></div>
+  <div class="zchips" id="zc" role="group" aria-label="Zones du plan"></div></div>
+  <svg class="plan" id="plan" viewBox="55 75 995 990" role="group" aria-label="Plan interactif du site" xmlns="http://www.w3.org/2000/svg">
+   <path class="dc" style="stroke:none" d="M72 204 L97 206 L135 640 L108 688 Z"/>
+   <path class="dn" d="M108 688 L72 204 L97 206"/>
+   <g><path class="dc" d="M108 688 L247 686 L265 892 L262 965 L116 961 Z"/><path class="dc" d="M247 686 L338 683 L336 893 L265 892 Z"/></g>
+   <g class="z" data-z="parc" tabindex="0" role="button" aria-label="Parc Melkonian"><path class="sh" fill="#fbe9b4" stroke="#f3c443" d="M97 206 L130 200 L172 161 L1007 93 L1026 618 L627 628 L135 640 Z"/>
+    <circle class="sh" cx="266" cy="318" r="48" fill="#f7dc8a" stroke="#f3c443"/><circle class="sh" cx="787" cy="287" r="75" fill="#f7dc8a" stroke="#f3c443"/></g>
+   <g class="z" data-z="parvis" tabindex="0" role="button" aria-label="Parvis"><path class="sh" fill="#fbe9b4" stroke="none" d="M135 640 L625 628 L628 737 L388 733 L388 895 L336 893 L338 683 L247 686 L108 688 Z"/>
+    <path class="sh" fill="none" stroke="#f3c443" d="M135 640 L625 628 L628 737 L388 733 L388 895 L336 893 L338 683 L247 686 L108 688"/></g>
+   <g class="z" data-z="stade" tabindex="0" role="button" aria-label="City stade"><path class="sh" fill="#faf7ee" stroke="#e6dbbd" d="M388 733 L610 737 L610 880 L390 880 Z"/></g>
+   <g class="z" data-z="parking" tabindex="0" role="button" aria-label="Parking"><path class="sh" fill="#dccfa8" stroke="#a88f2c" d="M627 628 L1026 620 L1026 805 L1003 874 L985 910 L897 964 L758 1020 L735 995 L700 960 L630 893 L628 737 Z"/></g>
+   <g class="z" data-z="karts" tabindex="0" role="button" aria-label="Circuit de karts à pédales"><path class="sh" fill="#cbcdd9" stroke="#7a84a3" d="M336 895 L630 896 L735 985 L708 1012 L650 1026 L492 1047 L371 1051 Z"/></g>
+   <g class="z" data-z="salle" tabindex="0" role="button" aria-label="Salle Ughetti"><path class="sh" fill="#aba39a" stroke="#2b3a7a" d="M346 377 L432 393 L503 405 L554 397 L556 573 L508 578 L506 628 L440 631 L361 628 Z"/></g>
+   <text class="melk" x="843" y="456">Parc Melkonian</text>
+   <text x="451" y="520">Salle Ughetti</text>
+   <text x="489" y="700">Parvis</text>
+   <text x="500" y="820">City stade</text>
+   <text x="846" y="806">Parking</text>
+   <text x="540" y="978">Circuit de karts</text><text x="540" y="1010">à pédales</text>
   </svg>
  </div>
 </div></section>
@@ -526,6 +537,26 @@ else $("cd").textContent="Merci à tous";
 const mail=()=>["comite","luynesenfetes","fr"].reduce((a,p,i)=>a+(i?(i===1?"@":"."):"")+p,"");
 $("wr").onclick=()=>{location.href="mailto:"+mail()+"?subject="+encodeURIComponent("Téléthon 2026 à Luynes");$("msg").textContent="Votre messagerie s’ouvre. Sinon, affichez l’adresse et écrivez-nous depuis votre boîte mail."};
 $("sh").onclick=()=>{$("msg").textContent=mail()};
+/* plan interactif */
+(()=>{const Z={
+ salle:["Salle Ughetti","#aba39a","Cœur de l’événement : accueil, caisse centrale (retrait des jetons, pass et tickets), porte-clés, Planet Jeunes, massages le samedi, spectacle Rythm&amp;Fit et concert FreeSon le dimanche."],
+ parvis:["Parvis","#f3c443","Devant la salle Ughetti : maquillage et ballons sculptés."],
+ karts:["Circuit de karts à pédales","#7a84a3","Avec l’ADAVA. Samedi et dimanche, 10h – 12h et 13h – 16h. Inclus dans le pass multi-activités."],
+ stade:["City stade","#e6dbbd","Espace voisin du parvis. Animations en plein air : horaires à venir."],
+ parking:["Parking","#a88f2c","Stationnement à proximité immédiate de la salle."],
+ parc:["Parc Melkonian","#f3c443","Le grand parc qui entoure la salle Ughetti."]};
+const pl=$("plan"),zi=$("zi"),zc=$("zc");
+zc.innerHTML=Object.keys(Z).map(k=>`<button type="button" class="zc" data-z="${k}" style="--zc:${Z[k][1]}"><i></i>${Z[k][0]}</button>`).join("");
+const hint=()=>{zi.innerHTML=`<p class="hint">Touchez une zone du plan, ou choisissez-la ci-dessous, pour savoir ce qui s’y passe.</p>`};
+hint();
+function pick(k){const on=pl.dataset.s===k;pl.dataset.s=on?"":k;pl.classList.toggle("sel",!on);
+ pl.querySelectorAll(".z").forEach(g=>g.classList.toggle("on",!on&&g.dataset.z===k));
+ zc.querySelectorAll(".zc").forEach(b=>b.classList.toggle("on",!on&&b.dataset.z===k));
+ if(on)return hint();const d=Z[k];zi.style.setProperty("--zc",d[1]);zi.innerHTML=`<h3><i></i>${d[0]}</h3><p>${d[2]}</p>`}
+pl.addEventListener("click",e=>{const g=e.target.closest(".z");if(g)pick(g.dataset.z)});
+pl.addEventListener("keydown",e=>{const g=e.target.closest&&e.target.closest(".z");if(g&&(e.key==="Enter"||e.key===" ")){e.preventDefault();pick(g.dataset.z)}});
+zc.addEventListener("click",e=>{const b=e.target.closest(".zc");if(b)pick(b.dataset.z)});
+})();
 /* modale ouverte : la page derrière ne défile plus */
 const lock=()=>document.documentElement.classList.toggle("lk",!!document.querySelector("dialog[open]"));
 document.querySelectorAll("dialog").forEach(d=>new MutationObserver(lock).observe(d,{attributes:true,attributeFilter:["open"]}));
