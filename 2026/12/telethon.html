@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Téléthon 2026 à Luynes | Luynes en Fêtes</title>
-<meta name="description" content="Téléthon 2026 à Luynes : samedi 5 et dimanche 6 décembre à l’Espace Ughetti. Au profit de l’AFM-Téléthon. Programme heure par heure, billetterie en ligne et don." />
+<meta name="description" content="Téléthon 2026 à Luynes, les 5 et 6 décembre à l’Espace Ughetti. Consultez le programme, réservez en ligne et faites un don à l’AFM-Téléthon." />
 <link rel="icon" type="image/png" href="files/logos/favicon.png" />
 <link rel="apple-touch-icon" href="files/logos/favicon.png" />
 <meta property="og:type" content="website" />
@@ -93,11 +93,11 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 .ticket{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:26px 30px;border-radius:24px;background:var(--ink);color:#fff;box-shadow:var(--shadow)}.ticket p{margin:0;max-width:50ch;line-height:1.6;font-size:1.1rem}.big{padding:18px 34px;font-size:1.1rem}
 
 /* assos */
-.orgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:22px}
-.org{display:flex;align-items:center;gap:18px;padding:20px 24px;border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:var(--shadow)}
-.org .logo{width:76px;height:76px;border-radius:18px;padding:6px}
-.org .logo.wide{width:150px;height:76px;flex:none;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px}
-.org b{display:block;color:var(--ink);font-size:1.2rem;line-height:1.2}.org span{color:var(--muted)}
+.orgs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:22px}
+.org{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:22px 20px 24px;border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:var(--shadow)}
+.org small{font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-dark)}
+.org img{width:100%;height:96px;object-fit:contain}
+.org b{color:var(--ink);font-size:1.15rem;line-height:1.2}
 .tiles{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:0;padding:0}
 .tiles li{padding:12px 20px;border-radius:999px;background:var(--brand-soft);color:var(--ink);font-weight:600}
 .tiles.o li{background:transparent;border:1px solid var(--line);font-weight:500}
@@ -128,7 +128,7 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 @media(max-width:800px){.lieu,.steps{grid-template-columns:1fr}.orgs{grid-template-columns:1fr}.strip{grid-template-columns:1fr}.contact{padding:22px}
  .spine{left:12px}.node{grid-template-columns:34px 1fr;row-gap:6px}.dot{grid-row:1;grid-column:1;margin:8px 0 0 4px;width:18px;height:18px}.hr{grid-row:1;grid-column:2;text-align:left;font-size:1.9rem;padding:0}.cards{grid-column:2}}
 @media(max-width:800px){.bar{gap:8px;padding:8px 0}.tabs{width:100%}.tab{padding:10px 8px}.legend{width:100%;padding-bottom:2px}.lg{padding:7px 12px;font-size:.88rem}.hero .container{padding:48px 0 32px}.sec{padding:44px 0}}
-@media(max-width:480px){.days{grid-template-columns:1fr}.org{flex-direction:column;text-align:center}.tab{padding:12px 18px}.visu{max-width:220px}}
+@media(max-width:480px){.days{grid-template-columns:1fr}.tab{padding:12px 18px}.visu{max-width:220px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 </style>
 <!-- Matomo -->
@@ -204,13 +204,11 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
  <h2>Associations</h2>
  <p class="lead">Elles se mobilisent pour le Téléthon, au profit de l’AFM-Téléthon.</p>
  <div class="orgs">
-  <div class="org"><img class="logo" src="https://hive.forms.usercontent.microsoft/images/775dabcb-7e15-4658-a8f9-1fa4fe7a9420/0722fc0d-08df-49f3-b822-4a568599971b/T8O9F5KIH1WU2VB4FCT15414Z8/0334595a-3f1f-46ba-b666-992adfab60d0" alt="Logo Luynes en Fêtes" /><div><b>Luynes en Fêtes</b><span>Organisateur</span></div></div>
-  <div class="org"><img class="logo wide" src="https://www.aixenprovence.fr/local/cache-vignettes/L1199xH630/f39fc0207b50495515902f20e30b1b-15bea.png" alt="Logo Ville d’Aix-en-Provence" /><div><b>Ville d’Aix-en-Provence</b><span>Soutien de la Ville</span></div></div>
-  <div class="org"><img class="logo wide" src="https://www.afm-telethon.fr/sites/default/files/media/images/AFM_TELETHON_millesime_2026_Q.jpg" alt="Logo AFM-Téléthon 2026" /><div><b>AFM-Téléthon</b><span>Partenaire institutionnel</span></div></div>
+  <div class="org"><small>Organisateur</small><img src="files/logos/lef.jpeg" alt="Logo Luynes en Fêtes" /><b>Luynes en Fêtes</b></div>
+  <div class="org"><small>Organisateur</small><img src="https://www.aixenprovence.fr/local/cache-vignettes/L1199xH630/f39fc0207b50495515902f20e30b1b-15bea.png" alt="Logo Ville d’Aix-en-Provence" /><b>Ville d’Aix-en-Provence</b></div>
+  <div class="org"><small>Partenaire institutionnel</small><img src="https://www.afm-telethon.fr/sites/default/files/media/images/AFM_TELETHON_millesime_2026_Q.jpg" alt="Logo AFM-Téléthon 2026" /><b>AFM-Téléthon</b></div>
  </div>
- <ul class="tiles"><li>Festi Luynes</li><li>Union Cycliste de Luynes</li><li>ADAVA</li><li>FreeSon</li><li>Rythm&amp;Fit</li><li>Planet Jeunes</li><li>Mon Tir Sportif</li><li>Luynes Sports</li><li>Paroisse de Luynes</li></ul>
- <p class="small">Participent également</p>
- <ul class="tiles o"><li>Le Corps au Présent</li><li>Pizza Verte</li><li>Boulangerie L’Orge</li></ul>
+ <ul class="tiles"><li>Festi Luynes</li><li>Union Cycliste de Luynes</li><li>ADAVA</li><li>FreeSon</li><li>Rythm&amp;Fit</li><li>Planet Jeunes</li><li>Mon Tir Sportif</li><li>Luynes Sports</li><li>Paroisse de Luynes</li><li>Le Corps au Présent</li><li>Pizza Verte</li><li>Boulangerie L’Orge</li></ul>
  <p class="small">Avec le soutien de</p>
  <ul class="tiles o"><li>Arena Aix</li><li>Sodexo</li></ul>
 </div></section>
