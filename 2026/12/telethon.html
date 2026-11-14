@@ -23,8 +23,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
 :root{--brand-dark:#c2792a;--brand:#ffb763;--brand-soft:#f8e0c2;--ink:#2f2418;--text:#4b3a29;--muted:rgba(75,58,41,.72);--line:rgba(95,68,37,.16);--shadow:0 14px 36px rgba(63,40,16,.09);
---c-jeton:#b0703a;--c-pass:#9aa3ae;--c-fort:#e0b11f;--c-tombola:#8e5ea2;--ok:#2e7d32}
-.t-jeton{--t:var(--c-jeton);--tc:#fff}.t-pass{--t:var(--c-pass);--tc:var(--ink)}.t-fort{--t:var(--c-fort);--tc:var(--ink)}.t-free{--t:var(--ok);--tc:#fff}.t-tombola{--t:var(--c-tombola);--tc:#fff}
+--c-jeton:#9a5b26;--c-pass:#5d6b7a;--c-fort:#8a6500;--c-tombola:#8e5ea2;--ok:#2e7d32}
+.t-jeton,.t-pass,.t-fort,.t-free,.t-tombola{--tc:#fff}
+.t-jeton{--t:var(--c-jeton)}.t-pass{--t:var(--c-pass)}.t-fort{--t:var(--c-fort)}.t-free{--t:var(--ok)}.t-tombola{--t:var(--c-tombola)}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px;scrollbar-gutter:stable}
 html.lk{overflow:hidden}dialog{overscroll-behavior:contain}.pgb,.wzb{overscroll-behavior:contain}
 body{margin:0;font-family:"Outfit",sans-serif;color:var(--text);background:linear-gradient(180deg,#fffaf4,#fff6eb);overflow-x:hidden}
@@ -39,7 +40,7 @@ nav{display:flex;gap:2px}nav a{padding:9px 13px;border-radius:999px;font-weight:
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:600;border:0;transition:transform .2s}
 .btn:hover{transform:translateY(-1px)}.btn-p{background:var(--brand-dark);color:#fff;box-shadow:0 10px 22px rgba(194,121,42,.3)}.btn-s{background:var(--brand-soft);color:var(--ink)}
 .btn-w{background:rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.4)}
-.hero{position:relative;color:#fff;min-height:calc(100svh - 64px);display:flex;align-items:flex-end;background:linear-gradient(180deg,rgba(47,36,24,.35),rgba(47,36,24,.82)),url("https://actus.13080.fr/wp-content/uploads/2024/04/Banniere-scaled.png") center/cover #5a432b}
+.hero{position:sticky;top:64px;z-index:0;color:#fff;min-height:calc(100svh - 64px);display:flex;align-items:flex-end;background:linear-gradient(180deg,rgba(47,36,24,.35),rgba(47,36,24,.82)),url("https://actus.13080.fr/wp-content/uploads/2024/04/Banniere-scaled.png") center/cover #5a432b}
 .hero .container{padding:70px 0 40px}
 .hgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:end}
 .visu{width:100%;max-width:440px;justify-self:center;align-self:center;background:#fffaf4;padding:24px;border-radius:32px;border:4px solid rgba(255,255,255,.55);box-shadow:0 22px 48px rgba(0,0,0,.38)}
@@ -56,6 +57,10 @@ h1{margin:0 0 16px;font-size:clamp(3.2rem,11vw,8rem);line-height:.9;letter-spaci
 .sec{padding:clamp(32px,4.67vw,59px) 0}
 h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spacing:-.045em;line-height:1.05}
 .lead{margin:0 0 26px;color:var(--muted);font-size:1.05rem}
+/* le hero reste figé, le contenu remonte par-dessus */
+main>section:not(.hero){position:relative;z-index:1;background:#fff9f1}
+#programme{border-radius:36px 36px 0 0;box-shadow:0 -18px 40px rgba(47,36,24,.35),0 -2px 0 rgba(255,255,255,.55);padding-top:clamp(40px,5.5vw,72px)}
+@media(max-width:800px){#programme{border-radius:26px 26px 0 0}}
 /* programme */
 .pick{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:760px}
 .pickb{display:block;width:100%;text-align:left;border:0;border-radius:24px;padding:22px 26px;background:var(--brand-dark);color:#fff;box-shadow:0 12px 26px rgba(194,121,42,.3);transition:transform .2s}
@@ -85,23 +90,16 @@ dialog.pg::backdrop,dialog.wz::backdrop{background:rgba(47,36,24,.6);backdrop-fi
 .tg{display:inline-block;margin-top:8px;padding:3px 12px;border-radius:999px;background:var(--t);color:var(--tc);font-weight:700;font-size:.82rem}
 /* billetterie : présentation */
 .tarifs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 18px}
-.tf{background:#fff;border:1px solid var(--line);border-top:10px solid var(--t);border-radius:24px;padding:22px 22px 24px;box-shadow:var(--shadow)}
+.tf{background:#fff;border:1px solid var(--line);border-top:10px solid var(--t);border-radius:24px;padding:22px 22px 24px;box-shadow:none}
 .tn{display:inline-block;padding:4px 14px;border-radius:999px;background:var(--t);color:var(--tc);font-weight:800;font-size:.85rem;letter-spacing:.04em}
 .tf h3{margin:12px 0 4px;color:var(--ink);font-size:1.4rem;letter-spacing:-.03em}
 .tf .px{margin:0 0 12px;color:var(--brand-dark);font-weight:700;font-size:1.1rem}
 .tf ul{margin:0;padding-left:20px;line-height:1.65}
-.fam{display:flex;gap:16px;align-items:center;margin:0 0 14px;padding:18px 22px;border-radius:20px;background:#eaf5ea;border:1px solid #cfe5cf;color:#1f4d22;line-height:1.5}.fam b{color:#1b5e20}
-.fisc{margin:0 0 22px;padding:16px 20px;border-radius:18px;background:#fff;border:1px dashed var(--line);line-height:1.55;color:var(--ink)}
-.pay{display:flex;gap:16px;align-items:center;margin:0 0 22px;padding:16px 20px;border-radius:18px;background:#fff;border:1px solid var(--line);line-height:1.55;color:var(--ink)}
-.pay>span:first-child{font-size:1.8rem;flex:none}
-.pay ul{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:8px 0 0;padding:0}
-.pay li{padding:6px 14px;border-radius:999px;background:var(--brand-soft);font-weight:600;font-size:.92rem}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
-.steps div{display:flex;gap:14px;align-items:center;padding:14px 18px;border-radius:18px;background:rgba(255,255,255,.75);border:1px solid var(--line);line-height:1.35;color:var(--ink);font-weight:500}
-.steps b{flex:none;width:34px;height:34px;border-radius:99px;background:var(--brand-dark);color:#fff;display:grid;place-items:center}
-.ticket{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:26px 30px;border-radius:24px;background:var(--ink);color:#fff;box-shadow:var(--shadow)}.ticket p{margin:0;max-width:50ch;line-height:1.6;font-size:1.1rem}.big{padding:18px 34px;font-size:1.1rem}
+.gtk{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:10px;color:var(--ink);line-height:1.5}
+.gtk li{padding:2px 0 2px 14px;border-left:3px solid var(--brand)}
+.ticket{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding:26px 30px;border-radius:24px;background:var(--ink);color:#fff;box-shadow:var(--shadow)}.ticket p{margin:0;max-width:50ch;line-height:1.6;font-size:1.1rem;text-wrap:balance}.big{padding:18px 34px;font-size:1.1rem}
 /* billetterie : assistant plein écran */
-dialog.wz{width:min(640px,100%);height:min(92svh,860px);max-height:none;padding:0;border:0;border-radius:32px;background:#fffaf4;color:var(--text);box-shadow:0 30px 80px rgba(47,36,24,.4);overflow:hidden}
+dialog.wz{width:100%;max-width:none;height:100vh;height:100dvh;max-height:none;margin:0;inset:0;padding:0;border:0;border-radius:0;background:#fffaf4;color:var(--text);overflow:hidden}
 dialog.wz[open]{display:flex;flex-direction:column}
 .wzh{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid var(--line);background:#fff}
 .wzh button{flex:none;width:44px;height:44px;border-radius:99px;border:0;background:var(--brand-soft);color:var(--ink);font-size:1.6rem;line-height:1}
@@ -114,7 +112,7 @@ dialog.wz[open]{display:flex;flex-direction:column}
 .grp{margin:0 0 18px;background:#fff;border:1px solid var(--line);border-left:8px solid var(--t);border-radius:22px;overflow:hidden}
 .gh{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;padding:14px 18px 8px}.gh small{color:var(--muted)}
 .rw{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-top:1px solid var(--line)}
-.rw b{display:block;color:var(--ink);font-size:1.08rem}.rw small{display:block;color:var(--muted);line-height:1.35}.rw .px{color:var(--brand-dark);font-weight:700}
+.rw b{display:block;color:var(--ink);font-size:1.08rem}.rw small{display:block;color:var(--muted);line-height:1.35}.rw small:empty{display:none}.rw .px{color:var(--brand-dark);font-weight:700}
 .rw.off{opacity:.6}
 .st{display:flex;align-items:center;gap:8px;flex:none}.st button{width:44px;height:44px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:1.4rem;line-height:1}
 .st button:disabled{opacity:.3;cursor:default}.st output{min-width:28px;text-align:center;font-weight:800;color:var(--ink);font-size:1.2rem}
@@ -139,6 +137,8 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 .wzf{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:14px 20px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:#fff}
 .wzf .tot{color:var(--ink);font-weight:600}.wzf .tot b{font-size:1.5rem;margin-left:6px}.wzf .btn{flex:1 1 180px;padding:16px 24px;font-size:1.05rem}.wzf .btn:disabled{opacity:.45;cursor:default}
 #bm{flex:1 0 100%;order:-1;margin:0;font-weight:600;color:#b3261e}#bm:empty{display:none}
+/* plein écran : le contenu reste centré sur 640 px sur grand écran */
+.wzh,.wzb,.wzf{padding-left:max(16px,calc((100% - 640px)/2));padding-right:max(16px,calc((100% - 640px)/2))}
 /* tombola */
 .tombola{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;padding:clamp(24px,4vw,40px);border-radius:32px;background:linear-gradient(135deg,var(--brand-soft),#fff);border:1px solid var(--line);box-shadow:var(--shadow)}
 .tombola .lead{margin-bottom:14px}
@@ -201,9 +201,8 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 @media(max-width:900px){.burger{display:flex}
  nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:8px 16px 14px;background:rgba(255,249,242,.98);border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(63,40,16,.12)}
  nav.open{display:flex}nav a{padding:14px 12px;font-size:1.05rem;border-radius:12px}
- .hgrid{grid-template-columns:1fr}.visu{max-width:300px;order:-1;justify-self:start}.steps{grid-template-columns:1fr 1fr}}
+ .hgrid{grid-template-columns:1fr}.visu{max-width:300px;order:-1;justify-self:start}}
 @media(max-width:800px){.orgs{grid-template-columns:1fr}.tarifs{grid-template-columns:1fr}.pick{grid-template-columns:1fr}.contact{padding:22px}.hero .container{padding:48px 0 32px}.sec{padding:29px 0}}
-@media(max-width:600px){dialog.wz{width:100%;height:100svh;border-radius:0}.wzb{padding:22px 16px 16px}.steps{grid-template-columns:1fr}}
 @media(max-width:480px){.days{grid-template-columns:1fr}.ag li{grid-template-columns:1fr;gap:6px;padding:16px 18px 16px 16px}.h{display:flex;flex-wrap:wrap;gap:0 14px}.pgf a{margin-left:0}.visu{max-width:220px}.dbl{grid-template-columns:1fr;gap:0}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 /* lieu : carte intégrée */
@@ -241,7 +240,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 <header><div class="container">
  <a class="brand" href="/"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" />Luynes en Fêtes</a>
  <button class="burger" id="bg" type="button" aria-expanded="false" aria-controls="nv" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
- <nav id="nv" aria-label="Sections"><a href="#programme" class="keep">Programme</a><a href="#tombola" class="keep">Tombola</a><a href="#billetterie" class="keep">Billetterie</a><a href="#associations">Associations</a><a href="#don" class="keep">Don</a><a href="#contact">Contact</a><a href="#lieu" class="keep">Lieu</a></nav>
+ <nav id="nv" aria-label="Sections"><a href="#programme" class="keep">Programme</a><a href="#tombola" class="keep">Tombola</a><a href="#billetterie" class="keep">Billetterie</a><a href="#associations">Associations</a><a href="#don" class="keep">Don</a><a href="#contact">Contact</a><a href="#lieu" class="keep">Lieu et plan</a></nav>
 </div></header>
 
 <main>
@@ -267,7 +266,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
   <button class="pickb" type="button" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></button>
   <button class="pickb" type="button" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></button>
  </div>
- <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-pass"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-pass"><i></i><span>Atelier code de la route <small>Sporting Auto Moto École</small></span></li><li class="t-pass"><i></i><span>Découverte du tandem <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-fort"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Inscription obligatoire · places limitées</em></li><li class="t-fort"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Inscription obligatoire · places limitées</em></li></ul></div>
+ <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-pass"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-pass"><i></i><span>Atelier code de la route <small>Sporting Auto Moto École</small></span></li><li class="t-pass"><i></i><span>Découverte du tandem <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-fort"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Inscription obligatoire, places limitées</em></li><li class="t-fort"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Inscription obligatoire, places limitées</em></li></ul></div>
  <dialog class="pg" id="pg" aria-labelledby="pgt">
   <div class="pgh"><h3 id="pgt"></h3><button class="x" type="button" id="pgx" aria-label="Fermer">&times;</button></div>
   <div class="pgb" data-d="sam"><ul class="ag">
@@ -301,15 +300,16 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
  <h2>Billetterie en ligne</h2>
  <p class="lead">Réglez à l’avance, retirez tout en un seul passage à la caisse centrale. Chaque achat soutient l’AFM-Téléthon.</p>
  <div class="tarifs">
-  <div class="tf t-jeton"><span class="tn">Jetons</span><h3>Pour les petits achats</h3><p class="px">1 jeton = 1 €</p><ul><li>Cafés</li><li>Ballons sculptés : 1 jeton</li><li>Porte-clés : 5 jetons</li></ul></div>
-  <div class="tf t-pass"><span class="tn">Pass multi-activités</span><h3>Toutes les activités du jour</h3><p class="px">10 € par participant et par jour</p><ul><li>Karts à pédales, Planet Jeunes, maquillage</li><li>Tir laser, code de la route, tandem</li><li>Sorties VTT et route</li><li>Samedi, dimanche ou les deux jours</li></ul></div>
-  <div class="tf t-fort"><span class="tn">Ticket temps fort</span><h3>Une animation, un ticket</h3><p class="px">Tarif propre à chaque temps fort</p><ul><li>Massage de 20 minutes · samedi</li><li>Concert de FreeSon · dimanche</li><li>Ateliers pizza et cookies<br><span class="ins">Inscription obligatoire, places limitées</span></li></ul></div>
+  <div class="tf t-jeton"><span class="tn">Jetons</span><h3>Petits achats</h3><p class="px">1 jeton = 1 €</p><ul><li>Cafés, ballons sculptés</li><li>Porte-clés : 5 jetons</li></ul></div>
+  <div class="tf t-pass"><span class="tn">Pass multi-activités</span><h3>Activités du jour</h3><p class="px">10 € par participant et par jour</p><ul><li>Karts, Planet Jeunes, maquillage, tir laser, VTT…</li></ul></div>
+  <div class="tf t-fort"><span class="tn">Ticket temps fort</span><h3>Une animation, un ticket</h3><p class="px">Tarif propre à chaque animation</p><ul><li>Massage, concert, ateliers pizza et cookies</li></ul></div>
  </div>
- <div class="fam"><span style="font-size:2rem" aria-hidden="true">👨‍👩‍👧‍👦</span><div><b>Gratuité famille.</b> Pour un lot de pass multi-activités ou un lot de tickets temps fort, à partir du 3<sup>e</sup> enfant d’une même famille (sur justificatif), c’est gratuit. La billetterie s’en charge.</div></div>
- <p class="fisc"><b>Bon à savoir :</b> les jetons, les pass et les tickets sont un droit d’accès aux animations. Ils <b>ne donnent pas droit à un reçu fiscal</b> (réduction d’impôt), à la différence d’un <a href="#don" style="text-decoration:underline">don</a>. À l’inverse, un don ne donne pas accès aux activités du Téléthon, pour des raisons légales.</p>
- <div class="pay"><span aria-hidden="true">💳</span><div><b>Paiement en ligne sécurisé.</b> Moyens de paiement disponibles :<ul><li>Cartes bancaires (CB, Mastercard, Visa)</li><li>Apple Pay</li><li>Google Pay</li></ul></div></div>
- <div class="steps"><div><b>1</b><span>Choisissez vos jetons, pass et tickets</span></div><div><b>2</b><span>Ajoutez les participants et les accompagnants</span></div><div><b>3</b><span>Attribuez chaque achat, puis vérifiez votre panier</span></div><div><b>4</b><span>Payez, puis retirez tout à la caisse centrale</span></div></div>
- <div class="ticket"><p>Commandez en 3 minutes ! Vous recevez une confirmation détaillée par e-mail.</p><button class="btn btn-p big" type="button" data-bil>Ouvrir la billetterie</button></div>
+ <ul class="gtk">
+  <li><b>Gratuité famille :</b> à partir du 3<sup>e</sup> enfant d’une même famille (sur justificatif), pass et tickets sont offerts.</li>
+  <li><b>Pas de reçu fiscal</b> pour ces achats. Un <a href="#don" style="text-decoration:underline">don</a> en donne un.</li>
+  <li>Paiement sécurisé : carte bancaire, Apple Pay, Google Pay.</li>
+ </ul>
+ <div class="ticket"><p>Commandez en 3 minutes ! Vous recevez une confirmation détaillée par <span style="white-space:nowrap">e-mail</span>.</p><button class="btn btn-p big" type="button" data-bil>Ouvrir la billetterie</button></div>
 </div></section>
 
 <section class="sec" id="associations"><div class="container">
@@ -341,7 +341,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 
 <section class="sec" id="lieu"><div class="container">
  <div class="lieu">
-  <div class="lp"><h2>Lieu</h2><address>Espace Ughetti<br>Allée Serge Attard / Rue André Claverie<br>Luynes<br>13080 Aix-en-Provence</address>
+  <div class="lp"><h2>Lieu et plan</h2><address>Espace Ughetti<br>Allée Serge Attard / Rue André Claverie<br>Luynes<br>13080 Aix-en-Provence</address>
   <a class="btn btn-p" target="_blank" rel="noreferrer" href="https://maps.app.goo.gl/Q3UA2Ws4CXG31pKu6">Itinéraire</a>
   </div>
   <div class="pw">
@@ -411,14 +411,14 @@ const API_URL="https://default403611541d9141c3b14ddd403256e1.be.environment.api.
 const LS="telethon2026-commande";
 const PR=[
 {id:"jeton",g:"jeton",n:"Jetons",d:"1 jeton = 1 €. Cafés, ballons sculptés (1 jeton), porte-clés (5 jetons). Valables les deux jours.",p:1,j:["tous"]},
-{id:"pass",g:"pass",n:"Pass multi-activités",d:"",dj:{sam:"Karts à pédales, Planet Jeunes, maquillage… et les activités annoncées au programme du samedi.",dim:"Karts à pédales, Planet Jeunes… et les activités annoncées au programme du dimanche."},p:10,j:["sam","dim"]},
+{id:"pass",g:"pass",n:"Pass multi-activités",d:"",p:10,j:["sam","dim"]},
 {id:"massage",g:"fort",n:"Massage de 20 minutes",d:"Tête ou pieds, à 10h, 12h, 14h et 16h, salle Ughetti",p:10,j:["sam"]},
 {id:"concert",g:"fort",n:"Concert FreeSon",d:"Jazz vocal, 17h – 18h",p:10,j:["dim"]},
 {id:"tombola",g:"tombola",n:"Carnets de tombola",d:"1 carnet = 5 tickets de tombola. Tirage au sort pour gagner l’un des lots.",p:10,j:["tombola"]},
 {id:"pizza",g:"fort",n:"Atelier pizza",d:"Inscription obligatoire, places limitées",p:null,j:[]},
 {id:"cookies",g:"fort",n:"Atelier cookies",d:"Inscription obligatoire, places limitées",p:null,j:[]}];
 const multi=p=>p.g==="jeton"||p.g==="tombola";
-const GR=[["jeton","Jetons","1 jeton = 1 €"],["pass","Pass multi-activités","10 € par participant et par jour"],["fort","Ticket temps fort","Un ticket par participant et par animation"],["tombola","Tombola","1 carnet de 5 tickets = 10 €"]];
+const GR=[["jeton","Jetons","1 jeton = 1 €"],["pass","Pass multi-activités","10 € par participant et par jour : karts, Planet Jeunes, maquillage et activités du programme"],["fort","Ticket temps fort","Un ticket par participant et par animation"],["tombola","Tombola","1 carnet de 5 tickets = 10 €"]];
 const JL={tombola:"",tous:"samedi et dimanche",sam:"samedi 5 décembre",dim:"dimanche 6 décembre"};
 const AGES=[["m11","Moins de 11 ans"],["m18","11 - 17 ans"],["a26","18 - 26 ans"],["a59","27 - 59 ans"],["p60","60 ans et plus"]];
 const AL=Object.fromEntries(AGES);
@@ -449,7 +449,7 @@ function v1(){let o=`<h2 class="wt">Vos courses</h2><p class="ws">Choisissez vos
  GR.forEach(g=>{o+=`<section class="grp t-${g[0]}"><div class="gh"><span class="tn">${g[1]}</span><small>${g[2]}</small></div>`;
   PR.filter(p=>p.g===g[0]).forEach(p=>{
    if(p.p==null){o+=`<div class="rw off"><div><b>${p.n}</b><small>${p.d}</small><span class="px">Bientôt disponible</span></div></div>`;return}
-   p.j.forEach(j=>{o+=rowHtml(p,j,p.g==="pass"?cap(JL[j]):p.g==="fort"?p.n+" · "+JL[j]:p.n,p.dj?p.dj[j]:p.d)})});
+   p.j.forEach(j=>{o+=rowHtml(p,j,p.g==="pass"?cap(JL[j]):p.g==="fort"?p.n+", "+JL[j]:p.n,p.d)})});
   o+=`</section>`});
  return o+`<p class="note g"><b>Gratuité famille.</b> Pour un lot de pass multi-activités ou un lot de tickets temps fort, à partir du 3<sup>e</sup> enfant d’une même famille (sur justificatif), c’est gratuit. La billetterie s’en charge.</p><p class="note w"><b>Pas de reçu fiscal.</b> Les jetons, les pass et les tickets sont un droit d’accès aux animations : ils ne donnent pas droit à un reçu fiscal, à la différence d’un don. Un don, lui, ne donne pas accès aux activités du Téléthon (raisons légales).</p>`}
 /* ---- étape 2 ---- */
@@ -461,7 +461,7 @@ function card(x,i){const p=i===0;
  const seg=`<div class="seg" role="group" aria-label="Rôle"><button type="button" data-role="${x.id}|participant" class="${x.role==="participant"?"on":""}">${p?"Je participe":"Participant"}</button><button type="button" data-role="${x.id}|accompagnant" class="${x.role==="accompagnant"?"on":""}">${p?"J’accompagne seulement":"Accompagnant"}</button></div>`;
  let o=`<div class="card"><div class="ch"><b>${p?"Vous, qui réglez la commande":label(x)}</b>${p?"":`<button type="button" class="lnk" data-rm="${x.id}">Retirer</button>`}</div>${seg}
  <div class="dbl"><label>Prénom${inp(x.id,"prenom",x.prenom,"text",p?"given-name":"off")}</label><label>Nom${inp(x.id,"nom",x.nom,"text",p?"family-name":"off")}</label></div>`;
- if(p)o+=`<label>Adresse e-mail<small style="font-weight:400;color:var(--muted)"> · votre confirmation y sera envoyée</small>${inp(x.id,"mail",x.mail,"email","email")}</label>`;
+ if(p)o+=`<label>Adresse e-mail<small style="font-weight:400;color:var(--muted)">, votre confirmation y sera envoyée</small>${inp(x.id,"mail",x.mail,"email","email")}</label>`;
  o+=`<label>Tranche d’âge${sel(x.id,x.age,x.role==="accompagnant"||p)}</label>`;
  if(minor(x)){const ad=adults();o+=ad.length?`<fieldset class="acc"><legend>Accompagné(e) par</legend>${ad.map(a=>`<label class="chk"><input type="checkbox" data-acc="${x.id}|${a.id}"${(x.accs||[]).includes(a.id)?" checked":""} />${esc(label(a))}</label>`).join("")}<small>Cochez un ou plusieurs adultes. Pour la gratuité famille, indiquez les mêmes accompagnants pour les frères et sœurs.</small></fieldset>`:`<p class="note a">Un mineur doit être accompagné : ajoutez d’abord un adulte, participant ou accompagnant.</p>`}
  return o+`</div>`}
@@ -483,10 +483,10 @@ function err2(){fixResp();for(const[i,x]of X.entries()){const w=i?label(x):"Vos 
 /* ---- étape 3 ---- */
 function v3(){const L=price();
  let o=`<h2 class="wt">Pour qui ?</h2><p class="ws">Attribuez chaque achat au bon participant. Nous avons pré-rempli : corrigez si besoin.</p>`;
- keys().forEach(([s,p,j])=>{const r=Q[s]-got(s),t=multi(p)?p.n:p.g==="pass"?"Pass multi-activités · "+JL[j]:p.n+" · "+JL[j];
+ keys().forEach(([s,p,j])=>{const r=Q[s]-got(s),t=multi(p)?p.n:p.g==="pass"?"Pass multi-activités, "+JL[j]:p.n+", "+JL[j];
   o+=`<div class="card t-${p.g}" style="border-left:8px solid var(--t)"><div class="ch"><b>${t}</b><span class="${r?"ko":"okc"}">${r?"Il en reste "+r+" à attribuer":"✓ Tout est attribué"}</span></div>`;
   parts().forEach(x=>{const n=A[s][x.id]||0,f=L.find(l=>l.x===x&&l.p===p&&l.j===j&&l.free);
-   o+=`<div class="who"><span>${esc(label(x))}${f?`<span class="free">Offert · ${f.rk}<sup>e</sup> enfant</span>`:""}</span><div class="st"><button type="button" data-a="${s}|${x.id}|-1" aria-label="Retirer" ${n?"":"disabled"}>−</button><output>${n}</output><button type="button" data-a="${s}|${x.id}|1" aria-label="Ajouter" ${r>0&&(multi(p)||!n)?"":"disabled"}>+</button></div></div>`});o+=`</div>`});
+   o+=`<div class="who"><span>${esc(label(x))}${f?`<span class="free">Offert, ${f.rk}<sup>e</sup> enfant</span>`:""}</span><div class="st"><button type="button" data-a="${s}|${x.id}|-1" aria-label="Retirer" ${n?"":"disabled"}>−</button><output>${n}</output><button type="button" data-a="${s}|${x.id}|1" aria-label="Ajouter" ${r>0&&(multi(p)||!n)?"":"disabled"}>+</button></div></div>`});o+=`</div>`});
  return o}
 function err3(){const k=keys().find(([s])=>Q[s]-got(s)>0);if(k)return "Il reste des achats à attribuer ("+k[1].n+").";const x=parts().find(x=>!price().some(l=>l.x===x));return x?label(x)+" n’a rien : attribuez-lui un achat, ou passez-le en accompagnant/retirez-le à l’étape précédente.":""}
 /* ---- étape 4 ---- */
@@ -494,8 +494,8 @@ function v4(){const L=price(),T=total(),p0=X[0];
  let o=`<h2 class="wt">Relire ma commande</h2><p class="ws">Tout est correct ? Vérifiez une dernière fois avant de payer.</p>
  <div class="card"><div class="ch"><b>Qui paie</b><button class="lnk" type="button" data-go="2">Modifier</button></div><p style="margin:0 0 12px;color:var(--ink)"><b>${esc(label(p0))}</b><br>${esc(p0.mail)}<br><small style="color:var(--muted)">La confirmation détaillée sera envoyée à cette adresse.</small></p></div>`;
  parts().forEach(x=>{const ls=L.filter(l=>l.x===x),rs=X.filter(a=>(x.accs||[]).includes(a.id));
-  o+=`<div class="card"><div class="ch"><b>${esc(label(x))}</b><button class="lnk" type="button" data-go="3">Modifier</button></div><small style="display:block;margin:-6px 0 8px;color:var(--muted)">Participant · ${AL[x.age]}${rs.length?" · accompagné(e) par "+rs.map(a=>esc(label(a))).join(", "):""}</small>`;
-  ls.forEach(l=>{o+=`<div class="ln"><span>${l.n} × ${l.p.n}${multi(l.p)?"":" · "+JL[l.j]}</span><b>${l.free?"Offert":eur(l.c)}</b>${l.free?`<small><em>Gratuité famille : ${l.rk}<sup>e</sup> enfant pour ce ${l.p.g==="fort"?"ticket":"pass"} (sur justificatif)</em></small>`:""}</div>`});o+=`</div>`});
+  o+=`<div class="card"><div class="ch"><b>${esc(label(x))}</b><button class="lnk" type="button" data-go="3">Modifier</button></div><small style="display:block;margin:-6px 0 8px;color:var(--muted)">Participant, ${AL[x.age]}${rs.length?", accompagné(e) par "+rs.map(a=>esc(label(a))).join(", "):""}</small>`;
+  ls.forEach(l=>{o+=`<div class="ln"><span>${l.n} × ${l.p.n}${multi(l.p)?"":", "+JL[l.j]}</span><b>${l.free?"Offert":eur(l.c)}</b>${l.free?`<small><em>Gratuité famille : ${l.rk}<sup>e</sup> enfant pour ce ${l.p.g==="fort"?"ticket":"pass"} (sur justificatif)</em></small>`:""}</div>`});o+=`</div>`});
  const ac=X.filter(x=>x.role==="accompagnant");
  if(ac.length)o+=`<div class="card"><div class="ch"><b>Accompagnants</b><button class="lnk" type="button" data-go="2">Modifier</button></div>${ac.map(a=>`<div class="ln"><span>${esc(label(a))}</span><b>Gratuit</b><small>Accompagne ${X.filter(m=>(m.accs||[]).includes(a.id)).map(m=>esc(label(m))).join(", ")}</small></div>`).join("")}</div>`;
  return o+`<div class="tt"><span>Total à payer</span><b>${eur(T)}</b></div>
@@ -558,10 +558,20 @@ const bk=$("bk");$("bkx").onclick=()=>bk.close();bk.addEventListener("click",e=>
 const bg=$("bg"),nv=$("nv");
 bg.onclick=()=>{const o=nv.classList.toggle("open");bg.setAttribute("aria-expanded",o);bg.setAttribute("aria-label",o?"Fermer le menu":"Ouvrir le menu")};
 nv.addEventListener("click",e=>{if(e.target.closest("a")){nv.classList.remove("open");bg.setAttribute("aria-expanded","false")}});
-const T=new Date("2026-12-05T10:00:00+01:00"),FIN=new Date("2026-12-06T18:00:00+01:00"),now=new Date();
-if(now<T){const j=Math.ceil((T-now)/864e5);$("cd").textContent=j>1?`Dans ${j} jours`:"C’est demain"}
-else if(now<FIN){$("cd").textContent="C’est maintenant";}
-else $("cd").textContent="Merci à tous";
+/* hero figé : colle sous l’en-tête, ou par le bas s’il est plus haut que l’écran */
+(()=>{const h=document.querySelector(".hero"),hd=document.querySelector("header");
+ const f=()=>{h.style.top=Math.min(hd.offsetHeight,innerHeight-h.offsetHeight)+"px"};
+ f();addEventListener("resize",f);addEventListener("load",f)})();
+/* compte à rebours : mis à jour toutes les 30 secondes et au retour sur l’onglet */
+const T=new Date("2026-12-05T10:00:00+01:00"),FIN=new Date("2026-12-06T18:00:00+01:00");
+let iv;
+function tick(){const n=new Date(),c=$("cd");
+ if(n<T){const m=Math.floor((T-n)/6e4),j=Math.floor(m/1440),h=Math.floor(m%1440/60),mn=m%60;
+  c.textContent=j>=1?`Dans ${j} jour${j>1?"s":""} ${h} h`:h>=1?`Dans ${h} h ${mn} min`:`Dans ${mn} min`}
+ else if(n<FIN)c.textContent="C’est maintenant";
+ else{c.textContent="Merci à tous";clearInterval(iv)}}
+tick();iv=setInterval(tick,3e4);
+document.addEventListener("visibilitychange",tick);
 /* contact : l’adresse n’existe jamais en clair dans le code, elle est assemblée au clic */
 const mail=()=>["comite","luynesenfetes","fr"].reduce((a,p,i)=>a+(i?(i===1?"@":"."):"")+p,"");
 $("wr").onclick=()=>{location.href="mailto:"+mail()+"?subject="+encodeURIComponent("Téléthon 2026 à Luynes");$("msg").textContent="Votre messagerie s’ouvre. Sinon, affichez l’adresse et écrivez-nous depuis votre boîte mail."};
@@ -582,7 +592,7 @@ const Z2={
  accueil:["Accueil et caisse centrale","#c9a21f","Retrait de vos jetons, pass et tickets en un seul passage. Le samedi, porte-clés personnalisés de 10h à 12h et de 14h à 16h."],
  parvis:["Parvis","#cfb888","Devant la salle : maquillage et ballons sculptés."],
  wc:["Toilettes","#5f95c4","Toilettes, juste sous la salle de danse."]};
-const H1="Touchez une pastille <b>i</b> pour découvrir ce qui se passe à cet endroit. La salle Ughetti s’ouvre sur son plan intérieur. Les flèches vertes signalent les entrées.",
+const H1="Touchez une pastille pour voir ce qui s’y passe.",
  H2="Touchez une pastille pour voir ce qu’il y a dans chaque espace.";
 const P1=$("plan"),P2=$("plan2"),zi=$("zi"),phd=$("phd");
 const hint=h=>{zi.innerHTML=`<p class="hint">${h}</p>`};
@@ -596,7 +606,7 @@ function pick(pl,Z,k){const on=pl.dataset.s===k;pl.classList.add("touched");clea
  pl.querySelectorAll(`.z[data-z="${k}"] .sh:not(.tree)`).forEach(p=>{const c=p.cloneNode(false);c.removeAttribute("class");c.removeAttribute("fill");ov.appendChild(c)});
  pl.insertBefore(ov,pl.querySelector(".pin"));
  const d=Z[k];zi.style.setProperty("--zc",d[1]);zi.innerHTML=`<h3><i></i>${d[0]}</h3><p>${d[2]}</p>`}
-function view(inside){clear(P1);clear(P2);P1.toggleAttribute("hidden",inside);P2.toggleAttribute("hidden",!inside);$("pback").hidden=!inside;$("ptt").textContent=inside?"Salle Ughetti · intérieur":"Plan du site";hint(inside?H2:H1);
+function view(inside){clear(P1);clear(P2);P1.toggleAttribute("hidden",inside);P2.toggleAttribute("hidden",!inside);$("pback").hidden=!inside;$("ptt").textContent=inside?"Salle Ughetti, intérieur":"Plan du site";hint(inside?H2:H1);
  (inside?phd:P1).scrollIntoView({block:"nearest",behavior:"smooth"})}
 $("pback").onclick=()=>view(false);
 function act(pl,Z,g){const k=g.dataset.z;if(pl===P1&&k==="salle")return view(true);pick(pl,Z,k)}
