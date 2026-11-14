@@ -193,6 +193,8 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 .plan{width:100%;max-width:540px;justify-self:center;height:auto;padding:14px;border-radius:28px;background:#fffdf8;border:1px solid var(--line);box-shadow:var(--shadow)}
 @media(max-width:800px){.lieu{grid-template-columns:1fr;gap:22px}.plan{max-width:none}}
 .fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:55;display:inline-flex;align-items:center;gap:10px;padding:14px 22px 14px 18px;border:0;border-radius:999px;background:var(--brand-dark);color:#fff;font-weight:700;font-size:1.05rem;box-shadow:0 14px 30px rgba(63,40,16,.35);transition:transform .2s}
+.up{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:55;display:grid;place-items:center;width:52px;height:52px;padding:0;border:2px solid var(--brand-dark);border-radius:50%;background:#fff;color:var(--brand-dark);box-shadow:0 10px 24px rgba(63,40,16,.25);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,transform .25s,visibility .25s}
+.up.show{opacity:1;visibility:visible;transform:none}.up:hover{background:var(--brand-soft)}.up svg{width:24px;height:24px}
 .fab:hover{transform:translateY(-2px)}.fab svg{flex:none;width:26px;height:26px}
 @media(max-width:480px){.fab{padding:14px 18px 14px 14px}}
 .lieu address{font-style:normal;font-size:1.25rem;line-height:1.7;color:var(--ink);margin:0 0 24px}
@@ -239,7 +241,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 </head>
 <body>
 <header><div class="container">
- <a class="brand" href="/"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" />Luynes en Fêtes</a>
+ <a class="brand" id="home" href="#"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" />Luynes en Fêtes</a>
  <button class="burger" id="bg" type="button" aria-expanded="false" aria-controls="nv" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
  <nav id="nv" aria-label="Sections"><a href="#programme" class="keep">Programme</a><a href="#tombola" class="keep">Tombola</a><a href="#billetterie" class="keep">Tarifs et billetterie</a><a href="#associations">Associations</a><a href="#don" class="keep">Don</a><a href="#lieu" class="keep">Lieu et plan</a><a href="#contact">Contact</a></nav>
 </div></header>
@@ -386,6 +388,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 </div></section>
 
 <button class="fab" type="button" data-bil aria-label="Ouvrir la billetterie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9a2 2 0 0 0 0 6v2.5A1.5 1.5 0 0 0 4.5 19h15a1.5 1.5 0 0 0 1.5-1.5V15a2 2 0 0 1 0-6V6.5A1.5 1.5 0 0 0 19.5 5h-15A1.5 1.5 0 0 0 3 6.5z"/><path d="M14 5v2.5M14 10.5v3M14 16.5V19"/></svg>Billetterie</button>
+<button class="up" id="up" type="button" aria-label="Revenir en haut de la page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <dialog class="wz" id="bw" aria-label="Billetterie">
  <div class="wzh"><button type="button" id="bb" aria-label="Étape précédente">‹</button><div class="pg4" id="pg4" aria-hidden="true"><i></i><i></i><i></i><i></i></div><button type="button" id="bwx" aria-label="Fermer">&times;</button></div>
  <div class="wzb" id="wzb"></div>
@@ -582,6 +585,12 @@ document.addEventListener("visibilitychange",tick);
   L.forEach(x=>{const on=x===cur;x.a.classList.toggle("act",on);if(on)x.a.setAttribute("aria-current","true");else x.a.removeAttribute("aria-current")})};
  const q=()=>{if(!raf)raf=requestAnimationFrame(run)};
  addEventListener("scroll",q,{passive:true});addEventListener("resize",q);run()})();
+/* logo et titre : retour en haut de cette page ; bouton flottant de retour en haut */
+(()=>{const top=()=>scrollTo({top:0,behavior:"smooth"}),u=$("up");
+ $("home").addEventListener("click",e=>{e.preventDefault();top();history.replaceState(null,"",location.pathname+location.search)});
+ u.addEventListener("click",top);
+ const f=()=>u.classList.toggle("show",scrollY>innerHeight*.6);
+ addEventListener("scroll",f,{passive:true});f()})();
 /* contact : l’adresse n’existe jamais en clair dans le code, elle est assemblée au clic */
 const mail=()=>["comite","luynesenfetes","fr"].reduce((a,p,i)=>a+(i?(i===1?"@":"."):"")+p,"");
 $("wr").onclick=()=>{location.href="mailto:"+mail()+"?subject="+encodeURIComponent("Téléthon 2026 à Luynes");$("msg").textContent="Votre messagerie s’ouvre. Sinon, affichez l’adresse et écrivez-nous depuis votre boîte mail."};
