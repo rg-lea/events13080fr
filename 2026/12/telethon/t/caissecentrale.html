@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Caisse centrale | Téléthon 2026 à Luynes</title>
+<link rel="icon" type="image/png" href="/files/logos/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{--brand-dark:#c2792a;--brand:#ffb763;--brand-soft:#f8e0c2;--ink:#2f2418;--text:#4b3a29;--muted:rgba(75,58,41,.72);--line:rgba(95,68,37,.16);--shadow:0 14px 36px rgba(63,40,16,.09);
+--c-jeton:#b0703a;--c-pass:#9aa3ae;--c-fort:#e0b11f;--c-tombola:#8e5ea2;--ok:#2e7d32}
+.t-jeton{--t:var(--c-jeton);--tc:#fff}.t-pass{--t:var(--c-pass);--tc:var(--ink)}.t-fort{--t:var(--c-fort);--tc:var(--ink)}.t-tombola{--t:var(--c-tombola);--tc:#fff}
+*{box-sizing:border-box}html{scrollbar-gutter:stable}html.lk{overflow:hidden}
+body{margin:0;font-family:"Outfit",sans-serif;color:var(--text);background:linear-gradient(180deg,#fffaf4,#fff6eb);overflow-x:hidden}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}button{font:inherit;cursor:pointer}
+.container{width:min(calc(100% - 32px),780px);margin:0 auto}
+:focus-visible{outline:3px solid var(--brand-dark);outline-offset:2px}
+header{position:sticky;top:0;z-index:60;background:rgba(255,249,242,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header .container{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:9px 0}
+.brand{display:flex;align-items:center;gap:12px;color:var(--ink);font-weight:700;letter-spacing:-.02em}
+.logo{width:46px;height:46px;border-radius:12px;object-fit:contain;background:var(--brand-dark);padding:4px}
+.tag{padding:7px 16px;border-radius:999px;background:var(--brand-soft);color:var(--ink);font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:600;border:0;transition:transform .2s}
+.btn:hover{transform:translateY(-1px)}.btn-p{background:var(--brand-dark);color:#fff;box-shadow:0 10px 22px rgba(194,121,42,.3)}.btn-s{background:var(--brand-soft);color:var(--ink)}
+main{padding:28px 0 40px}
+.top{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px}
+.wt{margin:0 0 6px;color:var(--ink);font-size:clamp(1.9rem,6vw,2.6rem);letter-spacing:-.045em;line-height:1.05;font-weight:800}
+.ws{margin:0 0 22px;color:var(--muted);font-size:1.05rem;line-height:1.5;max-width:60ch}
+h2.sh{margin:26px 0 10px;color:var(--ink);font-size:1.4rem;letter-spacing:-.03em}
+.grp{margin:0 0 14px;background:#fff;border:1px solid var(--line);border-left:8px solid var(--t);border-radius:22px;overflow:hidden}
+.gh{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;padding:14px 18px 8px}.gh small{color:var(--muted)}
+.tn{display:inline-block;padding:4px 14px;border-radius:999px;background:var(--t);color:var(--tc);font-weight:800;font-size:.85rem;letter-spacing:.04em}
+.rw{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-top:1px solid var(--line)}
+.rw b{display:block;color:var(--ink);font-size:1.08rem}.rw small{display:block;color:var(--muted);line-height:1.35}.rw .px{color:var(--brand-dark);font-weight:700}
+.st{display:flex;align-items:center;gap:8px;flex:none}.st button{width:44px;height:44px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:1.4rem;line-height:1}
+.st button:disabled{opacity:.3;cursor:default}.st output{min-width:30px;text-align:center;font-weight:800;color:var(--ink);font-size:1.2rem}
+.card{margin:0 0 14px;padding:16px 18px 6px;border:1px solid var(--line);border-radius:22px;background:#fff}
+.card label{display:block;margin-bottom:12px;font-weight:600;color:var(--ink)}
+.card textarea{display:block;width:100%;margin-top:6px;padding:14px;border:1px solid var(--line);border-radius:14px;font:inherit;font-size:1rem;background:#fffdfa;min-height:96px;resize:vertical}
+.card small{display:block;margin-top:4px;font-weight:400;color:var(--muted)}
+.card input{display:block;width:100%;margin-top:6px;padding:14px;border:1px solid var(--line);border-radius:14px;font:inherit;font-size:1rem;background:#fffdfa}
+.dbl{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 14px;padding:4px;border-radius:999px;background:var(--brand-soft)}
+.seg button{border:0;border-radius:999px;padding:14px 8px;background:transparent;color:var(--ink);font-weight:600}.seg button.on{background:var(--brand-dark);color:#fff}
+.dens{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;margin:0 0 14px}
+.den{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);color:var(--ink);font-weight:600}
+.den .st button{width:40px;height:40px}
+.sub{margin:6px 0 4px;color:var(--ink);font-weight:700}
+.tt{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:6px 0 14px;padding:16px 20px;border-radius:20px;background:var(--ink);color:#fff;font-weight:600}.tt b{font-size:1.8rem;letter-spacing:-.03em}
+.tt.ko{background:#b3261e}
+[hidden]{display:none!important}
+.wzf{position:sticky;bottom:0;z-index:50;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:14px 20px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:rgba(255,255,255,.96);backdrop-filter:blur(10px)}
+.wzf .tot{color:var(--ink);font-weight:600}.wzf .tot b{font-size:1.6rem;margin-left:6px}.wzf .btn{flex:1 1 220px;padding:16px 24px;font-size:1.05rem}.wzf .btn:disabled{opacity:.45;cursor:default}
+#bm{flex:1 0 100%;order:-1;margin:0;font-weight:600;color:#b3261e}#bm:empty{display:none}
+dialog.pg{width:min(560px,calc(100% - 24px));max-height:88svh;padding:0;border:0;border-radius:28px;background:#fffaf4;color:var(--text);box-shadow:0 30px 80px rgba(47,36,24,.4);overflow:hidden}
+dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{background:rgba(47,36,24,.6);backdrop-filter:blur(3px)}
+.pgh{padding:18px 24px;background:var(--brand-dark);color:#fff}.pgh h3{margin:0;font-size:1.5rem;letter-spacing:-.03em}
+.pgb{padding:20px 24px;line-height:1.6;overflow:auto}.pgb p{margin:0 0 10px}
+.pgf{display:flex;justify-content:flex-end;padding:14px 24px;border-top:1px solid var(--line);background:#fff}
+.ref{display:inline-block;margin:4px 0 12px;padding:8px 16px;border-radius:14px;background:var(--brand-soft);color:var(--ink);font-size:1.4rem;font-weight:800;letter-spacing:.02em}
+@media(max-width:480px){.dbl{grid-template-columns:1fr;gap:0}.dens{grid-template-columns:1fr}.rw{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://vigie.siweb.13080.fr/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '18']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "yowb8uix66");
+</script>
+</head>
+<body>
+<header><div class="container">
+ <a class="brand" href="/"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" />Luynes en Fêtes</a>
+ <span class="tag">Caisse centrale</span>
+</div></header>
+
+<main class="container" data-clarity-mask="True">
+ <div class="top"><h1 class="wt">Achat en caisse centrale</h1><button class="btn btn-s" type="button" id="rz">Tout effacer</button></div>
+ <p class="ws">Pour un achat réglé sur place, sans commande en ligne. L’acheteur reçoit une confirmation par e-mail, et la boîte du Téléthon en garde une copie pour le bilan.</p>
+
+ <div class="card"><label>Code caisse<small>Mot de passe de la caisse, donné par le comité. À saisir une fois.</small><input id="code" type="password" autocomplete="off" /></label></div>
+
+ <h2 class="sh">Acheteur</h2>
+ <div class="card">
+  <div class="dbl"><label>Prénom<input id="pre" type="text" autocomplete="off" /></label><label>Nom<input id="nom" type="text" autocomplete="off" /></label></div>
+  <label>Adresse e-mail<small>Facultatif. Sans adresse, seule la boîte du Téléthon reçoit le mail.</small><input id="mel" type="email" autocomplete="off" /></label>
+ </div>
+
+ <h2 class="sh">Achats</h2>
+ <div id="achats"></div>
+
+ <h2 class="sh">Note</h2>
+ <div class="card"><label>Note (facultatif)<small>Apparaît dans le mail, par exemple : gratuité famille, remarque sur le paiement…</small><textarea id="nt" maxlength="1000"></textarea></label></div>
+
+ <h2 class="sh">Paiement</h2>
+ <div class="card">
+  <div class="seg" role="group" aria-label="Moyen de paiement" id="seg"><button type="button" data-m="cb">Carte bancaire</button><button type="button" data-m="especes">Espèces</button><button type="button" data-m="cheque">Chèque</button></div>
+  <div id="esp" hidden>
+   <p class="sub">Ce que l’acheteur a remis</p>
+   <div class="sub" style="font-weight:600;color:var(--muted)">Billets</div><div class="dens" id="bil"></div>
+   <div class="sub" style="font-weight:600;color:var(--muted)">Pièces</div><div class="dens" id="pie"></div>
+   <div class="tt" id="rendu"><span>Remis <span id="remis"></span></span><span id="rl"></span></div>
+  </div>
+ </div>
+</main>
+
+<div class="wzf" data-clarity-mask="True"><p id="bm" role="alert"></p><div class="tot">Total<b id="bt">0 €</b></div><button class="btn btn-p" type="button" id="bn">Enregistrer et envoyer la confirmation</button></div>
+
+<dialog class="pg" id="dg" data-clarity-mask="True" aria-labelledby="dgt"><div class="pgh"><h3 id="dgt"></h3></div><div class="pgb" id="dgb"></div><div class="pgf"><button class="btn btn-p" type="button" id="dgx">Nouvel achat</button></div></dialog>
+
+<script>
+const $=i=>document.getElementById(i);
+/* Adresse du flux « Caisse centrale » : à coller ici après l’import dans Power Automate (déclencheur HTTP, URL complète). */
+const API_URL="";
+const PR=[
+{id:"jeton",j:"tous",g:"jeton",n:"Jetons",d:"1 jeton = 1 €. Cafés, ballons sculptés, porte-clés…",p:1,u:""},
+{id:"pass",j:"sam",g:"pass",n:"Pass multi-activités · samedi",d:"Samedi 5 décembre",p:10,u:" par participant"},
+{id:"pass",j:"dim",g:"pass",n:"Pass multi-activités · dimanche",d:"Dimanche 6 décembre",p:10,u:" par participant"},
+{id:"massage",j:"sam",g:"fort",n:"Massage de 20 minutes · samedi",d:"Tête ou pieds, à 10h, 12h, 14h et 16h",p:10,u:""},
+{id:"concert",j:"dim",g:"fort",n:"Concert FreeSon · dimanche",d:"Jazz vocal, 17h – 18h",p:10,u:""},
+{id:"tombola",j:"tombola",g:"tombola",n:"Carnets de tombola",d:"1 carnet = 5 tickets",p:10,u:" le carnet"}];
+const GR=[["jeton","Jetons","1 jeton = 1 €"],["pass","Pass multi-activités","10 € par participant et par jour"],["fort","Tickets temps forts","Un ticket par animation"],["tombola","Tombola","1 carnet de 5 tickets = 10 €"]];
+const BIL=[[500,"5 €"],[1000,"10 €"],[2000,"20 €"],[5000,"50 €"],[10000,"100 €"],[20000,"200 €"]];
+const PIE=[[200,"2 €"],[100,"1 €"],[50,"50 c"],[20,"20 c"],[10,"10 c"],[5,"5 c"],[2,"2 c"],[1,"1 c"]];
+const ML={cb:"Carte bancaire",especes:"Espèces",cheque:"Chèque"};
+let Q={},E={},M="",busy=false;
+const sum=a=>a.reduce((x,y)=>x+y,0);
+const eur=c=>(c/100).toLocaleString("fr-FR",c%100?{minimumFractionDigits:2,maximumFractionDigits:2}:{})+" €";
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const stp=(k,v)=>`<div class="st"><button type="button" data-k="${k}|-1" aria-label="Retirer">−</button><output data-o="${k}">0</output><button type="button" data-k="${k}|1" aria-label="Ajouter">+</button></div>`;
+$("achats").innerHTML=GR.map(g=>`<section class="grp t-${g[0]}"><div class="gh"><span class="tn">${g[1]}</span><small>${g[2]}</small></div>`+PR.filter(p=>p.g===g[0]).map(p=>`<div class="rw"><div><b>${p.n}</b><small>${p.d}</small><span class="px">${eur(p.p*100)}${p.u}</span></div>${stp("q"+p.id+":"+p.j)}</div>`).join("")+`</section>`).join("");
+const den=(a,z)=>$(z).innerHTML=a.map(d=>`<div class="den"><span>${d[1]}</span>${stp("e"+d[0])}</div>`).join("");
+den(BIL,"bil");den(PIE,"pie");
+const total=()=>sum(PR.map(p=>p.p*100*(Q[p.id+":"+p.j]||0)));
+const remis=()=>sum(Object.entries(E).map(([v,n])=>v*n));
+function upd(){const T=total(),R=remis();
+ document.querySelectorAll("[data-o]").forEach(o=>{const k=o.dataset.o,n=(k[0]==="q"?Q[k.slice(1)]:E[k.slice(1)])||0;o.textContent=n;const b=o.parentNode.querySelectorAll("button");b[0].disabled=!n;b[1].disabled=n>=(k[0]==="q"?99:999)});
+ $("bt").textContent=eur(T);$("seg").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.m===M));
+ $("esp").hidden=M!=="especes";$("remis").textContent=eur(R);const short=R<T;$("rendu").classList.toggle("ko",short&&R>0);
+ $("rl").innerHTML=short?"Il manque <b>"+eur(T-R)+"</b>":"À rendre <b>"+eur(R-T)+"</b>"}
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b||busy)return;
+ if(b.dataset.k){const[k,v]=b.dataset.k.split("|"),s=k.slice(1),o=k[0]==="q"?Q:E;o[s]=Math.max(0,Math.min(k[0]==="q"?99:999,(o[s]||0)+ +v));$("bm").textContent="";upd()}
+ else if(b.dataset.m){M=b.dataset.m;$("bm").textContent="";upd()}});
+const propre=v=>v.trim().replace(/\s+/g," ").replace(/’/g,"'");
+const nomOK=v=>/^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ' -]*$/.test(v);
+function err(){const a=propre($("pre").value),n=propre($("nom").value);
+ if(!$("code").value.trim())return "Saisissez le code caisse.";
+ if(!nomOK(a)||!nomOK(n))return "Acheteur : indiquez le prénom et le nom (lettres uniquement).";
+ if($("mel").value.trim()&&!/^[^\s@;,]+@[^\s@;,]+\.[^\s@;,]+$/.test($("mel").value.trim()))return "Acheteur : adresse e-mail invalide.";
+ if(!total())return "Ajoutez au moins un achat.";
+ if(!M)return "Choisissez le moyen de paiement.";
+ if(M==="especes"&&remis()<total())return "Le montant remis ("+eur(remis())+") est inférieur au total ("+eur(total())+").";return ""}
+function fin(t,h){$("dgt").textContent=t;$("dgb").innerHTML=h;if(!$("dg").open)$("dg").showModal()}
+function raz(){Q={};E={};M="";["pre","nom","mel","nt"].forEach(i=>$(i).value="");$("bm").textContent="";upd()}
+$("rz").onclick=()=>{if(!busy&&confirm("Effacer la saisie en cours ?"))raz()};
+$("dgx").onclick=()=>{$("dg").close();raz();window.scrollTo(0,0)};
+$("dg").addEventListener("cancel",e=>e.preventDefault());
+$("bn").onclick=async()=>{const m=t=>$("bm").textContent=t,e=err();if(e)return m(e);m("");
+ if(!API_URL)return m("Le flux de la caisse n’est pas encore branché (voir API_URL dans la page).");
+ const code=$("code").value.trim();try{sessionStorage.setItem("caisse-code",code)}catch(_){}
+ const body={code,prenom:propre($("pre").value),nom:propre($("nom").value),mail:$("mel").value.trim(),note:$("nt").value.trim(),paiement:M,
+  lignes:PR.filter(p=>Q[p.id+":"+p.j]).map(p=>({id:p.id,jour:p.j,qte:Q[p.id+":"+p.j]})),
+  especes:M==="especes"?Object.entries(E).filter(x=>x[1]).map(([v,n])=>({v:+v,qte:n})):[]};
+ busy=true;$("bn").disabled=true;$("bn").textContent="Envoi en cours…";
+ try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body)});
+  let d={};try{d=await r.json()}catch(_){}
+  if(r.status===403)m("Code caisse incorrect.");
+  else if(r.status===400)m("Achat refusé par le flux : vérifiez les quantités, l’e-mail et les espèces.");
+  else if(r.status===502)m("Le mail n’a pas pu partir, l’achat n’est pas enregistré dans la boîte. Notez-le sur papier et prévenez le comité.");
+  else if(!r.ok||!d.envoye)m("Réponse inattendue. Avant de recommencer, vérifiez dans la boîte du Téléthon si le mail est arrivé.");
+  else fin("Achat enregistré",`<p><span class="ref">${esc(d.ref||"")}</span></p><p>${body.mail?`Confirmation envoyée à <b>${esc(body.mail)}</b>, avec copie à la boîte du Téléthon.`:"Pas d’e-mail pour l’acheteur : le mail est parti uniquement dans la boîte du Téléthon."}</p><p>${esc(ML[M])} · <b>${eur(total())}</b>${M==="especes"?` · remis ${eur(remis())}, à rendre <b>${eur(remis()-total())}</b>`:""}</p>`)}
+ catch(_){m("Pas de réponse du serveur. Avant de recommencer, vérifiez dans la boîte du Téléthon si le mail est arrivé.")}
+ busy=false;$("bn").disabled=false;$("bn").textContent="Enregistrer et envoyer la confirmation"};
+try{$("code").value=sessionStorage.getItem("caisse-code")||""}catch(_){}
+const lock=()=>document.documentElement.classList.toggle("lk",$("dg").open);
+new MutationObserver(lock).observe($("dg"),{attributes:true,attributeFilter:["open"]});
+upd();
+</script>
+</body>
+</html>
