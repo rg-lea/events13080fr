@@ -309,9 +309,10 @@ document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",e
 $("pgx").onclick=()=>dlg.close();
 dlg.addEventListener("click",e=>{if(e.target===dlg||e.target.closest(".pgf a"))dlg.close()});
 /* billetterie : widget.
-   >>> COLLEZ ICI, entre les guillemets, l’URL du flux Power Automate (« URL HTTP POST » du déclencheur). <<<
+   URL du flux Power Automate (« URL HTTP POST » du déclencheur).
    Les clés HelloAsso ne vont JAMAIS ici : elles restent dans le flux. Les prix ci-dessous servent à l’affichage ; le flux recalcule le montant de son côté. */
-const API_URL="https://default403611541d9141c3b14ddd403256e1.be.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/07/workflows/9cd451be8db54573bfd8199d474255f2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bKay8rC9da6iQXNhUXjylN9sOkI-9PxD0ikvq8_hjjs";const P=[
+const API_URL="https://default403611541d9141c3b14ddd403256e1.be.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/07/workflows/9cd451be8db54573bfd8199d474255f2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bKay8rC9da6iQXNhUXjylN9sOkI-9PxD0ikvq8_hjjs";
+const P=[
 {id:"jeton",t:"bronze",n:"Jetons",d:"1 jeton = 1 €",p:1},
 {id:"pass",t:"argent",n:"Pass activités",d:"Karts, Planet Jeunes, tir laser, code de la route, tandem, VTT, route, maquillage…",p:10},
 {id:"concert",t:"or",n:"Concert FreeSon",d:"Dimanche, 17h – 18h",p:10},
@@ -340,7 +341,7 @@ $("bn").onclick=async()=>{
  if(!/^\S+@\S+\.\S+$/.test(mail)){$("bm").textContent="Merci d’indiquer une adresse e-mail valide.";return}
  if(!API_URL){$("bm").textContent="Le paiement en ligne n’est pas encore branché.";return}
  $("bn").disabled=true;$("bm").textContent="Redirection vers le paiement…";
- try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({prenom,nom,mail,lignes:P.filter(x=>Q[x.id]).map(x=>({id:x.id,qte:Q[x.id]}))})});
+ try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({prenom,nom,mail,qtes:{jeton:Q.jeton||0,pass:Q.pass||0,concert:Q.concert||0,massage:Q.massage||0}})});
   if(!r.ok)throw 0;const d=await r.json();
   if(d&&typeof d.url==="string"&&new URL(d.url).hostname.endsWith("helloasso.com"))location.href=d.url;else throw 0}
  catch(_){$("bm").textContent="Une erreur est survenue. Réessayez dans un instant.";$("bn").disabled=false}
