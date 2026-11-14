@@ -37,6 +37,7 @@ header .container{display:flex;align-items:center;justify-content:space-between;
 .brand{display:flex;align-items:center;gap:12px;color:var(--ink);font-weight:700;letter-spacing:-.02em}
 .logo{width:46px;height:46px;border-radius:12px;object-fit:contain;background:var(--brand-dark);padding:4px}
 nav{display:flex;gap:2px}nav a{padding:9px 13px;border-radius:999px;font-weight:500;color:var(--ink)}nav a:hover{background:rgba(194,121,42,.12)}
+nav a.act{background:var(--brand-soft);box-shadow:inset 0 0 0 2px var(--brand-dark);font-weight:600}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:600;border:0;transition:transform .2s}
 .btn:hover{transform:translateY(-1px)}.btn-p{background:var(--brand-dark);color:#fff;box-shadow:0 10px 22px rgba(194,121,42,.3)}.btn-s{background:var(--brand-soft);color:var(--ink)}
 .btn-w{background:rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.4)}
@@ -572,6 +573,15 @@ function tick(){const n=new Date(),c=$("cd");
  else{c.textContent="Merci à tous";clearInterval(iv)}}
 tick();iv=setInterval(tick,1e3);
 document.addEventListener("visibilitychange",tick);
+/* menu : le bouton de la section atteinte s’allume */
+(()=>{const L=[...document.querySelectorAll("#nv a")].map(a=>({a,s:document.querySelector(a.getAttribute("href"))})).filter(x=>x.s);
+ const hd=document.querySelector("header");let raf=0;
+ const run=()=>{raf=0;const y=hd.offsetHeight+Math.round(innerHeight*.3);let cur=null;
+  L.forEach(x=>{if(x.s.getBoundingClientRect().top<=y)cur=x});
+  if(innerHeight+scrollY>=document.documentElement.scrollHeight-2)cur=L[L.length-1];
+  L.forEach(x=>{const on=x===cur;x.a.classList.toggle("act",on);if(on)x.a.setAttribute("aria-current","true");else x.a.removeAttribute("aria-current")})};
+ const q=()=>{if(!raf)raf=requestAnimationFrame(run)};
+ addEventListener("scroll",q,{passive:true});addEventListener("resize",q);run()})();
 /* contact : l’adresse n’existe jamais en clair dans le code, elle est assemblée au clic */
 const mail=()=>["comite","luynesenfetes","fr"].reduce((a,p,i)=>a+(i?(i===1?"@":"."):"")+p,"");
 $("wr").onclick=()=>{location.href="mailto:"+mail()+"?subject="+encodeURIComponent("Téléthon 2026 à Luynes");$("msg").textContent="Votre messagerie s’ouvre. Sinon, affichez l’adresse et écrivez-nous depuis votre boîte mail."};
