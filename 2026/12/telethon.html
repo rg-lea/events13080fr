@@ -592,7 +592,7 @@ document.addEventListener("visibilitychange",tick);
  const f=()=>u.classList.toggle("show",scrollY>innerHeight*.6);
  addEventListener("scroll",f,{passive:true});f()})();
 /* contact : l’adresse n’existe jamais en clair dans le code, elle est assemblée au clic */
-const mail=()=>["comite","luynesenfetes","fr"].reduce((a,p,i)=>a+(i?(i===1?"@":"."):"")+p,"");
+const mail=()=>["contact-telethon","13080","fr"].reduce((a,p,i)=>a+(i?(i===1?"@":"."):"")+p,"");
 $("wr").onclick=()=>{location.href="mailto:"+mail()+"?subject="+encodeURIComponent("Téléthon 2026 à Luynes");$("msg").textContent="Votre messagerie s’ouvre. Sinon, affichez l’adresse et écrivez-nous depuis votre boîte mail."};
 $("sh").onclick=()=>{$("msg").textContent=mail()};
 /* plan interactif : plan du site + plan intérieur de la salle Ughetti */
