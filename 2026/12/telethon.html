@@ -66,6 +66,8 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 .sl{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
 .sl li{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--ink);font-weight:600}
 .sl i,.k i{flex:none;width:12px;height:12px;border-radius:50%;background:var(--t)}.sl small{font-weight:400;color:var(--muted)}
+.ins{font-style:normal;font-weight:700;font-size:.85rem;color:var(--brand-dark)}
+.sl li{flex-wrap:wrap}
 .k{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.9rem;color:var(--ink)}
 dialog.pg{width:min(680px,calc(100% - 24px));max-height:min(88svh,820px);padding:0;border:0;border-radius:28px;background:#fffaf4;color:var(--text);box-shadow:0 30px 80px rgba(47,36,24,.4);overflow:hidden}
 dialog.pg[open]{display:flex;flex-direction:column}
@@ -91,6 +93,17 @@ dialog.pg::backdrop{background:rgba(47,36,24,.6);backdrop-filter:blur(3px)}
 .tf h3{margin:12px 0 4px;color:var(--ink);font-size:1.4rem;letter-spacing:-.03em}
 .tf .px{margin:0 0 12px;color:var(--brand-dark);font-weight:700;font-size:1.1rem}
 .tf ul{margin:0;padding-left:20px;line-height:1.65}
+/* widget billetterie */
+.bl1{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 20px 14px 16px;border-left:8px solid var(--t);border-top:1px solid var(--line)}
+.bl1:first-child{border-top:0}.bl1 b{display:block;color:var(--ink);font-size:1.1rem}.bl1 small{display:block;color:var(--muted);line-height:1.4}.bl1 .px{color:var(--brand-dark);font-weight:700}
+.st{display:flex;align-items:center;gap:8px}.st button{width:40px;height:40px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:1.3rem;line-height:1}
+.st button:disabled{opacity:.35;cursor:default}.st output{min-width:26px;text-align:center;font-weight:800;color:var(--ink);font-size:1.1rem}
+.bwf{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;padding:14px 20px;border-top:1px solid var(--line);background:#fff}
+.tot{color:var(--ink);font-weight:600}.tot b{font-size:1.5rem;margin-left:6px}.bbt{display:flex;gap:8px}.bwf .btn{padding:12px 22px}.bwf .btn:disabled{opacity:.45;cursor:default}
+#bm{flex:1 0 100%;order:3;margin:0;font-weight:600;color:var(--ink)}#bm:empty{display:none}
+.bwf2{padding:20px 22px}.bwf2 p{margin:0 0 14px}.bwf2 label{display:block;margin-bottom:12px;font-weight:600;color:var(--ink)}
+.bwf2 input{display:block;width:100%;margin-top:6px;padding:13px 14px;border:1px solid var(--line);border-radius:14px;font:inherit;background:#fff}
+.rc{margin-top:6px;padding:14px 16px;border-radius:16px;background:#fff;border:1px solid var(--line);line-height:1.7}
 /* tombola */
 .tombola{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;padding:clamp(24px,4vw,40px);border-radius:32px;background:linear-gradient(135deg,var(--brand-soft),#fff);border:1px solid var(--line);box-shadow:var(--shadow)}
 .tombola .lead{margin-bottom:14px}
@@ -193,7 +206,7 @@ dialog.pg::backdrop{background:rgba(47,36,24,.6);backdrop-filter:blur(3px)}
   <button class="pickb" type="button" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></button>
   <button class="pickb" type="button" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></button>
  </div>
- <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-argent"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-argent"><i></i><span>Atelier code de la route</span></li><li class="t-argent"><i></i><span>Découverte du tandem</span></li><li class="t-argent"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-argent"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-or"><i></i><span>Atelier pizza <small>Pizza Verte</small></span></li><li class="t-or"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span></li></ul></div>
+ <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-argent"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-argent"><i></i><span>Atelier code de la route</span></li><li class="t-argent"><i></i><span>Découverte du tandem</span></li><li class="t-argent"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-argent"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-or"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Inscription obligatoire · places limitées</em></li><li class="t-or"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Inscription obligatoire · places limitées</em></li></ul></div>
  <dialog class="pg" id="pg" aria-labelledby="pgt">
   <div class="pgh"><h3 id="pgt"></h3><button class="x" type="button" id="pgx" aria-label="Fermer">&times;</button></div>
   <div class="pgb" data-d="sam"><ul class="ag">
@@ -222,10 +235,10 @@ dialog.pg::backdrop{background:rgba(47,36,24,.6);backdrop-filter:blur(3px)}
  <div class="tarifs">
   <div class="tf t-bronze"><span class="tn">Bronze</span><h3>Les jetons</h3><p class="px">1 jeton = 1 €</p><ul><li>Cafés</li><li>Ballons sculptés : 1 ballon = 1 jeton</li><li>Porte-clés : 5 jetons</li></ul></div>
   <div class="tf t-argent"><span class="tn">Argent</span><h3>Le pass activités</h3><p class="px">10 €</p><ul><li>Karts à pédales</li><li>Planet Jeunes</li><li>Tir laser</li><li>Atelier code de la route</li><li>Découverte du tandem</li><li>Sorties VTT et sorties route</li><li>Maquillage et activités similaires</li></ul></div>
-  <div class="tf t-or"><span class="tn">Or</span><h3>Les temps forts</h3><p class="px">Tarif propre à chaque temps fort</p><ul><li>Ateliers culinaires : cookies ou pizza</li><li>Spectacle de danse Rythm&amp;Fit</li><li>Concert de FreeSon</li><li>Massage de 20 minutes</li></ul></div>
+  <div class="tf t-or"><span class="tn">Or</span><h3>Les temps forts</h3><p class="px">Tarif propre à chaque temps fort</p><ul><li>Ateliers culinaires : cookies ou pizza<br><span class="ins">Inscription obligatoire, places limitées</span></li><li>Spectacle de danse Rythm&amp;Fit</li><li>Concert de FreeSon</li><li>Massage de 20 minutes</li></ul></div>
  </div>
  <div class="steps"><div><b>1</b><span>Choisissez vos activités en ligne</span></div><div><b>2</b><span>Payez en quelques clics</span></div><div><b>3</b><span>Retirez votre ticket ou pass à la caisse centrale, salle Ughetti</span></div></div>
- <div class="ticket"><p>Réglez à l’avance et profitez des animations sans attendre : un seul passage à la caisse, et c’est parti.</p><a class="btn btn-p big" href="#">Accéder à la billetterie</a></div>
+ <div class="ticket"><p>Réglez à l’avance et profitez des animations sans attendre : un seul passage à la caisse, et c’est parti.</p><button class="btn btn-p big" type="button" data-bil>Ouvrir la billetterie</button></div>
 </div></section>
 
 <section class="sec" id="tombola"><div class="container">
@@ -270,6 +283,17 @@ dialog.pg::backdrop{background:rgba(47,36,24,.6);backdrop-filter:blur(3px)}
   <a class="btn btn-p" target="_blank" rel="noreferrer" href="https://maps.app.goo.gl/Q3UA2Ws4CXG31pKu6">Itinéraire</a></div>
  </div>
 </div></section>
+<dialog class="pg" id="bw" aria-labelledby="bwt">
+ <div class="pgh"><h3 id="bwt">Billetterie</h3><button class="x" type="button" id="bwx" aria-label="Fermer">&times;</button></div>
+ <div class="pgb" id="bs1"><div id="bl"></div></div>
+ <div class="pgb bwf2" id="bs2" hidden>
+  <p>Dernière étape : dites-nous à qui envoyer vos tickets.</p>
+  <label>Nom et prénom<input id="bnm" type="text" autocomplete="name" /></label>
+  <label>Adresse e-mail<input id="bem" type="email" autocomplete="email" /></label>
+  <div id="brc" class="rc"></div>
+ </div>
+ <div class="bwf"><div class="tot">Total <b id="bt">0 €</b></div><p id="bm" role="status"></p><div class="bbt"><button class="btn btn-s" type="button" id="bb" hidden>Retour</button><button class="btn btn-p" type="button" id="bn" disabled>Continuer</button></div></div>
+</dialog>
 </main>
 
 <script>
@@ -279,6 +303,40 @@ function openDay(d){dlg.querySelectorAll(".pgb").forEach(b=>b.hidden=b.dataset.d
 document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();openDay(b.dataset.open)}));
 $("pgx").onclick=()=>dlg.close();
 dlg.addEventListener("click",e=>{if(e.target===dlg||e.target.closest(".pgf a"))dlg.close()});
+/* billetterie : widget. Les clés d’API ne vont JAMAIS ici : elles restent sur le serveur (voir API_URL). */
+const API_URL="";
+const P=[
+{id:"jeton",t:"bronze",n:"Jetons",d:"1 jeton = 1 €",p:1},
+{id:"pass",t:"argent",n:"Pass activités",d:"Karts, Planet Jeunes, tir laser, code de la route, tandem, VTT, route, maquillage…",p:10},
+{id:"concert",t:"or",n:"Concert FreeSon",d:"Dimanche, 17h – 18h",p:10},
+{id:"massage",t:"or",n:"Massage de 20 minutes",d:"Tête ou pieds",p:10},
+{id:"danse",t:"or",n:"Spectacle Rythm&amp;Fit",d:"Dimanche, 15h – 16h",p:null},
+{id:"pizza",t:"or",n:"Atelier pizza",d:"Inscription obligatoire, places limitées",p:null},
+{id:"cookies",t:"or",n:"Atelier cookies",d:"Inscription obligatoire, places limitées",p:null}
+];
+const Q={},bw=$("bw"),eur=x=>x.toLocaleString("fr-FR")+" €";
+const total=()=>P.reduce((a,x)=>a+(Q[x.id]||0)*(x.p||0),0);
+function bview(){
+ $("bl").innerHTML=P.map(x=>`<div class="bl1 t-${x.t}"><div><b>${x.n}</b><small>${x.d}</small><span class="px">${x.p==null?"Tarif à venir":eur(x.p)}</span></div><div class="st"><button type="button" data-m="${x.id}" aria-label="Retirer" ${x.p==null||!Q[x.id]?"disabled":""}>−</button><output>${Q[x.id]||0}</output><button type="button" data-a="${x.id}" aria-label="Ajouter" ${x.p==null?"disabled":""}>+</button></div></div>`).join("");
+ $("bt").textContent=eur(total());$("bn").disabled=total()===0;
+}
+$("bl").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const id=b.dataset.a||b.dataset.m;Q[id]=Math.max(0,Math.min(99,(Q[id]||0)+(b.dataset.a?1:-1)));bview()});
+function bstep(n){$("bs1").hidden=n!==1;$("bs2").hidden=n!==2;$("bb").hidden=n!==2;$("bn").textContent=n===1?"Continuer":"Payer "+eur(total());$("bm").textContent="";
+ if(n===2)$("brc").innerHTML=P.filter(x=>Q[x.id]).map(x=>`${Q[x.id]} × ${x.n} <b style="float:right">${eur(Q[x.id]*x.p)}</b><br>`).join("")}
+$("bb").onclick=()=>bstep(1);
+$("bn").onclick=async()=>{
+ if(!$("bs1").hidden){bstep(2);return}
+ const nom=$("bnm").value.trim(),mail=$("bem").value.trim();
+ if(!nom||!/^\S+@\S+\.\S+$/.test(mail)){$("bm").textContent="Merci d’indiquer votre nom et une adresse e-mail valide.";return}
+ if(!API_URL){$("bm").textContent="Le paiement en ligne n’est pas encore branché.";return}
+ $("bn").disabled=true;$("bm").textContent="Redirection vers le paiement…";
+ try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({nom,mail,lignes:P.filter(x=>Q[x.id]).map(x=>({id:x.id,qte:Q[x.id]}))})});
+  const d=await r.json();if(d.url)location.href=d.url;else throw 0}
+ catch(_){$("bm").textContent="Une erreur est survenue. Réessayez dans un instant.";$("bn").disabled=false}
+};
+document.querySelectorAll("[data-bil]").forEach(b=>b.addEventListener("click",()=>{bview();bstep(1);bw.showModal()}));
+$("bwx").onclick=()=>bw.close();
+bw.addEventListener("click",e=>{if(e.target===bw)bw.close()});
 const bg=$("bg"),nv=$("nv");
 bg.onclick=()=>{const o=nv.classList.toggle("open");bg.setAttribute("aria-expanded",o);bg.setAttribute("aria-label",o?"Fermer le menu":"Ouvrir le menu")};
 nv.addEventListener("click",e=>{if(e.target.closest("a")){nv.classList.remove("open");bg.setAttribute("aria-expanded","false")}});
