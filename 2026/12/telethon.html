@@ -193,8 +193,9 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 .plan{width:100%;max-width:540px;justify-self:center;height:auto;padding:14px;border-radius:28px;background:#fffdf8;border:1px solid var(--line);box-shadow:var(--shadow)}
 @media(max-width:800px){.lieu{grid-template-columns:1fr;gap:22px}.plan{max-width:none}}
 .fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:55;display:inline-flex;align-items:center;gap:10px;padding:14px 22px 14px 18px;border:0;border-radius:999px;background:var(--brand-dark);color:#fff;font-weight:700;font-size:1.05rem;box-shadow:0 14px 30px rgba(63,40,16,.35);transition:transform .2s}
-.up{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:55;display:grid;place-items:center;width:52px;height:52px;padding:0;border:2px solid var(--brand-dark);border-radius:50%;background:#fff;color:var(--brand-dark);box-shadow:0 10px 24px rgba(63,40,16,.25);opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,transform .25s,visibility .25s}
-.up.show{opacity:1;visibility:visible;transform:none}.up:hover{background:var(--brand-soft)}.up svg{width:24px;height:24px}
+.sw{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:55;display:flex;flex-direction:column;border:2px solid var(--brand-dark);border-radius:999px;background:#fff;box-shadow:0 10px 24px rgba(63,40,16,.25);overflow:hidden}
+.sw button{display:grid;place-items:center;width:52px;height:48px;padding:0;border:0;background:none;color:var(--brand-dark)}
+.sw button+button{border-top:1px solid var(--line)}.sw button:hover:not(:disabled){background:var(--brand-soft)}.sw button:disabled{opacity:.3;cursor:default}.sw svg{width:24px;height:24px}
 .fab:hover{transform:translateY(-2px)}.fab svg{flex:none;width:26px;height:26px}
 @media(max-width:480px){.fab{padding:14px 18px 14px 14px}}
 .lieu address{font-style:normal;font-size:1.25rem;line-height:1.7;color:var(--ink);margin:0 0 24px}
@@ -277,7 +278,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 <li class="t-pass"><div class="h"><b>10h – 12h</b><b>13h – 16h</b></div><div class="i"><h4>Karts à pédales</h4><span class="p">Boulodrome, avec l’ADAVA</span><p>Pilotez un kart sur un circuit sécurisé.</p><span class="tg">Pass multi-activités</span></div></li>
 <li class="t-pass"><div class="h"><b>10h – 12h</b><b>14h – 17h</b></div><div class="i"><h4>Planet Jeunes</h4><span class="p">Salle Ughetti</span><p>Atelier créatif, crêpes et kermesse pour les enfants.</p><span class="tg">Pass multi-activités</span></div></li>
 <li class="t-pass"><div class="h"><b>10h – 12h</b><b>14h – 16h</b></div><div class="i"><h4>Maquillage</h4><span class="p">Devant la salle Ughetti</span><p>Petits et grands se font transformer.</p><span class="tg">Pass multi-activités</span></div></li>
-<li class="t-fort"><div class="h"><b>à 10h, 12h, 14h et 16h</b></div><div class="i"><h4>Massages</h4><span class="p">Salle Ughetti, avec Le Corps au Présent</span><p>Séances de 20 minutes, au choix tête ou pieds.</p><span class="tg">Ticket temps fort</span></div></li>
+<li class="t-fort"><div class="h"><b>10h – 12h</b><b>14h – 16h</b></div><div class="i"><h4>Massages</h4><span class="p">Salle Ughetti, avec Le Corps au Présent</span><p>Séances de 20 minutes, au choix tête ou pieds.</p><span class="tg">Ticket temps fort</span></div></li>
 <li class="t-jeton"><div class="h"><b>14h – 16h</b></div><div class="i"><h4>Ballons sculptés</h4><span class="p">Devant la salle Ughetti</span><p>Des animateurs sculptent des ballons à rapporter à la maison.</p><span class="tg">1 jeton le ballon</span></div></li>
 </ul></div>
   <div class="pgb" data-d="dim" hidden><ul class="ag">
@@ -295,7 +296,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
  <div class="tombola">
   <div><h2>Tombola</h2><p class="lead"><b>1 carnet de 5 tickets = 10 €.</b> Tentez de gagner l’un de ces lots :</p>
    <ul class="lots"><li><b>10 places Arena Aix</b><span>2 lots de 5 places</span></li><li><b>Urban Jump</b><span>1 heure de trampoline et une place pour l’Urban Quiz</span></li></ul></div>
-  <a class="btn btn-p big" href="#billetterie">Prendre mes tickets</a>
+  <button class="btn btn-p big" type="button" data-bil="tombola">Prendre mes tickets</button>
  </div>
 </div></section>
 
@@ -388,7 +389,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 </div></section>
 
 <button class="fab" type="button" data-bil aria-label="Ouvrir la billetterie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9a2 2 0 0 0 0 6v2.5A1.5 1.5 0 0 0 4.5 19h15a1.5 1.5 0 0 0 1.5-1.5V15a2 2 0 0 1 0-6V6.5A1.5 1.5 0 0 0 19.5 5h-15A1.5 1.5 0 0 0 3 6.5z"/><path d="M14 5v2.5M14 10.5v3M14 16.5V19"/></svg>Billetterie</button>
-<button class="up" id="up" type="button" aria-label="Revenir en haut de la page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<div class="sw" role="group" aria-label="Changer de section"><button type="button" id="sp" aria-label="Section précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15l7-7 7 7"/></svg></button><button type="button" id="sn" aria-label="Section suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg></button></div>
 <dialog class="wz" id="bw" aria-label="Billetterie">
  <div class="wzh"><button type="button" id="bb" aria-label="Étape précédente">‹</button><div class="pg4" id="pg4" aria-hidden="true"><i></i><i></i><i></i><i></i></div><button type="button" id="bwx" aria-label="Fermer">&times;</button></div>
  <div class="wzb" id="wzb"></div>
@@ -416,7 +417,7 @@ const LS="telethon2026-commande";
 const PR=[
 {id:"jeton",g:"jeton",n:"Jetons",d:"1 jeton = 1 €. Cafés, ballons sculptés (1 jeton), porte-clés (5 jetons). Valables les deux jours.",p:1,j:["tous"]},
 {id:"pass",g:"pass",n:"Pass multi-activités",d:"",p:10,j:["sam","dim"]},
-{id:"massage",g:"fort",n:"Massage de 20 minutes",d:"Tête ou pieds, à 10h, 12h, 14h et 16h, salle Ughetti",p:10,j:["sam"]},
+{id:"massage",g:"fort",n:"Massage de 20 minutes",d:"Tête ou pieds, de 10h à 12h et de 14h à 16h, salle Ughetti",p:10,j:["sam"]},
 {id:"concert",g:"fort",n:"Concert FreeSon",d:"Jazz vocal, 17h – 18h",p:10,j:["dim"]},
 {id:"tombola",g:"tombola",n:"Carnets de tombola",d:"1 carnet = 5 tickets de tombola. Tirage au sort pour gagner l’un des lots.",p:10,j:["tombola"]},
 {id:"pizza",g:"fort",n:"Atelier pizza",d:"Inscription obligatoire, places limitées",p:null,j:[]},
@@ -450,7 +451,7 @@ const total=()=>sum(price().map(l=>l.c))+sum(keys().map(([s,p])=>Math.max(0,Q[s]
 function rowHtml(p,j,t,desc){const s=p.id+":"+j,q=Q[s]||0;
  return `<div class="rw"><div><b>${t}</b><small>${desc}</small><span class="px">${eur(p.p)}${p.g==="jeton"?"":p.g==="tombola"?" le carnet":" par participant"}</span></div><div class="st"><button type="button" data-q="${s}|-1" aria-label="Retirer" ${q?"":"disabled"}>−</button><output>${q}</output><button type="button" data-q="${s}|1" aria-label="Ajouter" ${q>=(multi(p)?99:20)?"disabled":""}>+</button></div></div>`}
 function v1(){let o=`<h2 class="wt">Vos courses</h2><p class="ws">Choisissez vos jetons, vos pass, vos tickets et vos carnets de tombola, et le jour qui vous convient. Vous direz ensuite qui en profite.</p>`;
- GR.forEach(g=>{o+=`<section class="grp t-${g[0]}"><div class="gh"><span class="tn">${g[1]}</span><small>${g[2]}</small></div>`;
+ GR.forEach(g=>{o+=`<section class="grp t-${g[0]}" data-g="${g[0]}"><div class="gh"><span class="tn">${g[1]}</span><small>${g[2]}</small></div>`;
   PR.filter(p=>p.g===g[0]).forEach(p=>{
    if(p.p==null){o+=`<div class="rw off"><div><b>${p.n}</b><small>${p.d}</small><span class="px">Bientôt disponible</span></div></div>`;return}
    p.j.forEach(j=>{o+=rowHtml(p,j,p.g==="pass"?cap(JL[j]):p.g==="fort"?p.n+", "+JL[j]:p.n,p.d)})});
@@ -542,7 +543,7 @@ $("bn").onclick=async()=>{const m=t=>{$("bm").textContent=t};
   if(d&&typeof d.url==="string"&&new URL(d.url).hostname.endsWith("helloasso.com"))location.href=d.url;else throw 0}
  catch(_){m("Une erreur est survenue. Réessayez dans un instant.");$("bn").disabled=false;$("bn").textContent="Payer "+eur(total())}};
 addEventListener("pageshow",e=>{if(e.persisted&&step===4){$("bn").disabled=false;$("bn").textContent="Payer "+eur(total());$("bm").textContent=""}});
-document.querySelectorAll("[data-bil]").forEach(b=>b.addEventListener("click",()=>{show(step);bw.showModal()}));
+document.querySelectorAll("[data-bil]").forEach(b=>b.addEventListener("click",()=>{const t=b.dataset.bil;show(t?1:step);bw.showModal();if(t){const g=wb.querySelector(`[data-g="${t}"]`);if(g){wb.style.scrollBehavior="auto";wb.scrollTop+=g.getBoundingClientRect().top-wb.getBoundingClientRect().top-8;wb.style.scrollBehavior=""}}}));
 $("bwx").onclick=()=>bw.close();bw.addEventListener("click",e=>{if(e.target===bw)bw.close()});
 /* retour depuis HelloAsso : le flux ajoute ?type=return (avec code, orderId, checkoutIntentId), ?type=error ou ?type=back */
 const bk=$("bk");$("bkx").onclick=()=>bk.close();bk.addEventListener("click",e=>{if(e.target===bk)bk.close()});
@@ -585,12 +586,18 @@ document.addEventListener("visibilitychange",tick);
   L.forEach(x=>{const on=x===cur;x.a.classList.toggle("act",on);if(on)x.a.setAttribute("aria-current","true");else x.a.removeAttribute("aria-current")})};
  const q=()=>{if(!raf)raf=requestAnimationFrame(run)};
  addEventListener("scroll",q,{passive:true});addEventListener("resize",q);run()})();
-/* logo et titre : retour en haut de cette page ; bouton flottant de retour en haut */
-(()=>{const top=()=>scrollTo({top:0,behavior:"smooth"}),u=$("up");
+/* logo et titre : retour en haut de cette page ; flèches : section précédente ou suivante */
+(()=>{const hd=document.querySelector("header"),top=()=>scrollTo({top:0,behavior:"smooth"});
  $("home").addEventListener("click",e=>{e.preventDefault();top();history.replaceState(null,"",location.pathname+location.search)});
- u.addEventListener("click",top);
- const f=()=>u.classList.toggle("show",scrollY>innerHeight*.6);
- addEventListener("scroll",f,{passive:true});f()})();
+ const S=[...document.querySelectorAll("main>section")],sp=$("sp"),sn=$("sn");
+ const idx=()=>{const y=hd.offsetHeight+30;let c=0;S.forEach((x,i)=>{if(x.getBoundingClientRect().top<=y)c=i});return c};
+ const atEnd=()=>innerHeight+scrollY>=document.documentElement.scrollHeight-2;
+ const go=i=>i===0?top():S[i].scrollIntoView({behavior:"smooth",block:"start"});
+ const upd=()=>{sp.disabled=scrollY<5;sn.disabled=atEnd()||idx()>=S.length-1};
+ sp.onclick=()=>{const c=idx();go(c>0&&S[c].getBoundingClientRect().top>=74?c-1:c)};
+ sn.onclick=()=>{const c=idx();if(c<S.length-1)go(c+1)};
+ let raf=0;const q=()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;upd()})};
+ addEventListener("scroll",q,{passive:true});addEventListener("resize",q);upd()})();
 /* contact : l’adresse n’existe jamais en clair dans le code, elle est assemblée au clic */
 const mail=()=>["contact-telethon","13080","fr"].reduce((a,p,i)=>a+(i?(i===1?"@":"."):"")+p,"");
 $("wr").onclick=()=>{location.href="mailto:"+mail()+"?subject="+encodeURIComponent("Téléthon 2026 à Luynes");$("msg").textContent="Votre messagerie s’ouvre. Sinon, affichez l’adresse et écrivez-nous depuis votre boîte mail."};
@@ -606,7 +613,7 @@ const Z1={
  "entree-parking":["Entrée du parking","#2e7d32","Entrée à pied, à vélo ou en voiture : accès au parking par le côté droit du plan, juste avant l’angle en biais."],
  parc:["Parc Melkonian","#6fae5c","Le grand parc qui entoure la salle Ughetti."]};
 const Z2={
- danse:["Salle de danse","#8f77c4","Massages de 20 minutes avec Le Corps au Présent, au choix tête ou pieds, le samedi à 10h, 12h, 14h et 16h. Ticket temps fort."],
+ danse:["Salle de danse","#8f77c4","Massages de 20 minutes avec Le Corps au Présent, au choix tête ou pieds, le samedi de 10h à 12h et de 14h à 16h. Ticket temps fort."],
  grande:["Grande salle","#b9691c","Dimanche : spectacle de danse Rythm&amp;Fit de 15h à 16h (accueil à 14h30, gratuit), puis concert de jazz vocal FreeSon de 17h à 18h (ticket temps fort)."],
  accueil:["Accueil et caisse centrale","#c9a21f","Retrait de vos jetons, pass et tickets en un seul passage. Le samedi, porte-clés personnalisés de 10h à 12h et de 14h à 16h."],
  parvis:["Parvis","#cfb888","Devant la salle : maquillage et ballons sculptés."],
