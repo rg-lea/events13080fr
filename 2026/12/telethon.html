@@ -23,7 +23,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
 :root{--brand-dark:#c2792a;--brand:#ffb763;--brand-soft:#f8e0c2;--ink:#2f2418;--text:#4b3a29;--muted:rgba(75,58,41,.72);--line:rgba(95,68,37,.16);--shadow:0 14px 36px rgba(63,40,16,.09);
---sport:#c2792a;--atelier:#e8a33d;--show:#2f2418;--bien:#8f7254}
+--bronze:#b0703a;--argent:#9aa3ae;--or:#e0b11f}
+.t-bronze{--t:var(--bronze);--tc:#fff}.t-argent{--t:var(--argent);--tc:var(--ink)}.t-or{--t:var(--or);--tc:var(--ink)}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{margin:0;font-family:"Outfit",sans-serif;color:var(--text);background:linear-gradient(180deg,#fffaf4,#fff6eb);overflow-x:hidden}
 a{color:inherit;text-decoration:none}img{display:block;max-width:100%}button{font:inherit;cursor:pointer}
@@ -57,35 +58,45 @@ h1{margin:0 0 16px;font-size:clamp(3.2rem,11vw,8rem);line-height:.9;letter-spaci
 h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spacing:-.045em;line-height:1.05}
 .lead{margin:0 0 26px;color:var(--muted);font-size:1.05rem}
 
-/* programme : planning */
-.bar{position:sticky;top:65px;z-index:30;padding:10px 0 12px;background:linear-gradient(#fff9f1 82%,transparent)}
-.tabs{display:inline-grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border-radius:999px;background:#f3e3cd}
-.tab{border:0;background:none;border-radius:999px;padding:12px 26px;font-weight:700;color:var(--ink);font-size:1.02rem}
-.tab[aria-selected=true]{background:var(--brand-dark);color:#fff;box-shadow:0 8px 18px rgba(194,121,42,.28)}
-.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0 34px}
-.strip div{padding:16px 18px;border-radius:18px;background:rgba(255,255,255,.75);border:1px solid var(--line)}
-.strip b{display:block;color:var(--ink);margin-bottom:2px}.strip span{font-size:.93rem;color:var(--muted);line-height:1.45}
-.pl{border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:var(--shadow);overflow:hidden}
-.ax,.ln summary{display:grid;grid-template-columns:260px 1fr;gap:18px;padding-left:24px;padding-right:24px}
-.ax{padding-top:12px;padding-bottom:10px;background:var(--brand-soft);border-bottom:1px solid var(--line);color:var(--ink);font-weight:700;font-size:.8rem}
-.tk{position:relative;height:16px;margin:0 10px}.tk span{position:absolute;top:0;transform:translateX(-50%)}
-.ln{border-bottom:1px solid var(--line)}.ln:last-child{border-bottom:0}
-.ln summary{list-style:none;cursor:pointer;align-items:center;padding-top:16px;padding-bottom:16px}
-.ln summary::-webkit-details-marker{display:none}
-.ln summary:hover,.ln[open] summary{background:rgba(248,224,194,.3)}
-.nm b{display:block;color:var(--ink);font-size:1.1rem;letter-spacing:-.02em;line-height:1.25}
-.nm b::after{content:" +";color:var(--brand-dark)}.ln[open] .nm b::after{content:" \2212"}
-.nm span{display:block;font-size:.88rem;color:var(--muted);line-height:1.4}
-.nm .ts{color:var(--brand-dark);font-weight:700;margin-top:2px}
-.nm em{display:inline-block;margin-top:6px;padding:2px 11px;border-radius:999px;background:rgba(194,121,42,.12);color:var(--brand-dark);font-style:normal;font-weight:700;font-size:.82rem}
-.tr{position:relative;height:36px;margin:0 10px;border-radius:10px;background:rgba(248,224,194,.35) linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/calc(100%/var(--n)) 100%}
-.bx{position:absolute;top:4px;bottom:4px;min-width:8px;border-radius:8px;background:var(--c);color:var(--tc,#fff);font-style:normal;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden}
-.dt{padding:2px 24px 18px 302px;line-height:1.55;background:rgba(248,224,194,.3)}
-.key{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px;font-size:.9rem;font-weight:600;color:var(--ink)}
-.key i{display:inline-block;width:12px;height:12px;border-radius:4px;background:var(--c);margin-right:7px}
-.soon{margin-top:18px;padding:18px 22px;border-radius:18px;background:rgba(255,255,255,.75);border:1px dashed var(--line);line-height:1.7}.soon b{color:var(--ink)}
-
+/* programme */
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:760px}
+.pickb{display:block;width:100%;text-align:left;border:0;border-radius:24px;padding:22px 26px;background:var(--brand-dark);color:#fff;box-shadow:0 12px 26px rgba(194,121,42,.3);transition:transform .2s}
+.pickb:hover{transform:translateY(-2px)}.pickb small{display:block;opacity:.85;font-weight:600}.pickb b{display:block;font-size:2rem;letter-spacing:-.04em;margin:2px 0 8px}.pickb span{font-weight:600}
+.soon{margin-top:22px;padding:18px 22px;border-radius:18px;background:rgba(255,255,255,.75);border:1px dashed var(--line)}.soon>b{display:block;color:var(--ink);margin-bottom:10px}
+.sl{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.sl li{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--ink);font-weight:600}
+.sl i,.k i{flex:none;width:12px;height:12px;border-radius:50%;background:var(--t)}.sl small{font-weight:400;color:var(--muted)}
+.k{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.9rem;color:var(--ink)}
+dialog.pg{width:min(680px,calc(100% - 24px));max-height:min(88svh,820px);padding:0;border:0;border-radius:28px;background:#fffaf4;color:var(--text);box-shadow:0 30px 80px rgba(47,36,24,.4);overflow:hidden}
+dialog.pg[open]{display:flex;flex-direction:column}
+dialog.pg::backdrop{background:rgba(47,36,24,.6);backdrop-filter:blur(3px)}
+.pgh{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 16px 24px;background:var(--brand-dark);color:#fff}
+.pgh h3{margin:0;font-size:1.5rem;letter-spacing:-.03em}
+.x{flex:none;width:46px;height:46px;border-radius:99px;border:0;background:rgba(255,255,255,.22);color:#fff;font-size:1.8rem;line-height:1}
+.pgb{overflow:auto;flex:1 1 auto}
+.pgf{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;padding:14px 24px;border-top:1px solid var(--line);background:#fff}
+.pgf a{margin-left:auto;font-weight:700;color:var(--brand-dark);text-decoration:underline}
+.ag{list-style:none;margin:0;padding:0}
+.ag li{display:grid;grid-template-columns:118px 1fr;gap:16px;padding:18px 24px 18px 20px;border-left:8px solid var(--t);border-top:1px solid var(--line)}
+.ag li:first-child{border-top:0}
+.h b{display:block;color:var(--ink);font-size:1.15rem;line-height:1.35}
+.i h4{margin:0;color:var(--ink);font-size:1.2rem;letter-spacing:-.02em}
+.i .p{display:block;margin-top:2px;font-size:.92rem;color:var(--muted)}
+.i p{margin:6px 0 0;line-height:1.5}
+.tg{display:inline-block;margin-top:8px;padding:3px 12px;border-radius:999px;background:var(--t);color:var(--tc);font-weight:700;font-size:.82rem}
 /* billetterie */
+.tarifs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 22px}
+.tf{background:#fff;border:1px solid var(--line);border-top:10px solid var(--t);border-radius:24px;padding:22px 22px 24px;box-shadow:var(--shadow)}
+.tn{display:inline-block;padding:4px 14px;border-radius:999px;background:var(--t);color:var(--tc);font-weight:800;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+.tf h3{margin:12px 0 4px;color:var(--ink);font-size:1.4rem;letter-spacing:-.03em}
+.tf .px{margin:0 0 12px;color:var(--brand-dark);font-weight:700;font-size:1.1rem}
+.tf ul{margin:0;padding-left:20px;line-height:1.65}
+/* tombola */
+.tombola{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;padding:clamp(24px,4vw,40px);border-radius:32px;background:linear-gradient(135deg,var(--brand-soft),#fff);border:1px solid var(--line);box-shadow:var(--shadow)}
+.tombola .lead{margin-bottom:14px}
+.lots{display:flex;flex-wrap:wrap;gap:12px;list-style:none;margin:0;padding:0}
+.lots li{padding:14px 20px;border-radius:18px;background:#fff;border:1px solid var(--line);max-width:300px}
+.lots b{display:block;color:var(--ink);font-size:1.15rem}.lots span{color:var(--muted);line-height:1.4}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
 .steps div{display:flex;gap:14px;align-items:center;padding:14px 18px;border-radius:18px;background:rgba(255,255,255,.75);border:1px solid var(--line);line-height:1.35;color:var(--ink);font-weight:500}
 .steps b{flex:none;width:34px;height:34px;border-radius:99px;background:var(--brand-dark);color:#fff;display:grid;place-items:center}
@@ -123,11 +134,10 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
  nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:8px 16px 14px;background:rgba(255,249,242,.98);border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(63,40,16,.12)}
  nav.open{display:flex}nav a{padding:14px 12px;font-size:1.05rem;border-radius:12px}
  .hgrid{grid-template-columns:1fr}.visu{max-width:300px;order:-1;justify-self:start}}
-@media(max-width:800px){.steps{grid-template-columns:1fr}.orgs{grid-template-columns:1fr}.strip{grid-template-columns:1fr}.contact{padding:22px}
+@media(max-width:800px){.steps{grid-template-columns:1fr}.orgs{grid-template-columns:1fr}.tarifs{grid-template-columns:1fr}.pick{grid-template-columns:1fr}.contact{padding:22px}
  }
-@media(max-width:800px){.bar{gap:8px;padding:8px 0}.tabs{width:100%}.tab{padding:10px 8px}.hero .container{padding:48px 0 32px}.sec{padding:44px 0}}
-@media(max-width:480px){.days{grid-template-columns:1fr}.tab{padding:12px 18px}.visu{max-width:220px}}
-@media(max-width:800px){.ax{grid-template-columns:1fr;padding:10px 18px 8px}.ax>span{display:none}.ln summary{grid-template-columns:1fr;gap:10px;padding:14px 18px}.dt{padding:2px 18px 16px}.pl{border-radius:22px}}
+@media(max-width:800px){.hero .container{padding:48px 0 32px}.sec{padding:44px 0}}
+@media(max-width:480px){.days{grid-template-columns:1fr}.ag li{grid-template-columns:1fr;gap:6px;padding:16px 18px 16px 16px}.h{display:flex;flex-wrap:wrap;gap:0 14px}.pgf a{margin-left:0}.visu{max-width:220px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 </style>
 <!-- Matomo -->
@@ -157,7 +167,7 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 <header><div class="container">
  <a class="brand" href="/"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" />Luynes en Fêtes</a>
  <button class="burger" id="bg" type="button" aria-expanded="false" aria-controls="nv" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
- <nav id="nv" aria-label="Sections"><a href="#programme" class="keep">Programme</a><a href="#billetterie" class="keep">Billetterie</a><a href="#associations">Associations</a><a href="#don" class="keep">Don</a><a href="#contact">Contact</a></nav>
+ <nav id="nv" aria-label="Sections"><a href="#programme" class="keep">Programme</a><a href="#billetterie" class="keep">Billetterie</a><a href="#tombola" class="keep">Tombola</a><a href="#associations">Associations</a><a href="#don" class="keep">Don</a><a href="#contact">Contact</a></nav>
 </div></header>
 
 <main>
@@ -168,8 +178,8 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
  <p class="where">Espace Ughetti</p>
  <p class="cause">Deux jours de mobilisation au profit de l’<b>AFM-Téléthon</b>, pour vaincre les maladies génétiques rares.</p>
  <div class="days">
-  <a class="daycard" href="#programme" data-go="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></a>
-  <a class="daycard" href="#programme" data-go="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></a>
+  <a class="daycard" href="#programme" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></a>
+  <a class="daycard" href="#programme" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></a>
  </div>
  <div class="hcta"><a class="btn btn-p" href="#billetterie">Billetterie en ligne</a><a class="btn btn-w" href="#don">Faire un don</a></div>
  </div>
@@ -178,25 +188,52 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 
 <section class="sec" id="programme"><div class="container">
  <h2>Le programme</h2>
- <p class="lead">Une ligne par animation, une barre par créneau. Touchez une ligne pour en savoir plus.</p>
- <div class="strip">
-  <div><b>Marché de Noël</b><span>Exposants locaux sur l’esplanade, samedi et dimanche.</span></div>
-  <div><b>Buvette et restauration</b><span>Pizza Verte, cookies L’Orge, crêpes, boissons chaudes.</span></div>
-  <div><b>Tombola</b><span>10 places Arena et une heure de trampoline Urban Jump à gagner.</span></div>
+ <p class="lead">Touchez un jour pour découvrir ses animations.</p>
+ <div class="pick">
+  <button class="pickb" type="button" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></button>
+  <button class="pickb" type="button" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></button>
  </div>
- <div class="bar">
-  <div class="tabs" role="tablist" aria-label="Jour"><button class="tab" role="tab" data-d="sam" aria-selected="true">Samedi 5</button><button class="tab" role="tab" data-d="dim" aria-selected="false">Dimanche 6</button></div>
- </div>
- <div class="pl" id="pl" aria-live="polite"></div>
- <div class="key" id="key"></div>
- <div class="soon"><b>Horaires à venir :</b> tir laser avec Mon Tir Sportif, atelier code de la route, découverte du tandem, sorties VTT et sorties route de l’Union Cycliste de Luynes.</div>
+ <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-argent"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-argent"><i></i><span>Atelier code de la route</span></li><li class="t-argent"><i></i><span>Découverte du tandem</span></li><li class="t-argent"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-argent"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-or"><i></i><span>Atelier pizza <small>Pizza Verte</small></span></li><li class="t-or"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span></li></ul></div>
+ <dialog class="pg" id="pg" aria-labelledby="pgt">
+  <div class="pgh"><h3 id="pgt"></h3><button class="x" type="button" id="pgx" aria-label="Fermer">&times;</button></div>
+  <div class="pgb" data-d="sam"><ul class="ag">
+<li class="t-argent"><div class="h"><b>10h – 12h</b><b>13h – 16h</b></div><div class="i"><h4>Karts à pédales</h4><span class="p">Boulodrome, avec l’ADAVA</span><p>Pilotez un kart sur un circuit sécurisé.</p><span class="tg">Tarif Argent</span></div></li>
+<li class="t-argent"><div class="h"><b>10h – 12h</b><b>14h – 17h</b></div><div class="i"><h4>Planet Jeunes</h4><span class="p">Salle Ughetti</span><p>Atelier créatif, crêpes et kermesse pour les enfants.</p><span class="tg">Tarif Argent</span></div></li>
+<li class="t-argent"><div class="h"><b>10h – 12h</b><b>14h – 16h</b></div><div class="i"><h4>Maquillage</h4><span class="p">Devant la salle Ughetti</span><p>Petits et grands se font transformer.</p><span class="tg">Tarif Argent</span></div></li>
+<li class="t-bronze"><div class="h"><b>10h – 12h</b><b>14h – 16h</b></div><div class="i"><h4>Porte-clés</h4><span class="p">Accueil de la salle Ughetti</span><p>Un porte-clés personnalisé, avec votre prénom ou le motif de votre choix.</p><span class="tg">Tarif Bronze</span></div></li>
+<li class="t-or"><div class="h"><b>à 10h, 12h, 14h et 16h</b></div><div class="i"><h4>Massages</h4><span class="p">Salle Ughetti, avec Le Corps au Présent</span><p>Séances de 20 minutes, au choix tête ou pieds.</p><span class="tg">Tarif Or</span></div></li>
+<li class="t-bronze"><div class="h"><b>14h – 16h</b></div><div class="i"><h4>Ballons sculptés</h4><span class="p">Devant la salle Ughetti</span><p>Des animateurs sculptent des ballons à rapporter à la maison.</p><span class="tg">Tarif Bronze</span></div></li>
+</ul></div>
+  <div class="pgb" data-d="dim" hidden><ul class="ag">
+<li class="t-argent"><div class="h"><b>10h – 12h</b><b>13h – 16h</b></div><div class="i"><h4>Karts à pédales</h4><span class="p">Boulodrome, avec l’ADAVA</span><p>Pilotez un kart sur un circuit sécurisé.</p><span class="tg">Tarif Argent</span></div></li>
+<li class="t-argent"><div class="h"><b>10h – 12h</b><b>14h – 16h</b></div><div class="i"><h4>Planet Jeunes</h4><span class="p">Salle Ughetti</span><p>Atelier créatif, crêpes et kermesse pour les enfants.</p><span class="tg">Tarif Argent</span></div></li>
+<li class="t-or"><div class="h"><b>à partir de 11h</b></div><div class="i"><h4>Massages</h4><span class="p">Salle Ughetti, avec Le Corps au Présent</span><p>Séances de 20 minutes, au choix tête ou pieds.</p><span class="tg">Tarif Or</span></div></li>
+<li class="t-bronze"><div class="h"><b>14h – 16h</b></div><div class="i"><h4>Ballons sculptés</h4><span class="p">Devant la salle Ughetti</span><p>Des animateurs sculptent des ballons à rapporter à la maison.</p><span class="tg">Tarif Bronze</span></div></li>
+<li class="t-or"><div class="h"><b>15h – 16h</b></div><div class="i"><h4>Spectacle Rythm&amp;Fit</h4><span class="p">Salle principale</span><p>Accueil à 14h30. Les adhérents de Rythm&amp;Fit présentent leur spectacle de danse.</p><span class="tg">Tarif Or</span></div></li>
+<li class="t-or"><div class="h"><b>17h – 18h</b></div><div class="i"><h4>Concert FreeSon</h4><span class="p">Salle principale</span><p>Du jazz vocal pour clôturer le week-end.</p><span class="tg">Tarif Or</span></div></li>
+</ul></div>
+  <div class="pgf"><span class="k t-bronze"><i></i>Bronze</span><span class="k t-argent"><i></i>Argent</span><span class="k t-or"><i></i>Or</span><a href="#billetterie">Comprendre les tarifs</a></div>
+ </dialog>
 </div></section>
 
 <section class="sec" id="billetterie"><div class="container">
  <h2>Billetterie unique</h2>
- <p class="lead">Une seule billetterie en ligne pour toutes les activités payantes. Chaque achat soutient l’AFM-Téléthon.</p>
+ <p class="lead">Une seule billetterie en ligne pour toutes les activités payantes. Chaque achat soutient l’AFM-Téléthon. Trois tarifs, trois couleurs : vous les retrouvez dans le programme.</p>
+ <div class="tarifs">
+  <div class="tf t-bronze"><span class="tn">Bronze</span><h3>Les jetons</h3><p class="px">1 jeton = 1 €</p><ul><li>Cafés</li><li>Ballons sculptés : 1 ballon = 1 jeton</li><li>Porte-clés : 5 jetons</li></ul></div>
+  <div class="tf t-argent"><span class="tn">Argent</span><h3>Le pass activités</h3><p class="px">10 €</p><ul><li>Karts à pédales</li><li>Planet Jeunes</li><li>Tir laser</li><li>Atelier code de la route</li><li>Découverte du tandem</li><li>Sorties VTT et sorties route</li><li>Maquillage et activités similaires</li></ul></div>
+  <div class="tf t-or"><span class="tn">Or</span><h3>Les temps forts</h3><p class="px">Tarif propre à chaque temps fort</p><ul><li>Ateliers culinaires : cookies ou pizza</li><li>Spectacle de danse Rythm&amp;Fit</li><li>Concert de FreeSon</li><li>Massage de 20 minutes</li></ul></div>
+ </div>
  <div class="steps"><div><b>1</b><span>Choisissez vos activités en ligne</span></div><div><b>2</b><span>Payez en quelques clics</span></div><div><b>3</b><span>Retirez votre ticket ou pass à la caisse centrale, salle Ughetti</span></div></div>
  <div class="ticket"><p>Réglez à l’avance et profitez des animations sans attendre : un seul passage à la caisse, et c’est parti.</p><a class="btn btn-p big" href="#">Accéder à la billetterie</a></div>
+</div></section>
+
+<section class="sec" id="tombola"><div class="container">
+ <div class="tombola">
+  <div><h2>Tombola</h2><p class="lead">Tentez de gagner l’un de ces lots :</p>
+   <ul class="lots"><li><b>10 places Arena Aix</b><span>2 lots de 5 places</span></li><li><b>Urban Jump</b><span>1 heure de trampoline et une place pour l’Urban Quiz</span></li></ul></div>
+  <a class="btn btn-p big" href="#">Prendre mes tickets</a>
+ </div>
 </div></section>
 
 <section class="sec" id="associations"><div class="container">
@@ -237,42 +274,17 @@ h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spaci
 
 <script>
 const $=i=>document.getElementById(i);
-const CAT={sport:["Sport et vélo","var(--sport)","#fff"],atelier:["Enfants et ateliers","var(--atelier)","var(--ink)"],show:["Spectacles","var(--show)","#fff"],bien:["Bien-être","var(--bien)","#fff"]};
-/* s = créneaux [début, fin, texte d’horaire facultatif] */
-const A=[
-{n:"Karts à pédales",c:"sport",p:"Boulodrome, avec l’ADAVA",t:"Bracelet 10 €",d:"Pilotez un kart sur un circuit sécurisé.",s:{sam:[[10,12],[13,16]],dim:[[10,12],[13,16]]}},
-{n:"Planet Jeunes",c:"atelier",p:"Salle Ughetti",t:"",d:"Atelier créatif, crêpes et kermesse pour les enfants.",s:{sam:[[10,12],[14,17]],dim:[[10,12],[14,16]]}},
-{n:"Maquillage",c:"atelier",p:"Devant la salle Ughetti",t:"Bracelet 10 €",d:"Petits et grands se font transformer.",s:{sam:[[10,12],[14,16]]}},
-{n:"Porte-clés",c:"atelier",p:"Accueil de la salle Ughetti",t:"5 €",d:"Un porte-clés personnalisé, avec votre prénom ou le motif de votre choix.",s:{sam:[[10,12],[14,16]]}},
-{n:"Ballons sculptés",c:"atelier",p:"Devant la salle Ughetti",t:"1 € pièce",d:"Des animateurs sculptent des ballons à rapporter à la maison.",s:{sam:[[14,16]],dim:[[14,16]]}},
-{n:"Massages",c:"bien",p:"Salle Ughetti, avec Le Corps au Présent",t:"10 € les 20 minutes",d:"Au choix tête ou pieds.",s:{sam:[[10,10.34,"10h"],[12,12.34,"12h"],[14,14.34,"14h"],[16,16.34,"16h"]],dim:[[11,11.34,"à partir de 11h"]]}},
-{n:"Spectacle Rythm&Fit",c:"show",p:"Salle principale",t:"",d:"Les adhérents de Rythm&Fit présentent leur spectacle de danse.",s:{dim:[[14.5,16,"accueil à 14h30, spectacle de 15h à 16h"]]}},
-{n:"Concert FreeSon",c:"show",p:"Salle principale",t:"Entrée 10 €",d:"Du jazz vocal pour clôturer le week-end.",s:{dim:[[17,18]]}}
-];
-let day="sam",cat=null;
-const f=x=>Math.floor(x)+"h"+(x%1?String(Math.round(x%1*60)).padStart(2,"0"):"");
-const ALL=A.flatMap(a=>Object.values(a.s).flat()),T0=Math.floor(Math.min(...ALL.map(z=>z[0]))),T1=Math.ceil(Math.max(...ALL.map(z=>z[1]))),N=T1-T0,pc=x=>(x-T0)/N*100;
-$("key").innerHTML=Object.values(CAT).map(v=>`<span style="--c:${v[1]}"><i></i>${v[0]}</span>`).join("");
-function draw(){
- const L=A.filter(a=>a.s[day]).sort((p,q)=>p.s[day][0][0]-q.s[day][0][0]);
- const ticks=Array.from({length:N+1},(_,i)=>`<span style="left:${i/N*100}%">${T0+i}h</span>`).join("");
- $("pl").style.setProperty("--n",N);
- $("pl").innerHTML=`<div class="ax"><span></span><div class="tk">${ticks}</div></div>`+L.map(a=>{
-  const sl=a.s[day],c=CAT[a.c];
-  const txt=sl.map(([x,y,l])=>l||f(x)+"–"+f(y)).join(" · ");
-  const bars=sl.map(([x,y,l])=>`<i class="bx" style="left:${pc(x)}%;width:${pc(y)-pc(x)}%">${!l&&y-x>=2?f(x)+"–"+f(y):""}</i>`).join("");
-  return `<details class="ln" style="--c:${c[1]};--tc:${c[2]}"><summary><div class="nm"><b>${a.n}</b><span>${a.p}</span><span class="ts">${txt}</span>${a.t?`<em>${a.t}</em>`:""}</div><div class="tr">${bars}</div></summary><div class="dt">${a.d}</div></details>`}).join("");
-}
-function setDay(d){day=d;document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x.dataset.d===d));draw()}
-document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>setDay(t.dataset.d));
-document.querySelectorAll("[data-go]").forEach(a=>a.addEventListener("click",()=>setDay(a.dataset.go)));
+const dlg=$("pg");
+function openDay(d){dlg.querySelectorAll(".pgb").forEach(b=>b.hidden=b.dataset.d!==d);$("pgt").textContent=d==="sam"?"Samedi 5 décembre":"Dimanche 6 décembre";dlg.showModal();dlg.querySelector(".pgb:not([hidden])").scrollTop=0}
+document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();openDay(b.dataset.open)}));
+$("pgx").onclick=()=>dlg.close();
+dlg.addEventListener("click",e=>{if(e.target===dlg||e.target.closest(".pgf a"))dlg.close()});
 const bg=$("bg"),nv=$("nv");
 bg.onclick=()=>{const o=nv.classList.toggle("open");bg.setAttribute("aria-expanded",o);bg.setAttribute("aria-label",o?"Fermer le menu":"Ouvrir le menu")};
 nv.addEventListener("click",e=>{if(e.target.closest("a")){nv.classList.remove("open");bg.setAttribute("aria-expanded","false")}});
-draw();
 const T=new Date("2026-12-05T10:00:00+01:00"),E=new Date("2026-12-06T18:00:00+01:00"),now=new Date();
 if(now<T){const j=Math.ceil((T-now)/864e5);$("cd").textContent=j>1?`Dans ${j} jours`:"C’est demain"}
-else if(now<E){$("cd").textContent="C’est maintenant";if(now>=new Date("2026-12-06T00:00:00+01:00"))setDay("dim")}
+else if(now<E){$("cd").textContent="C’est maintenant";}
 else $("cd").textContent="Merci à tous";
 
 /* contact : l’adresse n’existe jamais en clair dans le code, elle est assemblée au clic */
