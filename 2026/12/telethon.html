@@ -196,6 +196,8 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 .sw{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:55;display:flex;flex-direction:column;border:2px solid var(--brand-dark);border-radius:999px;background:#fff;box-shadow:0 10px 24px rgba(63,40,16,.25);overflow:hidden}
 .sw button{display:grid;place-items:center;width:52px;height:48px;padding:0;border:0;background:none;color:var(--brand-dark)}
 .sw button+button{border-top:1px solid var(--line)}.sw button:hover:not(:disabled){background:var(--brand-soft)}.sw button:disabled{opacity:.3;cursor:default}.sw svg{width:24px;height:24px}
+@media(min-width:901px){.sw{top:50%;bottom:auto;transform:translateY(-50%)}}
+@media(max-width:900px){.sw{bottom:calc(max(16px,env(safe-area-inset-bottom,0px)) + 64px)}}
 .fab:hover{transform:translateY(-2px)}.fab svg{flex:none;width:26px;height:26px}
 @media(max-width:480px){.fab{padding:14px 18px 14px 14px}}
 .lieu address{font-style:normal;font-size:1.25rem;line-height:1.7;color:var(--ink);margin:0 0 24px}
@@ -550,7 +552,7 @@ const bk=$("bk");$("bkx").onclick=()=>bk.close();bk.addEventListener("click",e=>
 (async()=>{const q=new URLSearchParams(location.search),ty=q.get("type");if(!ty)return;
  const pop=(t,h)=>{$("bkt").textContent=t;$("bkb").innerHTML=h;if(!bk.open)bk.showModal()};
  const o=(q.get("orderId")||"").replace(/\D/g,""),ci=(q.get("checkoutIntentId")||"").replace(/\D/g,"");
- history.replaceState(null,"",location.pathname+"#billetterie");
+ history.replaceState(null,"",location.pathname);
  if(ty==="return"&&q.get("code")==="succeeded"){
   const base=`<p><b>Votre paiement a bien été reçu.</b> HelloAsso vous envoie aussi son propre reçu de paiement.</p><p>Le jour J, présentez-vous à la caisse centrale, salle Ughetti, avec votre nom${o?` (commande n° ${o})`:""} pour retirer vos jetons, pass et tickets.</p>`;
   let saved=null;try{saved=JSON.parse(localStorage.getItem(LS)||"null");localStorage.removeItem(LS)}catch(_){}
@@ -598,6 +600,10 @@ document.addEventListener("visibilitychange",tick);
  sn.onclick=()=>{const c=idx();if(c<S.length-1)go(c+1)};
  let raf=0;const q=()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;upd()})};
  addEventListener("scroll",q,{passive:true});addEventListener("resize",q);upd()})();
+/* ancres : on défile sans écrire le # dans l’adresse, et on l’efface s’il arrive dans le lien */
+document.addEventListener("click",e=>{if(e.defaultPrevented)return;const a=e.target.closest('a[href^="#"]');if(!a)return;const h=a.getAttribute("href");if(h.length<2)return;let t=null;try{t=document.querySelector(h)}catch(_){}
+ if(!t)return;e.preventDefault();t.scrollIntoView({behavior:"smooth",block:"start"})});
+addEventListener("load",()=>{if(location.hash)setTimeout(()=>history.replaceState(null,"",location.pathname+location.search),0)});
 /* contact : l’adresse n’existe jamais en clair dans le code, elle est assemblée au clic */
 const mail=()=>["contact-telethon","13080","fr"].reduce((a,p,i)=>a+(i?(i===1?"@":"."):"")+p,"");
 $("wr").onclick=()=>{location.href="mailto:"+mail()+"?subject="+encodeURIComponent("Téléthon 2026 à Luynes");$("msg").textContent="Votre messagerie s’ouvre. Sinon, affichez l’adresse et écrivez-nous depuis votre boîte mail."};
