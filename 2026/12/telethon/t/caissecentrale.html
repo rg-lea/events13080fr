@@ -98,7 +98,7 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 </div></header>
 
 <main class="container" data-clarity-mask="True">
- <div class="top"><h1 class="wt">Achat en caisse centrale</h1><span style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-p" type="button" id="rc0">Retrouver une commande en ligne</button><button class="btn btn-s" type="button" id="rz">Tout effacer</button></span></div>
+ <div class="top"><h1 class="wt">Achat en caisse centrale</h1><span style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-s" type="button" id="vh0">Historique des ventes</button><button class="btn btn-p" type="button" id="rc0">Retrouver une commande en ligne</button><button class="btn btn-s" type="button" id="rz">Tout effacer</button></span></div>
  <p class="ws">Pour un achat réglé sur place, sans commande en ligne. L’acheteur reçoit une confirmation par e-mail, et la boîte du Téléthon en garde une copie pour le bilan.</p>
 
  <div class="card"><label>Code caisse<small>Mot de passe de la caisse, donné par le comité. À saisir une fois.</small><input id="code" type="password" autocomplete="off" /></label></div>
@@ -123,6 +123,7 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
    <div class="sub" style="font-weight:600;color:var(--muted)">Billets</div><div class="dens" id="bil"></div>
    <div class="sub" style="font-weight:600;color:var(--muted)">Pièces</div><div class="dens" id="pie"></div>
    <div class="tt" id="rendu"><span>Remis <span id="remis"></span></span><span id="rl"></span></div>
+   <p class="sub" id="rb" style="font-size:1.15rem"></p>
   </div>
  </div>
 </main>
@@ -132,6 +133,8 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 <dialog class="pg" id="dg" data-clarity-mask="True" aria-labelledby="dgt"><div class="pgh"><h3 id="dgt"></h3></div><div class="pgb" id="dgb"></div><div class="pgf"><button class="btn btn-p" type="button" id="dgx">Nouvel achat</button></div></dialog>
 
 <dialog class="pg" id="rc" aria-labelledby="rct"><div class="pgh"><h3 id="rct">Retrouver une commande en ligne</h3></div><div class="pgb"><p>Tapez les 4 derniers chiffres du numéro de commande HelloAsso (indiqués en gros dans le mail du client).</p><form class="rcf" id="rcfm"><input id="rci" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="4 derniers chiffres" /><button class="btn btn-p" type="submit" id="rcb">Chercher</button></form><p id="rcm" role="alert" style="color:#b3261e;font-weight:600"></p><div id="rcr"></div><div class="hs"><span id="hn"></span><button class="lnk" type="button" id="hall">Tout supprimer</button></div><ul class="hl" id="hl"></ul></div><div class="pgf"><button class="btn btn-s" type="button" id="rcx">Fermer</button></div></dialog>
+
+<dialog class="pg" id="vh" aria-labelledby="vht"><div class="pgh"><h3 id="vht">Historique des ventes en caisse</h3></div><div class="pgb"><div id="vs"></div><ul class="hl" id="vl"></ul><button class="lnk" type="button" id="vall">Tout supprimer</button></div><div class="pgf"><button class="btn btn-s" type="button" id="vx">Fermer</button></div></dialog>
 
 <script>
 const $=i=>document.getElementById(i);
@@ -156,12 +159,15 @@ const stp=(k,v)=>`<div class="st"><button type="button" data-k="${k}|-1" aria-la
 $("achats").innerHTML=GR.map(g=>`<section class="grp t-${g[0]}"><div class="gh"><span class="tn">${g[1]}</span><small>${g[2]}</small></div>`+PR.filter(p=>p.g===g[0]).map(p=>`<div class="rw"><div><b>${p.n}</b><small>${p.d}</small><span class="px">${eur(p.p*100)}${p.u}</span></div>${stp("q"+p.id+":"+p.j)}</div>`).join("")+`</section>`).join("");
 const den=(a,z)=>$(z).innerHTML=a.map(d=>`<div class="den"><span>${d[1]}</span>${stp("e"+d[0])}</div>`).join("");
 den(BIL,"bil");den(PIE,"pie");
+const DEN=[20000,10000,5000,2000,1000,500,200,100,50,20,10,5,2,1],DL=Object.fromEntries(BIL.concat(PIE));
+const rendre=c=>{const o=[];DEN.forEach(v=>{const n=Math.floor(c/v);if(n>0){o.push(n+" × "+DL[v]);c-=n*v}});return o.join(" + ")};
 const total=()=>sum(PR.map(p=>p.p*100*(Q[p.id+":"+p.j]||0)));
 const remis=()=>sum(Object.entries(E).map(([v,n])=>v*n));
 function upd(){const T=total(),R=remis();
  document.querySelectorAll("[data-o]").forEach(o=>{const k=o.dataset.o,n=(k[0]==="q"?Q[k.slice(1)]:E[k.slice(1)])||0;o.textContent=n;const b=o.parentNode.querySelectorAll("button");b[0].disabled=!n;b[1].disabled=n>=(k[0]==="q"?99:999)});
  $("bt").textContent=eur(T);$("seg").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.m===M));
  $("esp").hidden=M!=="especes";$("remis").textContent=eur(R);const short=R<T;$("rendu").classList.toggle("ko",short&&R>0);
+ $("rb").textContent=!short&&R-T>0?"Rendre : "+rendre(R-T):"";
  $("rl").innerHTML=short?"Il manque <b>"+eur(T-R)+"</b>":"À rendre <b>"+eur(R-T)+"</b>"}
 document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b||busy)return;
  if(b.dataset.k){const[k,v]=b.dataset.k.split("|"),s=k.slice(1),o=k[0]==="q"?Q:E;o[s]=Math.max(0,Math.min(k[0]==="q"?99:999,(o[s]||0)+ +v));$("bm").textContent="";upd()}
@@ -193,13 +199,27 @@ $("bn").onclick=async()=>{const m=t=>$("bm").textContent=t,e=err();if(e)return m
   else if(r.status===400)m("Achat refusé par le flux : vérifiez les quantités, l’e-mail et les espèces.");
   else if(r.status===502)m("Le mail n’a pas pu partir, l’achat n’est pas enregistré dans la boîte. Notez-le sur papier et prévenez le comité.");
   else if(!r.ok||!d.envoye)m("Réponse inattendue. Avant de recommencer, vérifiez dans la boîte du Téléthon si le mail est arrivé.");
-  else fin("Achat enregistré",`<p><span class="ref">${esc(d.ref||"")}</span></p><p>${body.mail?`Confirmation envoyée à <b>${esc(body.mail)}</b>, avec copie à la boîte du Téléthon.`:"Pas d’e-mail pour l’acheteur : le mail est parti uniquement dans la boîte du Téléthon."}</p><p>${esc(ML[M])} · <b>${eur(total())}</b>${M==="especes"?` · remis ${eur(remis())}, à rendre <b>${eur(remis()-total())}</b>`:""}</p>`)}
+  else{vadd(d.ref,body);fin("Achat enregistré",`<p><span class="ref">${esc(d.ref||"")}</span></p><p>${body.mail?`Confirmation envoyée à <b>${esc(body.mail)}</b>, avec copie à la boîte du Téléthon.`:"Pas d’e-mail pour l’acheteur : le mail est parti uniquement dans la boîte du Téléthon."}</p><p>${esc(ML[M])} · <b>${eur(total())}</b>${M==="especes"?` · remis ${eur(remis())}, à rendre <b>${eur(remis()-total())}</b><br>Rendre : ${rendre(remis()-total())||"rien"}`:""}</p>`)}}
  catch(_){m("Pas de réponse du serveur. Avant de recommencer, vérifiez dans la boîte du Téléthon si le mail est arrivé.")}
  busy=false;$("bn").disabled=false;$("bn").textContent="Enregistrer et envoyer la confirmation"};
 try{$("code").value=sessionStorage.getItem("caisse-code")||""}catch(_){}
 const lock=()=>document.documentElement.classList.toggle("lk",$("dg").open);
 new MutationObserver(lock).observe($("dg"),{attributes:true,attributeFilter:["open"]});
 upd();
+/* ---- Historique des ventes en caisse (navigateur) ---- */
+const VK="caisse-ventes";
+const vget=()=>{try{const v=JSON.parse(localStorage.getItem(VK)||"[]");return Array.isArray(v)?v:[]}catch(_){return[]}};
+const vset=v=>{try{localStorage.setItem(VK,JSON.stringify(v))}catch(_){}};
+function vadd(ref,b){const lab=l=>{const p=PR.find(x=>x.id===l.id&&x.j===l.jour);return l.qte+" × "+(p?p.n:l.id)};
+ const v=vget();v.unshift({ref:ref||"",t:Date.now(),n:b.prenom+" "+b.nom,mail:b.mail,m:b.paiement,c:total(),r:b.paiement==="especes"?remis():0,l:b.lignes.map(lab)});vset(v)}
+function vrender(){const v=vget(),S=sum(v.map(x=>x.c)),by=k=>sum(v.filter(x=>x.m===k).map(x=>x.c));
+ $("vs").innerHTML=v.length?`<p><b>${v.length} vente${v.length>1?"s":""} · ${eur(S)}</b><br>Espèces ${eur(by("especes"))} · Carte ${eur(by("cb"))} · Chèque ${eur(by("cheque"))}</p>`:"<p>Aucune vente enregistrée sur cet appareil.</p>";
+ $("vall").hidden=!v.length;
+ $("vl").innerHTML=v.map((x,i)=>`<li style="align-items:flex-start"><div style="flex:1"><b>${esc(x.ref)}</b> ${esc(x.n)} · ${eur(x.c)} · ${esc(ML[x.m]||"")}${x.m==="especes"&&x.r?` (remis ${eur(x.r)}, rendu ${eur(x.r-x.c)})`:""}<br><small>${new Date(x.t).toLocaleString("fr-FR",{weekday:"short",hour:"2-digit",minute:"2-digit"})} · ${esc(x.l.join(", "))}</small></div><button class="x" type="button" data-vx="${i}" aria-label="Supprimer">×</button></li>`).join("")}
+$("vh0").onclick=()=>{vrender();$("vh").showModal()};$("vx").onclick=()=>$("vh").close();
+$("vh").addEventListener("click",e=>{const x=e.target.closest("[data-vx]");
+ if(x){const v=vget();v.splice(+x.dataset.vx,1);vset(v);vrender()}
+ else if(e.target.id==="vall"&&confirm("Supprimer tout l’historique des ventes ?")){vset([]);vrender()}});
 /* ---- Retrouver une commande en ligne : le flux cherche le mail de confirmation dans la boîte partagée ---- */
 const API_CMD="https://default403611541d9141c3b14ddd403256e1.be.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/07/workflows/9cd451be8db54573bfd8199d474255f2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bKay8rC9da6iQXNhUXjylN9sOkI-9PxD0ikvq8_hjjs";
 const HK="caisse-retraits";
