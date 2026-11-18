@@ -60,6 +60,10 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 .pgh{padding:18px 24px;background:var(--brand-dark);color:#fff}.pgh h3{margin:0;font-size:1.5rem;letter-spacing:-.03em}
 .pgb{padding:20px 24px;line-height:1.6;overflow:auto}.pgb p{margin:0 0 10px}
 .pgf{display:flex;justify-content:flex-end;padding:14px 24px;border-top:1px solid var(--line);background:#fff}
+.rcf{display:flex;gap:8px;margin:0 0 12px}.rcf input{flex:1;min-width:0;padding:14px;border:2px solid var(--brand-dark);border-radius:14px;font:inherit;font-size:2rem;font-weight:800;letter-spacing:.3em;text-align:center}.rcf .btn{padding:14px 22px}
+.rr{margin:0 0 14px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}.rr small{display:block;padding:8px 12px;background:var(--brand-soft);color:var(--ink);font-weight:600}.rr iframe{display:block;width:100%;border:0;min-height:200px}
+.hs{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0 6px;color:var(--ink);font-weight:700}.hl{list-style:none;margin:0;padding:0}.hl li{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+.hl button.o{flex:1;text-align:left;border:0;background:none;color:var(--ink);padding:4px 0}.hl button.o b{font-size:1.15rem;letter-spacing:.1em;margin-right:8px}.hl small{color:var(--muted)}.hl button.x{border:1px solid var(--line);background:#fff;border-radius:99px;width:36px;height:36px}.lnk{border:0;background:none;color:var(--brand-dark);font-weight:700;text-decoration:underline}
 .ref{display:inline-block;margin:4px 0 12px;padding:8px 16px;border-radius:14px;background:var(--brand-soft);color:var(--ink);font-size:1.4rem;font-weight:800;letter-spacing:.02em}
 @media(max-width:480px){.dbl{grid-template-columns:1fr;gap:0}.dens{grid-template-columns:1fr}.rw{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -93,7 +97,7 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 </div></header>
 
 <main class="container" data-clarity-mask="True">
- <div class="top"><h1 class="wt">Achat en caisse centrale</h1><button class="btn btn-s" type="button" id="rz">Tout effacer</button></div>
+ <div class="top"><h1 class="wt">Achat en caisse centrale</h1><span style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-p" type="button" id="rc0">Retrouver une commande en ligne</button><button class="btn btn-s" type="button" id="rz">Tout effacer</button></span></div>
  <p class="ws">Pour un achat réglé sur place, sans commande en ligne. L’acheteur reçoit une confirmation par e-mail, et la boîte du Téléthon en garde une copie pour le bilan.</p>
 
  <div class="card"><label>Code caisse<small>Mot de passe de la caisse, donné par le comité. À saisir une fois.</small><input id="code" type="password" autocomplete="off" /></label></div>
@@ -125,6 +129,8 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 <div class="wzf" data-clarity-mask="True"><p id="bm" role="alert"></p><div class="tot">Total<b id="bt">0 €</b></div><button class="btn btn-p" type="button" id="bn">Enregistrer et envoyer la confirmation</button></div>
 
 <dialog class="pg" id="dg" data-clarity-mask="True" aria-labelledby="dgt"><div class="pgh"><h3 id="dgt"></h3></div><div class="pgb" id="dgb"></div><div class="pgf"><button class="btn btn-p" type="button" id="dgx">Nouvel achat</button></div></dialog>
+
+<dialog class="pg" id="rc" aria-labelledby="rct"><div class="pgh"><h3 id="rct">Retrouver une commande en ligne</h3></div><div class="pgb"><p>Tapez les 4 chiffres du code indiqué en gros dans le mail du client.</p><form class="rcf" id="rcfm"><input id="rci" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="4 derniers chiffres" /><button class="btn btn-p" type="submit" id="rcb">Chercher</button></form><p id="rcm" role="alert" style="color:#b3261e;font-weight:600"></p><div id="rcr"></div><div class="hs"><span id="hn"></span><button class="lnk" type="button" id="hall">Tout supprimer</button></div><ul class="hl" id="hl"></ul></div><div class="pgf"><button class="btn btn-s" type="button" id="rcx">Fermer</button></div></dialog>
 
 <script>
 const $=i=>document.getElementById(i);
@@ -193,6 +199,35 @@ try{$("code").value=sessionStorage.getItem("caisse-code")||""}catch(_){}
 const lock=()=>document.documentElement.classList.toggle("lk",$("dg").open);
 new MutationObserver(lock).observe($("dg"),{attributes:true,attributeFilter:["open"]});
 upd();
+/* ---- Retrouver une commande en ligne : le flux cherche le mail de confirmation dans la boîte partagée ---- */
+const API_CMD="https://default403611541d9141c3b14ddd403256e1.be.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/07/workflows/9cd451be8db54573bfd8199d474255f2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bKay8rC9da6iQXNhUXjylN9sOkI-9PxD0ikvq8_hjjs";
+const HK="caisse-retraits";
+const hget=()=>{try{const v=JSON.parse(localStorage.getItem(HK)||"[]");return Array.isArray(v)?v:[]}catch(_){return[]}};
+const hset=v=>{try{localStorage.setItem(HK,JSON.stringify(v))}catch(_){}};
+function hrender(){const h=hget();$("hn").textContent=h.length?h.length+" commande"+(h.length>1?"s":"")+" remise"+(h.length>1?"s":"")+" (retrouvée"+(h.length>1?"s":"")+" ici)":"Aucune commande retrouvée pour l’instant";$("hall").hidden=!h.length;
+ $("hl").innerHTML=h.map((x,i)=>`<li><button class="o" type="button" data-hs="${i}"><b>${esc(x.c)}</b>${esc(x.n||"")}<small> ${esc(x.t||"")} · ${new Date(x.d).toLocaleString("fr-FR",{weekday:"short",hour:"2-digit",minute:"2-digit"})}</small></button><button class="x" type="button" data-hx="${i}" aria-label="Supprimer">×</button></li>`).join("")}
+function hadd(c,doc){let n="",t="";try{const hs=[...doc.querySelectorAll("h3")].find(e=>/Qui a pay/i.test(e.textContent));n=hs&&hs.nextElementSibling?hs.nextElementSibling.textContent.trim():"";const m=/Total pay[ée]\s*:\s*([^\n]*?€)/.exec(doc.body.textContent);t=m?m[1].trim():""}catch(_){}
+ const h=hget().filter(x=>x.c!==c);h.unshift({c,n,t,d:Date.now()});hset(h);hrender()}
+async function chercher(c){const m=t=>$("rcm").textContent=t;m("");$("rcr").innerHTML="";
+ if(!/^\d{4}$/.test(c))return m("Tapez exactement 4 chiffres.");
+ const code=($("code").value||"").trim();if(!code)return m("Saisissez d’abord le code caisse dans la page.");
+ $("rcb").disabled=true;$("rcb").textContent="Recherche…";
+ try{const r=await fetch(API_CMD,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"retrouver",code,chiffres:c})});
+  if(r.status===403)m("Code caisse incorrect.");else if(!r.ok)m("Erreur du serveur. Réessayez dans un instant.");
+  else{const d=await r.json(),L=d.trouves||[];if(!L.length)m("Aucune commande avec le code "+c+". Vérifiez les chiffres (ou demandez le mail ou le PDF au client).");
+   else{L.forEach((x,i)=>{const w=document.createElement("div");w.className="rr";w.innerHTML=`<small>${esc(x.sujet||"")}</small>`;const f=document.createElement("iframe");f.setAttribute("sandbox","allow-same-origin");f.srcdoc=x.html||"";f.onload=()=>{try{f.style.height=f.contentDocument.documentElement.scrollHeight+20+"px"}catch(_){}};w.appendChild(f);$("rcr").appendChild(w)});
+    if(L.length>1)m("Attention : "+L.length+" commandes ont ce code. Vérifiez le nom du payeur.");
+    hadd(c,new DOMParser().parseFromString(L[0].html||"","text/html"))}}}
+ catch(_){m("Pas de réponse du serveur (internet ?). Utilisez le mail ou le PDF du client.")}
+ $("rcb").disabled=false;$("rcb").textContent="Chercher"}
+$("rc0").onclick=()=>{$("rcm").textContent="";$("rcr").innerHTML="";$("rci").value="";hrender();$("rc").showModal();$("rci").focus()};
+$("rcx").onclick=()=>$("rc").close();
+$("rcfm").onsubmit=e=>{e.preventDefault();chercher($("rci").value.trim())};
+$("rci").oninput=e=>{e.target.value=e.target.value.replace(/\D/g,"").slice(0,4)};
+$("rc").addEventListener("click",e=>{const o=e.target.closest("[data-hs]"),x=e.target.closest("[data-hx]");
+ if(o){const c=hget()[+o.dataset.hs].c;$("rci").value=c;chercher(c)}
+ else if(x){const h=hget();h.splice(+x.dataset.hx,1);hset(h);hrender()}
+ else if(e.target.id==="hall"&&confirm("Supprimer tout l’historique des commandes retrouvées ?")){hset([]);hrender()}});
 </script>
 </body>
 </html>
