@@ -212,16 +212,30 @@ function hadd(c,doc){let n="",t="";try{const hs=[...doc.querySelectorAll("h3")].
 let R=[];
 const dec=s=>{try{const m=/<!--TD:([A-Za-z0-9+\/=]+)-->/.exec(s||"");if(!m)return null;return JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(m[1]),c=>c.charCodeAt(0))))}catch(_){return null}};
 const ex=n=>n&&n.charAt?n:"";
-function card(dt,i){const P=dt.personnes||[],Ls=dt.lignes||[];const done=R[i]&&R[i].r;
- const pers=P.map((x,k)=>({x,l:Ls.filter(l=>l.p===k)})).filter(o=>o.x.role==="participant"||o.l.length).map(o=>`<div class="pp"><b>${esc(o.x.n)}</b> <small style="display:inline;margin:0;padding:0;background:none">${esc(ex(o.x.age))}</small><ul>${o.l.length?o.l.map(l=>`<li>${esc(l.qte)} × ${esc(l.nom)}${l.jour?` (${esc(l.jour)})`:""}${l.gratuit===true?" · offert":""}</li>`).join(""):"<li>Aucun achat nominatif</li>"}</ul></div>`).join("");
- return `<div class="cm" data-i="${i}"><h4>Commande n° ${esc(dt.ref)}</h4><small style="display:block;color:var(--muted);padding:0;background:none">${esc(dt.date||"")}</small><p style="margin:8px 0 0"><b>Payeur : ${esc(dt.payeur)}</b><br>${esc(dt.mail||"")} · ${esc(dt.tel||"")}</p>${pers}<div class="tot2">Total payé : ${esc(dt.total)} €</div>
+function norm(dt){if(dt.pers)return dt;const P=dt.personnes||[],Ls=dt.lignes||[];
+ return{...dt,pers:P.map((x,k)=>({n:x.n,age:ex(x.age),role:x.role,notes:[],l:Ls.filter(l=>l.p===k).map(l=>({qte:l.qte,nom:l.nom,jour:l.jour,free:l.gratuit===true}))}))}}
+/* lecture directe du mail (anciens mails ou bloc de données absent) */
+function parseMail(html,sujet){try{const d=new DOMParser().parseFromString(html||"","text/html"),T=d.body.textContent.replace(/\s+/g," ");
+ const ref=((/n°\s*(\d+)/.exec(sujet||"")||[])[1])||((/commande n°\s*(\d+)/.exec(T)||[])[1])||"";
+ const hq=[...d.querySelectorAll("h3")].find(e=>/Qui a pay/i.test(e.textContent));let payeur="",mail="",tel="";
+ if(hq&&hq.nextElementSibling){payeur=hq.nextElementSibling.textContent.trim();const r=(hq.nextElementSibling.nextSibling&&hq.nextElementSibling.nextSibling.textContent||"").split("·").map(s=>s.trim());mail=r[1]||"";tel=r[2]||""}
+ const heads=[...d.querySelectorAll("div")].filter(e=>/margin:20px 0 6px/.test(e.getAttribute("style")||"")&&e.querySelector("b")),pers=[];
+ heads.forEach(hd=>{const sp=hd.querySelector("span"),meta=sp?sp.textContent.replace(/^·\s*/,"").split("·").map(s=>s.trim()):[],o={n:hd.querySelector("b").textContent.trim(),role:/Accompagnant/i.test(meta[0]||"")?"accompagnant":"participant",age:meta[1]||"",notes:[],l:[]};
+  let e=hd.nextElementSibling;while(e&&e!==heads[heads.indexOf(hd)+1]&&e.tagName!=="BR"){if(e.tagName==="TABLE")[...e.querySelectorAll("tr")].slice(1).forEach(tr=>{const c=tr.children,s=c[0].querySelector("span"),j=s?s.textContent.replace(/[()]/g,"").trim():"";const nm=[...c[0].childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join("").trim();o.l.push({qte:c[1].textContent.trim(),nom:nm,jour:j,free:/Offert/i.test(c[2].textContent)})});
+   else if(e.textContent.trim())o.notes.push(e.textContent.trim());e=e.nextElementSibling}
+  pers.push(o)});
+ const tt=/Total pay[ée]\s*:\s*([\d.,\s]+)\s*€/.exec(T);
+ if(!pers.length)return null;return{ref,payeur,mail,tel,total:tt?tt[1].trim():"",date:"",pers}}catch(_){return null}}
+function card(dt,i){dt=norm(dt);const done=R[i]&&R[i].r;
+ const pers=dt.pers.filter(o=>o.role==="participant"||o.l.length).map(o=>`<div class="pp"><b>${esc(o.n)}</b> <small style="display:inline;margin:0;padding:0;background:none">${esc(o.age)}</small>${o.notes.filter(t=>/Mineur/.test(t)).map(t=>`<div style="color:var(--muted);font-size:.9rem">${esc(t)}</div>`).join("")}<ul>${o.l.length?o.l.map(l=>`<li><b>${esc(l.qte)} ×</b> ${esc(l.nom)}${l.jour?` (${esc(l.jour)})`:""}${l.free?" · offert":""}</li>`).join(""):"<li>Aucun achat nominatif</li>"}</ul></div>`).join("");
+ return `<div class="cm" data-i="${i}"><h4>Commande n° ${esc(dt.ref)}</h4><p style="margin:6px 0 0"><b>Payeur : ${esc(dt.payeur)}</b>${dt.mail||dt.tel?`<br><small style="display:inline;margin:0;padding:0;background:none">${esc(dt.mail||"")} ${dt.tel?"· "+esc(dt.tel):""}</small>`:""}</p>${pers}<div class="tot2">Total payé : ${esc(dt.total)} €</div>
   ${done?`<p class="ok">✓ Déjà marquée comme remise (${new Date(done.rd).toLocaleString("fr-FR",{weekday:"short",hour:"2-digit",minute:"2-digit"})}${done.par?`, par ${esc(done.par)}`:""})</p>`:`<label>Retirée par<input type="text" data-par="${i}" value="${esc(dt.payeur)}" autocomplete="off" /></label><button class="btn btn-p" type="button" data-ret="${i}">Commande remise : prévenir par e-mail</button>`}</div>`}
 function hadd2(c,dt){const o=hget().find(x=>x.c===c&&x.ref===dt.ref);const h=hget().filter(x=>!(x.c===c&&x.ref===dt.ref));h.unshift({...(o||{}),c,ref:dt.ref,n:dt.payeur,t:dt.total+" €",d:Date.now()});hset(h);hrender()}
 async function retirer(i,btn){const o=R[i],par=propre(document.querySelector(`[data-par="${i}"]`).value)||o.dt.payeur,code=($("code").value||"").trim();btn.disabled=true;btn.textContent="Envoi…";
  try{const r=await fetch(API_CMD,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"retire",code,chiffres:o.c,ref:String(o.dt.ref),par,payeur:o.dt.payeur,total:String(o.dt.total)})});
-  if(!r.ok)throw 0;const h=hget(),e=h.find(x=>x.c===o.c&&x.ref===o.dt.ref);if(e){e.r=true;e.rd=Date.now();e.par=par;hset(h)}
+  if(r.status===400||r.status===403)throw 1;if(!r.ok)throw 0;const h=hget(),e=h.find(x=>x.c===o.c&&x.ref===o.dt.ref);if(e){e.r=true;e.rd=Date.now();e.par=par;hset(h)}
   o.r=e||{rd:Date.now(),par};$("rcr").querySelector(`[data-i="${i}"]`).outerHTML=card(o.dt,i);hrender()}
- catch(_){btn.disabled=false;btn.textContent="Commande remise : prévenir par e-mail";$("rcm").textContent="L’e-mail n’est pas parti. Réessayez ou prévenez le comité."}}
+ catch(z){btn.disabled=false;btn.textContent="Commande remise : prévenir par e-mail";$("rcm").textContent=z===1?"Le flux HelloAsso n’est pas à jour (ou code caisse incorrect) : réimportez flux-telethon.zip dans Power Automate.":"L’e-mail n’est pas parti. Réessayez ou prévenez le comité."}}
 async function chercher(c){const m=t=>$("rcm").textContent=t;m("");$("rcr").innerHTML="";
  if(!/^\d{4}$/.test(c))return m("Tapez exactement 4 chiffres.");
  const code=($("code").value||"").trim();if(!code)return m("Saisissez d’abord le code caisse dans la page (mot de passe de la caisse).");
@@ -229,10 +243,10 @@ async function chercher(c){const m=t=>$("rcm").textContent=t;m("");$("rcr").inne
  try{const r=await fetch(API_CMD,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"retrouver",code,chiffres:c})});
   if(r.status===403)m("Code caisse incorrect.");else if(!r.ok)m("Erreur du serveur. Réessayez dans un instant.");
   else{const d=await r.json(),L=d.trouves||[];if(!L.length)m("Aucune commande finissant par "+c+". Vérifiez les chiffres (ou demandez le mail ou le PDF au client).");
-   else{R=[];L.forEach((x,i)=>{const dt=dec(x.html);if(dt){R.push({c,dt,r:hget().find(y=>y.c===c&&y.ref===dt.ref&&y.r)});$("rcr").insertAdjacentHTML("beforeend",card(dt,R.length-1))}
-     else{const w=document.createElement("div");w.className="rr";w.innerHTML=`<small>${esc(x.sujet||"")} (ancien format : mail complet)</small>`;const f=document.createElement("iframe");f.setAttribute("sandbox","allow-same-origin");f.srcdoc=x.html||"";f.onload=()=>{try{f.style.height=f.contentDocument.documentElement.scrollHeight+20+"px"}catch(_){}};w.appendChild(f);$("rcr").appendChild(w)}});
+   else{R=[];L.forEach((x,i)=>{const dt=dec(x.html)||parseMail(x.html,x.sujet);if(dt){R.push({c,dt,r:hget().find(y=>y.c===c&&y.ref===dt.ref&&y.r)});$("rcr").insertAdjacentHTML("beforeend",card(dt,R.length-1))}
+     else{const w=document.createElement("div");w.className="rr";w.innerHTML=`<small>${esc(x.sujet||"")} (lecture du mail impossible : mail complet)</small>`;const f=document.createElement("iframe");f.setAttribute("sandbox","allow-same-origin");f.srcdoc=x.html||"";f.onload=()=>{try{f.style.height=f.contentDocument.documentElement.scrollHeight+20+"px"}catch(_){}};w.appendChild(f);$("rcr").appendChild(w)}});
     if(L.length>1)m("Attention : "+L.length+" commandes finissent par ces chiffres. Vérifiez le nom du payeur.");
-    const d0=dec(L[0].html);if(d0)hadd2(c,d0);else hadd(c,new DOMParser().parseFromString(L[0].html||"","text/html"))}}}
+    const d0=dec(L[0].html)||parseMail(L[0].html,L[0].sujet);if(d0)hadd2(c,d0);else hadd(c,new DOMParser().parseFromString(L[0].html||"","text/html"))}}}
  catch(_){m("Pas de réponse du serveur (internet ?). Utilisez le mail ou le PDF du client.")}
  $("rcb").disabled=false;$("rcb").textContent="Chercher"}
 $("rc0").onclick=()=>{$("rcm").textContent="";$("rcr").innerHTML="";$("rci").value="";hrender();$("rc").showModal();$("rci").focus()};
