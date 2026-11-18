@@ -130,7 +130,7 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 
 <dialog class="pg" id="dg" data-clarity-mask="True" aria-labelledby="dgt"><div class="pgh"><h3 id="dgt"></h3></div><div class="pgb" id="dgb"></div><div class="pgf"><button class="btn btn-p" type="button" id="dgx">Nouvel achat</button></div></dialog>
 
-<dialog class="pg" id="rc" aria-labelledby="rct"><div class="pgh"><h3 id="rct">Retrouver une commande en ligne</h3></div><div class="pgb"><p>Tapez les 4 chiffres du code indiqué en gros dans le mail du client.</p><form class="rcf" id="rcfm"><input id="rci" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="4 derniers chiffres" /><button class="btn btn-p" type="submit" id="rcb">Chercher</button></form><p id="rcm" role="alert" style="color:#b3261e;font-weight:600"></p><div id="rcr"></div><div class="hs"><span id="hn"></span><button class="lnk" type="button" id="hall">Tout supprimer</button></div><ul class="hl" id="hl"></ul></div><div class="pgf"><button class="btn btn-s" type="button" id="rcx">Fermer</button></div></dialog>
+<dialog class="pg" id="rc" aria-labelledby="rct"><div class="pgh"><h3 id="rct">Retrouver une commande en ligne</h3></div><div class="pgb"><p>Tapez les 4 derniers chiffres du numéro de commande HelloAsso (indiqués en gros dans le mail du client).</p><form class="rcf" id="rcfm"><input id="rci" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="4 derniers chiffres" /><button class="btn btn-p" type="submit" id="rcb">Chercher</button></form><p id="rcm" role="alert" style="color:#b3261e;font-weight:600"></p><div id="rcr"></div><div class="hs"><span id="hn"></span><button class="lnk" type="button" id="hall">Tout supprimer</button></div><ul class="hl" id="hl"></ul></div><div class="pgf"><button class="btn btn-s" type="button" id="rcx">Fermer</button></div></dialog>
 
 <script>
 const $=i=>document.getElementById(i);
@@ -210,13 +210,13 @@ function hadd(c,doc){let n="",t="";try{const hs=[...doc.querySelectorAll("h3")].
  const h=hget().filter(x=>x.c!==c);h.unshift({c,n,t,d:Date.now()});hset(h);hrender()}
 async function chercher(c){const m=t=>$("rcm").textContent=t;m("");$("rcr").innerHTML="";
  if(!/^\d{4}$/.test(c))return m("Tapez exactement 4 chiffres.");
- const code=($("code").value||"").trim();if(!code)return m("Saisissez d’abord le code caisse dans la page.");
+ const code=($("code").value||"").trim();if(!code)return m("Saisissez d’abord le code caisse dans la page (mot de passe de la caisse).");
  $("rcb").disabled=true;$("rcb").textContent="Recherche…";
  try{const r=await fetch(API_CMD,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"retrouver",code,chiffres:c})});
   if(r.status===403)m("Code caisse incorrect.");else if(!r.ok)m("Erreur du serveur. Réessayez dans un instant.");
-  else{const d=await r.json(),L=d.trouves||[];if(!L.length)m("Aucune commande avec le code "+c+". Vérifiez les chiffres (ou demandez le mail ou le PDF au client).");
+  else{const d=await r.json(),L=d.trouves||[];if(!L.length)m("Aucune commande finissant par "+c+". Vérifiez les chiffres (ou demandez le mail ou le PDF au client).");
    else{L.forEach((x,i)=>{const w=document.createElement("div");w.className="rr";w.innerHTML=`<small>${esc(x.sujet||"")}</small>`;const f=document.createElement("iframe");f.setAttribute("sandbox","allow-same-origin");f.srcdoc=x.html||"";f.onload=()=>{try{f.style.height=f.contentDocument.documentElement.scrollHeight+20+"px"}catch(_){}};w.appendChild(f);$("rcr").appendChild(w)});
-    if(L.length>1)m("Attention : "+L.length+" commandes ont ce code. Vérifiez le nom du payeur.");
+    if(L.length>1)m("Attention : "+L.length+" commandes finissent par ces chiffres. Vérifiez le nom du payeur.");
     hadd(c,new DOMParser().parseFromString(L[0].html||"","text/html"))}}}
  catch(_){m("Pas de réponse du serveur (internet ?). Utilisez le mail ou le PDF du client.")}
  $("rcb").disabled=false;$("rcb").textContent="Chercher"}
