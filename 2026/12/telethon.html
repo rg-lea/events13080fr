@@ -298,7 +298,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 
 <section class="sec" id="tombola"><div class="container">
  <div class="tombola">
-  <div><h2>Tombola</h2><p class="lead"><b>2 € le ticket.</b> Tentez de gagner l’un de ces lots :</p>
+  <div><h2>Tombola</h2><p class="lead"><b>2 € le ticket.</b> Tentez de gagner l’un de ces lots. Tirage au sort le dimanche 6 décembre à 16h45.</p>
    <ul class="lots"><li><b>10 places Arena Aix</b><span>2 lots de 5 places</span></li><li><b>Urban Jump</b><span>1 heure de trampoline et une place pour l’Urban Quiz</span></li></ul></div>
   <button class="btn btn-p big" type="button" data-bil="tombola">Prendre mes tickets</button>
  </div>
@@ -317,7 +317,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
   <li><b>Pas de reçu fiscal</b> pour ces achats. Un <a href="#don" style="text-decoration:underline">don</a> en donne un.</li>
   <li>Paiement sécurisé : carte bancaire, Apple Pay, Google Pay.</li>
  </ul>
- <div class="ticket"><p>Commandez en 3 minutes ! Vous recevez une confirmation détaillée par <span style="white-space:nowrap">e-mail</span>.</p><button class="btn btn-p big" type="button" data-bil>Ouvrir la billetterie en ligne</button></div>
+ <div class="ticket"><p>Commandez en 3 minutes, jusqu’au dimanche 6 décembre à 16h00 ! Vous recevez une confirmation détaillée par <span style="white-space:nowrap">e-mail</span>.</p><button class="btn btn-p big" type="button" data-bil>Ouvrir la billetterie en ligne</button></div>
 </div></section>
 
 <section class="sec" id="associations"><div class="container">
@@ -424,11 +424,11 @@ const PR=[
 {id:"pass",g:"pass",n:"Pass multi-activités",d:"",p:10,j:["sam","dim"]},
 {id:"massage",g:"fort",n:"Massage de 20 minutes",d:"Tête ou pieds, de 10h à 12h et de 14h à 16h, salle Ughetti",p:10,j:["sam"]},
 {id:"concert",g:"fort",n:"Concert FreeSon",d:"Jazz vocal, 17h – 18h",p:10,j:["dim"]},
-{id:"tombola",g:"tombola",n:"Tickets de tombola",d:"2 € le ticket. Tirage au sort pour gagner l’un des lots.",p:2,j:["tombola"]},
+{id:"tombola",g:"tombola",n:"Tickets de tombola",d:"Tirage au sort pour gagner l’un des lots, le dimanche 6 décembre à 16h45.",p:2,j:["tombola"]},
 {id:"pizza",g:"fort",n:"Atelier pizza",d:"Inscription obligatoire, places limitées",p:3,j:["sam","dim"]},
 {id:"cookies",g:"fort",n:"Atelier cookies",d:"Inscription obligatoire, places limitées",p:3,j:["sam","dim"]}];
 const multi=p=>p.g==="jeton"||p.g==="tombola";
-const GR=[["jeton","Jetons","1 jeton = 1 €"],["pass","Pass multi-activités","10 € par participant et par jour : karts, Planet Jeunes, maquillage et activités du programme"],["fort","Ticket temps fort","Un ticket par participant et par animation"],["tombola","Tombola","2 € le ticket"]];
+const GR=[["jeton","Jetons","1 jeton = 1 €"],["pass","Pass multi-activités","10 € par participant et par jour : karts, Planet Jeunes, maquillage et activités du programme"],["fort","Ticket temps fort","Un ticket par participant et par animation"],["tombola","Tombola","Tirage dimanche 6 décembre à 16h45"]];
 const JL={tombola:"",tous:"samedi et dimanche",sam:"samedi 5 décembre",dim:"dimanche 6 décembre"};
 const AGES=[["m11","Moins de 11 ans"],["m18","11 - 17 ans"],["a26","18 - 26 ans"],["a59","27 - 59 ans"],["p60","60 ans et plus"]];
 const AL=Object.fromEntries(AGES);
@@ -539,7 +539,7 @@ $("bn").onclick=async()=>{const m=t=>{$("bm").textContent=t};
  if(step===1){if(keys().length)show(2);return}
  if(step===2){const e=err2();if(e)return m(e);show(3);return}
  if(step===3){const e=err3();if(e)return m(e);show(4);return}
- const e=err2()||err3();if(e)return m(e);if(!API_URL)return m("Le paiement en ligne n’est pas encore branché.");
+ const e=err2()||err3();if(e)return m(e);if(!API_URL)return m("Le paiement en ligne n’est pas encore branché.");if(closed())return fermer();
  const L=price(),idx=id=>X.findIndex(a=>a.id===id),pers=X.map(x=>({prenom:propre(x.prenom),nom:propre(x.nom),age:x.age,role:x.role,resp:x.resp?idx(x.resp):null,accomp:(x.accs||[]).map(idx)})),
   lignes=L.map(l=>({id:l.p.id,jour:l.j,p:X.indexOf(l.x),qte:l.n})),mail=X[0].mail.trim(),tel=X[0].tel.trim(),body={mail,tel,personnes:pers,lignes};
  $("bn").disabled=true;m("");$("bn").textContent="Redirection vers le paiement…";
@@ -549,7 +549,12 @@ $("bn").onclick=async()=>{const m=t=>{$("bm").textContent=t};
   if(d&&typeof d.url==="string"&&new URL(d.url).hostname.endsWith("helloasso.com"))location.href=d.url;else throw 0}
  catch(_){m("Une erreur est survenue. Réessayez dans un instant.");$("bn").disabled=false;$("bn").textContent="Payer "+eur(total())}};
 addEventListener("pageshow",e=>{if(e.persisted&&step===4){$("bn").disabled=false;$("bn").textContent="Payer "+eur(total());$("bm").textContent=""}});
-document.querySelectorAll("[data-bil]").forEach(b=>b.addEventListener("click",()=>{const t=b.dataset.bil;show(t?1:step);bw.showModal();if(t){const g=wb.querySelector(`[data-g="${t}"]`);if(g){wb.style.scrollBehavior="auto";wb.scrollTop+=g.getBoundingClientRect().top-wb.getBoundingClientRect().top-8;wb.style.scrollBehavior=""}}}));
+/* arrêt automatique de la billetterie : dimanche 6 décembre 2026 à 16h00 (heure de Paris) */
+const FERME=Date.parse("2026-12-06T16:00:00+01:00"),closed=()=>Date.now()>=FERME;
+function fermer(){if(bw.open)bw.close();document.querySelectorAll("[data-bil]").forEach(b=>{b.disabled=true;if(b.classList.contains("fab"))b.hidden=true;else b.textContent="Billetterie fermée"});
+ document.querySelectorAll(".ticket p").forEach(p=>p.textContent="La billetterie en ligne est fermée. Retrouvez-nous sur place, à la caisse centrale de la salle Ughetti.")}
+if(closed())fermer();else{const iv=setInterval(()=>{if(closed()){clearInterval(iv);fermer()}},15000)}
+document.querySelectorAll("[data-bil]").forEach(b=>b.addEventListener("click",()=>{if(closed())return fermer();const t=b.dataset.bil;show(t?1:step);bw.showModal();if(t){const g=wb.querySelector(`[data-g="${t}"]`);if(g){wb.style.scrollBehavior="auto";wb.scrollTop+=g.getBoundingClientRect().top-wb.getBoundingClientRect().top-8;wb.style.scrollBehavior=""}}}));
 $("bwx").onclick=()=>bw.close();bw.addEventListener("click",e=>{if(e.target===bw)bw.close()});
 /* retour depuis HelloAsso : le flux ajoute ?type=return (avec code, orderId, checkoutIntentId), ?type=error ou ?type=back */
 const bk=$("bk");$("bkx").onclick=()=>bk.close();bk.addEventListener("click",e=>{if(e.target===bk)bk.close()});
