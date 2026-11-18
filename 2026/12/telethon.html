@@ -220,21 +220,6 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 .phd[hidden],.phd button[hidden]{display:none}
 .pw .zinfo{margin:0;border:0;border-top:1px solid var(--line);border-radius:0;min-height:104px;background:#fff}
 @media(max-width:800px){.pw{justify-self:stretch;max-width:none}.lieu{border-radius:26px}}
-/* bannière « page en construction » : en haut de page, non figée, ouverture douce */
-.wip{position:relative;z-index:61;background:linear-gradient(90deg,var(--brand-soft),#ffd9a8 50%,var(--brand-soft));color:var(--ink);font-size:.95rem;line-height:1.5;border-bottom:1px solid rgba(194,121,42,.35)}
-.wh{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:10px 16px;border:0;background:none;color:inherit;font-weight:600;text-align:center}
-.wh:hover{background:rgba(255,255,255,.35)}.wh:focus-visible{outline-offset:-3px}
-.wh .chev{flex:none;width:22px;height:22px;padding:2px;border-radius:50%;background:var(--brand-dark);color:#fff;transition:transform .5s cubic-bezier(.4,0,.2,1);animation:nudge 2.2s ease-in-out infinite}
-.wip.open .chev{transform:rotate(180deg);animation:none}
-@keyframes nudge{0%,60%,100%{translate:0 0}30%{translate:0 3px}}
-.wc{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.4,0,.2,1)}
-.wip.open .wc{grid-template-rows:1fr}
-.wbx{min-height:0;overflow:hidden;visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .45s ease .1s,transform .5s cubic-bezier(.4,0,.2,1) .05s,visibility 0s .55s}
-.wip.open .wbx{visibility:visible;opacity:1;transform:none;transition:opacity .45s ease .15s,transform .5s cubic-bezier(.4,0,.2,1) .1s,visibility 0s}
-.wb{width:min(calc(100% - 32px),720px);margin:0 auto;padding:4px 0 18px}
-.wb p{margin:0 0 10px}.wb p:last-of-type{margin-bottom:12px}
-.wb a{display:inline-block;padding:9px 20px;border-radius:999px;background:var(--brand-dark);color:#fff;font-weight:700;box-shadow:0 8px 18px rgba(194,121,42,.28);transition:transform .2s}
-.wb a:hover{transform:translateY(-1px)}
 </style>
 <!-- Matomo -->
 <script>
@@ -259,14 +244,6 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 </script>
 </head>
 <body>
-<div class="wip" id="wip">
- <button class="wh" type="button" id="wiph" aria-expanded="false" aria-controls="wipb"><span>🚧 Page en construction</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
- <div class="wc" id="wipb"><div class="wbx"><div class="wb">
-  <p>Cette page est en cours d’alimentation avec les dernières données validées par le comité organisateur. Certaines sections (hors billetterie) ne sont pas encore toutes complètes : elles le seront très prochainement.</p>
-  <p>Nous vous invitons à revenir ultérieurement sur la page. Pour être tenu au courant, vous pouvez aussi vous inscrire à la newsletter de 13080.fr :</p>
-  <a href="https://forms.13080.fr/diffusion/2021/05/newsletter/#luynois" target="_blank" rel="noopener noreferrer">S’inscrire à la newsletter</a>
- </div></div></div>
-</div>
 <header><div class="container">
  <a class="brand" id="home" href="#"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" />Luynes en Fêtes</a>
  <button class="burger" id="bg" type="button" aria-expanded="false" aria-controls="nv" aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>
@@ -296,7 +273,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
   <button class="pickb" type="button" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></button>
   <button class="pickb" type="button" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></button>
  </div>
- <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-pass"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-pass"><i></i><span>Atelier code de la route <small>Sporting Auto Moto École</small></span></li><li class="t-pass"><i></i><span>Découverte du tandem <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-fort"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Inscription obligatoire, places limitées</em></li><li class="t-fort"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Inscription obligatoire, places limitées</em></li></ul></div>
+ <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-pass"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-pass"><i></i><span>Atelier code de la route <small>Sporting Auto Moto École</small></span></li><li class="t-pass"><i></i><span>Découverte du tandem <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-fort"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Date à confirmer · Inscription obligatoire, places limitées</em></li><li class="t-fort"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Samedi après-midi · Inscription obligatoire, places limitées</em></li></ul></div>
  <div class="soon"><b>🎅 Boîte aux lettres du Père Noël</b>Les enfants ont la possibilité d’y déposer leur lettre.</div>
  <dialog class="pg" id="pg" aria-labelledby="pgt">
   <div class="pgh"><h3 id="pgt"></h3><button class="x" type="button" id="pgx" aria-label="Fermer">&times;</button></div>
@@ -448,8 +425,8 @@ const PR=[
 {id:"massage",g:"fort",n:"Massage de 20 minutes",d:"Tête ou pieds, de 10h à 12h et de 14h à 16h, salle Ughetti",p:10,j:["sam"]},
 {id:"concert",g:"fort",n:"Concert FreeSon",d:"Jazz vocal, 17h – 18h",p:10,j:["dim"]},
 {id:"tombola",g:"tombola",n:"Tickets de tombola",d:"Tirage au sort pour gagner l’un des lots, le dimanche 6 décembre à 16h45.",p:2,j:["tombola"]},
-{id:"pizza",g:"fort",n:"Atelier pizza",d:"Inscription obligatoire, places limitées",p:3,j:["sam","dim"]},
-{id:"cookies",g:"fort",n:"Atelier cookies",d:"Inscription obligatoire, places limitées",p:3,j:["sam","dim"]}];
+{id:"pizza",g:"fort",n:"Atelier pizza",d:"Date à confirmer. Inscription obligatoire, places limitées",p:null,j:[]},
+{id:"cookies",g:"fort",n:"Atelier cookies",d:"Samedi après-midi. Inscription obligatoire, places limitées",p:3,j:["sam"]}];
 const multi=p=>p.g==="jeton"||p.g==="tombola";
 const GR=[["jeton","Jetons","1 jeton = 1 €"],["pass","Pass multi-activités","10 € par participant et par jour : karts, Planet Jeunes, maquillage et activités du programme"],["fort","Ticket temps fort","Un ticket par participant et par animation"],["tombola","Tombola","Tirage dimanche 6 décembre à 16h45"]];
 const JL={tombola:"",tous:"samedi et dimanche",sam:"samedi 5 décembre",dim:"dimanche 6 décembre"};
@@ -683,6 +660,5 @@ const lock=()=>document.documentElement.classList.toggle("lk",!!document.querySe
 document.querySelectorAll("dialog").forEach(d=>new MutationObserver(lock).observe(d,{attributes:true,attributeFilter:["open"]}));
 </script>
 <script>(()=>{const f=document.getElementById("tfab"),c=document.getElementById("contact");if(!f||!c||!("IntersectionObserver" in window))return;new IntersectionObserver(e=>f.classList.toggle("off",e[0].isIntersecting),{threshold:.05}).observe(c)})();</script>
-<script>document.getElementById("wiph").addEventListener("click",function(){var w=document.getElementById("wip"),o=w.classList.toggle("open");this.setAttribute("aria-expanded",o)})</script>
 </body>
 </html>
