@@ -198,6 +198,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 .sw button+button{border-top:1px solid var(--line)}.sw button:hover:not(:disabled){background:var(--brand-soft)}.sw button:disabled{opacity:.3;cursor:default}.sw svg{width:24px;height:24px}
 @media(min-width:901px){.sw{top:50%;bottom:auto;transform:translateY(-50%)}}
 @media(max-width:900px){.sw{display:none}}
+.tfab{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:55;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--brand-dark);color:#fff;box-shadow:0 14px 30px rgba(63,40,16,.35);transition:opacity .2s,transform .2s}.tfab svg{width:26px;height:26px}.tfab.off{opacity:0;pointer-events:none;transform:translateY(10px)}
 .fab:hover{transform:translateY(-2px)}.fab svg{flex:none;width:26px;height:26px}
 @media(max-width:480px){.fab{padding:14px 18px 14px 14px}}
 .lieu address{font-style:normal;font-size:1.25rem;line-height:1.7;color:var(--ink);margin:0 0 24px}
@@ -273,6 +274,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
   <button class="pickb" type="button" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></button>
  </div>
  <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-pass"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-pass"><i></i><span>Atelier code de la route <small>Sporting Auto Moto École</small></span></li><li class="t-pass"><i></i><span>Découverte du tandem <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-fort"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Inscription obligatoire, places limitées</em></li><li class="t-fort"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Inscription obligatoire, places limitées</em></li></ul></div>
+ <div class="soon"><b>🎅 Boîte aux lettres du Père Noël</b>Les enfants ont la possibilité d’y déposer leur lettre.</div>
  <dialog class="pg" id="pg" aria-labelledby="pgt">
   <div class="pgh"><h3 id="pgt"></h3><button class="x" type="button" id="pgx" aria-label="Fermer">&times;</button></div>
   <div class="pgb" data-d="sam"><ul class="ag">
@@ -296,7 +298,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 
 <section class="sec" id="tombola"><div class="container">
  <div class="tombola">
-  <div><h2>Tombola</h2><p class="lead"><b>1 carnet de 5 tickets = 10 €.</b> Tentez de gagner l’un de ces lots :</p>
+  <div><h2>Tombola</h2><p class="lead"><b>2 € le ticket.</b> Tentez de gagner l’un de ces lots :</p>
    <ul class="lots"><li><b>10 places Arena Aix</b><span>2 lots de 5 places</span></li><li><b>Urban Jump</b><span>1 heure de trampoline et une place pour l’Urban Quiz</span></li></ul></div>
   <button class="btn btn-p big" type="button" data-bil="tombola">Prendre mes tickets</button>
  </div>
@@ -308,7 +310,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
  <div class="tarifs">
   <div class="tf t-jeton"><span class="tn">Jetons</span><h3>Petits achats</h3><p class="px">1 jeton = 1 €</p><ul><li>Cafés, ballons sculptés</li><li>Porte-clés : 5 jetons</li></ul></div>
   <div class="tf t-pass"><span class="tn">Pass multi-activités</span><h3>Activités du jour</h3><p class="px">10 € par participant et par jour</p><ul><li>Karts, Planet Jeunes, maquillage, tir laser, VTT…</li></ul></div>
-  <div class="tf t-fort"><span class="tn">Ticket temps fort</span><h3>Une animation, un ticket</h3><p class="px">Tarif propre à chaque animation</p><ul><li>Massage, concert, ateliers pizza et cookies</li></ul></div>
+  <div class="tf t-fort"><span class="tn">Ticket temps fort</span><h3>Une animation, un ticket</h3><p class="px">Tarif propre à chaque animation</p><ul><li>Massage, concert : 10 € · Ateliers pizza et cookies : 3 €</li></ul></div>
  </div>
  <ul class="gtk">
   <li><b>Gratuité famille :</b> à partir du 3<sup>e</sup> enfant d’une même famille (sur justificatif), pass et tickets sont offerts.</li>
@@ -333,7 +335,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 
 <section class="sec" id="don"><div class="container">
  <div class="donbox">
-  <div><h2>Faire un don en ligne</h2><p>Vous ne pouvez pas venir ou vous souhaitez aller plus loin ? Soutenez l’AFM-Téléthon depuis la page dédiée à l’édition de Luynes. La collecte se fait directement sur le réseau du Téléthon.</p><p><b>Nous nous fixons un objectif de 500 € !</b> La collecte en ligne se termine le <b>31 décembre 2026</b>.</p><p class="sm">Un don ouvre droit à un reçu fiscal, mais ne donne pas accès aux activités du Téléthon (raisons légales). Pour participer aux animations, passez par la billetterie.</p></div>
+  <div><h2>Faire un don</h2><p>Vous ne pouvez pas venir ou vous souhaitez aller plus loin ? Soutenez l’AFM-Téléthon depuis la page dédiée à l’édition de Luynes. La collecte se fait directement sur le réseau du Téléthon.</p><p><b>Sur place, le jour J :</b> dons par <b>chèque (à l’ordre du « Téléthon »)</b> ou en <b>espèces</b>. Pas de don par carte bancaire sur place : pour donner par carte, passez par le bouton ci-dessous.</p><p><b>Nous nous fixons un objectif de 500 € !</b> La collecte en ligne se termine le <b>31 décembre 2026</b>.</p><p class="sm">Un don ouvre droit à un reçu fiscal, mais ne donne pas accès aux activités du Téléthon (raisons légales). Pour participer aux animations, passez par la billetterie.</p></div>
   <a class="btn" target="_blank" rel="noreferrer" href="https://mapage.telethon.fr/animation/13080-2026">Faire un don au Téléthon</a>
  </div>
 </div></section>
@@ -390,6 +392,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
  </div>
 </div></section>
 
+<a class="tfab" id="tfab" href="#contact" aria-label="Aller à la section contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></a>
 <button class="fab" type="button" data-bil aria-label="Ouvrir la billetterie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9a2 2 0 0 0 0 6v2.5A1.5 1.5 0 0 0 4.5 19h15a1.5 1.5 0 0 0 1.5-1.5V15a2 2 0 0 1 0-6V6.5A1.5 1.5 0 0 0 19.5 5h-15A1.5 1.5 0 0 0 3 6.5z"/><path d="M14 5v2.5M14 10.5v3M14 16.5V19"/></svg>Billetterie</button>
 <div class="sw" role="group" aria-label="Changer de section"><button type="button" id="sp" aria-label="Section précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15l7-7 7 7"/></svg></button><button type="button" id="sn" aria-label="Section suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg></button></div>
 <dialog class="wz" id="bw" aria-label="Billetterie">
@@ -421,18 +424,18 @@ const PR=[
 {id:"pass",g:"pass",n:"Pass multi-activités",d:"",p:10,j:["sam","dim"]},
 {id:"massage",g:"fort",n:"Massage de 20 minutes",d:"Tête ou pieds, de 10h à 12h et de 14h à 16h, salle Ughetti",p:10,j:["sam"]},
 {id:"concert",g:"fort",n:"Concert FreeSon",d:"Jazz vocal, 17h – 18h",p:10,j:["dim"]},
-{id:"tombola",g:"tombola",n:"Carnets de tombola",d:"1 carnet = 5 tickets de tombola. Tirage au sort pour gagner l’un des lots.",p:10,j:["tombola"]},
-{id:"pizza",g:"fort",n:"Atelier pizza",d:"Inscription obligatoire, places limitées",p:null,j:[]},
-{id:"cookies",g:"fort",n:"Atelier cookies",d:"Inscription obligatoire, places limitées",p:null,j:[]}];
+{id:"tombola",g:"tombola",n:"Tickets de tombola",d:"2 € le ticket. Tirage au sort pour gagner l’un des lots.",p:2,j:["tombola"]},
+{id:"pizza",g:"fort",n:"Atelier pizza",d:"Inscription obligatoire, places limitées",p:3,j:["sam","dim"]},
+{id:"cookies",g:"fort",n:"Atelier cookies",d:"Inscription obligatoire, places limitées",p:3,j:["sam","dim"]}];
 const multi=p=>p.g==="jeton"||p.g==="tombola";
-const GR=[["jeton","Jetons","1 jeton = 1 €"],["pass","Pass multi-activités","10 € par participant et par jour : karts, Planet Jeunes, maquillage et activités du programme"],["fort","Ticket temps fort","Un ticket par participant et par animation"],["tombola","Tombola","1 carnet de 5 tickets = 10 €"]];
+const GR=[["jeton","Jetons","1 jeton = 1 €"],["pass","Pass multi-activités","10 € par participant et par jour : karts, Planet Jeunes, maquillage et activités du programme"],["fort","Ticket temps fort","Un ticket par participant et par animation"],["tombola","Tombola","2 € le ticket"]];
 const JL={tombola:"",tous:"samedi et dimanche",sam:"samedi 5 décembre",dim:"dimanche 6 décembre"};
 const AGES=[["m11","Moins de 11 ans"],["m18","11 - 17 ans"],["a26","18 - 26 ans"],["a59","27 - 59 ans"],["p60","60 ans et plus"]];
 const AL=Object.fromEntries(AGES);
 const eur=x=>x.toLocaleString("fr-FR")+" €",esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const sum=a=>a.reduce((x,y)=>x+y,0),cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 /* accs = identifiants des adultes qui accompagnent un mineur (plusieurs possibles) ; resp = le plus petit d’entre eux, sert de clé « famille » pour la gratuité */
-let Q={},A={},X=[{id:1,prenom:"",nom:"",age:"",role:"participant",resp:null,accs:[],mail:""}],NID=2,step=1,MAX=4;
+let Q={},A={},X=[{id:1,prenom:"",nom:"",age:"",role:"participant",resp:null,accs:[],mail:"",tel:""}],NID=2,step=1,MAX=4;
 const bw=$("bw"),wb=$("wzb");
 const minor=x=>x.age==="m11"||x.age==="m18",isAdult=x=>x.age&&!minor(x);
 const parts=()=>X.filter(x=>x.role==="participant"),adults=()=>X.filter(isAdult);
@@ -451,8 +454,8 @@ function price(){const seen={},L=[];parts().forEach(x=>PR.filter(p=>p.p!=null).f
 const total=()=>sum(price().map(l=>l.c))+sum(keys().map(([s,p])=>Math.max(0,Q[s]-got(s))*p.p));
 /* ---- étape 1 ---- */
 function rowHtml(p,j,t,desc){const s=p.id+":"+j,q=Q[s]||0;
- return `<div class="rw"><div><b>${t}</b><small>${desc}</small><span class="px">${eur(p.p)}${p.g==="jeton"?"":p.g==="tombola"?" le carnet":" par participant"}</span></div><div class="st"><button type="button" data-q="${s}|-1" aria-label="Retirer" ${q?"":"disabled"}>−</button><output>${q}</output><button type="button" data-q="${s}|1" aria-label="Ajouter" ${q>=(multi(p)?99:20)?"disabled":""}>+</button></div></div>`}
-function v1(){let o=`<h2 class="wt">Vos courses</h2><p class="ws">Choisissez vos jetons, vos pass, vos tickets et vos carnets de tombola, et le jour qui vous convient. Vous direz ensuite qui en profite.</p>`;
+ return `<div class="rw"><div><b>${t}</b><small>${desc}</small><span class="px">${eur(p.p)}${p.g==="jeton"?"":p.g==="tombola"?" le ticket":" par participant"}</span></div><div class="st"><button type="button" data-q="${s}|-1" aria-label="Retirer" ${q?"":"disabled"}>−</button><output>${q}</output><button type="button" data-q="${s}|1" aria-label="Ajouter" ${q>=(multi(p)?99:20)?"disabled":""}>+</button></div></div>`}
+function v1(){let o=`<h2 class="wt">Vos courses</h2><p class="ws">Choisissez vos jetons, vos pass, vos tickets et vos tickets de tombola, et le jour qui vous convient. Vous direz ensuite qui en profite.</p>`;
  GR.forEach(g=>{o+=`<section class="grp t-${g[0]}" data-g="${g[0]}"><div class="gh"><span class="tn">${g[1]}</span><small>${g[2]}</small></div>`;
   PR.filter(p=>p.g===g[0]).forEach(p=>{
    if(p.p==null){o+=`<div class="rw off"><div><b>${p.n}</b><small>${p.d}</small><span class="px">Bientôt disponible</span></div></div>`;return}
@@ -468,7 +471,7 @@ function card(x,i){const p=i===0;
  const seg=`<div class="seg" role="group" aria-label="Rôle"><button type="button" data-role="${x.id}|participant" class="${x.role==="participant"?"on":""}">${p?"Je participe":"Participant"}</button><button type="button" data-role="${x.id}|accompagnant" class="${x.role==="accompagnant"?"on":""}">${p?"J’accompagne seulement":"Accompagnant"}</button></div>`;
  let o=`<div class="card"><div class="ch"><b>${p?"Vous, qui réglez la commande":label(x)}</b>${p?"":`<button type="button" class="lnk" data-rm="${x.id}">Retirer</button>`}</div>${seg}
  <div class="dbl"><label>Prénom${inp(x.id,"prenom",x.prenom,"text",p?"given-name":"off")}</label><label>Nom${inp(x.id,"nom",x.nom,"text",p?"family-name":"off")}</label></div>`;
- if(p)o+=`<label>Adresse e-mail<small style="font-weight:400;color:var(--muted)">, votre confirmation y sera envoyée</small>${inp(x.id,"mail",x.mail,"email","email")}</label>`;
+ if(p)o+=`<label>Adresse e-mail<small style="font-weight:400;color:var(--muted)">, votre confirmation y sera envoyée</small>${inp(x.id,"mail",x.mail,"email","email")}</label><label>Téléphone<small style="font-weight:400;color:var(--muted)">, pour vous joindre au sujet de la commande</small>${inp(x.id,"tel",x.tel,"tel","tel")}</label>`;
  o+=`<label>Tranche d’âge${sel(x.id,x.age,x.role==="accompagnant"||p)}</label>`;
  if(minor(x)){const ad=adults();o+=ad.length?`<fieldset class="acc"><legend>Accompagné(e) par</legend>${ad.map(a=>`<label class="chk"><input type="checkbox" data-acc="${x.id}|${a.id}"${(x.accs||[]).includes(a.id)?" checked":""} />${esc(label(a))}</label>`).join("")}<small>Cochez un ou plusieurs adultes. Pour la gratuité famille, indiquez les mêmes accompagnants pour les frères et sœurs.</small></fieldset>`:`<p class="note a">Un mineur doit être accompagné : ajoutez d’abord un adulte, participant ou accompagnant.</p>`}
  return o+`</div>`}
@@ -485,6 +488,7 @@ function err2(){fixResp();for(const[i,x]of X.entries()){const w=i?label(x):"Vos 
   if(minor(x)&&!adults().length)return "Un mineur doit être accompagné d’un adulte : ajoutez-le.";
   if(minor(x)&&!x.accs.length)return w+" : merci de cocher au moins un adulte qui l’accompagne."}
  if(!/^\S+@\S+\.\S+$/.test(X[0].mail.trim()))return "Merci d’indiquer une adresse e-mail valide.";
+ if(!/^\+?[0-9 .-]{9,20}$/.test(X[0].tel.trim())||X[0].tel.replace(/\D/g,"").length<9)return "Merci d’indiquer un numéro de téléphone valide.";
  const np=parts().length;if(!np)return "Il faut au moins un participant.";if(np<need())return "Il faut au moins "+need()+" participants pour ce panier : ajoutez des participants ou réduisez les quantités.";
  const bad=X.find(x=>x.role==="accompagnant"&&!X.some(m=>(m.accs||[]).includes(x.id)));if(bad)return label(bad)+" n’accompagne aucun mineur : passez-le en participant ou retirez-le.";return ""}
 /* ---- étape 3 ---- */
@@ -499,7 +503,7 @@ function err3(){const k=keys().find(([s])=>Q[s]-got(s)>0);if(k)return "Il reste 
 /* ---- étape 4 ---- */
 function v4(){const L=price(),T=total(),p0=X[0];
  let o=`<h2 class="wt">Relire ma commande</h2><p class="ws">Tout est correct ? Vérifiez une dernière fois avant de payer.</p>
- <div class="card"><div class="ch"><b>Qui paie</b><button class="lnk" type="button" data-go="2">Modifier</button></div><p style="margin:0 0 12px;color:var(--ink)"><b>${esc(label(p0))}</b><br>${esc(p0.mail)}<br><small style="color:var(--muted)">La confirmation détaillée sera envoyée à cette adresse.</small></p></div>`;
+ <div class="card"><div class="ch"><b>Qui paie</b><button class="lnk" type="button" data-go="2">Modifier</button></div><p style="margin:0 0 12px;color:var(--ink)"><b>${esc(label(p0))}</b><br>${esc(p0.mail)}<br>${esc(p0.tel)}<br><small style="color:var(--muted)">La confirmation détaillée sera envoyée à cette adresse.</small></p></div>`;
  parts().forEach(x=>{const ls=L.filter(l=>l.x===x),rs=X.filter(a=>(x.accs||[]).includes(a.id));
   o+=`<div class="card"><div class="ch"><b>${esc(label(x))}</b><button class="lnk" type="button" data-go="3">Modifier</button></div><small style="display:block;margin:-6px 0 8px;color:var(--muted)">Participant, ${AL[x.age]}${rs.length?", accompagné(e) par "+rs.map(a=>esc(label(a))).join(", "):""}</small>`;
   ls.forEach(l=>{o+=`<div class="ln"><span>${l.n} × ${l.p.n}${multi(l.p)?"":", "+JL[l.j]}</span><b>${l.free?"Offert":eur(l.c)}</b>${l.free?`<small><em>Gratuité famille : ${l.rk}<sup>e</sup> enfant pour ce ${l.p.g==="fort"?"ticket":"pass"} (sur justificatif)</em></small>`:""}</div>`});o+=`</div>`});
@@ -537,7 +541,7 @@ $("bn").onclick=async()=>{const m=t=>{$("bm").textContent=t};
  if(step===3){const e=err3();if(e)return m(e);show(4);return}
  const e=err2()||err3();if(e)return m(e);if(!API_URL)return m("Le paiement en ligne n’est pas encore branché.");
  const L=price(),idx=id=>X.findIndex(a=>a.id===id),pers=X.map(x=>({prenom:propre(x.prenom),nom:propre(x.nom),age:x.age,role:x.role,resp:x.resp?idx(x.resp):null,accomp:(x.accs||[]).map(idx)})),
-  lignes=L.map(l=>({id:l.p.id,jour:l.j,p:X.indexOf(l.x),qte:l.n})),mail=X[0].mail.trim(),body={mail,personnes:pers,lignes};
+  lignes=L.map(l=>({id:l.p.id,jour:l.j,p:X.indexOf(l.x),qte:l.n})),mail=X[0].mail.trim(),tel=X[0].tel.trim(),body={mail,tel,personnes:pers,lignes};
  $("bn").disabled=true;m("");$("bn").textContent="Redirection vers le paiement…";
  try{localStorage.setItem(LS,JSON.stringify(body))}catch(_){}
  try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...body,action:"commande"})});
@@ -650,5 +654,6 @@ function act(pl,Z,g){const k=g.dataset.z;if(pl===P1&&k==="salle")return view(tru
 const lock=()=>document.documentElement.classList.toggle("lk",!!document.querySelector("dialog[open]"));
 document.querySelectorAll("dialog").forEach(d=>new MutationObserver(lock).observe(d,{attributes:true,attributeFilter:["open"]}));
 </script>
+<script>(()=>{const f=document.getElementById("tfab"),c=document.getElementById("contact");if(!f||!c||!("IntersectionObserver" in window))return;new IntersectionObserver(e=>f.classList.toggle("off",e[0].isIntersecting),{threshold:.05}).observe(c)})();</script>
 </body>
 </html>
