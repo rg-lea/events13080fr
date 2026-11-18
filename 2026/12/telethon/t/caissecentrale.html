@@ -62,6 +62,7 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 .pgf{display:flex;justify-content:flex-end;padding:14px 24px;border-top:1px solid var(--line);background:#fff}
 .rcf{display:flex;gap:8px;margin:0 0 12px}.rcf input{flex:1;min-width:0;padding:14px;border:2px solid var(--brand-dark);border-radius:14px;font:inherit;font-size:2rem;font-weight:800;letter-spacing:.3em;text-align:center}.rcf .btn{padding:14px 22px}
 .rr{margin:0 0 14px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}.rr small{display:block;padding:8px 12px;background:var(--brand-soft);color:var(--ink);font-weight:600}.rr iframe{display:block;width:100%;border:0;min-height:200px}
+.cm{margin:0 0 14px;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:#fff}.cm h4{margin:0 0 2px;color:var(--ink);font-size:1.2rem}.cm .pp{margin:10px 0 0;padding:10px 12px;border-radius:12px;background:#fffaf4;border:1px solid var(--line)}.cm .pp b{color:var(--ink)}.cm ul{margin:6px 0 0;padding-left:20px}.cm .tot2{margin:10px 0;font-size:1.3rem;font-weight:800;color:var(--ink)}.cm .ok{color:var(--ok);font-weight:700}.cm label{display:block;font-weight:600;color:var(--ink);margin:10px 0 6px}.cm input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font:inherit}
 .hs{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0 6px;color:var(--ink);font-weight:700}.hl{list-style:none;margin:0;padding:0}.hl li{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
 .hl button.o{flex:1;text-align:left;border:0;background:none;color:var(--ink);padding:4px 0}.hl button.o b{font-size:1.15rem;letter-spacing:.1em;margin-right:8px}.hl small{color:var(--muted)}.hl button.x{border:1px solid var(--line);background:#fff;border-radius:99px;width:36px;height:36px}.lnk{border:0;background:none;color:var(--brand-dark);font-weight:700;text-decoration:underline}
 .ref{display:inline-block;margin:4px 0 12px;padding:8px 16px;border-radius:14px;background:var(--brand-soft);color:var(--ink);font-size:1.4rem;font-weight:800;letter-spacing:.02em}
@@ -205,9 +206,22 @@ const HK="caisse-retraits";
 const hget=()=>{try{const v=JSON.parse(localStorage.getItem(HK)||"[]");return Array.isArray(v)?v:[]}catch(_){return[]}};
 const hset=v=>{try{localStorage.setItem(HK,JSON.stringify(v))}catch(_){}};
 function hrender(){const h=hget();$("hn").textContent=h.length?h.length+" commande"+(h.length>1?"s":"")+" remise"+(h.length>1?"s":"")+" (retrouvée"+(h.length>1?"s":"")+" ici)":"Aucune commande retrouvée pour l’instant";$("hall").hidden=!h.length;
- $("hl").innerHTML=h.map((x,i)=>`<li><button class="o" type="button" data-hs="${i}"><b>${esc(x.c)}</b>${esc(x.n||"")}<small> ${esc(x.t||"")} · ${new Date(x.d).toLocaleString("fr-FR",{weekday:"short",hour:"2-digit",minute:"2-digit"})}</small></button><button class="x" type="button" data-hx="${i}" aria-label="Supprimer">×</button></li>`).join("")}
+ $("hl").innerHTML=h.map((x,i)=>`<li><button class="o" type="button" data-hs="${i}"><b>${esc(x.c)}</b>${esc(x.n||"")}<small> ${esc(x.t||"")}${x.r?" · ✓ remise":""} · ${new Date(x.d).toLocaleString("fr-FR",{weekday:"short",hour:"2-digit",minute:"2-digit"})}</small></button><button class="x" type="button" data-hx="${i}" aria-label="Supprimer">×</button></li>`).join("")}
 function hadd(c,doc){let n="",t="";try{const hs=[...doc.querySelectorAll("h3")].find(e=>/Qui a pay/i.test(e.textContent));n=hs&&hs.nextElementSibling?hs.nextElementSibling.textContent.trim():"";const m=/Total pay[ée]\s*:\s*([^\n]*?€)/.exec(doc.body.textContent);t=m?m[1].trim():""}catch(_){}
  const h=hget().filter(x=>x.c!==c);h.unshift({c,n,t,d:Date.now()});hset(h);hrender()}
+let R=[];
+const dec=s=>{try{const m=/<!--TD:([A-Za-z0-9+\/=]+)-->/.exec(s||"");if(!m)return null;return JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(m[1]),c=>c.charCodeAt(0))))}catch(_){return null}};
+const ex=n=>n&&n.charAt?n:"";
+function card(dt,i){const P=dt.personnes||[],Ls=dt.lignes||[];const done=R[i]&&R[i].r;
+ const pers=P.map((x,k)=>({x,l:Ls.filter(l=>l.p===k)})).filter(o=>o.x.role==="participant"||o.l.length).map(o=>`<div class="pp"><b>${esc(o.x.n)}</b> <small style="display:inline;margin:0;padding:0;background:none">${esc(ex(o.x.age))}</small><ul>${o.l.length?o.l.map(l=>`<li>${esc(l.qte)} × ${esc(l.nom)}${l.jour?` (${esc(l.jour)})`:""}${l.gratuit===true?" · offert":""}</li>`).join(""):"<li>Aucun achat nominatif</li>"}</ul></div>`).join("");
+ return `<div class="cm" data-i="${i}"><h4>Commande n° ${esc(dt.ref)}</h4><small style="display:block;color:var(--muted);padding:0;background:none">${esc(dt.date||"")}</small><p style="margin:8px 0 0"><b>Payeur : ${esc(dt.payeur)}</b><br>${esc(dt.mail||"")} · ${esc(dt.tel||"")}</p>${pers}<div class="tot2">Total payé : ${esc(dt.total)} €</div>
+  ${done?`<p class="ok">✓ Déjà marquée comme remise (${new Date(done.rd).toLocaleString("fr-FR",{weekday:"short",hour:"2-digit",minute:"2-digit"})}${done.par?`, par ${esc(done.par)}`:""})</p>`:`<label>Retirée par<input type="text" data-par="${i}" value="${esc(dt.payeur)}" autocomplete="off" /></label><button class="btn btn-p" type="button" data-ret="${i}">Commande remise : prévenir par e-mail</button>`}</div>`}
+function hadd2(c,dt){const o=hget().find(x=>x.c===c&&x.ref===dt.ref);const h=hget().filter(x=>!(x.c===c&&x.ref===dt.ref));h.unshift({...(o||{}),c,ref:dt.ref,n:dt.payeur,t:dt.total+" €",d:Date.now()});hset(h);hrender()}
+async function retirer(i,btn){const o=R[i],par=propre(document.querySelector(`[data-par="${i}"]`).value)||o.dt.payeur,code=($("code").value||"").trim();btn.disabled=true;btn.textContent="Envoi…";
+ try{const r=await fetch(API_CMD,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"retire",code,chiffres:o.c,ref:String(o.dt.ref),par,payeur:o.dt.payeur,total:String(o.dt.total)})});
+  if(!r.ok)throw 0;const h=hget(),e=h.find(x=>x.c===o.c&&x.ref===o.dt.ref);if(e){e.r=true;e.rd=Date.now();e.par=par;hset(h)}
+  o.r=e||{rd:Date.now(),par};$("rcr").querySelector(`[data-i="${i}"]`).outerHTML=card(o.dt,i);hrender()}
+ catch(_){btn.disabled=false;btn.textContent="Commande remise : prévenir par e-mail";$("rcm").textContent="L’e-mail n’est pas parti. Réessayez ou prévenez le comité."}}
 async function chercher(c){const m=t=>$("rcm").textContent=t;m("");$("rcr").innerHTML="";
  if(!/^\d{4}$/.test(c))return m("Tapez exactement 4 chiffres.");
  const code=($("code").value||"").trim();if(!code)return m("Saisissez d’abord le code caisse dans la page (mot de passe de la caisse).");
@@ -215,9 +229,10 @@ async function chercher(c){const m=t=>$("rcm").textContent=t;m("");$("rcr").inne
  try{const r=await fetch(API_CMD,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"retrouver",code,chiffres:c})});
   if(r.status===403)m("Code caisse incorrect.");else if(!r.ok)m("Erreur du serveur. Réessayez dans un instant.");
   else{const d=await r.json(),L=d.trouves||[];if(!L.length)m("Aucune commande finissant par "+c+". Vérifiez les chiffres (ou demandez le mail ou le PDF au client).");
-   else{L.forEach((x,i)=>{const w=document.createElement("div");w.className="rr";w.innerHTML=`<small>${esc(x.sujet||"")}</small>`;const f=document.createElement("iframe");f.setAttribute("sandbox","allow-same-origin");f.srcdoc=x.html||"";f.onload=()=>{try{f.style.height=f.contentDocument.documentElement.scrollHeight+20+"px"}catch(_){}};w.appendChild(f);$("rcr").appendChild(w)});
+   else{R=[];L.forEach((x,i)=>{const dt=dec(x.html);if(dt){R.push({c,dt,r:hget().find(y=>y.c===c&&y.ref===dt.ref&&y.r)});$("rcr").insertAdjacentHTML("beforeend",card(dt,R.length-1))}
+     else{const w=document.createElement("div");w.className="rr";w.innerHTML=`<small>${esc(x.sujet||"")} (ancien format : mail complet)</small>`;const f=document.createElement("iframe");f.setAttribute("sandbox","allow-same-origin");f.srcdoc=x.html||"";f.onload=()=>{try{f.style.height=f.contentDocument.documentElement.scrollHeight+20+"px"}catch(_){}};w.appendChild(f);$("rcr").appendChild(w)}});
     if(L.length>1)m("Attention : "+L.length+" commandes finissent par ces chiffres. Vérifiez le nom du payeur.");
-    hadd(c,new DOMParser().parseFromString(L[0].html||"","text/html"))}}}
+    const d0=dec(L[0].html);if(d0)hadd2(c,d0);else hadd(c,new DOMParser().parseFromString(L[0].html||"","text/html"))}}}
  catch(_){m("Pas de réponse du serveur (internet ?). Utilisez le mail ou le PDF du client.")}
  $("rcb").disabled=false;$("rcb").textContent="Chercher"}
 $("rc0").onclick=()=>{$("rcm").textContent="";$("rcr").innerHTML="";$("rci").value="";hrender();$("rc").showModal();$("rci").focus()};
@@ -225,6 +240,7 @@ $("rcx").onclick=()=>$("rc").close();
 $("rcfm").onsubmit=e=>{e.preventDefault();chercher($("rci").value.trim())};
 $("rci").oninput=e=>{e.target.value=e.target.value.replace(/\D/g,"").slice(0,4)};
 $("rc").addEventListener("click",e=>{const o=e.target.closest("[data-hs]"),x=e.target.closest("[data-hx]");
+ const rt=e.target.closest("[data-ret]");if(rt)return retirer(+rt.dataset.ret,rt);
  if(o){const c=hget()[+o.dataset.hs].c;$("rci").value=c;chercher(c)}
  else if(x){const h=hget();h.splice(+x.dataset.hx,1);hset(h);hrender()}
  else if(e.target.id==="hall"&&confirm("Supprimer tout l’historique des commandes retrouvées ?")){hset([]);hrender()}});
