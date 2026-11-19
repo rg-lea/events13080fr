@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Luynes en Fetes//Telethon 2026//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:telethon-2026-luynes@13080.fr
+DTSTAMP:20261119T220000Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261207
+SUMMARY:Téléthon 2026 à Luynes
+LOCATION:Espace Ughetti\, Allée Serge Attard / Rue André Claverie\, Luynes\, 13080 Aix-en-Provence
+DESCRIPTION:Samedi 5 et dimanche 6 décembre\, au profit de l'AFM-Téléthon.\nProgramme\, billetterie et don : https://s.13080.fr/telethon
+URL:https://s.13080.fr/telethon
+END:VEVENT
+END:VCALENDAR
