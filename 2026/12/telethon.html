@@ -279,6 +279,17 @@ a.org{transition:transform .2s,box-shadow .2s}a.org:hover{transform:translateY(-
 .kqr svg{width:160px;height:160px}.kqr .kact{justify-content:center;margin:0;padding:0}
 @media(max-width:1000px){.kit{grid-template-columns:repeat(2,1fr)}.kcol{grid-column:1/-1;grid-template-columns:1fr 1fr;grid-template-rows:none}}
 @media(max-width:800px){.kit,.kcol{grid-template-columns:1fr}.kshare{grid-template-columns:1fr}.kqr{justify-self:start}.kv img{height:300px}}
+/* ===== Pied de page ===== */
+.ft{position:relative;z-index:1;background:var(--ink);color:rgba(255,246,235,.82);padding:48px 0 calc(96px + env(safe-area-inset-bottom,0px));font-size:.95rem;line-height:1.55}
+.ft a{color:#fff}.ft a:hover{color:var(--brand)}
+.ftg{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+.ft .brand{color:#fff;margin-bottom:12px}.ft .logo{background:var(--brand-dark)}
+.ft h3{margin:0 0 10px;color:var(--brand);font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ft p{margin:0 0 6px}.ft ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ftd{display:inline-flex;margin-top:14px;padding:10px 20px;border-radius:999px;background:var(--brand-dark);font-weight:600}
+.ftb{margin-top:36px;padding-top:18px;border-top:1px solid rgba(255,246,235,.16);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;font-size:.85rem;color:rgba(255,246,235,.6)}
+@media(max-width:800px){.ftg{grid-template-columns:1fr 1fr}.ftg>div:first-child{grid-column:1/-1}}
+@media(max-width:480px){.ftg{grid-template-columns:1fr}}
 </style>
 <!-- Matomo -->
 <script>
@@ -507,6 +518,26 @@ a.org{transition:transform .2s,box-shadow .2s}a.org:hover{transform:translateY(-
  <div class="pgb" id="bkb" style="padding:20px 24px;line-height:1.6"></div>
 </dialog>
 </main>
+<footer class="ft"><div class="container">
+ <div class="ftg">
+  <div>
+   <a class="brand" href="#"><img class="logo" src="/files/logos/favicon.png" alt="" />Luynes en Fêtes</a>
+   <p><b>Téléthon 2026 à Luynes</b><br>Samedi 5 et dimanche 6 décembre<br>Au profit de l’AFM-Téléthon</p>
+   <a class="ftd" href="https://mapage.telethon.fr/animation/13080-2026" target="_blank" rel="noopener noreferrer">Faire un don</a>
+  </div>
+  <div>
+   <h3>Sur cette page</h3>
+   <ul><li><a href="#programme">Programme</a></li><li><a href="#billetterie">Tarifs et billetterie</a></li><li><a href="#tombola">Tombola</a></li><li><a href="#lieu">Lieu et plan</a></li><li><a href="#contact">Contact</a></li><li><a href="#ressources">Ressources</a></li></ul>
+  </div>
+  <div>
+   <h3>Infos pratiques</h3>
+   <p>Espace Ughetti<br>Allée Serge Attard / Rue André Claverie<br>Luynes, 13080 Aix-en-Provence</p>
+   <p><a href="tel:+33670761026">06 70 76 10 26</a></p>
+   <ul><li><a href="https://www.afm-telethon.fr" target="_blank" rel="noopener noreferrer">AFM-Téléthon</a></li><li><a href="https://forms.13080.fr/diffusion/2021/05/newsletter/#luynois" target="_blank" rel="noopener noreferrer">Newsletter de 13080.fr</a></li></ul>
+  </div>
+ </div>
+ <div class="ftb"><span>© 2026 Luynes en Fêtes</span><span>Lien court : <a href="https://s.13080.fr/telethon">s.13080.fr/telethon</a></span></div>
+</div></footer>
 
 <script>
 const $=i=>document.getElementById(i);
