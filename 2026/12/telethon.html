@@ -314,6 +314,27 @@ html.pluie .ag li[data-lieu=abri] h4::after,html.pluie .sl li[data-lieu=abri]::a
 /* ===== Page de fin (à partir du dimanche 6 décembre, 19h) ===== */
 .hero.merci{position:relative;top:auto!important}.merci[hidden]{display:none}
 html.fin main>section:not(#merci),html.fin .fab,html.fin .tfab,html.fin .sw,html.fin nav,html.fin .burger,html.fin .wip,html.fin .live,html.fin .ft .ftg>div:nth-child(2),html.fin .ft a[href$=".ics"]{display:none!important}
+/* ===== Météo en temps réel ===== */
+.meteo{max-width:760px;margin-top:14px;padding:18px 20px;border:1px solid var(--line);border-radius:24px;background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+.meteo[hidden]{display:none}
+.mtop{display:flex;align-items:center;gap:14px}.mic{flex:none;font-size:2rem;line-height:1}
+.mtop b{display:block;font-size:1.15rem}.mtop small{display:block;color:var(--muted);line-height:1.4}
+.mdays{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.md{padding:14px 16px;border-radius:18px;background:#fffaf4;border:1px solid var(--line)}
+.mdh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 10px;margin-bottom:8px}
+.mdh b{font-size:1.05rem}.rel{font-size:.78rem;font-weight:700;padding:2px 10px;border-radius:99px;background:var(--brand-soft);color:var(--ink)}
+.rel.r1{background:#eee;color:#555}.rel.r3{background:#e1f1e1;color:#1b5e20}
+.mdm{display:flex;align-items:center;gap:10px}.mdm b{display:block}.mdm small{display:block;color:var(--muted)}
+.mbar{display:grid;grid-template-columns:repeat(9,1fr);gap:4px;align-items:end;height:64px;margin:12px 0 4px}
+.mbar span{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:3px}
+.mbar i{display:block;width:100%;min-height:3px;border-radius:4px 4px 2px 2px;background:#5f95c4}
+.mbar i.dry{background:#d9e6f2}.mbar small{min-height:1.2em;font-size:.68rem;line-height:1.2;color:var(--muted)}
+.mlg{display:block;font-size:.85rem;color:var(--muted)}
+.madv{margin:14px 0 0;padding:12px 16px;border-radius:16px;background:#f1f7ee;color:#1f4d22;line-height:1.5}
+.madv.wet{background:#e8f0f8;color:#1f3f5f}.madv .btn{margin-top:10px;padding:10px 18px;font-size:.95rem}
+.msrc{margin:10px 0 0;font-size:.8rem;color:var(--muted)}.msrc a{text-decoration:underline}
+.lvw{margin:-4px 0 12px;font-weight:600;opacity:.95}
+@media(max-width:600px){.mdays{grid-template-columns:1fr}}
 /* ===== Pied de page ===== */
 .ft{position:relative;z-index:1;background:var(--ink);color:rgba(255,246,235,.82);padding:48px 0 calc(96px + env(safe-area-inset-bottom,0px));font-size:.95rem;line-height:1.55}
 .ft a{color:#fff}.ft a:hover{color:var(--brand)}
@@ -394,6 +415,7 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin .tfab,html.fin .sw,html
   <button class="pickb" type="button" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></button>
   <button class="pickb" type="button" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></button>
  </div>
+ <div class="meteo" id="meteo" hidden aria-live="polite"></div>
  <button class="rain" type="button" data-pluie aria-pressed="false"><span aria-hidden="true">☔</span><span><span class="off"><b>Mauvais temps ?</b><small>Afficher d’abord les temps forts et activités à l’intérieur de la salle Ughetti.</small></span><span class="on"><b>Mode mauvais temps activé</b><small>L’intérieur de la salle Ughetti passe en premier. Touchez pour revenir au programme normal.</small></span></span></button>
  <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-pass" data-meteo="in" data-mt="Intérieur le samedi, à l’abri le dimanche"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-pass" data-meteo="in" data-mt="Possible à l’intérieur"><i></i><span>Atelier code de la route <small>Sporting Auto Moto École</small></span></li><li class="t-pass"><i></i><span>Découverte du tandem <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-fort" data-meteo="abri"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Samedi matin. Inscription obligatoire, places limitées</em></li><li class="t-fort" data-meteo="abri"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Samedi après-midi. Inscription obligatoire, places limitées</em></li></ul></div>
  <div class="soon"><b>🎅 Boîte aux lettres du Père Noël</b>Les enfants ont la possibilité d’y déposer leur lettre.</div>
@@ -855,6 +877,43 @@ document.querySelectorAll("#pg .pgb[data-d]").forEach(b=>{const d=b.dataset.d;b.
   if(m)EV.push({d,t:t.trim(),pl,w,mt:(li.querySelector("h4")||li).dataset.mt||MT[w],c:li.className,s:at(d,m[1],m[2]),e:at(d,m[3],m[4]),sh:hh(m[1],m[2]),eh:hh(m[3],m[4])})})})});
 EV.push({d:"dim",t:"Tirage de la tombola",pl:"",w:"",c:"t-tombola",s:at("dim",16,"45"),e:at("dim",17),sh:"16h45",eh:"17h"});
 const W=$("live"),pluie=()=>document.documentElement.classList.contains("pluie"),rk=e=>pluie()?R[e.w]:0;
+/* ---- Météo en temps réel : Open-Meteo (gratuit, sans clé), Luynes 13080 Aix-en-Provence (43,48 N ; 5,42 E).
+   Maintenant + prévision heure par heure de 10h à 18h pour le samedi et le dimanche, avec un indice de fiabilité selon l’éloignement.
+   Pluie probable (risque ≥ 50 % ou ≥ 0,5 mm dans l’heure) : la page propose le mode mauvais temps. Rafales ≥ 50 km/h : alerte vent. */
+const MURL="https://api.open-meteo.com/v1/forecast?latitude=43.4833&longitude=5.4167&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,is_day&hourly=temperature_2m,precipitation_probability,precipitation,weather_code,wind_speed_10m,wind_gusts_10m&timezone=Europe%2FParis&forecast_days=16";
+const WMO=(c,nuit)=>c==null?["🌡️","—"]:c==0?[nuit?"🌙":"☀️","Ciel dégagé"]:c==1?[nuit?"🌙":"🌤️","Plutôt ensoleillé"]:c==2?["⛅","Partiellement nuageux"]:c==3?["☁️","Couvert"]:c<=48?["🌫️","Brouillard"]:c<=57?["🌦️","Bruine"]:c<=67?["🌧️","Pluie"]:c<=77?["🌨️","Neige"]:c<=82?["🌦️","Averses"]:c<=86?["🌨️","Averses de neige"]:["⛈️","Orages"];
+const MC=$("meteo"),JC={sam:"Samedi 5 déc.",dim:"Dimanche 6 déc."};let MET=null;
+const rnd=x=>Math.round(x),nn=a=>a.filter(x=>x!=null);
+function mday(d){const h=MET.hourly,ix=[];h.time.forEach((t,i)=>{if(t.slice(0,10)===JOUR[d]){const H=+t.slice(11,13);if(H>=10&&H<=18)ix.push(i)}});if(ix.length<9)return null;
+ const v=k=>ix.map(i=>(h[k]||[])[i]),P=v("precipitation_probability"),M=v("precipitation"),T=nn(v("temperature_2m")),G=nn(v("wind_gusts_10m")),C=nn(v("weather_code"));
+ const wet=i=>(P[i]!=null&&P[i]>=50)||(M[i]||0)>=.5,H=ix.map(i=>+h.time[i].slice(11,13));
+ return{P,M,H,tmin:rnd(Math.min(...T)),tmax:rnd(Math.max(...T)),pm:nn(P).length?Math.max(...nn(P)):null,mm:nn(M).reduce((a,b)=>a+b,0),gust:G.length?rnd(Math.max(...G)):null,code:C.length?Math.max(...C):null,
+  am:H.some((x,i)=>x<13&&wet(i)),ap:H.some((x,i)=>x>=13&&wet(i))}}
+function fiab(d){const auj=new Date(now()).toLocaleDateString("fr-CA",{timeZone:"Europe/Paris"}),j=Math.round((Date.parse(JOUR[d])-Date.parse(auj))/864e5);
+ return j>7?["r1","J-"+j+" · tendance, à confirmer"]:j>3?["r2","J-"+j+" · assez fiable"]:j>0?["r3","J-"+j+" · fiable"]:["r3","prévision du jour"]}
+function rmet(){if(!MET||!MET.current||!MET.hourly){MC.hidden=true;return}
+ const c=MET.current,[ic,lb]=WMO(c.weather_code,c.is_day===0);
+ let o=`<div class="mtop"><span class="mic" aria-hidden="true">${ic}</span><div><b>Météo à Luynes</b><small>Maintenant : ${rnd(c.temperature_2m)}°${c.apparent_temperature!=null?` (ressenti ${rnd(c.apparent_temperature)}°)`:""} · ${lb} · vent ${rnd(c.wind_speed_10m)} km/h</small></div></div><div class="mdays">`;
+ const D={},pluieJ=[],vent=[];
+ ["sam","dim"].forEach(d=>{const x=D[d]=mday(d);
+  if(!x){const dt=new Date(Date.parse(JOUR[d]+"T12:00:00+01:00")-15*864e5).toLocaleDateString("fr-FR",{day:"numeric",month:"long",timeZone:"Europe/Paris"});
+   o+=`<div class="md"><div class="mdh"><b>${JC[d]}</b></div><small class="mlg">Prévision disponible à partir du ${dt}.</small></div>`;return}
+  const [fc,ft]=fiab(d),[di,dl]=WMO(x.code);
+  if(x.am||x.ap)pluieJ.push(JN[d].split(" ")[0]+(x.am&&x.ap?"":x.am?" matin":" après-midi"));
+  if(x.gust!=null&&x.gust>=50)vent.push(JN[d].split(" ")[0]+" (rafales jusqu’à "+x.gust+" km/h)");
+  o+=`<div class="md"><div class="mdh"><b>${JC[d]}</b><span class="rel ${fc}">${ft}</span></div>
+  <div class="mdm"><span class="mic" aria-hidden="true">${di}</span><div><b>${dl}</b><small>${x.tmin}° à ${x.tmax}° de 10h à 18h${x.gust!=null?` · rafales ${x.gust} km/h`:""}</small></div></div>
+  <div class="mbar" role="img" aria-label="Risque de pluie heure par heure, de 10h à 18h">${x.H.map((hh,i)=>{const pr=x.P[i];return `<span title="${hh}h : ${pr==null?"—":pr+" %"} de risque de pluie${x.M[i]?", "+x.M[i].toFixed(1).replace(".",",")+" mm":""}"><i class="${(pr||0)<30&&!(x.M[i]>=.5)?"dry":""}" style="height:${Math.max(4,pr||0)}%"></i><small>${hh%2?"":hh+"h"}</small></span>`}).join("")}</div>
+  <small class="mlg">Risque de pluie${x.pm!=null?` : jusqu’à ${x.pm} %`:" : non disponible"}${x.mm>=.1?` · environ ${x.mm.toFixed(1).replace(".",",")} mm`:""}</small></div>`});
+ o+=`</div>`;
+ if(pluieJ.length)o+=`<p class="madv wet">☔ <b>Pluie possible ${pluieJ.join(" et ")}.</b> Plusieurs temps forts et activités se replient à l’intérieur de la salle Ughetti ou à l’abri.<br><button type="button" class="btn btn-s" data-pluie>${pluie()?"Revenir au programme normal":"Voir le programme mauvais temps"}</button></p>`;
+ else if(D.sam||D.dim)o+=`<p class="madv">${vent.length?"":"🌤️ "}Pas de pluie annoncée pour l’instant sur les heures d’ouverture (10h – 18h).</p>`;
+ if(vent.length)o+=`<p class="madv wet">💨 <b>Vent fort annoncé ${vent.join(" et ")}.</b></p>`;
+ const mj=new Date(MET.at).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit",timeZone:"Europe/Paris"}).replace(":","h");
+ o+=`<p class="msrc">Prévisions <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> pour Luynes (13080 Aix-en-Provence), actualisées à ${mj}. Plus le week-end approche, plus elles sont précises.</p>`;
+ MC.innerHTML=o;MC.hidden=false}
+async function meteo(){try{const r=await fetch(MURL);if(!r.ok)throw 0;const j=await r.json();if(!j.hourly)throw 0;MET=j;MET.at=Date.now()}catch(_){}rmet();live()}
+
 const li=(e,sub)=>`<li class="${e.c}"><i></i><span><b>${esc(e.t)}</b><small>${esc(sub)}${e.pl?" · "+esc(e.pl):""}</small></span>${pluie()&&(e.w==="in"||e.w==="abri")?"<em>"+esc(e.mt)+"</em>":""}</li>`;
 function live(){const n=now();if(n<DEB||n>=FINP){W.hidden=true;return}
  const cur=EV.filter(e=>e.s<=n&&n<e.e).sort((a,b)=>rk(a)-rk(b)||a.e-b.e),fut=EV.filter(e=>e.s>n);
@@ -862,6 +921,7 @@ function live(){const n=now();if(n<DEB||n>=FINP){W.hidden=true;return}
  if(!cur.length&&!nx.length){W.hidden=true;return}
  const dn=new Date(n).toLocaleDateString("fr-CA",{timeZone:"Europe/Paris"}),dd=Object.keys(JOUR).find(k=>JOUR[k]===dn);
  let o="";
+ if(MET&&MET.current){const c=MET.current,[ic,lb]=WMO(c.weather_code,c.is_day===0);o+=`<div class="lvw">${ic} ${rnd(c.temperature_2m)}° · ${lb} à Luynes</div>`}
  if(cur.length){const v=cur.slice(0,4);o+=`<div class="lvc"><div class="lvt"><i class="dot"></i>En ce moment</div><ul>${v.map(e=>li(e,"jusqu’à "+e.eh)).join("")}</ul>${cur.length>4?`<p class="lvm">+ ${cur.length-4} autre${cur.length>5?"s":""} activité${cur.length>5?"s":""} en cours</p>`:""}</div>`}
  if(nx.length){const e0=nx[0],jr=JOUR[e0.d]===dn?"à "+e0.sh:JN[e0.d]+" à "+e0.sh;
   o+=`<div class="lvc"><div class="lvt">${cur.length?"À suivre":"Prochain rendez-vous"} · ${jr}</div><ul>${nx.slice(0,4).map(e=>li(e,e.sh+" – "+e.eh)).join("")}</ul>${nx.length>4?`<p class="lvm">+ ${nx.length-4} autre${nx.length>5?"s":""} activité${nx.length>5?"s":""}</p>`:""}</div>`}
@@ -871,11 +931,12 @@ function live(){const n=now();if(n<DEB||n>=FINP){W.hidden=true;return}
 W.addEventListener("click",e=>{const b=e.target.closest("[data-lvday]");if(b)openDay(b.dataset.lvday)});
 function setPluie(on){document.documentElement.classList.toggle("pluie",on);try{sessionStorage.setItem("telethon-pluie",on?"1":"")}catch(_){}
  ags.forEach(u=>[...u.children].sort((a,b)=>(on?R[a.dataset.lieu||""]-R[b.dataset.lieu||""]:0)||a.dataset.o-b.dataset.o).forEach(x=>u.appendChild(x)));
- document.querySelectorAll(".rain[data-pluie]").forEach(b=>b.setAttribute("aria-pressed",on));live()}
+ document.querySelectorAll(".rain[data-pluie]").forEach(b=>b.setAttribute("aria-pressed",on));live();if(MET)rmet()}
 document.addEventListener("click",e=>{if(e.target.closest("[data-pluie]"))setPluie(!pluie())});
 function fin(){if(now()<FINP)return false;if(!document.documentElement.classList.contains("fin")){document.documentElement.classList.add("fin");$("merci").hidden=false;if(bw.open)bw.close();if(dlg.open)dlg.close();scrollTo(0,0)}return true}
 try{if(sessionStorage.getItem("telethon-pluie"))setPluie(true)}catch(_){}
-if(!fin())live();
+if(!fin()){live();meteo()}
+setInterval(()=>{if(!document.documentElement.classList.contains("fin"))meteo()},30*60000);
 const it=setInterval(()=>{if(fin())clearInterval(it);else live()},30000);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&!fin())live()});
 })();
