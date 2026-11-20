@@ -281,6 +281,37 @@ a.org{transition:transform .2s,box-shadow .2s}a.org:hover{transform:translateY(-
 .kqr svg{width:160px;height:160px}.kqr .kact{justify-content:center;margin:0;padding:0}
 @media(max-width:1000px){.kit{grid-template-columns:repeat(2,1fr)}.kcol{grid-column:1/-1;grid-template-columns:1fr 1fr;grid-template-rows:none}}
 @media(max-width:800px){.kit,.kcol{grid-template-columns:1fr}.kshare{grid-template-columns:1fr}.kqr{justify-self:start}.kv img{height:300px}}
+/* ===== Jour J : widget « en ce moment / à suivre » ===== */
+.live{max-width:620px;margin:-8px 0 22px;border:1px solid rgba(255,255,255,.3);background:rgba(47,36,24,.42);backdrop-filter:blur(12px);border-radius:22px;padding:16px 18px;color:#fff}
+.live[hidden]{display:none}
+.lvc+.lvc{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.18)}
+.lvt{display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:8px}
+.lvt .dot{width:9px;height:9px;border-radius:50%;background:#ff5a4e;box-shadow:0 0 0 0 rgba(255,90,78,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(255,90,78,0)}100%{box-shadow:0 0 0 0 rgba(255,90,78,0)}}
+.live ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.live li{display:flex;align-items:flex-start;gap:10px;line-height:1.3}
+.live li>i{flex:none;width:10px;height:10px;margin-top:6px;border-radius:50%;background:var(--t,var(--brand));box-shadow:0 0 0 2px rgba(255,255,255,.7)}
+.live li b{display:block;font-size:1.05rem}.live li small{display:block;opacity:.8}
+.live li em{flex:none;margin-left:auto;padding:2px 10px;border-radius:99px;background:rgba(255,255,255,.18);font-style:normal;font-size:.78rem;font-weight:700}
+.lvm{opacity:.75;font-size:.9rem}
+.lva{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.lva button{border:1px solid rgba(255,255,255,.4);border-radius:99px;padding:8px 14px;background:rgba(255,255,255,.14);color:#fff;font-weight:600;font-size:.9rem}
+.lva button:hover{background:rgba(255,255,255,.26)}
+html.pluie .lva [data-pluie]{background:#fff;color:var(--ink)}
+/* ===== Mode mauvais temps ===== */
+.rain{display:flex;align-items:center;gap:14px;width:100%;max-width:760px;margin-top:14px;padding:14px 20px;border:1px solid var(--line);border-radius:20px;background:#fff;color:var(--ink);text-align:left;transition:background .2s,box-shadow .2s}
+.rain:hover{background:var(--brand-soft)}.rain>span:first-child{flex:none;font-size:1.8rem;line-height:1}
+.rain b{display:block;font-size:1.05rem}.rain small{display:block;color:var(--muted);line-height:1.4}
+.rain .on,html.pluie .rain .off{display:none}html.pluie .rain .on{display:block}
+html.pluie .rain{background:#e8f0f8;border-color:#5f95c4;box-shadow:inset 0 0 0 1px #5f95c4}
+html.pluie #pg .pgb::before{content:"☔ Mode mauvais temps : les activités à l’intérieur de la salle Ughetti d’abord";display:block;padding:12px 24px;background:#e8f0f8;color:#1f3f5f;font-weight:600;border-bottom:1px solid var(--line)}
+html.pluie .ag li[data-lieu=out]{opacity:.5}
+html.pluie .ag li[data-lieu] h4::after{display:inline-block;margin-left:10px;padding:2px 10px;border-radius:99px;font-size:.75rem;font-weight:700;vertical-align:middle;letter-spacing:0}
+html.pluie .ag li[data-lieu=in] h4::after{content:"À l’intérieur";background:#e1f1e1;color:#1b5e20}
+html.pluie .ag li[data-lieu=out] h4::after{content:"En extérieur";background:#eee;color:#555}
+/* ===== Page de fin (à partir du dimanche 6 décembre, 19h) ===== */
+.hero.merci{position:relative;top:auto!important}.merci[hidden]{display:none}
+html.fin main>section:not(#merci),html.fin .fab,html.fin .tfab,html.fin .sw,html.fin nav,html.fin .burger,html.fin .wip,html.fin .live,html.fin .ft .ftg>div:nth-child(2),html.fin .ft a[href$=".ics"]{display:none!important}
 /* ===== Pied de page ===== */
 .ft{position:relative;z-index:1;background:var(--ink);color:rgba(255,246,235,.82);padding:48px 0 calc(96px + env(safe-area-inset-bottom,0px));font-size:.95rem;line-height:1.55}
 .ft a{color:#fff}.ft a:hover{color:var(--brand)}
@@ -337,6 +368,7 @@ a.org{transition:transform .2s,box-shadow .2s}a.org:hover{transform:translateY(-
  <h1>Téléthon<br>à Luynes</h1>
  <p class="where">Espace Ughetti</p>
  <p class="cause">Deux jours de mobilisation au profit de l’<b>AFM-Téléthon</b>, pour vaincre les maladies génétiques rares.</p>
+ <div class="live" id="live" hidden aria-live="polite"></div>
  <div class="days">
   <a class="daycard" href="#programme" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></a>
   <a class="daycard" href="#programme" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></a>
@@ -344,6 +376,13 @@ a.org{transition:transform .2s,box-shadow .2s}a.org:hover{transform:translateY(-
  <div class="hcta"><a class="btn btn-p" href="#billetterie">Billetterie en ligne</a><a class="btn btn-w" href="#don">Faire un don</a><a class="btn btn-w" href="/files/2026/12/telethon/telethon-2026.ics" download="telethon-2026-luynes.ics">Ajouter à mon agenda</a></div>
  </div>
  <img class="visu" src="/files/2026/12/telethon/2026%20-%20Visuel_Te%CC%81le%CC%81thon%20renversant.png" alt="Visuel du Téléthon 2026" />
+</div></section>
+<section class="hero merci" id="merci" hidden><div class="container">
+ <span class="pill">Téléthon 2026 · 5 et 6 décembre</span>
+ <h1>Merci<br>à tous !</h1>
+ <p class="where">Espace Ughetti, Luynes</p>
+ <p class="cause">Le Téléthon 2026 à Luynes est terminé. Merci aux bénévoles, aux associations, aux partenaires et à toutes celles et ceux qui sont venus partager ces deux jours au profit de l’<b>AFM-Téléthon</b>.</p>
+ <div class="hcta"><a class="btn btn-p" href="https://mapage.telethon.fr/animation/13080-2026" target="_blank" rel="noopener noreferrer">Soutenir l’AFM-Téléthon</a><a class="btn btn-w" href="https://forms.13080.fr/diffusion/2021/05/newsletter/#luynois" target="_blank" rel="noopener noreferrer">S’inscrire à la newsletter</a></div>
 </div></section>
 
 <section class="sec" id="programme"><div class="container">
@@ -353,6 +392,7 @@ a.org{transition:transform .2s,box-shadow .2s}a.org:hover{transform:translateY(-
   <button class="pickb" type="button" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></button>
   <button class="pickb" type="button" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></button>
  </div>
+ <button class="rain" type="button" data-pluie aria-pressed="false"><span aria-hidden="true">☔</span><span><span class="off"><b>Mauvais temps ?</b><small>Afficher d’abord les temps forts et activités à l’intérieur de la salle Ughetti.</small></span><span class="on"><b>Mode mauvais temps activé</b><small>L’intérieur de la salle Ughetti passe en premier. Touchez pour revenir au programme normal.</small></span></span></button>
  <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-pass"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-pass"><i></i><span>Atelier code de la route <small>Sporting Auto Moto École</small></span></li><li class="t-pass"><i></i><span>Découverte du tandem <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-fort"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Samedi matin. Inscription obligatoire, places limitées</em></li><li class="t-fort"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Samedi après-midi. Inscription obligatoire, places limitées</em></li></ul></div>
  <div class="soon"><b>🎅 Boîte aux lettres du Père Noël</b>Les enfants ont la possibilité d’y déposer leur lettre.</div>
  <dialog class="pg" id="pg" aria-labelledby="pgt">
@@ -713,7 +753,7 @@ nv.addEventListener("click",e=>{if(e.target.closest("a")){nv.classList.remove("o
 (()=>{const h=document.querySelector(".hero"),hd=document.querySelector("header");
  const f=()=>{h.style.top=Math.min(hd.offsetHeight,innerHeight-h.offsetHeight)+"px"};
  f();addEventListener("resize",f);addEventListener("load",f)})();
-/* compte à rebours : mis à jour toutes les 30 secondes et au retour sur l’onglet */
+/* compte à rebours : mis à jour chaque seconde et au retour sur l’onglet */
 const T=new Date("2026-12-05T10:00:00+01:00"),FIN=new Date("2026-12-06T18:00:00+01:00");
 let iv;
 function tick(){const n=new Date(),c=$("cd");
@@ -789,6 +829,49 @@ function act(pl,Z,g){const k=g.dataset.z;if(pl===P1&&k==="salle")return view(tru
 [[P1,Z1],[P2,Z2]].forEach(([pl,Z])=>{
  pl.addEventListener("click",e=>{const g=e.target.closest(".pin,.z");if(g)act(pl,Z,g)});
  pl.addEventListener("keydown",e=>{const g=e.target.closest&&e.target.closest(".pin");if(g&&(e.key==="Enter"||e.key===" ")){e.preventDefault();act(pl,Z,g)}})});
+})();
+/* ===== Jour J : widget « en ce moment / à suivre », mode mauvais temps, page de fin =====
+   Le widget lit directement le programme (listes du samedi et du dimanche) : rien à saisir en double.
+   Intérieur / extérieur : déduit du lieu affiché sous chaque activité. « Devant », boulodrome, parvis, parc, city stade = extérieur ;
+   « salle » = intérieur ; sinon non classé (ni mis en avant, ni grisé).
+   Pour tester : ajouter ?t=2026-12-05T11:00 à l’adresse simule cette date et cette heure (heure de Paris). */
+(()=>{
+const qt=new URLSearchParams(location.search).get("t"),SIM=qt?Date.parse(/([zZ]|[+-]\d\d:?\d\d)$/.test(qt)?qt:qt+"+01:00"):NaN;
+const now=()=>isNaN(SIM)?Date.now():SIM;
+const DEB=Date.parse("2026-12-04T00:00:00+01:00"),FINP=Date.parse("2026-12-06T19:00:00+01:00");
+const JOUR={sam:"2026-12-05",dim:"2026-12-06"},JN={sam:"samedi 5 décembre",dim:"dimanche 6 décembre"},R={in:0,"":1,out:2};
+const at=(d,h,m)=>Date.parse(JOUR[d]+"T"+String(h).padStart(2,"0")+":"+(m||"00")+":00+01:00"),hh=(h,m)=>h+"h"+(m&&m!=="00"?m:"");
+const lieu=t=>{t=t.toLowerCase();return /devant|boulodrome|parvis|parc|city stade|extérieur/.test(t)?"out":/salle/.test(t)?"in":""};
+const EV=[],ags=[...document.querySelectorAll("#pg .ag")];
+document.querySelectorAll("#pg .pgb[data-d]").forEach(b=>{const d=b.dataset.d;b.querySelectorAll(".ag>li").forEach((li,i)=>{
+ const t=(li.querySelector("h4")||{}).textContent||"",pl=((li.querySelector(".p")||{}).textContent||"").trim(),w=lieu(pl);li.dataset.lieu=w;li.dataset.o=i;
+ li.querySelectorAll(".h b").forEach(x=>{const m=x.textContent.match(/(\d{1,2})h(\d{2})?\s*[–-]\s*(\d{1,2})h(\d{2})?/);
+  if(m)EV.push({d,t:t.trim(),pl,w,c:li.className,s:at(d,m[1],m[2]),e:at(d,m[3],m[4]),sh:hh(m[1],m[2]),eh:hh(m[3],m[4])})})})});
+EV.push({d:"dim",t:"Tirage de la tombola",pl:"",w:"",c:"t-tombola",s:at("dim",16,"45"),e:at("dim",17),sh:"16h45",eh:"17h"});
+const W=$("live"),pluie=()=>document.documentElement.classList.contains("pluie"),rk=e=>pluie()?R[e.w]:0;
+const li=(e,sub)=>`<li class="${e.c}"><i></i><span><b>${esc(e.t)}</b><small>${esc(sub)}${e.pl?" · "+esc(e.pl):""}</small></span>${pluie()&&e.w==="in"?"<em>À l’intérieur</em>":""}</li>`;
+function live(){const n=now();if(n<DEB||n>=FINP){W.hidden=true;return}
+ const cur=EV.filter(e=>e.s<=n&&n<e.e).sort((a,b)=>rk(a)-rk(b)||a.e-b.e),fut=EV.filter(e=>e.s>n);
+ const ns=fut.length?Math.min(...fut.map(e=>e.s)):0,nx=fut.filter(e=>e.s===ns).sort((a,b)=>rk(a)-rk(b));
+ if(!cur.length&&!nx.length){W.hidden=true;return}
+ const dn=new Date(n).toLocaleDateString("fr-CA",{timeZone:"Europe/Paris"}),dd=Object.keys(JOUR).find(k=>JOUR[k]===dn);
+ let o="";
+ if(cur.length){const v=cur.slice(0,4);o+=`<div class="lvc"><div class="lvt"><i class="dot"></i>En ce moment</div><ul>${v.map(e=>li(e,"jusqu’à "+e.eh)).join("")}</ul>${cur.length>4?`<p class="lvm">+ ${cur.length-4} autre${cur.length>5?"s":""} activité${cur.length>5?"s":""} en cours</p>`:""}</div>`}
+ if(nx.length){const e0=nx[0],jr=JOUR[e0.d]===dn?"à "+e0.sh:JN[e0.d]+" à "+e0.sh;
+  o+=`<div class="lvc"><div class="lvt">${cur.length?"À suivre":"Prochain rendez-vous"} · ${jr}</div><ul>${nx.slice(0,4).map(e=>li(e,e.sh+" – "+e.eh)).join("")}</ul>${nx.length>4?`<p class="lvm">+ ${nx.length-4} autre${nx.length>5?"s":""} activité${nx.length>5?"s":""}</p>`:""}</div>`}
+ const pd=dd||(nx[0]&&nx[0].d);
+ o+=`<div class="lva">${pd?`<button type="button" data-lvday="${pd}">Programme du ${JN[pd].split(" ")[0]}</button>`:""}<button type="button" data-pluie aria-pressed="${pluie()}">☔ ${pluie()?"Mode mauvais temps activé":"Mauvais temps ?"}</button></div>`;
+ W.innerHTML=o;W.hidden=false}
+W.addEventListener("click",e=>{const b=e.target.closest("[data-lvday]");if(b)openDay(b.dataset.lvday)});
+function setPluie(on){document.documentElement.classList.toggle("pluie",on);try{sessionStorage.setItem("telethon-pluie",on?"1":"")}catch(_){}
+ ags.forEach(u=>[...u.children].sort((a,b)=>(on?R[a.dataset.lieu||""]-R[b.dataset.lieu||""]:0)||a.dataset.o-b.dataset.o).forEach(x=>u.appendChild(x)));
+ document.querySelectorAll(".rain[data-pluie]").forEach(b=>b.setAttribute("aria-pressed",on));live()}
+document.addEventListener("click",e=>{if(e.target.closest("[data-pluie]"))setPluie(!pluie())});
+function fin(){if(now()<FINP)return false;if(!document.documentElement.classList.contains("fin")){document.documentElement.classList.add("fin");$("merci").hidden=false;if(bw.open)bw.close();if(dlg.open)dlg.close();scrollTo(0,0)}return true}
+try{if(sessionStorage.getItem("telethon-pluie"))setPluie(true)}catch(_){}
+if(!fin())live();
+const it=setInterval(()=>{if(fin())clearInterval(it);else live()},30000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&!fin())live()});
 })();
 /* modale ouverte : la page derrière ne défile plus */
 const lock=()=>document.documentElement.classList.toggle("lk",!!document.querySelector("dialog[open]"));
