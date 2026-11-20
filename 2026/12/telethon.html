@@ -102,7 +102,7 @@ h1{margin:0 0 14px;font-size:clamp(3rem,7vw,5.4rem);line-height:.92;letter-spaci
 .live li>i{flex:none;width:10px;height:10px;margin-top:6px;border-radius:50%;background:var(--t,var(--brand));box-shadow:0 0 0 2px rgba(255,255,255,.7)}
 .live li b{display:block;font-size:1.05rem}.live li small{display:block;opacity:.8}
 .live li em{flex:none;margin-left:auto;padding:2px 10px;border-radius:99px;background:rgba(255,255,255,.18);font-style:normal;font-size:.78rem;font-weight:700}
-.lvm{margin:8px 0 0;opacity:.75;font-size:.9rem}
+.lvm{display:block;margin:10px 0 0;padding:0;border:0;background:none;color:#fff;opacity:.8;font-size:.9rem;text-decoration:underline;text-underline-offset:3px}.lvm:hover{opacity:1}
 .lva{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .lva button{border:1px solid rgba(255,255,255,.4);border-radius:99px;padding:8px 14px;background:rgba(255,255,255,.14);color:#fff;font-weight:600;font-size:.9rem}
 .lva button:hover{background:rgba(255,255,255,.26)}html.pluie .lva [data-pluie]{background:#fff;color:var(--ink)}
@@ -486,7 +486,7 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin nav,html.fin .burger,ht
   <button class="pickb" type="button" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></button>
  </div>
  <div class="pact"><button class="chip rain" type="button" data-pluie aria-pressed="false"><span class="off">☔ Mauvais temps ?</span><span class="on">☔ Mode mauvais temps activé</span></button><button class="chip" type="button" id="imprimer">🖨️ Imprimer l’affiche A4</button></div>
- <div class="qq" role="search"><label class="vh" for="qq">Rechercher : où, quand, combien</label><input id="qq" type="search" placeholder="Où ? Quand ? Combien ? Ex. : karts, toilettes, concert" autocomplete="off" enterkeyhint="search" />
+ <div class="qq" role="search"><label class="vh" for="qq">Rechercher : où, quand, combien</label><input id="qq" type="search" placeholder="Karts, toilettes, concert…" autocomplete="off" enterkeyhint="search" />
   <div class="qqs" aria-label="Suggestions">Par exemple :<button type="button" data-qq="karts">karts</button><button type="button" data-qq="massage">massage</button><button type="button" data-qq="concert">concert</button><button type="button" data-qq="toilettes">toilettes</button><button type="button" data-qq="parking">parking</button><button type="button" data-qq="pass">pass</button></div>
   <div class="qqr" id="qqr" aria-live="polite"></div></div>
  <div class="pgrid">
@@ -994,6 +994,8 @@ function rmet(){if(!MET||!MET.current||!MET.hourly){MC.hidden=true;return}
 async function meteo(){try{const r=await fetch(MURL);if(!r.ok)throw 0;const j=await r.json();if(!j.hourly)throw 0;MET=j;MET.at=Date.now()}catch(_){}rmet();live()}
 
 const li=(e,sub)=>`<li class="${e.c}"><i></i><span><b>${esc(e.t)}</b><small>${esc(sub)}${e.pl?" · "+esc(e.pl):""}</small></span>${pluie()&&(e.w==="in"||e.w==="abri")?"<em>"+esc(e.mt)+"</em>":""}</li>`;
+/* le widget montre 3 activités au plus ; au-delà, un lien ouvre le programme du jour */
+const LVMAX=3,plus=(a,d,q)=>{const k=a.length-LVMAX;return k>0?`<button type="button" class="lvm" data-lvday="${d}">+ ${k} autre${k>1?"s":""} activité${k>1?"s":""}${q?" "+q:""} · voir le programme</button>`:""};
 function live(){const n=now();if(n<DEB||n>=FINP){W.hidden=true;return}
  const cur=EV.filter(e=>e.s<=n&&n<e.e).sort((a,b)=>rk(a)-rk(b)||a.e-b.e),fut=EV.filter(e=>e.s>n);
  const ns=fut.length?Math.min(...fut.map(e=>e.s)):0,nx=fut.filter(e=>e.s===ns).sort((a,b)=>rk(a)-rk(b));
@@ -1001,9 +1003,9 @@ function live(){const n=now();if(n<DEB||n>=FINP){W.hidden=true;return}
  const dn=new Date(n).toLocaleDateString("fr-CA",{timeZone:"Europe/Paris"}),dd=Object.keys(JOUR).find(k=>JOUR[k]===dn);
  let o="";
  if(MET&&MET.current){const c=MET.current,[ic,lb]=WMO(c.weather_code,c.is_day===0);o+=`<div class="lvw">${ic} ${rnd(c.temperature_2m)}° · ${lb} à Luynes</div>`}
- if(cur.length){const v=cur.slice(0,4);o+=`<div class="lvc"><div class="lvt"><i class="dot"></i>En ce moment</div><ul>${v.map(e=>li(e,"jusqu’à "+e.eh)).join("")}</ul>${cur.length>4?`<p class="lvm">+ ${cur.length-4} autre${cur.length>5?"s":""} activité${cur.length>5?"s":""} en cours</p>`:""}</div>`}
+ if(cur.length)o+=`<div class="lvc"><div class="lvt"><i class="dot"></i>En ce moment</div><ul>${cur.slice(0,LVMAX).map(e=>li(e,"jusqu’à "+e.eh)).join("")}</ul>${plus(cur,cur[0].d,"en cours")}</div>`;
  if(nx.length){const e0=nx[0],jr=JOUR[e0.d]===dn?"à "+e0.sh:JN[e0.d]+" à "+e0.sh;
-  o+=`<div class="lvc"><div class="lvt">${cur.length?"À suivre":"Prochain rendez-vous"} · ${jr}</div><ul>${nx.slice(0,4).map(e=>li(e,e.sh+" – "+e.eh)).join("")}</ul>${nx.length>4?`<p class="lvm">+ ${nx.length-4} autre${nx.length>5?"s":""} activité${nx.length>5?"s":""}</p>`:""}</div>`}
+  o+=`<div class="lvc"><div class="lvt">${cur.length?"À suivre":"Prochain rendez-vous"} · ${jr}</div><ul>${nx.slice(0,LVMAX).map(e=>li(e,e.sh+" – "+e.eh)).join("")}</ul>${plus(nx,e0.d,"")}</div>`}
  const pd=dd||(nx[0]&&nx[0].d);
  o+=`<div class="lva">${pd?`<button type="button" data-lvday="${pd}">Programme du ${JN[pd].split(" ")[0]}</button>`:""}<button type="button" data-pluie aria-pressed="${pluie()}">☔ ${pluie()?"Mode mauvais temps activé":"Mauvais temps ?"}</button></div>`;
  W.innerHTML=o;W.hidden=false}
@@ -1076,7 +1078,9 @@ IX.push({t:"Faire un don",cl:"",tag:"AFM-Téléthon",k:"don",h:"don dons donner 
 IX.push({t:"Venir à l’Espace Ughetti",cl:"",tag:"Accès",k:"acces",h:"acces adresse venir itineraire plan allee serge attard rue andre claverie luynes parking entree",l:["📍 Allée Serge Attard / Rue André Claverie, Luynes, 13080 Aix-en-Provence."],z:"entree-parking",res:[],a:["#lieu","Lieu et itinéraire"]});
 const QI=$("qq"),QR=$("qqr");let qt0;
 function cherche(q){const w=nz(q).split(/\s+/).filter(Boolean).map(x=>SYN[x]||SYN[x.replace(/s$/,"")]||x);if(!w.length){QR.innerHTML="";return}
- const r=IX.map(x=>{let sc=0;for(const m of w){const re=new RegExp("(^|\\s)"+m.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));if(re.test(x.k))sc+=3;else if(re.test(x.h))sc+=1;else return null}return{x,sc}}).filter(Boolean).sort((a,b)=>b.sc-a.sc).slice(0,5).map(o=>o.x);
+ const r0=IX.map(x=>{let sc=0;for(const m of w){const re=new RegExp("(^|\\s)"+m.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));if(re.test(x.k))sc+=3;else if(re.test(x.h))sc+=1;else return null}return{x,sc}}).filter(Boolean).sort((a,b)=>b.sc-a.sc).map(o=>o.x);
+ /* une zone du plan déjà couverte par une activité trouvée (même lieu) n’est pas répétée : l’activité a son bouton « Voir sur le plan » */
+ const r=r0.filter(x=>!(x.zone&&r0.some(y=>!y.zone&&y.z===x.z))).slice(0,5);
  if(!r.length){QR.innerHTML=`<p class="qn">Rien trouvé pour « ${esc(q)} ». Essayez : karts, toilettes, concert, parking, pass.</p>`;return}
  QR.innerHTML=r.map(x=>`<article class="qa ${x.cl}"><div class="qah"><b>${esc(x.t)}</b>${x.tag?`<span class="tg">${esc(x.tag)}</span>`:""}</div>${x.l.filter(Boolean).map(l=>`<p>${esc(l)}</p>`).join("")}
   <div class="qab">${x.z?`<button type="button" data-plan="${x.z}">Voir sur le plan</button>`:""}${closed()?"":x.res.map(k=>`<button type="button" class="res" data-res="${k}">${resLab(k)}</button>`).join("")}${x.tel?`<a href="tel:+33670761026">Appeler</a>`:""}${x.a?`<a href="${x.a[0]}">${x.a[1]}</a>`:""}</div></article>`).join("");
