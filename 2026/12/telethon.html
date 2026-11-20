@@ -7,17 +7,19 @@
 <meta name="description" content="Téléthon 2026 à Luynes, les 5 et 6 décembre à l’Espace Ughetti. Consultez le programme, réservez en ligne et faites un don à l’AFM-Téléthon." />
 <link rel="icon" type="image/png" href="/files/logos/favicon.png" />
 <link rel="apple-touch-icon" href="/files/logos/favicon.png" />
+<link rel="canonical" href="https://events.13080.fr/2026/12/telethon" />
 <meta property="og:type" content="website" />
+<meta property="og:url" content="https://events.13080.fr/2026/12/telethon" />
 <meta property="og:locale" content="fr_FR" />
 <meta property="og:site_name" content="Luynes en Fêtes" />
 <meta property="og:title" content="Téléthon 2026 à Luynes | Luynes en Fêtes" />
 <meta property="og:description" content="Samedi 5 et dimanche 6 décembre à l’Espace Ughetti. Au profit de l’AFM-Téléthon. Programme, billetterie en ligne et don." />
-<meta property="og:image" content="/files/2026/12/telethon/opengraph.png" />
+<meta property="og:image" content="https://events.13080.fr/files/2026/12/telethon/opengraph.png" />
 <meta property="og:image:alt" content="Téléthon 2026 à Luynes" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Téléthon 2026 à Luynes | Luynes en Fêtes" />
 <meta name="twitter:description" content="Samedi 5 et dimanche 6 décembre à l’Espace Ughetti. Au profit de l’AFM-Téléthon." />
-<meta name="twitter:image" content="/files/2026/12/telethon/opengraph.png" />
+<meta name="twitter:image" content="https://events.13080.fr/files/2026/12/telethon/opengraph.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -339,7 +341,7 @@ a.org{transition:transform .2s,box-shadow .2s}a.org:hover{transform:translateY(-
   <a class="daycard" href="#programme" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></a>
   <a class="daycard" href="#programme" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></a>
  </div>
- <div class="hcta"><a class="btn btn-p" href="#billetterie">Billetterie en ligne</a><a class="btn btn-w" href="#don">Faire un don</a></div>
+ <div class="hcta"><a class="btn btn-p" href="#billetterie">Billetterie en ligne</a><a class="btn btn-w" href="#don">Faire un don</a><a class="btn btn-w" href="/files/2026/12/telethon/telethon-2026.ics" download="telethon-2026-luynes.ics">Ajouter à mon agenda</a></div>
  </div>
  <img class="visu" src="/files/2026/12/telethon/2026%20-%20Visuel_Te%CC%81le%CC%81thon%20renversant.png" alt="Visuel du Téléthon 2026" />
 </div></section>
@@ -533,7 +535,7 @@ a.org{transition:transform .2s,box-shadow .2s}a.org:hover{transform:translateY(-
    <h3>Infos pratiques</h3>
    <p>Espace Ughetti<br>Allée Serge Attard / Rue André Claverie<br>Luynes, 13080 Aix-en-Provence</p>
    <p><a href="tel:+33670761026">06 70 76 10 26</a></p>
-   <ul><li><a href="https://www.afm-telethon.fr" target="_blank" rel="noopener noreferrer">AFM-Téléthon</a></li><li><a href="https://forms.13080.fr/diffusion/2021/05/newsletter/#luynois" target="_blank" rel="noopener noreferrer">Newsletter de 13080.fr</a></li></ul>
+   <ul><li><a href="/files/2026/12/telethon/telethon-2026.ics" download="telethon-2026-luynes.ics">Ajouter à mon agenda</a></li><li><a href="https://www.afm-telethon.fr" target="_blank" rel="noopener noreferrer">AFM-Téléthon</a></li><li><a href="https://forms.13080.fr/diffusion/2021/05/newsletter/#luynois" target="_blank" rel="noopener noreferrer">Newsletter de 13080.fr</a></li></ul>
   </div>
  </div>
  <div class="ftb"><span>© 2026 Luynes en Fêtes</span><span>Lien court : <a href="https://s.13080.fr/telethon">s.13080.fr/telethon</a></span></div>
@@ -732,7 +734,7 @@ document.addEventListener("visibilitychange",tick);
  addEventListener("scroll",q,{passive:true});addEventListener("resize",q);run()})();
 /* logo et titre : retour en haut de cette page ; flèches : section précédente ou suivante */
 (()=>{const hd=document.querySelector("header"),top=()=>scrollTo({top:0,behavior:"smooth"});
- $("home").addEventListener("click",e=>{e.preventDefault();top();history.replaceState(null,"",location.pathname+location.search)});
+ document.querySelectorAll("#home,.ft .brand").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();top();history.replaceState(null,"",location.pathname+location.search)}));
  const S=[...document.querySelectorAll("main>section")],sp=$("sp"),sn=$("sn");
  const idx=()=>{const y=hd.offsetHeight+30;let c=0;S.forEach((x,i)=>{if(x.getBoundingClientRect().top<=y)c=i});return c};
  const atEnd=()=>innerHeight+scrollY>=document.documentElement.scrollHeight-2;
