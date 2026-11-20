@@ -56,7 +56,8 @@ h1{margin:0 0 16px;font-size:clamp(3.2rem,11vw,8rem);line-height:.9;letter-spaci
 .daycard:hover{background:rgba(255,255,255,.26);transform:translateY(-2px)}
 .daycard small{display:block;opacity:.8}.daycard b{display:block;font-size:1.5rem;letter-spacing:-.03em;margin:2px 0 8px}.daycard span{font-weight:600;color:var(--brand)}
 .cause{max-width:46ch;margin:-14px 0 28px;font-size:1.15rem;line-height:1.55;opacity:.95}.cause b{color:var(--brand)}
-.hcta{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.hcta{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 26px}
+@media(min-width:901px){.hero{align-items:flex-start}.hero .container{padding:clamp(28px,5vh,56px) 0 40px}.hgrid{align-items:start}.hgrid h1{font-size:clamp(3.2rem,7.4vw,5.6rem)}.hgrid .visu{align-self:start;margin-top:12px}}
 .sec{padding:clamp(32px,4.67vw,59px) 0}
 h2{margin:0 0 8px;color:var(--ink);font-size:clamp(2rem,4.5vw,3rem);letter-spacing:-.045em;line-height:1.05}
 .lead{margin:0 0 26px;color:var(--muted);font-size:1.05rem}
@@ -365,6 +366,41 @@ dialog.wz[open]{position:fixed;inset:0;z-index:1000}
 .qab{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.qab button,.qab a{border:1px solid var(--line);border-radius:99px;padding:7px 14px;background:var(--brand-soft);color:var(--ink);font-weight:600;font-size:.9rem}
 .qab .res{margin:0;border:0;background:var(--brand-dark);color:#fff}
 .qn{padding:12px 16px;border-radius:16px;background:#fff;border:1px dashed var(--line);color:var(--muted)}
+/* ===== Panier sauvegardé ===== */
+.reprise{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:58;width:min(calc(100% - 24px),520px);padding:16px 18px;border-radius:22px;background:var(--ink);color:#fff;box-shadow:0 18px 40px rgba(47,36,24,.4);animation:up .4s both}
+.reprise[hidden]{display:none}.reprise b{display:block;font-size:1.05rem;margin-bottom:4px}.reprise p{margin:0 0 4px;opacity:.85;font-size:.92rem;line-height:1.4}
+.reprise .ra{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.reprise .btn{padding:10px 18px;font-size:.95rem}.reprise .btn-s{background:rgba(255,255,255,.16);color:#fff}
+/* ===== Tombola proposée au récapitulatif ===== */
+.upsell{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:0 0 14px;padding:16px 18px;border-radius:22px;background:linear-gradient(135deg,#f3e8f7,#fff);border:1px solid #dcc6e6}
+.upsell div{flex:1 1 220px}.upsell b{display:block;color:var(--ink);font-size:1.1rem}.upsell small{display:block;color:var(--muted);line-height:1.4}
+.upsell .ub{display:flex;gap:8px}.upsell button{border:0;border-radius:99px;padding:10px 16px;background:var(--c-tombola);color:#fff;font-weight:700}
+.upsell button+button{background:#fff;color:var(--c-tombola);box-shadow:inset 0 0 0 2px var(--c-tombola)}
+/* ===== Programme imprimable (A4) ===== */
+.pbtn{margin-top:14px}
+#print{display:none}
+@media print{
+ @page{size:A4;margin:9mm}
+ html,body{background:#fff!important}
+ body>*:not(#print){display:none!important}
+ #print{display:block;font-family:"Outfit",Arial,sans-serif;font-size:10.8pt;line-height:1.35;color:#2f2418;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ #print .ph1{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:#c2792a;color:#fff}
+ #print .ph1 img{width:64px;height:64px;border-radius:12px;background:#a8601c;padding:4px}
+ #print h1{margin:0;font-size:26pt;letter-spacing:-.03em;line-height:1}
+ #print .ph1 p{margin:4px 0 0;font-size:10pt}
+ #print .pqr{margin-left:auto;text-align:center;background:#fff;color:#2f2418;border-radius:10px;padding:5px 6px 3px;font-weight:700;font-size:8pt}
+ #print .pqr svg{width:92px;height:92px;display:block}
+ #print .pcols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+ #print h2{margin:0 0 6px;padding-bottom:3px;border-bottom:2px solid #c2792a;font-size:14pt;color:#2f2418}
+ #print ul{list-style:none;margin:0;padding:0}
+ #print .pcols li{display:grid;grid-template-columns:24mm 1fr;gap:6px;padding:6px 0 6px 7px;border-left:4px solid var(--t);margin-bottom:6px;break-inside:avoid}
+ #print .pcols li b{font-size:12pt}#print small{display:block;color:#6b5844;font-size:9.4pt}
+ #print .ph{font-weight:700;font-size:10.4pt}
+ #print em{font-style:normal;font-size:7.6pt;font-weight:700;padding:0 5px;border-radius:9px;background:#e1f1e1;color:#1b5e20;white-space:nowrap}
+ #print .pbloc{margin-top:14px}#print .pbloc p{margin:2px 0}
+ #print .psoon{display:flex;flex-wrap:wrap;gap:4px 14px}
+ #print .pfoot{margin-top:14px;padding-top:6px;border-top:1px solid #ddd;font-size:8.2pt;color:#6b5844;display:flex;justify-content:space-between;gap:10px}
+ #print .pmt{display:inline-block;margin-top:5px;padding:3px 10px;border-radius:9px;background:#e8f0f8;color:#1f3f5f;font-weight:700}
+}
 /* ===== Pied de page ===== */
 .ft{position:relative;z-index:1;background:var(--ink);color:rgba(255,246,235,.82);padding:48px 0 calc(96px + env(safe-area-inset-bottom,0px));font-size:.95rem;line-height:1.55}
 .ft a{color:#fff}.ft a:hover{color:var(--brand)}
@@ -421,12 +457,12 @@ dialog.wz[open]{position:fixed;inset:0;z-index:1000}
  <h1>Téléthon<br>à Luynes</h1>
  <p class="where">Espace Ughetti</p>
  <p class="cause">Deux jours de mobilisation au profit de l’<b>AFM-Téléthon</b>, pour vaincre les maladies génétiques rares.</p>
+ <div class="hcta"><a class="btn btn-p" href="#billetterie">Billetterie en ligne</a><a class="btn btn-w" href="#don">Faire un don</a><a class="btn btn-w" href="/files/2026/12/telethon/telethon-2026.ics" download="telethon-2026-luynes.ics">Ajouter à mon agenda</a></div>
  <div class="live" id="live" hidden aria-live="polite"></div>
  <div class="days">
   <a class="daycard" href="#programme" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></a>
   <a class="daycard" href="#programme" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></a>
  </div>
- <div class="hcta"><a class="btn btn-p" href="#billetterie">Billetterie en ligne</a><a class="btn btn-w" href="#don">Faire un don</a><a class="btn btn-w" href="/files/2026/12/telethon/telethon-2026.ics" download="telethon-2026-luynes.ics">Ajouter à mon agenda</a></div>
  </div>
  <img class="visu" src="/files/2026/12/telethon/2026%20-%20Visuel_Te%CC%81le%CC%81thon%20renversant.png" alt="Visuel du Téléthon 2026" />
 </div></section>
@@ -450,6 +486,7 @@ dialog.wz[open]{position:fixed;inset:0;z-index:1000}
  </div>
  <div class="meteo" id="meteo" hidden aria-live="polite"></div>
  <button class="rain" type="button" data-pluie aria-pressed="false"><span aria-hidden="true">☔</span><span><span class="off"><b>Mauvais temps ?</b><small>Afficher d’abord les temps forts et activités à l’intérieur de la salle Ughetti.</small></span><span class="on"><b>Mode mauvais temps activé</b><small>L’intérieur de la salle Ughetti passe en premier. Touchez pour revenir au programme normal.</small></span></span></button>
+ <button class="btn btn-s pbtn" type="button" id="imprimer">🖨️ Imprimer le programme (affiche A4)</button>
  <div class="soon"><b>Horaires à venir</b><ul class="sl"><li class="t-pass" data-meteo="in" data-mt="Intérieur le samedi, à l’abri le dimanche"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-pass" data-meteo="in" data-mt="Possible à l’intérieur"><i></i><span>Atelier code de la route <small>Sporting Auto Moto École</small></span></li><li class="t-pass"><i></i><span>Découverte du tandem <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-fort" data-meteo="abri"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Samedi matin. Inscription obligatoire, places limitées</em></li><li class="t-fort" data-meteo="abri"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Samedi après-midi. Inscription obligatoire, places limitées</em></li></ul></div>
  <div class="soon"><b>🎅 Boîte aux lettres du Père Noël</b>Les enfants ont la possibilité d’y déposer leur lettre.</div>
  <dialog class="pg" id="pg" aria-labelledby="pgt">
@@ -618,6 +655,8 @@ dialog.wz[open]{position:fixed;inset:0;z-index:1000}
  <div class="pgb" id="bkb" style="padding:20px 24px;line-height:1.6"></div>
 </dialog>
 </main>
+<div class="reprise" id="reprise" hidden role="dialog" aria-label="Reprendre votre commande"></div>
+<div id="print" aria-hidden="true"></div>
 <footer class="ft"><div class="container">
  <div class="ftg">
   <div>
@@ -1044,6 +1083,49 @@ function cherche(q){const w=nz(q).split(/\s+/).filter(Boolean).map(x=>SYN[x]||SY
   <div class="qab">${x.z?`<button type="button" data-plan="${x.z}">Voir sur le plan</button>`:""}${closed()?"":x.res.map(k=>`<button type="button" class="res" data-res="${k}">${resLab(k)}</button>`).join("")}${x.tel?`<a href="tel:+33670761026">Appeler</a>`:""}${x.a?`<a href="${x.a[0]}">${x.a[1]}</a>`:""}</div></article>`).join("");
  clearTimeout(qt0);qt0=setTimeout(()=>{ck("event","recherche");ck("set","recherche_resultat",r[0].t)},1200)}
 QI.addEventListener("input",()=>cherche(QI.value));
+
+/* ---- Panier sauvegardé : la commande en cours reste sur l’appareil (rien n’est envoyé) et peut être reprise ---- */
+const LP="telethon2026-panier",RP=$("reprise");
+const resume=()=>keys().map(([s,p,j])=>Q[s]+" × "+p.n+(multi(p)?"":", "+JL[j])).join(" ; ");
+function sauve(){try{if(!keys().length){localStorage.removeItem(LP);return}localStorage.setItem(LP,JSON.stringify({Q,A,X,NID,step,t:Date.now()}))}catch(_){}}
+const show0=show;show=n=>{show0(n);sauve()};
+let tsv;wb.addEventListener("input",()=>{clearTimeout(tsv);tsv=setTimeout(sauve,400)});
+function oublie(){try{localStorage.removeItem(LP)}catch(_){}RP.hidden=true}
+(()=>{let d=null;try{d=JSON.parse(localStorage.getItem(LP)||"null")}catch(_){}
+ const ty=new URLSearchParams(location.search).get("type");
+ if(ty==="return"){oublie();return}
+ if(!d||!d.Q||closed()||Date.now()-d.t>7*864e5){oublie();return}
+ const q0=Q,a0=A;Q=d.Q;A=d.A||{};const txt=resume(),tt=total();Q=q0;A=a0;if(!txt){oublie();return}
+ RP.innerHTML=`<b>Vous aviez commencé une commande</b><p>${esc(txt)}</p><p>Total : <b style="display:inline;font-size:inherit">${eur(tt)}</b></p><div class="ra"><button type="button" class="btn btn-p" id="rpok">Reprendre ma commande</button><button type="button" class="btn btn-s" id="rpno">Effacer</button></div>`;
+ RP.hidden=false;ck("event","panier_propose");
+ $("rpok").onclick=()=>{if(closed())return fermer();Q=d.Q;A=d.A||{};X=d.X&&d.X.length?d.X:X;NID=d.NID||NID;RP.hidden=true;ck("event","panier_repris");const st=Math.min(Math.max(1,d.step||1),4);show(st===4&&(err2()||err3())?2:st);bw.showModal()};
+ $("rpno").onclick=()=>{ck("event","panier_efface");oublie()}})();
+document.querySelectorAll("[data-bil]").forEach(b=>b.addEventListener("click",()=>{RP.hidden=true}));
+
+/* ---- Tombola proposée au récapitulatif, avant de payer ---- */
+const v4b=VIEWS[4],TK="tombola:tombola",PT0=PR.find(p=>p.id==="tombola");
+VIEWS[4]=()=>{let h=v4b();if(!PT0||Q[TK]||!parts().length)return h;
+ const lots=[...document.querySelectorAll("#tombola .lots b")].map(b=>b.textContent.trim()).slice(0,3).join(", ");
+ const up=`<div class="upsell"><div><b>🎟️ Et un ticket de tombola ?</b><small>${eur(PT0.p)} le ticket, tirage le dimanche 6 décembre à 16h45${lots?". À gagner : "+esc(lots)+"…":"."}</small></div><div class="ub"><button type="button" data-up="1">+ 1 ticket</button><button type="button" data-up="5">+ 5 tickets</button></div></div>`;
+ const i=h.indexOf('<div class="tt">');return i<0?h:h.slice(0,i)+up+h.slice(i)};
+wb.addEventListener("click",e=>{const b=e.target.closest("[data-up]");if(!b)return;const n=+b.dataset.up;Q[TK]=(Q[TK]||0)+n;norm();A[TK]=A[TK]||{};if(!got(TK))A[TK][parts()[0].id]=Q[TK];ck("event","tombola_ajoutee_"+n);show(4)});
+
+/* ---- Programme imprimable : affiche A4 générée depuis la page (bouton ou Ctrl+P) ---- */
+function affiche(){const pl=pluie(),P=$("print");
+ const col=d=>[...document.querySelectorAll(`#pg .pgb[data-d="${d}"] .ag>li`)].map(li=>{const h4=li.querySelector("h4"),t=h4.childNodes[0].textContent.trim(),h=[...li.querySelectorAll(".h b")].map(x=>x.textContent.trim()).join("<br>"),
+  pp=((li.querySelector(".p")||{}).textContent||"").trim(),tg=((li.querySelector(".tg")||{}).textContent||"").trim(),mt=pl&&(li.dataset.lieu==="in"||li.dataset.lieu==="abri")?h4.dataset.mt:"";
+  return `<li class="${(li.className.match(/t-\w+/)||[""])[0]}"><span class="ph">${h}</span><span><b>${esc(t)}</b>${mt?` <em>${esc(mt)}</em>`:""}<small>${esc(pp)}${tg?" · "+esc(tg):""}</small></span></li>`}).join("");
+ const soon=[...document.querySelectorAll(".soon .sl>li")].map(li=>{const sp=li.querySelector("span");return `<span><b>${esc(sp.childNodes[0].textContent.trim())}</b> ${esc(((sp.querySelector("small")||{}).textContent||"").trim())}</span>`}).join("");
+ const tar=GR.map(g=>{const ps=PR.filter(p=>p.g===g[0]&&p.p!=null);return `<p><b>${g[1]}</b> : ${esc(g[2])}${g[0]==="fort"?" — "+ps.map(p=>esc(p.n)+" "+eur(p.p)).join(", "):""}</p>`}).join("");
+ const qr=$("kqr")?$("kqr").outerHTML.replace(/\sid="kqr"/,""):"";
+ const maj=new Date().toLocaleString("fr-FR",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Paris"});
+ P.innerHTML=`<div class="ph1"><img src="/files/logos/favicon.png" alt="" /><div><h1>Téléthon 2026 à Luynes</h1><p><b>Samedi 5 et dimanche 6 décembre</b> · Espace Ughetti, allée Serge Attard / rue André Claverie, Luynes</p><p>Au profit de l’AFM-Téléthon</p>${pl?`<span class="pmt">☔ Programme mauvais temps : replis à l’intérieur et à l’abri</span>`:""}</div><div class="pqr">${qr}s.13080.fr/telethon</div></div>
+ <div class="pcols"><section><h2>Samedi 5 décembre</h2><ul>${col("sam")}</ul></section><section><h2>Dimanche 6 décembre</h2><ul>${col("dim")}</ul></section></div>
+ ${soon?`<div class="pbloc"><h2>Aussi au programme (horaires à venir)</h2><div class="psoon">${soon}</div></div>`:""}
+ <div class="pbloc"><h2>Tarifs</h2>${tar}<p>Billetterie en ligne sur <b>s.13080.fr/telethon</b>, retrait à la caisse centrale (accueil de la salle Ughetti). Les dons se font sur la page de collecte de l’AFM-Téléthon.</p></div>
+ <div class="pfoot"><span>Luynes en Fêtes · Renseignements : 06 70 76 10 26</span><span>Programme mis à jour le ${maj}</span></div>`}
+addEventListener("beforeprint",()=>{affiche();ck("event","programme_imprime")});
+$("imprimer").onclick=()=>{affiche();ck("event","programme_imprime");print()};
 document.addEventListener("click",e=>{const s=e.target.closest("[data-qq]");if(s){QI.value=s.dataset.qq;cherche(QI.value);QI.focus({preventScroll:true});return}
  const pz=e.target.closest("[data-plan]");if(pz&&window.planMontre){ck("event","recherche_plan");window.planMontre(pz.dataset.plan)}});
 
