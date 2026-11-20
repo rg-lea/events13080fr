@@ -335,6 +335,36 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin .tfab,html.fin .sw,html
 .msrc{margin:10px 0 0;font-size:.8rem;color:var(--muted)}.msrc a{text-decoration:underline}
 .lvw{margin:-4px 0 12px;font-weight:600;opacity:.95}
 @media(max-width:600px){.mdays{grid-template-columns:1fr}}
+/* ===== Fenêtres visibles dans les enregistrements Clarity (qui ne rejouent pas la « top layer » des <dialog>) ===== */
+dialog.pg[open]{position:fixed;inset:0;margin:auto;height:fit-content;z-index:1000}
+dialog.wz[open]{position:fixed;inset:0;z-index:1000}
+/* ===== Programme vivant ===== */
+.pgt{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:10px 24px;border-bottom:1px solid var(--line);background:#fff}
+.pgt[hidden]{display:none}
+.pgt button{border:1px solid var(--line);border-radius:99px;padding:8px 14px;background:#fff;color:var(--ink);font-weight:600}
+.pgt button[aria-pressed=true]{background:var(--brand-dark);border-color:var(--brand-dark);color:#fff}.pgt small{color:var(--muted)}
+.ag li.fini{opacity:.45}.pgb.cache li.fini{display:none}
+.ag li.encours{background:#fff3e0;box-shadow:inset 0 0 0 2px rgba(194,121,42,.35)}
+.etat{display:inline-block;margin-bottom:6px;padding:2px 10px;border-radius:99px;font-size:.78rem;font-weight:700;background:var(--brand-soft);color:var(--ink)}
+.encours .etat{background:var(--brand-dark);color:#fff}.fini .etat{background:#eee;color:#555}
+/* ===== Réserver depuis le programme ===== */
+.res{display:inline-flex;margin:10px 0 0 8px;padding:6px 14px;border:0;border-radius:99px;background:var(--brand-dark);color:#fff;font-weight:700;font-size:.85rem}
+.res:hover{filter:brightness(1.08)}.sl .res{margin:0}
+.rw.hl{animation:hl 2.4s ease-out}@keyframes hl{0%,40%{background:#ffe2bd}100%{background:transparent}}
+/* ===== Où ? Quand ? Combien ? ===== */
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.qq{max-width:760px;margin:0 0 18px}
+.qq input{display:block;width:100%;padding:16px 20px 16px 50px;border:2px solid var(--brand-dark);border-radius:999px;font:inherit;font-size:1.05rem;color:var(--ink);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c2792a' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E") 18px center/22px no-repeat;box-shadow:var(--shadow)}
+.qq input:focus{outline:none;box-shadow:0 0 0 4px rgba(194,121,42,.2)}
+.qqs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.qqs button{border:1px solid var(--line);border-radius:99px;padding:6px 12px;background:#fff;color:var(--ink);font-size:.9rem}.qqs button:hover{background:var(--brand-soft)}
+.qqr{display:grid;gap:10px;margin-top:12px}.qqr:empty{display:none}
+.qa{padding:14px 18px;border:1px solid var(--line);border-left:8px solid var(--t,var(--brand-dark));border-radius:18px;background:#fff;color:var(--ink)}
+.qah{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:6px}.qah b{font-size:1.15rem}
+.qa p{margin:4px 0 0;line-height:1.45;color:var(--text)}
+.qab{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.qab button,.qab a{border:1px solid var(--line);border-radius:99px;padding:7px 14px;background:var(--brand-soft);color:var(--ink);font-weight:600;font-size:.9rem}
+.qab .res{margin:0;border:0;background:var(--brand-dark);color:#fff}
+.qn{padding:12px 16px;border-radius:16px;background:#fff;border:1px dashed var(--line);color:var(--muted)}
 /* ===== Pied de page ===== */
 .ft{position:relative;z-index:1;background:var(--ink);color:rgba(255,246,235,.82);padding:48px 0 calc(96px + env(safe-area-inset-bottom,0px));font-size:.95rem;line-height:1.55}
 .ft a{color:#fff}.ft a:hover{color:var(--brand)}
@@ -411,6 +441,9 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin .tfab,html.fin .sw,html
 <section class="sec" id="programme"><div class="container">
  <h2>Le programme</h2>
  <p class="lead">Touchez un jour pour découvrir ses animations.</p>
+ <div class="qq" role="search"><label class="vh" for="qq">Rechercher : où, quand, combien</label><input id="qq" type="search" placeholder="Où ? Quand ? Combien ? Ex. : karts, toilettes, concert" autocomplete="off" enterkeyhint="search" />
+  <div class="qqs" aria-label="Suggestions"><button type="button" data-qq="karts">karts</button><button type="button" data-qq="massage">massage</button><button type="button" data-qq="concert">concert</button><button type="button" data-qq="toilettes">toilettes</button><button type="button" data-qq="parking">parking</button><button type="button" data-qq="pass">pass</button></div>
+  <div class="qqr" id="qqr" aria-live="polite"></div></div>
  <div class="pick">
   <button class="pickb" type="button" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></button>
   <button class="pickb" type="button" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></button>
@@ -421,6 +454,7 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin .tfab,html.fin .sw,html
  <div class="soon"><b>🎅 Boîte aux lettres du Père Noël</b>Les enfants ont la possibilité d’y déposer leur lettre.</div>
  <dialog class="pg" id="pg" aria-labelledby="pgt">
   <div class="pgh"><h3 id="pgt"></h3><button class="x" type="button" id="pgx" aria-label="Fermer">&times;</button></div>
+ <div class="pgt" id="pgtool" hidden><button type="button" aria-pressed="false">Encore possible aujourd’hui</button><small>masque les activités terminées</small></div>
   <div class="pgb" data-d="sam"><ul class="ag">
 <li class="t-jeton"><div class="h"><b>10h – 12h</b><b>14h – 16h</b></div><div class="i"><h4>Porte-clés</h4><span class="p">Accueil de la salle Ughetti</span><p>Un porte-clés personnalisé, avec votre prénom ou le motif de votre choix.</p><span class="tg">5 jetons</span></div></li>
 <li class="t-pass"><div class="h"><b>10h – 12h</b><b>13h – 16h</b></div><div class="i"><h4>Karts à pédales</h4><span class="p">Boulodrome, avec l’ADAVA</span><p>Pilotez un kart sur un circuit sécurisé.</p><span class="tg">Pass multi-activités</span></div></li>
@@ -607,6 +641,8 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin .tfab,html.fin .sw,html
 
 <script>
 const $=i=>document.getElementById(i);
+/* Clarity : événements et étiquettes pour suivre ce qui se passe dans les fenêtres (billetterie, programme…) */
+const ck=(...a)=>{try{if(typeof window.clarity==="function")window.clarity(...a)}catch(_){}};
 const dlg=$("pg");
 function openDay(d){dlg.querySelectorAll(".pgb").forEach(b=>b.hidden=b.dataset.d!==d);$("pgt").textContent=d==="sam"?"Samedi 5 décembre":"Dimanche 6 décembre";dlg.showModal();dlg.querySelector(".pgb:not([hidden])").scrollTop=0}
 document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",e=>{e.preventDefault();openDay(b.dataset.open)}));
@@ -715,7 +751,7 @@ function v4(){const L=price(),T=total(),p0=X[0];
 /* ---- navigation ---- */
 const VIEWS=[0,v1,v2,v3,v4];
 let shown=0;
-function show(n){const was=shown;wb.classList.toggle("go",n!==shown);shown=n;step=n;if(n===3&&was!==3)auto();$("bm").textContent="";if(n>=3)norm();wb.innerHTML=VIEWS[n]();wb.scrollTop=0;
+function show(n){const was=shown;if(n!==was){ck("event","billetterie_etape_"+n);ck("set","billetterie_etape",String(n))}wb.classList.toggle("go",n!==shown);shown=n;step=n;if(n===3&&was!==3)auto();$("bm").textContent="";if(n>=3)norm();wb.innerHTML=VIEWS[n]();wb.scrollTop=0;
  $("pg4").querySelectorAll("i").forEach((e,i)=>e.classList.toggle("on",i<n));$("bb").hidden=n===1;
  $("bn").textContent=n===4?"Payer "+eur(total()):n===3?"Relire ma commande":"Continuer";upd()}
 function upd(){$("bt").textContent=eur(total());if(step===1)$("bn").disabled=!keys().length;else $("bn").disabled=false}
@@ -741,7 +777,7 @@ $("bn").onclick=async()=>{const m=t=>{$("bm").textContent=t};
  const e=err2()||err3();if(e)return m(e);if(!API_URL)return m("Le paiement en ligne n’est pas encore branché.");if(closed())return fermer();
  const L=price(),idx=id=>X.findIndex(a=>a.id===id),pers=X.map(x=>({prenom:propre(x.prenom),nom:propre(x.nom),age:x.age,role:x.role,resp:x.resp?idx(x.resp):null,accomp:(x.accs||[]).map(idx)})),
   lignes=L.map(l=>({id:l.p.id,jour:l.j,p:X.indexOf(l.x),qte:l.n})),mail=X[0].mail.trim(),tel=X[0].tel.trim(),body={mail,tel,personnes:pers,lignes};
- $("bn").disabled=true;m("");$("bn").textContent="Redirection vers le paiement…";
+ $("bn").disabled=true;m("");ck("event","billetterie_paiement");ck("set","billetterie_total",String(total()));$("bn").textContent="Redirection vers le paiement…";
  try{localStorage.setItem(LS,JSON.stringify(body))}catch(_){}
  try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...body,action:"commande"})});
   if(!r.ok)throw 0;const d=await r.json();
@@ -753,7 +789,7 @@ const FERME=Date.parse("2026-12-06T16:00:00+01:00"),closed=()=>Date.now()>=FERME
 function fermer(){if(bw.open)bw.close();document.querySelectorAll("[data-bil]").forEach(b=>{b.disabled=true;if(b.classList.contains("fab"))b.hidden=true;else b.textContent="Billetterie fermée"});
  document.querySelectorAll(".ticket p").forEach(p=>p.textContent="La billetterie en ligne est fermée. Retrouvez-nous sur place, à la caisse centrale de la salle Ughetti.")}
 if(closed())fermer();else{const iv=setInterval(()=>{if(closed()){clearInterval(iv);fermer()}},15000)}
-document.querySelectorAll("[data-bil]").forEach(b=>b.addEventListener("click",()=>{if(closed())return fermer();const t=b.dataset.bil;show(t?1:step);bw.showModal();if(t){const g=wb.querySelector(`[data-g="${t}"]`);if(g){wb.style.scrollBehavior="auto";wb.scrollTop+=g.getBoundingClientRect().top-wb.getBoundingClientRect().top-8;wb.style.scrollBehavior=""}}}));
+document.querySelectorAll("[data-bil]").forEach(b=>b.addEventListener("click",()=>{if(closed())return fermer();ck("event","billetterie_ouverte");const t=b.dataset.bil;show(t?1:step);bw.showModal();if(t){const g=wb.querySelector(`[data-g="${t}"]`);if(g){wb.style.scrollBehavior="auto";wb.scrollTop+=g.getBoundingClientRect().top-wb.getBoundingClientRect().top-8;wb.style.scrollBehavior=""}}}));
 $("bwx").onclick=()=>bw.close();bw.addEventListener("click",e=>{if(e.target===bw)bw.close()});
 /* retour depuis HelloAsso : le flux ajoute ?type=return (avec code, orderId, checkoutIntentId), ?type=error ou ?type=back */
 const bk=$("bk");$("bkx").onclick=()=>bk.close();bk.addEventListener("click",e=>{if(e.target===bk)bk.close()});
@@ -761,7 +797,7 @@ const bk=$("bk");$("bkx").onclick=()=>bk.close();bk.addEventListener("click",e=>
  const pop=(t,h)=>{$("bkt").textContent=t;$("bkb").innerHTML=h;if(!bk.open)bk.showModal()};
  const o=(q.get("orderId")||"").replace(/\D/g,""),ci=(q.get("checkoutIntentId")||"").replace(/\D/g,"");
  history.replaceState(null,"",location.pathname);
- if(ty==="return"&&q.get("code")==="succeeded"){
+ if(ty==="return"&&q.get("code")==="succeeded"){ck("event","paiement_reussi");
   const base=`<p><b>Votre paiement a bien été reçu.</b> HelloAsso vous envoie aussi son propre reçu de paiement.</p><p>Le jour J, présentez-vous à la caisse centrale, salle Ughetti, avec votre nom${o?` (commande n° ${o})`:""} pour retirer vos jetons, pass et tickets.</p>`;
   let saved=null;try{saved=JSON.parse(localStorage.getItem(LS)||"null");localStorage.removeItem(LS)}catch(_){}
   if(!saved||!ci||!API_URL){pop("Merci !",base+`<p>Pour toute question : 06 70 76 10 26.</p>`);return}
@@ -769,7 +805,7 @@ const bk=$("bk");$("bkx").onclick=()=>bk.close();bk.addEventListener("click",e=>
   try{const r=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...saved,action:"confirmer",checkoutIntentId:ci,orderId:o})});
    if(!r.ok)throw 0;$("cm").innerHTML=`<b>✓ Confirmation envoyée</b> à ${esc(saved.mail)}, avec le détail de chaque achat. Pensez à regarder vos courriers indésirables.`}
   catch(_){$("cm").textContent="Nous n’avons pas pu envoyer le détail par e-mail. Votre paiement est bien enregistré : conservez votre numéro de commande et contactez-nous au 06 70 76 10 26."}}
- else if(ty==="error")pop("Paiement non abouti","<p>Le paiement n’a pas pu aller à son terme. Avant de recommencer, vérifiez que vous n’avez pas reçu de confirmation par e-mail.</p>")})();
+ else if(ty==="error"&&(ck("event","paiement_erreur"),1))pop("Paiement non abouti","<p>Le paiement n’a pas pu aller à son terme. Avant de recommencer, vérifiez que vous n’avez pas reçu de confirmation par e-mail.</p>")})();
 const bg=$("bg"),nv=$("nv");
 bg.onclick=()=>{const o=nv.classList.toggle("open");bg.setAttribute("aria-expanded",o);bg.setAttribute("aria-label",o?"Fermer le menu":"Ouvrir le menu")};
 nv.addEventListener("click",e=>{if(e.target.closest("a")){nv.classList.remove("open");bg.setAttribute("aria-expanded","false")}});
@@ -838,7 +874,7 @@ const P1=$("plan"),P2=$("plan2"),zi=$("zi"),phd=$("phd");
 const hint=h=>{zi.innerHTML=`<p class="hint">${h}</p>`};
 hint(H1);
 function clear(pl){pl.dataset.s="";pl.classList.remove("sel");pl.querySelectorAll(".on").forEach(g=>g.classList.remove("on"));pl.querySelectorAll(".ov").forEach(o=>o.remove())}
-function pick(pl,Z,k){const on=pl.dataset.s===k;pl.classList.add("touched");clear(pl);
+function pick(pl,Z,k){const on=pl.dataset.s===k;if(!on)ck("event","plan_"+k);pl.classList.add("touched");clear(pl);
  if(on)return hint(pl===P1?H1:H2);
  pl.dataset.s=k;if(!k.startsWith("entree"))pl.classList.add("sel");
  pl.querySelectorAll(`[data-z="${k}"]`).forEach(g=>g.classList.add("on"));
@@ -849,6 +885,10 @@ function pick(pl,Z,k){const on=pl.dataset.s===k;pl.classList.add("touched");clea
 function view(inside){clear(P1);clear(P2);P1.toggleAttribute("hidden",inside);P2.toggleAttribute("hidden",!inside);$("pback").hidden=!inside;$("ptt").textContent=inside?"Salle Ughetti, intérieur":"Plan du site";hint(inside?H2:H1);
  (inside?phd:P1).scrollIntoView({block:"nearest",behavior:"smooth"})}
 $("pback").onclick=()=>view(false);
+/* ouvert aux autres scripts (recherche) : montrer une zone sur le plan */
+window.planZones={Z1,Z2};
+window.planMontre=k=>{if(k in Z2){view(true);P2.dataset.s="";pick(P2,Z2,k)}else if(k in Z1){view(false);P1.dataset.s="";pick(P1,Z1,k)}else view(true);
+ setTimeout(()=>$("lieu").scrollIntoView({behavior:"smooth",block:"start"}),60)};
 function act(pl,Z,g){const k=g.dataset.z;if(pl===P1&&k==="salle")return view(true);pick(pl,Z,k)}
 [[P1,Z1],[P2,Z2]].forEach(([pl,Z])=>{
  pl.addEventListener("click",e=>{const g=e.target.closest(".pin,.z");if(g)act(pl,Z,g)});
@@ -929,7 +969,7 @@ function live(){const n=now();if(n<DEB||n>=FINP){W.hidden=true;return}
  o+=`<div class="lva">${pd?`<button type="button" data-lvday="${pd}">Programme du ${JN[pd].split(" ")[0]}</button>`:""}<button type="button" data-pluie aria-pressed="${pluie()}">☔ ${pluie()?"Mode mauvais temps activé":"Mauvais temps ?"}</button></div>`;
  W.innerHTML=o;W.hidden=false}
 W.addEventListener("click",e=>{const b=e.target.closest("[data-lvday]");if(b)openDay(b.dataset.lvday)});
-function setPluie(on){document.documentElement.classList.toggle("pluie",on);try{sessionStorage.setItem("telethon-pluie",on?"1":"")}catch(_){}
+function setPluie(on){if(on!==pluie())ck("event",on?"mauvais_temps_on":"mauvais_temps_off");document.documentElement.classList.toggle("pluie",on);try{sessionStorage.setItem("telethon-pluie",on?"1":"")}catch(_){}
  ags.forEach(u=>[...u.children].sort((a,b)=>(on?R[a.dataset.lieu||""]-R[b.dataset.lieu||""]:0)||a.dataset.o-b.dataset.o).forEach(x=>u.appendChild(x)));
  document.querySelectorAll(".rain[data-pluie]").forEach(b=>b.setAttribute("aria-pressed",on));live();if(MET)rmet()}
 document.addEventListener("click",e=>{if(e.target.closest("[data-pluie]"))setPluie(!pluie())});
@@ -939,6 +979,74 @@ if(!fin()){live();meteo()}
 setInterval(()=>{if(!document.documentElement.classList.contains("fin"))meteo()},30*60000);
 const it=setInterval(()=>{if(fin())clearInterval(it);else live()},30000);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&!fin())live()});
+/* ---- Programme vivant : le jour J, la fenêtre suit l’heure (terminé, en cours, à venir) ---- */
+const auj=()=>new Date(now()).toLocaleDateString("fr-CA",{timeZone:"Europe/Paris"});
+const slots=(li,d)=>[...li.querySelectorAll(".h b")].map(x=>{const m=x.textContent.match(/(\d{1,2})h(\d{2})?\s*[–-]\s*(\d{1,2})h(\d{2})?/);return m?{s:at(d,m[1],m[2]),e:at(d,m[3],m[4]),sh:hh(m[1],m[2]),eh:hh(m[3],m[4])}:null}).filter(Boolean);
+const PT=$("pgtool");let cache=false;
+const jourVu=()=>{const b=document.querySelector("#pg .pgb[data-d]:not([hidden])");return b?b.dataset.d:null};
+function vivant(d){const b=document.querySelector(`#pg .pgb[data-d="${d}"]`);if(!b)return;const n=now(),td=auj(),jr=JOUR[d],today=td===jr;let first=null,nf=0;
+ b.querySelectorAll(".ag>li").forEach(li=>{li.classList.remove("fini","encours");const o=li.querySelector(".etat");if(o)o.remove();if(td<jr)return;
+  const S=slots(li,d);if(!S.length)return;let lab="",cls="";
+  if(td>jr||n>=Math.max(...S.map(x=>x.e))){cls="fini";lab="Terminé";nf++}
+  else{const c=S.find(x=>x.s<=n&&n<x.e);if(c){cls="encours";lab="En cours · jusqu’à "+c.eh}else{const nx=S.find(x=>x.s>n);if(nx)lab=(n<S[0].s?"À partir de ":"Reprend à ")+nx.sh}}
+  if(cls)li.classList.add(cls);if(lab){const e=document.createElement("span");e.className="etat";e.textContent=lab;li.querySelector(".i").prepend(e)}
+  if(!first&&cls!=="fini")first=li});
+ PT.hidden=!(today&&nf);b.classList.toggle("cache",cache&&today);PT.querySelector("button").setAttribute("aria-pressed",cache&&today);
+ if(today&&first)requestAnimationFrame(()=>{b.scrollTop=Math.max(0,first.getBoundingClientRect().top-b.getBoundingClientRect().top+b.scrollTop-8)})}
+PT.querySelector("button").onclick=()=>{cache=!cache;ck("event",cache?"programme_masquer_termine":"programme_tout_afficher");const d=jourVu();if(d)vivant(d)};
+const od=openDay;openDay=d=>{od(d);ck("event","programme_"+d);vivant(d)};
+/* boutons des jours : « aujourd’hui » ou « terminé » le week-end venu */
+function joursEtat(){const td=auj();document.querySelectorAll("[data-open]").forEach(b=>{const sm=b.querySelector("small");if(!sm)return;sm.dataset.o=sm.dataset.o||sm.textContent;const jr=JOUR[b.dataset.open];
+ sm.textContent=sm.dataset.o+(jr===td?" · aujourd’hui":td>jr?" · terminé":"")})}
+joursEtat();setInterval(()=>{joursEtat();const d=jourVu();if(dlg.open&&d)vivant(d)},30000);
+
+/* ---- Réserver depuis le programme : la billetterie s’ouvre sur la bonne ligne et le bon jour ---- */
+const resKey=(li,d)=>{const c=li.className,t=((li.querySelector("h4")||li.querySelector("span")||{}).textContent||"").toLowerCase();
+ if(/t-pass/.test(c))return d?"pass:"+d:"";if(/t-jeton/.test(c))return "jeton:tous";
+ if(/t-fort/.test(c)){const p=PR.find(p=>p.g==="fort"&&p.p!=null&&t.includes(p.id));if(p)return p.id+":"+(d&&p.j.includes(d)?d:p.j[0])}return ""};
+const resLab=k=>{const[id,j]=k.split(":");return id==="pass"?"Prendre le pass du "+JN[j].split(" ")[0]:id==="jeton"?"Acheter des jetons":id==="tombola"?"Acheter des tickets":"Réserver"};
+function reserver(k){if(closed()){document.querySelectorAll(".res").forEach(b=>b.hidden=true);return fermer()}
+ if(dlg.open)dlg.close();Q[k]=Q[k]||1;ck("event","reserver_"+k.replace(":","_"));show(1);if(!bw.open)bw.showModal();
+ const r=wb.querySelector(`[data-q^="${k}|"]`),row=r&&r.closest(".rw");if(row){wb.style.scrollBehavior="auto";wb.scrollTop+=row.getBoundingClientRect().top-wb.getBoundingClientRect().top-90;wb.style.scrollBehavior="";row.classList.add("hl")}}
+if(!closed()){
+ document.querySelectorAll("#pg .pgb[data-d] .ag>li").forEach(li=>{const k=resKey(li,li.closest(".pgb").dataset.d);if(k)li.querySelector(".i").insertAdjacentHTML("beforeend",`<button type="button" class="res" data-res="${k}">${resLab(k)}</button>`)});
+ document.querySelectorAll(".soon .sl>li.t-fort").forEach(li=>{const k=resKey(li,"sam");if(k)li.insertAdjacentHTML("beforeend",`<button type="button" class="res" data-res="${k}">${resLab(k)}</button>`)})}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-res]");if(b){e.preventDefault();reserver(b.dataset.res)}});
+
+/* ---- Où ? Quand ? Combien ? : recherche instantanée dans le programme, le plan et les tarifs ---- */
+const nz=t=>String(t||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[’'\-]/g," ");
+const SYN={wc:"toilettes",toilette:"toilettes",pipi:"toilettes",voiture:"parking",garer:"parking",stationner:"parking",stationnement:"parking",payer:"caisse",paiement:"caisse",retrait:"caisse",retirer:"caisse",billet:"billetterie",billets:"billetterie",ticket:"billetterie",tickets:"billetterie",manger:"crepes",crepe:"crepes",gouter:"crepes",kart:"karts",musique:"concert",jazz:"concert",danse:"rythm",enfant:"enfants",gamins:"enfants",velo:"cyclo",telephone:"contact",appeler:"contact",question:"contact",don:"don",dons:"don",prix:"tarifs",tarif:"tarifs",combien:"tarifs",cout:"tarifs",adresse:"acces",venir:"acces",itineraire:"acces",pluie:"interieur"};
+const ZD=window.planZones||{Z1:{},Z2:{}},STOP=["atelier","stand","spectacle","decouverte","sorties"];
+const zoneDe=(t,pl)=>{const w=nz(t).split(/\s+/).filter(x=>x.length>=4&&!STOP.includes(x)).map(x=>x.replace(/s$/,""));
+ for(const Z of [ZD.Z2,ZD.Z1])for(const k in Z){const h=nz(Z[k][0]+" "+Z[k][2]);if(w.some(x=>h.includes(x)))return k}
+ return /salle/i.test(pl)&&!/devant/i.test(pl)?"salle":/devant|parvis/i.test(pl)?"parvis":""};
+const IX=[],PRIX={pass:"Inclus dans le pass multi-activités : 10 € par participant et par jour.",jeton:"Payable en jetons (1 jeton = 1 €).",fort:"Ticket temps fort : "};
+const byT={};
+document.querySelectorAll("#pg .pgb[data-d] .ag>li").forEach(li=>{const d=li.closest(".pgb").dataset.d,t=li.querySelector("h4").childNodes[0].textContent.trim(),pl=((li.querySelector(".p")||{}).textContent||"").trim(),
+ tg=((li.querySelector(".tg")||{}).textContent||"").trim(),ds=((li.querySelector(".i p")||{}).textContent||"").trim(),cl=(li.className.match(/t-\w+/)||[""])[0];
+ const e=byT[t]=byT[t]||{t,pl,tg,ds,cl,j:{},res:[],z:zoneDe(t,pl),w:li.dataset.lieu||""};e.j[d]=[...li.querySelectorAll(".h b")].map(x=>x.textContent.trim()).join(", ");const k=resKey(li,d);if(k&&!e.res.includes(k))e.res.push(k)});
+Object.values(byT).forEach(e=>{const pr=e.cl==="t-pass"?PRIX.pass:e.cl==="t-jeton"?e.tg+". "+PRIX.jeton:e.cl==="t-fort"?(()=>{const p=PR.find(p=>p.g==="fort"&&nz(e.t).includes(p.id));return PRIX.fort+(p?eur(p.p)+" par participant.":"voir la billetterie.")})():e.tg+".";
+ IX.push({t:e.t,cl:e.cl,tag:e.tg,k:nz(e.t),h:nz([e.t,e.pl,e.ds,e.tg,e.cl==="t-pass"?"pass enfants":"",e.w==="in"?"interieur":""].join(" ")),
+  l:[Object.keys(e.j).map(d=>"📅 "+cap(JN[d].split(" ")[0])+" : "+e.j[d]).join(" · "),e.pl&&"📍 "+e.pl,"💶 "+pr],z:e.z,res:e.res})});
+document.querySelectorAll(".soon .sl>li").forEach(li=>{const sp=li.querySelector("span"),t=sp.childNodes[0].textContent.trim(),org=((sp.querySelector("small")||{}).textContent||"").trim(),ins=((li.querySelector(".ins")||{}).textContent||"").trim(),cl=(li.className.match(/t-\w+/)||[""])[0],k=resKey(li,"sam");
+ IX.push({t,cl,tag:"Horaires à venir",k:nz(t),h:nz([t,org,ins,cl==="t-pass"?"pass enfants":"",li.dataset.lieu==="in"?"interieur":""].join(" ")),l:[org&&"👥 "+org,ins&&"📅 "+ins,cl==="t-pass"?"💶 "+PRIX.pass:k?"💶 Ticket temps fort, à réserver en ligne.":""],z:"",res:k?[k]:[]})});
+for(const Z of [ZD.Z1,ZD.Z2])for(const k in Z){if(IX.some(x=>x.z===k&&x.zone))continue;IX.push({t:Z[k][0],cl:"",zone:1,tag:"Sur le plan",k:nz(Z[k][0]),h:nz(Z[k][0]+" "+Z[k][2]+(k==="accueil"?" caisse retrait billetterie":"")),l:["📍 "+Z[k][2]],z:k,res:[]})}
+GR.forEach(g=>{const ps=PR.filter(p=>p.g===g[0]&&p.p!=null);IX.push({t:g[1],cl:"t-"+g[0],tag:"Tarifs",k:nz(g[1]),h:nz(g[1]+" "+g[2]+" tarifs billetterie "+ps.map(p=>p.n+" "+p.d).join(" ")),
+ l:["💶 "+g[2]+(g[0]==="fort"?" : "+ps.map(p=>p.n+" "+eur(p.p)).join(", "):"")],z:"",res:g[0]==="pass"?["pass:sam","pass:dim"]:g[0]==="jeton"?["jeton:tous"]:g[0]==="tombola"?["tombola:tombola"]:[]})});
+IX.push({t:"Contact du comité",cl:"",tag:"Une question ?",k:"contact",h:"contact telephone question aide benevole comite mail",l:["📞 06 70 76 10 26, ou par e-mail depuis la section Contact."],z:"",res:[],a:["#contact","Aller au contact"],tel:1});
+IX.push({t:"Faire un don",cl:"",tag:"AFM-Téléthon",k:"don",h:"don dons donner soutenir afm telethon recu fiscal",l:["💛 Sur la page de collecte de Luynes. Un don donne droit à un reçu fiscal (pas les jetons, pass ou tickets)."],z:"",res:[],a:["#don","Faire un don"]});
+IX.push({t:"Venir à l’Espace Ughetti",cl:"",tag:"Accès",k:"acces",h:"acces adresse venir itineraire plan allee serge attard rue andre claverie luynes parking entree",l:["📍 Allée Serge Attard / Rue André Claverie, Luynes, 13080 Aix-en-Provence."],z:"entree-parking",res:[],a:["#lieu","Lieu et itinéraire"]});
+const QI=$("qq"),QR=$("qqr");let qt0;
+function cherche(q){const w=nz(q).split(/\s+/).filter(Boolean).map(x=>SYN[x]||SYN[x.replace(/s$/,"")]||x);if(!w.length){QR.innerHTML="";return}
+ const r=IX.map(x=>{let sc=0;for(const m of w){const re=new RegExp("(^|\\s)"+m.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));if(re.test(x.k))sc+=3;else if(re.test(x.h))sc+=1;else return null}return{x,sc}}).filter(Boolean).sort((a,b)=>b.sc-a.sc).slice(0,5).map(o=>o.x);
+ if(!r.length){QR.innerHTML=`<p class="qn">Rien trouvé pour « ${esc(q)} ». Essayez : karts, toilettes, concert, parking, pass.</p>`;return}
+ QR.innerHTML=r.map(x=>`<article class="qa ${x.cl}"><div class="qah"><b>${esc(x.t)}</b>${x.tag?`<span class="tg">${esc(x.tag)}</span>`:""}</div>${x.l.filter(Boolean).map(l=>`<p>${esc(l)}</p>`).join("")}
+  <div class="qab">${x.z?`<button type="button" data-plan="${x.z}">Voir sur le plan</button>`:""}${closed()?"":x.res.map(k=>`<button type="button" class="res" data-res="${k}">${resLab(k)}</button>`).join("")}${x.tel?`<a href="tel:+33670761026">Appeler</a>`:""}${x.a?`<a href="${x.a[0]}">${x.a[1]}</a>`:""}</div></article>`).join("");
+ clearTimeout(qt0);qt0=setTimeout(()=>{ck("event","recherche");ck("set","recherche_resultat",r[0].t)},1200)}
+QI.addEventListener("input",()=>cherche(QI.value));
+document.addEventListener("click",e=>{const s=e.target.closest("[data-qq]");if(s){QI.value=s.dataset.qq;cherche(QI.value);QI.focus({preventScroll:true});return}
+ const pz=e.target.closest("[data-plan]");if(pz&&window.planMontre){ck("event","recherche_plan");window.planMontre(pz.dataset.plan)}});
+
 })();
 /* modale ouverte : la page derrière ne défile plus */
 const lock=()=>document.documentElement.classList.toggle("lk",!!document.querySelector("dialog[open]"));
