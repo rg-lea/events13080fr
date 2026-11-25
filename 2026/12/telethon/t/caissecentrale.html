@@ -23,6 +23,8 @@ header{position:sticky;top:0;z-index:60;background:rgba(255,249,242,.92);backdro
 header .container{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:9px 0}
 .brand{display:flex;align-items:center;gap:12px;color:var(--ink);font-weight:700;letter-spacing:-.02em}
 .logo{width:46px;height:46px;border-radius:12px;object-fit:contain;background:var(--brand-dark);padding:4px}
+.hr{display:flex;align-items:center;gap:10px}
+.clk{padding:6px 14px;border-radius:999px;background:var(--ink);color:#fff;font-weight:800;font-size:1.15rem;letter-spacing:.02em;font-variant-numeric:tabular-nums}
 .tag{padding:7px 16px;border-radius:999px;background:var(--brand-soft);color:var(--ink);font-weight:700}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:600;border:0;transition:transform .2s}
 .btn:hover{transform:translateY(-1px)}.btn-p{background:var(--brand-dark);color:#fff;box-shadow:0 10px 22px rgba(194,121,42,.3)}.btn-s{background:var(--brand-soft);color:var(--ink)}
@@ -71,7 +73,7 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 .hs{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0 6px;color:var(--ink);font-weight:700}.hl{list-style:none;margin:0;padding:0}.hl li{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
 .hl button.o{flex:1;text-align:left;border:0;background:none;color:var(--ink);padding:4px 0}.hl button.o b{font-size:1.15rem;letter-spacing:.1em;margin-right:8px}.hl small{color:var(--muted)}.hl button.x{border:1px solid var(--line);background:#fff;border-radius:99px;width:36px;height:36px}.lnk{border:0;background:none;color:var(--brand-dark);font-weight:700;text-decoration:underline}
 .ref{display:inline-block;margin:4px 0 12px;padding:8px 16px;border-radius:14px;background:var(--brand-soft);color:var(--ink);font-size:1.4rem;font-weight:800;letter-spacing:.02em}
-@media(max-width:480px){.dbl{grid-template-columns:1fr;gap:0}.dens{grid-template-columns:1fr}.rw{flex-wrap:wrap}}
+@media(max-width:480px){.brand{font-size:0;gap:0}.tag{white-space:nowrap;padding:6px 12px;font-size:.9rem}.clk{font-size:1.05rem}.dbl{grid-template-columns:1fr;gap:0}.dens{grid-template-columns:1fr}.rw{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 <!-- Matomo -->
@@ -99,7 +101,7 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 <body>
 <header><div class="container">
  <a class="brand" href="/2026/12/telethon"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" />Luynes en Fêtes</a>
- <span class="tag">Caisse centrale</span>
+ <span class="hr"><time class="clk" id="clk" aria-label="Heure actuelle"></time><span class="tag">Caisse centrale</span></span>
 </div></header>
 
 <div class="off" id="off" hidden role="status">📡 <b>Pas de connexion internet.</b> Les ventes ne peuvent pas être enregistrées pour l’instant : notez-les sur papier, ou attendez le retour du réseau.</div>
@@ -225,6 +227,8 @@ addEventListener("beforeunload",e=>{if(!$("dg").open&&(busy||total()||$("pre").v
 let wl=null;const eveil=async()=>{try{if("wakeLock" in navigator&&document.visibilityState==="visible"&&!wl){wl=await navigator.wakeLock.request("screen");wl.addEventListener("release",()=>{wl=null})}}catch(_){}};
 document.addEventListener("visibilitychange",eveil);addEventListener("pointerdown",eveil,{once:true});eveil();reseau();
 upd();
+/* horloge de la caisse (heure de Paris), mise à jour chaque seconde */
+(()=>{const c=$("clk"),f=()=>{const d=new Date();c.textContent=d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit",second:"2-digit",timeZone:"Europe/Paris"});c.dateTime=d.toISOString()};f();setInterval(f,1000);document.addEventListener("visibilitychange",f)})();
 /* ---- Historique des ventes en caisse (navigateur) ---- */
 const VK="caisse-ventes";
 const vget=()=>{try{const v=JSON.parse(localStorage.getItem(VK)||"[]");return Array.isArray(v)?v:[]}catch(_){return[]}};
