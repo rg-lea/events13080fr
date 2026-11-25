@@ -105,7 +105,7 @@ h1{margin:0 0 14px;font-size:clamp(3rem,7vw,5.4rem);line-height:.92;letter-spaci
 .lvm{display:block;margin:10px 0 0;padding:0;border:0;background:none;color:#fff;opacity:.8;font-size:.9rem;text-decoration:underline;text-underline-offset:3px}.lvm:hover{opacity:1}
 .lva{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .lva button{border:1px solid rgba(255,255,255,.4);border-radius:99px;padding:8px 14px;background:rgba(255,255,255,.14);color:#fff;font-weight:600;font-size:.9rem}
-.lva button:hover{background:rgba(255,255,255,.26)}html.pluie .lva [data-pluie]{background:#fff;color:var(--ink)}
+.lva button:hover{background:rgba(255,255,255,.26)}
 
 /* ---------- 4. Sections ---------- */
 /* le hero reste figé, le contenu remonte par-dessus ; une section sur deux sur fond blanc pour rythmer la lecture */
@@ -122,8 +122,6 @@ h3.sh3{margin:34px 0 14px;color:var(--ink);font-size:1.1rem;letter-spacing:-.02e
 .pickb{display:block;width:100%;text-align:left;border:0;border-radius:24px;padding:22px 26px;background:var(--brand-dark);color:#fff;box-shadow:0 12px 26px rgba(194,121,42,.28);transition:transform .2s}
 .pickb:hover{transform:translateY(-2px)}.pickb small{display:block;opacity:.85;font-weight:600}.pickb b{display:block;font-size:2rem;letter-spacing:-.04em;margin:2px 0 8px}.pickb span{font-weight:600}
 .pact{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 28px}
-.rain .on,html.pluie .rain .off{display:none}html.pluie .rain .on{display:inline}
-html.pluie .rain{background:var(--rain);border-color:#5f95c4;color:var(--rain-ink)}
 /* recherche « Où ? Quand ? Combien ? » */
 .qq{margin:0 0 28px}
 .qq input{display:block;width:100%;padding:16px 20px 16px 50px;border:1px solid var(--line);border-radius:999px;font:inherit;font-size:1.05rem;color:var(--ink);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c2792a' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E") 18px center/22px no-repeat;box-shadow:var(--shadow)}
@@ -159,12 +157,6 @@ html.pluie .rain{background:var(--rain);border-color:#5f95c4;color:var(--rain-in
 .sl i,.k i{width:11px;height:11px;border-radius:50%;background:var(--t)}
 .ins{font-style:normal;font-weight:500;font-size:.86rem;color:var(--brand-dark)}
 .noel{margin:16px 0 0;padding-top:14px;border-top:1px solid var(--line);line-height:1.5}.noel b{color:var(--ink)}
-/* mode mauvais temps : badges et ordre */
-html.pluie .ag li[data-lieu=out],html.pluie .sl li[data-lieu=out]{opacity:.5}
-html.pluie .ag h4[data-mt]::after,html.pluie .sl li[data-mt]::after{content:attr(data-mt);display:inline-block;margin-left:10px;padding:2px 10px;border-radius:99px;font-size:.75rem;font-weight:700;vertical-align:middle;letter-spacing:0;background:#eee;color:#555}
-html.pluie .sl li[data-mt]::after{margin:2px 0 0;justify-self:start}
-html.pluie .ag li[data-lieu=in] h4::after,html.pluie .sl li[data-lieu=in]::after{background:var(--ok-soft);color:var(--ok-ink)}
-html.pluie .ag li[data-lieu=abri] h4::after,html.pluie .sl li[data-lieu=abri]::after{background:var(--rain);color:var(--rain-ink)}
 
 /* ---------- 6. Météo ---------- */
 .meteo{padding:20px 22px;color:var(--ink)}.meteo[hidden]{display:none}
@@ -198,7 +190,6 @@ dialog.pg::backdrop,dialog.wz::backdrop{background:rgba(47,36,24,.6);backdrop-fi
 .pgt button{border:1px solid var(--line);border-radius:99px;padding:8px 14px;background:#fff;color:var(--ink);font-weight:600}
 .pgt button[aria-pressed=true]{background:var(--brand-dark);border-color:var(--brand-dark);color:#fff}.pgt small{color:var(--muted)}
 .pgb{overflow:auto;flex:1 1 auto;overscroll-behavior:contain}
-html.pluie #pg .pgb::before{content:"☔ Mode mauvais temps : les activités à l’intérieur de la salle Ughetti d’abord";display:block;padding:12px 24px;background:var(--rain);color:var(--rain-ink);font-weight:600;border-bottom:1px solid var(--line)}
 .pgf{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;padding:14px 24px;border-top:1px solid var(--line);background:#fff}
 .pgf a{margin-left:auto;font-weight:700;color:var(--brand-dark);text-decoration:underline}
 .k{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.9rem;color:var(--ink)}
@@ -408,7 +399,7 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin nav,html.fin .burger,ht
  @page{size:A4;margin:9mm}
  html,body{background:#fff!important}
  body>*:not(#print){display:none!important}
- #print{display:block;font-family:"Outfit",Arial,sans-serif;font-size:10.8pt;line-height:1.35;color:#2f2418;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ #print{display:block;font-family:"Outfit",Arial,sans-serif;font-size:10.2pt;line-height:1.3;color:#2f2418;-webkit-print-color-adjust:exact;print-color-adjust:exact}
  #print .ph1{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:#c2792a;color:#fff}
  #print .ph1 img{width:64px;height:64px;border-radius:12px;background:#a8601c;padding:4px}
  #print h1{margin:0;font-size:26pt;letter-spacing:-.03em;line-height:1}
@@ -418,14 +409,12 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin nav,html.fin .burger,ht
  #print .pcols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
  #print h2{margin:0 0 6px;padding-bottom:3px;border-bottom:2px solid #c2792a;font-size:14pt;color:#2f2418}
  #print ul{list-style:none;margin:0;padding:0}
- #print .pcols li{display:grid;grid-template-columns:24mm 1fr;gap:6px;padding:6px 0 6px 7px;border-left:4px solid var(--t);margin-bottom:6px;break-inside:avoid}
- #print .pcols li b{font-size:12pt}#print small{display:block;color:#6b5844;font-size:9.4pt}
+ #print .pcols li{display:grid;grid-template-columns:24mm 1fr;gap:6px;padding:4px 0 4px 7px;border-left:4px solid var(--t);margin-bottom:5px;break-inside:avoid}
+ #print .pcols li b{font-size:11.2pt}#print small{display:block;color:#6b5844;font-size:9pt}
  #print .ph{font-weight:700;font-size:10.4pt}
- #print em{font-style:normal;font-size:7.6pt;font-weight:700;padding:0 5px;border-radius:9px;background:#e1f1e1;color:#1b5e20;white-space:nowrap}
- #print .pbloc{margin-top:14px}#print .pbloc p{margin:2px 0}
+ #print .pbloc{margin-top:10px}#print .pbloc p{margin:2px 0}
  #print .psoon{display:flex;flex-wrap:wrap;gap:4px 14px}
  #print .pfoot{margin-top:14px;padding-top:6px;border-top:1px solid #ddd;font-size:8.2pt;color:#6b5844;display:flex;justify-content:space-between;gap:10px}
- #print .pmt{display:inline-block;margin-top:5px;padding:3px 10px;border-radius:9px;background:#e8f0f8;color:#1f3f5f;font-weight:700}
 }
 </style>
 <!-- Matomo -->
@@ -493,7 +482,7 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin nav,html.fin .burger,ht
   <button class="pickb" type="button" data-open="sam"><small>Samedi</small><b>5 décembre</b><span>Voir le programme</span></button>
   <button class="pickb" type="button" data-open="dim"><small>Dimanche</small><b>6 décembre</b><span>Voir le programme</span></button>
  </div>
- <div class="pact"><button class="chip rain" type="button" data-pluie aria-pressed="false"><span class="off">☔ Mauvais temps ?</span><span class="on">☔ Mode mauvais temps activé</span></button><button class="chip" type="button" id="imprimer">🖨️ Imprimer l’affiche A4</button></div>
+ <div class="pact"><button class="chip" type="button" id="imprimer">🖨️ Imprimer l’affiche A4</button></div>
  <div class="qq" role="search"><label class="vh" for="qq">Rechercher : où, quand, combien</label><input id="qq" type="search" placeholder="Karts, toilettes, concert…" autocomplete="off" enterkeyhint="search" />
   <div class="qqs" aria-label="Suggestions">Par exemple :<button type="button" data-qq="karts">karts</button><button type="button" data-qq="massage">massage</button><button type="button" data-qq="concert">concert</button><button type="button" data-qq="toilettes">toilettes</button><button type="button" data-qq="parking">parking</button><button type="button" data-qq="pass">pass</button></div>
   <div class="qqr" id="qqr" aria-live="polite"></div></div>
@@ -503,7 +492,7 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin nav,html.fin .burger,ht
   <li><span class="fx" aria-hidden="true">💃</span><div><b>Spectacle de danse Rythm n’fit</b><small>Dimanche de 15h à 16h (accueil dès 14h30) · salle principale</small><a href="#focus" data-fgo="1">En savoir plus</a></div></li>
  </ul></div>
  <div class="pgrid">
-  <div class="soon card"><h3>Aussi au programme</h3><p class="cap">Horaires à venir</p><ul class="sl"><li class="t-pass" data-meteo="in" data-mt="Intérieur le samedi, à l’abri le dimanche"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-pass" data-meteo="in" data-mt="Possible à l’intérieur"><i></i><span>Atelier code de la route <small>Sporting Auto Moto École</small></span></li><li class="t-pass"><i></i><span>Découverte du tandem <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-fort" data-meteo="abri"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Samedi matin. Inscription obligatoire, places limitées</em></li><li class="t-fort" data-meteo="abri"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Samedi après-midi. Inscription obligatoire, places limitées</em></li></ul><p class="noel">🎅 <b>Boîte aux lettres du Père Noël</b> : les enfants peuvent y déposer leur lettre.</p></div>
+  <div class="soon card"><h3>Aussi au programme</h3><p class="cap">Horaires à venir</p><ul class="sl"><li class="t-pass"><i></i><span>Tir laser <small>Mon Tir Sportif</small></span></li><li class="t-pass"><i></i><span>Atelier code de la route <small>Sporting Auto Moto École</small></span></li><li class="t-pass"><i></i><span>Découverte du tandem <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties VTT <small>Union Cycliste de Luynes</small></span></li><li class="t-pass"><i></i><span>Sorties route <small>Union Cycliste de Luynes</small></span></li><li class="t-fort"><i></i><span>Atelier pizza <small>Pizza Verte</small></span><em class="ins">Samedi matin. Inscription obligatoire, places limitées</em></li><li class="t-fort"><i></i><span>Atelier cookies <small>Boulangerie L’Orge</small></span><em class="ins">Samedi après-midi. Inscription obligatoire, places limitées</em></li></ul><p class="noel">🎅 <b>Boîte aux lettres du Père Noël</b> : les enfants peuvent y déposer leur lettre.</p></div>
   <div class="meteo card" id="meteo" hidden aria-live="polite"></div>
  </div>
  <dialog class="pg" id="pg" aria-labelledby="pgt">
@@ -515,17 +504,17 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin nav,html.fin .burger,ht
 <li class="t-jeton"><div class="h"><b>10h – 12h</b><b>14h – 16h</b></div><div class="i"><h4>Porte-clés</h4><span class="p">Accueil de la salle Ughetti</span><p>Un porte-clés personnalisé, avec votre prénom ou le motif de votre choix.</p><span class="tg">5 jetons</span></div></li>
 <li class="t-pass"><div class="h"><b>10h – 12h</b><b>13h – 16h</b></div><div class="i"><h4>Karts à pédales</h4><span class="p">Boulodrome, avec l’ADAVA</span><p>Pilotez un kart sur un circuit sécurisé.</p><span class="tg">Pass multi-activités</span></div></li>
 <li class="t-pass"><div class="h"><b>10h – 12h</b><b>14h – 17h</b></div><div class="i"><h4>Planet’Jeunes</h4><span class="p">Salle Ughetti</span><p>Atelier créatif, crêpes et kermesse pour les enfants.</p><span class="tg">Pass multi-activités</span></div></li>
-<li data-meteo="in" data-mt="À l’intérieur s’il pleut" class="t-pass"><div class="h"><b>10h – 12h</b><b>14h – 16h</b></div><div class="i"><h4>Maquillage</h4><span class="p">Devant la salle Ughetti</span><p>Petits et grands se font transformer.</p><span class="tg">Pass multi-activités</span></div></li>
+<li class="t-pass"><div class="h"><b>10h – 12h</b><b>14h – 16h</b></div><div class="i"><h4>Maquillage</h4><span class="p">Devant la salle Ughetti</span><p>Petits et grands se font transformer.</p><span class="tg">Pass multi-activités</span></div></li>
 <li class="t-fort"><div class="h"><b>10h – 12h</b><b>14h – 16h</b></div><div class="i"><h4>Massages</h4><span class="p">Salle Ughetti, avec Le Corps au Présent</span><p>Séances de 20 minutes, au choix tête ou pieds.</p><span class="tg">Ticket temps fort</span></div></li>
 <li class="t-free"><div class="h"><b>10h – 16h30</b></div><div class="i"><h4>Stand CHOGAN</h4><span class="p">Avec Marjorie, conseillère CHOGAN</span><p>Plus de 3 000 références : parfumerie, maquillage, soins du visage et du corps, hygiène, entretien de la maison, bougies et coffrets cadeaux. Une gamme variée, adaptée aux besoins du quotidien et à différents budgets.</p><span class="tg">Entrée libre</span></div></li>
-<li data-meteo="in" data-mt="À l’intérieur s’il pleut" class="t-jeton"><div class="h"><b>14h – 16h</b></div><div class="i"><h4>Ballons sculptés</h4><span class="p">Devant la salle Ughetti</span><p>Des animateurs sculptent des ballons à rapporter à la maison.</p><span class="tg">1 jeton le ballon</span></div></li>
+<li class="t-jeton"><div class="h"><b>14h – 16h</b></div><div class="i"><h4>Ballons sculptés</h4><span class="p">Devant la salle Ughetti</span><p>Des animateurs sculptent des ballons à rapporter à la maison.</p><span class="tg">1 jeton le ballon</span></div></li>
 </ul></div>
   <div class="pgb" data-d="dim" hidden><ul class="ag">
 <li class="t-free"><div class="h"><b>Toute la journée</b></div><div class="i"><h4>Visite d’un engin minier</h4><span class="p">Près du square Jacques Melkonian, avec Aramine</span><p>La chargeuse L350D, conçue par ARAMAC pour les mines souterraines : 4 tonnes de charge pour seulement 1,50 m de large.</p><span class="tg">Gratuit</span></div></li>
 <li class="t-pass"><div class="h"><b>10h – 12h</b><b>13h – 16h</b></div><div class="i"><h4>Karts à pédales</h4><span class="p">Boulodrome, avec l’ADAVA</span><p>Pilotez un kart sur un circuit sécurisé.</p><span class="tg">Pass multi-activités</span></div></li>
 <li class="t-pass"><div class="h"><b>10h – 12h</b><b>14h – 16h</b></div><div class="i"><h4>Planet’Jeunes</h4><span class="p">Salle Ughetti</span><p>Atelier créatif, crêpes et kermesse pour les enfants.</p><span class="tg">Pass multi-activités</span></div></li>
 <li class="t-free"><div class="h"><b>10h – 16h30</b></div><div class="i"><h4>Stand CHOGAN</h4><span class="p">Avec Marjorie, conseillère CHOGAN</span><p>Plus de 3 000 références : parfumerie, maquillage, soins du visage et du corps, hygiène, entretien de la maison, bougies et coffrets cadeaux. Une gamme variée, adaptée aux besoins du quotidien et à différents budgets.</p><span class="tg">Entrée libre</span></div></li>
-<li data-meteo="in" data-mt="À l’intérieur s’il pleut" class="t-jeton"><div class="h"><b>14h – 16h</b></div><div class="i"><h4>Ballons sculptés</h4><span class="p">Devant la salle Ughetti</span><p>Des animateurs sculptent des ballons à rapporter à la maison.</p><span class="tg">1 jeton le ballon</span></div></li>
+<li class="t-jeton"><div class="h"><b>14h – 16h</b></div><div class="i"><h4>Ballons sculptés</h4><span class="p">Devant la salle Ughetti</span><p>Des animateurs sculptent des ballons à rapporter à la maison.</p><span class="tg">1 jeton le ballon</span></div></li>
 <li class="t-free"><div class="h"><b>15h – 16h</b></div><div class="i"><h4>Spectacle Rythm n’fit</h4><span class="p">Salle principale</span><p>Accueil à 14h30. Les adhérents de Rythm n’fit présentent leur spectacle de danse.</p><span class="tg">Gratuit</span></div></li>
 <li class="t-fort"><div class="h"><b>17h – 18h</b></div><div class="i"><h4>Concert Free Son</h4><span class="p">Salle principale</span><p>Groupe amateur aixois de jazz vocal. Son répertoire est composé de standards de jazz, blues, rock et rythmes latinos, proposés dans des arrangements pour 4 ou 5 voix réalisés par Cyrille Martial. Les chansons sont chantées, chorégraphiées et mises en scène dans le style «&nbsp;Comédie Musicale&nbsp;».</p><span class="tg">Ticket temps fort</span></div></li>
 </ul></div>
@@ -960,31 +949,24 @@ function act(pl,Z,g){const k=g.dataset.z;if(pl===P1&&k==="salle")return view(tru
  pl.addEventListener("click",e=>{const g=e.target.closest(".pin,.z");if(g)act(pl,Z,g)});
  pl.addEventListener("keydown",e=>{const g=e.target.closest&&e.target.closest(".pin");if(g&&(e.key==="Enter"||e.key===" ")){e.preventDefault();act(pl,Z,g)}})});
 })();
-/* ===== Jour J : widget « en ce moment / à suivre », mode mauvais temps, page de fin =====
+/* ===== Jour J : widget « en ce moment / à suivre », page de fin =====
    Le widget lit directement le programme (listes du samedi et du dimanche) : rien à saisir en double.
-   Intérieur / extérieur : déduit du lieu affiché sous chaque activité. « Devant », boulodrome, parvis, parc, city stade = extérieur ;
-   « salle » = intérieur ; sinon non classé (ni mis en avant, ni grisé).
-   Pour forcer le classement d’une activité (repli en cas de pluie), ajouter sur son <li> : data-meteo="in" (intérieur),
-   "abri" (à l’abri) ou "out" (extérieur), et si besoin data-mt="texte du badge". Vaut aussi pour la liste « Horaires à venir ».
    Pour tester : voir la configuration EVT en tête de script (?t=…). */
-const DEB=Date.parse(EVT.widget),FINP=Date.parse(EVT.pageFin),JOUR=EVT.jours,JN=EVT.noms,R={in:0,abri:1,"":2,out:3},MT={in:"À l’intérieur",abri:"À l’abri",out:"En extérieur"};
+const DEB=Date.parse(EVT.widget),FINP=Date.parse(EVT.pageFin),JOUR=EVT.jours,JN=EVT.noms;
 const at=(d,h,m)=>Date.parse(JOUR[d]+"T"+String(h).padStart(2,"0")+":"+(m||"00")+":00+01:00"),hh=(h,m)=>h+"h"+(m&&m!=="00"?m:"");
-const lieu=t=>{t=t.toLowerCase();return /devant|boulodrome|parvis|parc|square|city stade|extérieur/.test(t)?"out":/salle/.test(t)?"in":""};
 /* un créneau du programme (« 10h – 12h », ou « Toute la journée » = horaires d’ouverture du jour, voir EVT.journee) */
 const plage=(txt,d)=>{if(/toute la journ/i.test(txt))txt=EVT.journee[d]||"";const m=txt.match(/(\d{1,2})h(\d{2})?\s*[–-]\s*(\d{1,2})h(\d{2})?/);
  return m?{s:at(d,m[1],m[2]),e:at(d,m[3],m[4]),sh:hh(m[1],m[2]),eh:hh(m[3],m[4])}:null};
-const EV=[],ags=[...document.querySelectorAll("#pg .ag,.soon .sl")];
-const tag=(li,w)=>{li.dataset.lieu=w;const t=li.querySelector("h4")||li;if(w&&!t.dataset.mt)t.dataset.mt=li.dataset.mt||MT[w];if(t!==li)delete li.dataset.mt};
-document.querySelectorAll(".soon .sl>li").forEach((li,i)=>{li.dataset.o=i;tag(li,li.dataset.meteo||"")});
+const EV=[];
 document.querySelectorAll("#pg .pgb[data-d]").forEach(b=>{const d=b.dataset.d;b.querySelectorAll(".ag>li").forEach((li,i)=>{
- const t=(li.querySelector("h4")||{}).textContent||"",pl=((li.querySelector(".p")||{}).textContent||"").trim(),w=li.dataset.meteo||lieu(pl);tag(li,w);li.dataset.o=i;
+ const t=(li.querySelector("h4")||{}).textContent||"",pl=((li.querySelector(".p")||{}).textContent||"").trim();
  li.querySelectorAll(".h b").forEach(x=>{const c=plage(x.textContent,d);
-  if(c)EV.push({d,t:t.trim(),pl,w,mt:(li.querySelector("h4")||li).dataset.mt||MT[w],c:li.className,...c})})})});
-EV.push({d:"dim",t:"Tirage de la tombola",pl:"",w:"",c:"t-tombola",s:at("dim",16,"45"),e:at("dim",17),sh:"16h45",eh:"17h"});
-const W=$("live"),pluie=()=>document.documentElement.classList.contains("pluie"),rk=e=>pluie()?R[e.w]:0;
+  if(c)EV.push({d,t:t.trim(),pl,c:li.className,...c})})})});
+EV.push({d:"dim",t:"Tirage de la tombola",pl:"",c:"t-tombola",s:at("dim",16,"45"),e:at("dim",17),sh:"16h45",eh:"17h"});
+const W=$("live");
 /* ---- Météo en temps réel : Open-Meteo (gratuit, sans clé), Luynes 13080 Aix-en-Provence (43,48 N ; 5,42 E).
    Maintenant + prévision heure par heure de 10h à 18h pour le samedi et le dimanche, avec un indice de fiabilité selon l’éloignement.
-   Pluie probable (risque ≥ 50 % ou ≥ 0,5 mm dans l’heure) : la page propose le mode mauvais temps. Rafales ≥ 50 km/h : alerte vent. */
+   Pluie probable (risque ≥ 50 % ou ≥ 0,5 mm dans l’heure) : la page l’annonce. Rafales ≥ 50 km/h : alerte vent. */
 const MURL="https://api.open-meteo.com/v1/forecast?latitude=43.4833&longitude=5.4167&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,is_day&hourly=temperature_2m,precipitation_probability,precipitation,weather_code,wind_speed_10m,wind_gusts_10m&timezone=Europe%2FParis&forecast_days=16";
 const WMO=(c,nuit)=>c==null?["🌡️","—"]:c==0?[nuit?"🌙":"☀️","Ciel dégagé"]:c==1?[nuit?"🌙":"🌤️","Plutôt ensoleillé"]:c==2?["⛅","Partiellement nuageux"]:c==3?["☁️","Couvert"]:c<=48?["🌫️","Brouillard"]:c<=57?["🌦️","Bruine"]:c<=67?["🌧️","Pluie"]:c<=77?["🌨️","Neige"]:c<=82?["🌦️","Averses"]:c<=86?["🌨️","Averses de neige"]:["⛈️","Orages"];
 const MC=$("meteo"),JC={sam:"Samedi 5 déc.",dim:"Dimanche 6 déc."};let MET=null;
@@ -1008,7 +990,7 @@ function rmet(){if(!MET||!MET.current||!MET.hourly){MC.hidden=true;return}
   o+=`<div class="mrow"><span class="mic" aria-hidden="true">${di}</span><b>${JC[d]} · ${dl}</b><span class="rel ${fc}">${ft}</span><small>${x.tmin}° à ${x.tmax}° de 10h à 18h · pluie ${x.pm!=null?"jusqu’à "+x.pm+" %":"—"}${x.gust!=null?` · rafales ${x.gust} km/h`:""}</small></div>`;
   det+=`<b>${JC[d]}</b><div class="mbar" role="img" aria-label="Risque de pluie heure par heure, de 10h à 18h">${x.H.map((hh,i)=>{const pr=x.P[i];return `<span title="${hh}h : ${pr==null?"—":pr+" %"} de risque de pluie${x.M[i]?", "+x.M[i].toFixed(1).replace(".",",")+" mm":""}"><i class="${(pr||0)<30&&!(x.M[i]>=.5)?"dry":""}" style="height:${Math.max(4,pr||0)}%"></i><small>${hh%2?"":hh+"h"}</small></span>`}).join("")}</div>`});
  if(det)o+=`<details class="mhr"><summary>Risque de pluie heure par heure</summary><div class="mhd">${det}</div></details>`;
- if(pluieJ.length)o+=`<p class="madv wet">☔ <b>Pluie possible ${pluieJ.join(" et ")}.</b> Plusieurs activités se replient à l’intérieur ou à l’abri.<br><button type="button" class="chip" data-pluie>${pluie()?"Revenir au programme normal":"Voir le programme mauvais temps"}</button></p>`;
+ if(pluieJ.length)o+=`<p class="madv wet">☔ <b>Pluie possible ${pluieJ.join(" et ")}.</b></p>`;
  else if(D.sam||D.dim)o+=`<p class="madv">${vent.length?"":"🌤️ "}Pas de pluie annoncée pour l’instant de 10h à 18h.</p>`;
  if(vent.length)o+=`<p class="madv wet">💨 <b>Vent fort annoncé ${vent.join(" et ")}.</b></p>`;
  const mj=new Date(MET.at).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit",timeZone:"Europe/Paris"}).replace(":","h");
@@ -1016,12 +998,12 @@ function rmet(){if(!MET||!MET.current||!MET.hourly){MC.hidden=true;return}
  const ouvert=MC.querySelector("details[open]");MC.innerHTML=o;if(ouvert){const dd=MC.querySelector("details");if(dd)dd.open=true}MC.hidden=false}
 async function meteo(){try{const r=await fetch(MURL);if(!r.ok)throw 0;const j=await r.json();if(!j.hourly)throw 0;MET=j;MET.at=Date.now()}catch(_){}rmet();live()}
 
-const li=(e,sub)=>`<li class="${e.c}"><i></i><span><b>${esc(e.t)}</b><small>${esc(sub)}${e.pl?" · "+esc(e.pl):""}</small></span>${pluie()&&(e.w==="in"||e.w==="abri")?"<em>"+esc(e.mt)+"</em>":""}</li>`;
+const li=(e,sub)=>`<li class="${e.c}"><i></i><span><b>${esc(e.t)}</b><small>${esc(sub)}${e.pl?" · "+esc(e.pl):""}</small></span></li>`;
 /* le widget montre 3 activités au plus ; au-delà, un lien ouvre le programme du jour */
 const LVMAX=3,plus=(a,d,q)=>{const k=a.length-LVMAX;return k>0?`<button type="button" class="lvm" data-lvday="${d}">+ ${k} autre${k>1?"s":""} activité${k>1?"s":""}${q?" "+q:""} · voir le programme</button>`:""};
 function live(){const n=now();if(n<DEB||n>=FINP){W.hidden=true;return}
- const cur=EV.filter(e=>e.s<=n&&n<e.e).sort((a,b)=>rk(a)-rk(b)||a.e-b.e),fut=EV.filter(e=>e.s>n);
- const ns=fut.length?Math.min(...fut.map(e=>e.s)):0,nx=fut.filter(e=>e.s===ns).sort((a,b)=>rk(a)-rk(b));
+ const cur=EV.filter(e=>e.s<=n&&n<e.e).sort((a,b)=>a.e-b.e),fut=EV.filter(e=>e.s>n);
+ const ns=fut.length?Math.min(...fut.map(e=>e.s)):0,nx=fut.filter(e=>e.s===ns);
  if(!cur.length&&!nx.length){W.hidden=true;return}
  const dn=new Date(n).toLocaleDateString("fr-CA",{timeZone:"Europe/Paris"}),dd=Object.keys(JOUR).find(k=>JOUR[k]===dn);
  let o="";
@@ -1030,15 +1012,10 @@ function live(){const n=now();if(n<DEB||n>=FINP){W.hidden=true;return}
  if(nx.length){const e0=nx[0],jr=JOUR[e0.d]===dn?"à "+e0.sh:JN[e0.d]+" à "+e0.sh;
   o+=`<div class="lvc"><div class="lvt">${cur.length?"À suivre":"Prochain rendez-vous"} · ${jr}</div><ul>${nx.slice(0,LVMAX).map(e=>li(e,e.sh+" – "+e.eh)).join("")}</ul>${plus(nx,e0.d,"")}</div>`}
  const pd=dd||(nx[0]&&nx[0].d);
- o+=`<div class="lva">${pd?`<button type="button" data-lvday="${pd}">Programme du ${JN[pd].split(" ")[0]}</button>`:""}<button type="button" data-pluie aria-pressed="${pluie()}">☔ ${pluie()?"Mode mauvais temps activé":"Mauvais temps ?"}</button></div>`;
+ o+=`<div class="lva">${pd?`<button type="button" data-lvday="${pd}">Programme du ${JN[pd].split(" ")[0]}</button>`:""}</div>`;
  W.innerHTML=o;W.hidden=false}
 W.addEventListener("click",e=>{const b=e.target.closest("[data-lvday]");if(b)openDay(b.dataset.lvday)});
-function setPluie(on){if(on!==pluie())ck("event",on?"mauvais_temps_on":"mauvais_temps_off");document.documentElement.classList.toggle("pluie",on);try{sessionStorage.setItem("telethon-pluie",on?"1":"")}catch(_){}
- ags.forEach(u=>[...u.children].sort((a,b)=>(on?R[a.dataset.lieu||""]-R[b.dataset.lieu||""]:0)||a.dataset.o-b.dataset.o).forEach(x=>u.appendChild(x)));
- document.querySelectorAll(".rain[data-pluie]").forEach(b=>b.setAttribute("aria-pressed",on));live();if(MET)rmet()}
-document.addEventListener("click",e=>{if(e.target.closest("[data-pluie]"))setPluie(!pluie())});
 function fin(){if(now()<FINP)return false;if(!document.documentElement.classList.contains("fin")){document.documentElement.classList.add("fin");$("merci").hidden=false;if(bw.open)bw.close();if(dlg.open)dlg.close();scrollTo(0,0)}return true}
-try{if(sessionStorage.getItem("telethon-pluie"))setPluie(true)}catch(_){}
 if(!fin()){live();meteo()}
 setInterval(()=>{if(!document.documentElement.classList.contains("fin"))meteo()},30*60000);
 const it=setInterval(()=>{if(fin())clearInterval(it);else live()},30000);
@@ -1078,7 +1055,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-res]");if(
 
 /* ---- Où ? Quand ? Combien ? : recherche instantanée dans le programme, le plan et les tarifs ---- */
 const nz=t=>String(t||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[’'\-]/g," ");
-const SYN={wc:"toilettes",toilette:"toilettes",pipi:"toilettes",voiture:"parking",garer:"parking",stationner:"parking",stationnement:"parking",payer:"caisse",paiement:"caisse",retrait:"caisse",retirer:"caisse",billet:"billetterie",billets:"billetterie",ticket:"billetterie",tickets:"billetterie",manger:"crepes",crepe:"crepes",gouter:"crepes",kart:"karts",musique:"concert",jazz:"concert",danse:"rythm",enfant:"enfants",gamins:"enfants",velo:"cyclo",telephone:"contact",appeler:"contact",question:"contact",don:"don",dons:"don",prix:"tarifs",tarif:"tarifs",combien:"tarifs",cout:"tarifs",adresse:"acces",venir:"acces",itineraire:"acces",pluie:"interieur"};
+const SYN={wc:"toilettes",toilette:"toilettes",pipi:"toilettes",voiture:"parking",garer:"parking",stationner:"parking",stationnement:"parking",payer:"caisse",paiement:"caisse",retrait:"caisse",retirer:"caisse",billet:"billetterie",billets:"billetterie",ticket:"billetterie",tickets:"billetterie",manger:"crepes",crepe:"crepes",gouter:"crepes",kart:"karts",musique:"concert",jazz:"concert",danse:"rythm",enfant:"enfants",gamins:"enfants",velo:"cyclo",telephone:"contact",appeler:"contact",question:"contact",don:"don",dons:"don",prix:"tarifs",tarif:"tarifs",combien:"tarifs",cout:"tarifs",adresse:"acces",venir:"acces",itineraire:"acces"};
 const ZD=window.planZones||{Z1:{},Z2:{}},STOP=["atelier","stand","spectacle","decouverte","sorties"];
 const zoneDe=(t,pl)=>{const w=nz(t).split(/\s+/).filter(x=>x.length>=4&&!STOP.includes(x)).map(x=>x.replace(/s$/,""));
  for(const Z of [ZD.Z2,ZD.Z1])for(const k in Z){const h=nz(Z[k][0]+" "+Z[k][2]);if(w.some(x=>h.includes(x)))return k}
@@ -1087,12 +1064,12 @@ const IX=[],PRIX={pass:"Inclus dans le pass multi-activités : 10 € par partic
 const byT={};
 document.querySelectorAll("#pg .pgb[data-d] .ag>li").forEach(li=>{const d=li.closest(".pgb").dataset.d,t=li.querySelector("h4").childNodes[0].textContent.trim(),pl=((li.querySelector(".p")||{}).textContent||"").trim(),
  tg=((li.querySelector(".tg")||{}).textContent||"").trim(),ds=((li.querySelector(".i p")||{}).textContent||"").trim(),cl=(li.className.match(/t-\w+/)||[""])[0];
- const e=byT[t]=byT[t]||{t,pl,tg,ds,cl,j:{},res:[],z:zoneDe(t,pl),w:li.dataset.lieu||""};e.j[d]=[...li.querySelectorAll(".h b")].map(x=>x.textContent.trim()).join(", ");const k=resKey(li,d);if(k&&!e.res.includes(k))e.res.push(k)});
+ const e=byT[t]=byT[t]||{t,pl,tg,ds,cl,j:{},res:[],z:zoneDe(t,pl)};e.j[d]=[...li.querySelectorAll(".h b")].map(x=>x.textContent.trim()).join(", ");const k=resKey(li,d);if(k&&!e.res.includes(k))e.res.push(k)});
 Object.values(byT).forEach(e=>{const pr=e.cl==="t-pass"?PRIX.pass:e.cl==="t-jeton"?e.tg+". "+PRIX.jeton:e.cl==="t-fort"?(()=>{const p=PR.find(p=>p.g==="fort"&&nz(e.t).includes(p.id));return PRIX.fort+(p?eur(p.p)+" par participant.":"voir la billetterie.")})():e.tg+".";
- IX.push({t:e.t,cl:e.cl,tag:e.tg,k:nz(e.t),h:nz([e.t,e.pl,e.ds,e.tg,e.cl==="t-pass"?"pass enfants":"",e.w==="in"?"interieur":""].join(" ")),
+ IX.push({t:e.t,cl:e.cl,tag:e.tg,k:nz(e.t),h:nz([e.t,e.pl,e.ds,e.tg,e.cl==="t-pass"?"pass enfants":""].join(" ")),
   l:[Object.keys(e.j).map(d=>"📅 "+cap(JN[d].split(" ")[0])+" : "+e.j[d]).join(" · "),e.pl&&"📍 "+e.pl,"💶 "+pr],z:e.z,res:e.res})});
 document.querySelectorAll(".soon .sl>li").forEach(li=>{const sp=li.querySelector("span"),t=sp.childNodes[0].textContent.trim(),org=((sp.querySelector("small")||{}).textContent||"").trim(),ins=((li.querySelector(".ins")||{}).textContent||"").trim(),cl=(li.className.match(/t-\w+/)||[""])[0],k=resKey(li,"sam");
- IX.push({t,cl,tag:"Horaires à venir",k:nz(t),h:nz([t,org,ins,cl==="t-pass"?"pass enfants":"",li.dataset.lieu==="in"?"interieur":""].join(" ")),l:[org&&"👥 "+org,ins&&"📅 "+ins,cl==="t-pass"?"💶 "+PRIX.pass:k?"💶 Ticket temps fort, à réserver en ligne.":""],z:"",res:k?[k]:[]})});
+ IX.push({t,cl,tag:"Horaires à venir",k:nz(t),h:nz([t,org,ins,cl==="t-pass"?"pass enfants":""].join(" ")),l:[org&&"👥 "+org,ins&&"📅 "+ins,cl==="t-pass"?"💶 "+PRIX.pass:k?"💶 Ticket temps fort, à réserver en ligne.":""],z:"",res:k?[k]:[]})});
 for(const Z of [ZD.Z1,ZD.Z2])for(const k in Z){if(IX.some(x=>x.z===k&&x.zone))continue;IX.push({t:Z[k][0],cl:"",zone:1,tag:"Sur le plan",k:nz(Z[k][0]),h:nz(Z[k][0]+" "+Z[k][2]+(k==="accueil"?" caisse retrait billetterie":"")),l:["📍 "+Z[k][2]],z:k,res:[]})}
 GR.forEach(g=>{const ps=PR.filter(p=>p.g===g[0]&&p.p!=null);IX.push({t:g[1],cl:"t-"+g[0],tag:"Tarifs",k:nz(g[1]),h:nz(g[1]+" "+g[2]+" tarifs billetterie "+ps.map(p=>p.n+" "+p.d).join(" ")),
  l:["💶 "+g[2]+(g[0]==="fort"?" : "+ps.map(p=>p.n+" "+eur(p.p)).join(", "):"")],z:"",res:g[0]==="pass"?["pass:sam","pass:dim"]:g[0]==="jeton"?["jeton:tous"]:g[0]==="tombola"?["tombola:tombola"]:[]})});
@@ -1136,15 +1113,15 @@ function upsell(){if(!PT0||Q[TK]||!parts().length)return "";
 wb.addEventListener("click",e=>{const b=e.target.closest("[data-up]");if(!b)return;const n=+b.dataset.up;Q[TK]=(Q[TK]||0)+n;norm();A[TK]=A[TK]||{};if(!got(TK))A[TK][parts()[0].id]=Q[TK];ck("event","tombola_ajoutee_"+n);show(4)});
 
 /* ---- Programme imprimable : affiche A4 générée depuis la page (bouton ou Ctrl+P) ---- */
-function affiche(){const pl=pluie(),P=$("print");
+function affiche(){const P=$("print");
  const col=d=>[...document.querySelectorAll(`#pg .pgb[data-d="${d}"] .ag>li`)].map(li=>{const h4=li.querySelector("h4"),t=h4.childNodes[0].textContent.trim(),h=[...li.querySelectorAll(".h b")].map(x=>x.textContent.trim()).join("<br>"),
-  pp=((li.querySelector(".p")||{}).textContent||"").trim(),tg=((li.querySelector(".tg")||{}).textContent||"").trim(),mt=pl&&(li.dataset.lieu==="in"||li.dataset.lieu==="abri")?h4.dataset.mt:"";
-  return `<li class="${(li.className.match(/t-\w+/)||[""])[0]}"><span class="ph">${h}</span><span><b>${esc(t)}</b>${mt?` <em>${esc(mt)}</em>`:""}<small>${esc(pp)}${tg?" · "+esc(tg):""}</small></span></li>`}).join("");
+  pp=((li.querySelector(".p")||{}).textContent||"").trim(),tg=((li.querySelector(".tg")||{}).textContent||"").trim();
+  return `<li class="${(li.className.match(/t-\w+/)||[""])[0]}"><span class="ph">${h}</span><span><b>${esc(t)}</b><small>${esc(pp)}${tg?" · "+esc(tg):""}</small></span></li>`}).join("");
  const soon=[...document.querySelectorAll(".soon .sl>li")].map(li=>{const sp=li.querySelector("span");return `<span><b>${esc(sp.childNodes[0].textContent.trim())}</b> ${esc(((sp.querySelector("small")||{}).textContent||"").trim())}</span>`}).join("");
  const tar=GR.map(g=>{const ps=PR.filter(p=>p.g===g[0]&&p.p!=null);return `<p><b>${g[1]}</b> : ${esc(g[2])}${g[0]==="fort"?" — "+ps.map(p=>esc(p.n)+" "+eur(p.p)).join(", "):""}</p>`}).join("");
  const qr=$("kqr")?$("kqr").outerHTML.replace(/\sid="kqr"/,""):"";
  const maj=new Date().toLocaleString("fr-FR",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Paris"});
- P.innerHTML=`<div class="ph1"><img src="/files/logos/favicon.png" alt="" /><div><h1>Téléthon 2026 à Luynes</h1><p><b>Samedi 5 et dimanche 6 décembre</b> · Espace Ughetti, allée Serge Attard / rue André Claverie, Luynes</p><p>Au profit de l’AFM-Téléthon</p>${pl?`<span class="pmt">☔ Programme mauvais temps : replis à l’intérieur et à l’abri</span>`:""}</div><div class="pqr">${qr}s.13080.fr/telethon</div></div>
+ P.innerHTML=`<div class="ph1"><img src="/files/logos/favicon.png" alt="" /><div><h1>Téléthon 2026 à Luynes</h1><p><b>Samedi 5 et dimanche 6 décembre</b> · Espace Ughetti, allée Serge Attard / rue André Claverie, Luynes</p><p>Au profit de l’AFM-Téléthon</p></div><div class="pqr">${qr}s.13080.fr/telethon</div></div>
  <div class="pcols"><section><h2>Samedi 5 décembre</h2><ul>${col("sam")}</ul></section><section><h2>Dimanche 6 décembre</h2><ul>${col("dim")}</ul></section></div>
  ${soon?`<div class="pbloc"><h2>Aussi au programme (horaires à venir)</h2><div class="psoon">${soon}</div></div>`:""}
  <div class="pbloc"><h2>Tarifs</h2>${tar}<p>Billetterie en ligne sur <b>s.13080.fr/telethon</b>, retrait à la caisse centrale (accueil de la salle Ughetti). Les dons se font sur la page de collecte de l’AFM-Téléthon.</p></div>
