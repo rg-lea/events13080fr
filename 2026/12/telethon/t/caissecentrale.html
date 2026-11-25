@@ -117,6 +117,20 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 .vtools .btn{padding:10px 16px;font-size:.92rem}
 
 @media(max-width:1000px){.hbx{display:none}.brand span{display:none}}
+/* module Équipe : actualités et objets trouvés partagés avec l'app équipe */
+.eqd{width:min(680px,calc(100% - 24px))}
+.eqf{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:#fff}
+.eqf label{display:block;margin-bottom:10px;font-weight:600;color:var(--ink)}.eqf label small{font-weight:400;color:var(--muted)}
+.eqf input[type=text],.eqf textarea{display:block;width:100%;margin-top:5px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#fffdfa;color:var(--ink);resize:vertical}
+.eqa{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:10px}.eqa .chk{display:flex;align-items:center;gap:8px;margin:0 auto 0 0}.eqa .chk input{width:24px;height:24px;accent-color:var(--ko)}
+.eqm{margin:8px 0;font-weight:600;color:var(--ink)}.eqm:empty{display:none}.eqm.ko{color:var(--ko)}
+.eqoff{padding:12px 14px;border-radius:14px;background:#fff3e0;color:var(--ink);font-weight:600}
+.eql{list-style:none;margin:8px 0 0;padding:0}.eql li{display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px 10px;padding:12px 0;border-top:1px solid var(--line)}.eql li:first-child{border-top:0}
+.eql .tx{flex:1 1 260px}.eql .tx b{display:block;color:var(--ink)}.eql .tx small{display:block;color:var(--muted)}
+.eql .ur{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:99px;background:var(--ko);color:#fff;font-size:.75rem;font-weight:700}
+.eql .ok{display:inline-block;padding:1px 8px;border-radius:99px;background:#e1f1e1;color:var(--ok);font-size:.78rem;font-weight:700}
+.eql .ac{display:flex;gap:6px}.eql .ac button{min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:99px;background:#fff;color:var(--ink);font-weight:700}.eql .ac button.del{color:var(--ko)}
+.eql .vide{display:block;color:var(--muted);text-align:center}
 /* ---------- Écrans étroits (iPad mini en portrait, téléphone) : un seul volet, pied du ticket fixé en bas ---------- */
 @media(max-width:760px){
  .pos{display:block;height:auto;overflow:visible}.cat{overflow:visible;padding:14px 14px 8px}
@@ -149,12 +163,13 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "yowb8uix66");
 </script>
+<script src="/2026/12/telethon/equipe-api.js"></script>
 </head>
 <body>
 <header><div class="hbar">
  <a class="brand" href="/2026/12/telethon"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" /><span>Caisse centrale</span></a>
  <time class="clk" id="clk" aria-label="Heure actuelle"></time>
- <nav class="hact" aria-label="Outils de la caisse"><button class="hb" type="button" id="rc0" aria-label="Retrouver une commande"><span aria-hidden="true">🔎</span><span class="hbt">Retrouver<span class="hbx"> une commande</span></span></button><button class="hb" type="button" id="vh0" aria-label="Historique des ventes"><span aria-hidden="true">🧾</span><span class="hbt">Historique</span></button><button class="hb" type="button" id="cdp" aria-label="Code caisse"><span aria-hidden="true">🔒</span><span class="hbt" id="cdpt">Code caisse</span></button></nav>
+ <nav class="hact" aria-label="Outils de la caisse"><button class="hb" type="button" id="eq0" aria-label="Équipe : actualités et objets trouvés"><span aria-hidden="true">📣</span><span class="hbt">Équipe</span></button><button class="hb" type="button" id="rc0" aria-label="Retrouver une commande"><span aria-hidden="true">🔎</span><span class="hbt">Retrouver<span class="hbx"> une commande</span></span></button><button class="hb" type="button" id="vh0" aria-label="Historique des ventes"><span aria-hidden="true">🧾</span><span class="hbt">Historique</span></button><button class="hb" type="button" id="cdp" aria-label="Code caisse"><span aria-hidden="true">🔒</span><span class="hbt" id="cdpt">Code caisse</span></button></nav>
 </div></header>
 <div class="off" id="off" hidden role="status">📡 <b>Pas de connexion internet.</b> Les ventes ne peuvent pas être enregistrées pour l’instant : notez-les sur papier, ou attendez le retour du réseau.</div>
 
@@ -188,6 +203,23 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 <dialog class="pg" id="cdlg" aria-labelledby="cdt"><div class="pgh"><h3 id="cdt">Code caisse</h3></div><form class="pgb" id="cdf"><p>Le mot de passe de la caisse, donné par le comité. Il reste enregistré sur cet appareil jusqu’à la fermeture de l’onglet.</p><input id="code" type="password" autocomplete="off" enterkeyhint="done" aria-label="Code caisse" /><div class="pgf"><button class="btn btn-p" type="submit">Valider</button></div></form></dialog>
 
 <dialog class="pg" id="dg" data-clarity-mask="True" aria-labelledby="dgt"><div class="pgh"><h3 id="dgt"></h3></div><div class="pgb" id="dgb"></div><div class="pgf"><button class="btn btn-p" type="button" id="dgx">Nouvel achat</button></div></dialog>
+
+<dialog class="pg eqd" id="eqd" aria-labelledby="eqt"><div class="pgh"><h3 id="eqt">Équipe</h3></div><div class="pgb">
+ <div class="vtools"><div class="seg" id="eqs" role="group" aria-label="Rubrique"><button type="button" data-eq="actus" class="on">📣 Actualités</button><button type="button" data-eq="objets">🧳 Objets trouvés</button></div></div>
+ <p class="eqoff" id="eqoff" hidden>La passerelle avec l’app équipe n’est pas encore branchée : l’adresse du flux « Téléthon équipe » est à coller dans equipe-api.js.</p>
+ <div id="eq-actus">
+  <form class="eqf" id="af"><label>Message pour l’équipe <small>(visible dans l’app équipe)</small><textarea id="atx" maxlength="280" rows="3" placeholder="Par exemple : plus de monnaie en pièces de 2 €, besoin d’un bénévole au parvis…"></textarea></label>
+   <div class="eqa"><label class="chk"><input type="checkbox" id="aur"> Urgent</label><button class="lnk" type="button" id="aan" hidden>Annuler</button><button class="btn btn-p" type="submit" id="asb">Publier</button></div></form>
+  <p class="eqm" id="am" role="status"></p><ul class="eql" id="al"></ul>
+ </div>
+ <div id="eq-objets" hidden>
+  <form class="eqf" id="of"><div class="dbl"><label>Objet<input id="oob" type="text" maxlength="60" autocomplete="off" placeholder="Doudou, clés, écharpe…"></label><label>Trouvé où<input id="oli" type="text" maxlength="60" autocomplete="off" list="ozl" placeholder="Parvis, boulodrome…"></label></div>
+   <label>Détails <small>(couleur, marque…)</small><input id="ode" type="text" maxlength="120" autocomplete="off"></label>
+   <datalist id="ozl"><option value="Accueil"><option value="Salle Ughetti"><option value="Grande salle"><option value="Parvis"><option value="Boulodrome"><option value="Parc Melkonian"><option value="Parking"></datalist>
+   <div class="eqa"><button class="btn btn-p" type="submit" id="osb">Enregistrer l’objet</button></div></form>
+  <p class="eqm" id="om" role="status"></p><ul class="eql" id="ocl"></ul>
+ </div>
+</div><div class="pgf"><button class="btn btn-s" type="button" id="eqx">Fermer</button></div></dialog>
 
 <dialog class="pg" id="rc" aria-labelledby="rct"><div class="pgh"><h3 id="rct">Retrouver une commande en ligne</h3></div><div class="pgb"><p>Tapez les 4 derniers chiffres du numéro de commande HelloAsso (indiqués en gros dans le mail du client).</p><form class="rcf" id="rcfm"><input id="rci" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="4 derniers chiffres" /><button class="btn btn-p" type="submit" id="rcb">Chercher</button></form><p id="rcm" role="alert" style="color:#b3261e;font-weight:600"></p><div id="rcr"></div><div class="hs"><span id="hn"></span><button class="lnk" type="button" id="hall">Tout supprimer</button></div><ul class="hl" id="hl"></ul></div><div class="pgf"><button class="btn btn-s" type="button" id="rcx">Fermer</button></div></dialog>
 
@@ -297,6 +329,37 @@ document.addEventListener("visibilitychange",eveil);addEventListener("pointerdow
 upd();
 /* horloge de la caisse (heure de Paris), mise à jour chaque seconde */
 (()=>{const c=$("clk"),f=()=>{const d=new Date();c.textContent=d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit",second:"2-digit",timeZone:"Europe/Paris"});c.dateTime=d.toISOString()};f();setInterval(f,1000);document.addEventListener("visibilitychange",f)})();
+
+/* ---- Module Équipe : actualités et objets trouvés, partagés avec l'app équipe via equipe-api.js ---- */
+(()=>{const api=window.equipeApi,D={actus:[],objets:[]};let onglet="actus",edit=null;
+ const heureDe=q=>{const d=new Date(Date.parse(String(q)+(/[+-]\d\d:?\d\d$|Z$/.test(String(q))?"":"+01:00")));return isNaN(d)?"":d.toLocaleString("fr-FR",{weekday:"short",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Paris"})};
+ const msg=(id,t,ko)=>{$(id).textContent=t||"";$(id).classList.toggle("ko",!!ko)};
+ const actif=()=>!!(api&&api.actif());
+ function rend(){
+  $("al").innerHTML=D.actus.length?D.actus.slice().sort((a,b)=>String(b.quand).localeCompare(String(a.quand))).map(a=>`<li><div class="tx"><small>${esc(heureDe(a.quand))}</small><b>${a.urgent?'<span class="ur">Urgent</span>':""}${esc(a.texte)}</b></div><div class="ac"><button type="button" data-ae="${esc(a.id)}">Modifier</button><button type="button" class="del" data-ad="${esc(a.id)}">Supprimer</button></div></li>`).join(""):'<li class="vide">Aucune actualité publiée.</li>';
+  $("ocl").innerHTML=D.objets.length?D.objets.slice().sort((a,b)=>(a.statut==="rendu")-(b.statut==="rendu")||String(b.quand).localeCompare(String(a.quand))).map(o=>`<li><div class="tx"><b>${esc(o.objet)}</b><small>${o.details?esc(o.details)+" · ":""}trouvé ${o.lieu?": "+esc(o.lieu)+", ":""}${esc(heureDe(o.quand))}</small>${o.statut==="rendu"?`<span class="ok">Rendu ${esc(heureDe(o.rendu_quand))}</span>`:""}</div><div class="ac">${o.statut==="rendu"?`<button type="button" data-og="${esc(o.id)}">Remettre en garde</button>`:`<button type="button" data-or="${esc(o.id)}">Rendu</button>`}<button type="button" class="del" data-od="${esc(o.id)}">Supprimer</button></div></li>`).join(""):'<li class="vide">Aucun objet enregistré.</li>'}
+ function vue(){document.querySelectorAll("#eqs button").forEach(b=>b.classList.toggle("on",b.dataset.eq===onglet));$("eq-actus").hidden=onglet!=="actus";$("eq-objets").hidden=onglet!=="objets"}
+ async function charger(){if(!actif()){$("eqoff").hidden=false;["asb","osb"].forEach(i=>$(i).disabled=true);rend();return}
+  try{const d=await api.lire();D.actus=d.actus;D.objets=d.objets;msg("am","");msg("om","")}catch(_){msg(onglet==="actus"?"am":"om","Lecture impossible (connexion ?). Réessayez.",1)}rend()}
+ async function ecrire(fn,zone,ok){const code=($("code").value||"").trim();if(!code){codeOuvre();return msg(zone,"Saisissez d’abord le code caisse.",1)}
+  if(!actif())return msg(zone,"La passerelle n’est pas encore branchée.",1);
+  msg(zone,"Enregistrement…");try{const d=await api.modifier(code,fn);D.actus=d.actus;D.objets=d.objets;msg(zone,ok);rend();return true}
+  catch(e){msg(zone,e&&e.message==="code"?"Code caisse incorrect.":"Pas de réponse du serveur. Réessayez.",1);return false}}
+ const razA=()=>{edit=null;$("atx").value="";$("aur").checked=false;$("asb").textContent="Publier";$("aan").hidden=true};
+ $("eq0").onclick=()=>{vue();charger();$("eqd").showModal()};$("eqx").onclick=()=>$("eqd").close();
+ $("eqs").addEventListener("click",e=>{const b=e.target.closest("[data-eq]");if(b){onglet=b.dataset.eq;vue()}});
+ $("af").onsubmit=async e=>{e.preventDefault();const t=$("atx").value.trim().replace(/\s+/g," ");if(!t)return msg("am","Écrivez le message.",1);const u=$("aur").checked,id=edit;
+  if(await ecrire(d=>{if(id){const a=d.actus.find(x=>x.id===id);if(a){a.texte=t;a.urgent=u}}else d.actus.push({id:api.id(),quand:new Date().toISOString(),texte:t,urgent:u})},"am",id?"Actualité modifiée ✓":"Actualité publiée ✓"))razA()};
+ $("aan").onclick=razA;
+ $("of").onsubmit=async e=>{e.preventDefault();const o=$("oob").value.trim();if(!o)return msg("om","Indiquez l’objet.",1);const l=$("oli").value.trim(),de=$("ode").value.trim();
+  if(await ecrire(d=>{d.objets.push({id:api.id(),quand:new Date().toISOString(),objet:o,details:de,lieu:l,statut:"garde"})},"om","Objet enregistré ✓")){$("oob").value="";$("oli").value="";$("ode").value=""}};
+ $("eqd").addEventListener("click",async e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+  if(d.ae){const a=D.actus.find(x=>x.id===d.ae);if(a){edit=a.id;$("atx").value=a.texte;$("aur").checked=!!a.urgent;$("asb").textContent="Enregistrer la modification";$("aan").hidden=false;$("atx").focus()}}
+  else if(d.ad){if(confirm("Supprimer cette actualité de l’app équipe ?"))await ecrire(x=>{x.actus=x.actus.filter(a=>a.id!==d.ad)},"am","Actualité supprimée")}
+  else if(d.or)await ecrire(x=>{const o=x.objets.find(y=>y.id===d.or);if(o){o.statut="rendu";o.rendu_quand=new Date().toISOString()}},"om","Objet marqué comme rendu ✓");
+  else if(d.og)await ecrire(x=>{const o=x.objets.find(y=>y.id===d.og);if(o){o.statut="garde";delete o.rendu_quand}},"om","Objet remis en garde");
+  else if(d.od){if(confirm("Supprimer cet objet de la liste ?"))await ecrire(x=>{x.objets=x.objets.filter(o=>o.id!==d.od)},"om","Objet supprimé")}});
+})();
 /* ---- Historique des ventes en caisse (navigateur) ---- */
 const VK="caisse-ventes";
 const vget=()=>{try{const v=JSON.parse(localStorage.getItem(VK)||"[]");return Array.isArray(v)?v:[]}catch(_){return[]}};
