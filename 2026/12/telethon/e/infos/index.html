@@ -225,8 +225,7 @@ function rendObjets(){const q=nz($("osrch").value),L=OBJETS.filter(o=>(oStat==="
  document.querySelectorAll("[data-os]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.os===oStat));badges()}
 $("osrch").addEventListener("input",rendObjets);
 async function donnees(){
- try{if(window.equipeApi&&equipeApi.actif()){const d=await equipeApi.lire();ACTUS=d.actus;OBJETS=d.objets}
-  else{const r=await fetch("infos.json?v="+Date.now(),{cache:"no-store"});if(r.ok){const L=await r.json();ACTUS=(Array.isArray(L)?L:[]).filter(x=>x&&x.texte)}}
+ try{const d=await equipeApi.lire();ACTUS=d.actus.filter(x=>x&&x.texte);OBJETS=d.objets
   if(!premier&&ACTUS.some(a=>!vues.has(cle(a)))&&navigator.vibrate)navigator.vibrate(200);
   $("m-actus").textContent="Vérifié à "+heure(Date.now())+" · actualisation automatique chaque minute";premier=false}
  catch(_){$("m-actus").textContent="Pas de connexion pour l’instant : nouvel essai dans une minute."}
