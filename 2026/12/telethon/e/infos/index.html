@@ -17,8 +17,7 @@
 /* =====================================================================
    App équipe — Téléthon 2026 à Luynes
    Une vue d'accueil, puis une vue par besoin (comme une application mobile), barre d'onglets en bas.
-   Sources : programme public lu sur la page principale ; actualités et objets trouvés via la passerelle
-   equipe-api.js (alimentée depuis la caisse) ; coulisses, planning et zones dans la configuration du script.
+   Sources : programme public lu sur la page principale ; coulisses, planning et zones dans la configuration du script.
    ===================================================================== */
 :root{color-scheme:light dark;--bg:light-dark(#fff8ef,#1d1712);--card:light-dark(#fff,#2a221b);--ink:light-dark(#2f2418,#f6ece0);--mut:light-dark(rgba(75,58,41,.7),rgba(246,236,224,.7));--line:light-dark(rgba(95,68,37,.14),rgba(246,236,224,.14));--or:#c2792a;--or2:light-dark(#f8e0c2,#4a3420);--ko:#b3261e;--ok:#2e7d32;--pass:#5d6b7a;--fort:#8a6500;--jeton:#9a5b26;--free:#2e7d32;--tombola:#8e5ea2;--eq:#3b5fa8;--tab:64px}
 *{box-sizing:border-box;min-width:0;-webkit-tap-highlight-color:transparent}
@@ -43,18 +42,10 @@ a{color:var(--or)}button{font:inherit;color:inherit;cursor:pointer;touch-action:
 .hero ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
 .hero li{padding-left:10px;border-left:4px solid var(--c,var(--or))}.hero li b{display:block;line-height:1.25}.hero li small{opacity:.75}
 .hero .plus{display:inline-block;margin-top:10px;color:var(--bg);opacity:.8;font-weight:600;text-decoration:underline;border:0;background:none;padding:0}
-.alerte{display:block;width:100%;margin-top:12px;padding:14px 16px;border:0;border-left:6px solid var(--or);border-radius:18px;background:var(--card);text-align:left;box-shadow:0 4px 14px rgba(63,40,16,.06)}
-.alerte.urgent{border-left-color:var(--ko);background:light-dark(#fdecea,#3a1a18)}
-.alerte small{display:block;color:var(--mut);font-weight:600}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.tiles{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:14px}.tile{grid-column:span 2}.tile:nth-child(n+4){grid-column:span 3}
 .tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:104px;padding:14px;border:1px solid var(--line);border-radius:20px;background:var(--card);text-align:left;box-shadow:0 4px 14px rgba(63,40,16,.05)}
 .tile:active{transform:scale(.97)}.tile i{font-style:normal;font-size:1.7rem;line-height:1}.tile b{font-size:1rem;line-height:1.2}.tile small{color:var(--mut);font-size:.8rem;line-height:1.25}
-.badge{position:absolute;top:10px;right:10px;min-width:24px;height:24px;padding:0 7px;border-radius:99px;background:var(--ko);color:#fff;font-size:.8rem;font-weight:800;line-height:24px;text-align:center}
-.call{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding:14px 16px;border-radius:18px;background:var(--or);color:#fff;text-decoration:none;font-weight:700}.call b{font-size:1.2rem;white-space:nowrap}
-.feed{list-style:none;margin:0;padding:0}
-.feed li{padding:14px 16px;border-top:1px solid var(--line)}.feed li:first-child{border-top:0}
-.feed li.urgent{border-left:6px solid var(--ko)}.feed li.neuf{background:light-dark(#fff3e0,#3a2a1a)}
-.feed time{display:block;font-size:.82rem;font-weight:700;color:var(--mut)}.feed p{margin:2px 0 0;font-size:1.05rem}
+.call{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding:14px 16px;border-radius:18px;background:var(--or);color:#fff;text-decoration:none;font-weight:700}.call b{flex:none;font-size:1.2rem;white-space:nowrap}
 .tl{list-style:none;margin:0;padding:0}
 .tl li{display:grid;grid-template-columns:6.6em 1fr;gap:12px;padding:12px 14px;border-top:1px solid var(--line);border-left:6px solid var(--c,var(--line))}
 .tl li:first-child{border-top:0}.tl .t{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}.tl b{display:block;line-height:1.25}.tl small{color:var(--mut)}
@@ -63,8 +54,6 @@ a{color:var(--or)}button{font:inherit;color:inherit;cursor:pointer;touch-action:
 .seg button{padding:10px;border:0;border-radius:99px;background:transparent;font-weight:700;min-height:44px}.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
 .rows{list-style:none;margin:0;padding:0}.rows li{padding:12px 16px;border-top:1px solid var(--line)}.rows li:first-child{border-top:0}
 .rows b{display:block}.rows small{display:block;color:var(--mut)}.rows li.on{background:light-dark(#fff3e0,#3a2a1a)}
-.srch{display:block;width:100%;padding:13px 16px;margin-bottom:10px;border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--ink);font:inherit;font-size:16px}
-.obj{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:start}.obj>i{font-style:normal;font-size:1.5rem}
 .st{display:inline-block;margin-top:4px;padding:1px 9px;border-radius:99px;font-size:.78rem;font-weight:700;background:var(--or2)}.st.rendu{background:light-dark(#e1f1e1,#1f3a22);color:var(--ok)}
 .urg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.urg a{padding:16px;border-radius:18px;background:var(--ko);color:#fff;text-align:center;text-decoration:none;font-weight:600}.urg b{display:block;font-size:2.2rem;line-height:1}
 .maj{margin:10px 0 0;color:var(--mut);font-size:.82rem;text-align:center}
@@ -73,11 +62,9 @@ a{color:var(--or)}button{font:inherit;color:inherit;cursor:pointer;touch-action:
 .tabs div{display:grid;grid-template-columns:repeat(5,1fr);width:min(100%,720px)}
 .tabs a{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:var(--tab);color:var(--mut);text-decoration:none;font-size:.72rem;font-weight:700}
 .tabs a i{font-style:normal;font-size:1.35rem;line-height:1;filter:grayscale(1);opacity:.7}.tabs a[aria-current=page]{color:var(--or)}.tabs a[aria-current=page] i{filter:none;opacity:1}
-.tabs .badge{top:6px;right:calc(50% - 26px);min-width:18px;height:18px;line-height:18px;font-size:.7rem;padding:0 5px}
-@media(min-width:600px){.tiles{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:600px){.tiles{grid-template-columns:repeat(5,1fr)}.tile,.tile:nth-child(n+4){grid-column:auto}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
-<script src="/2026/12/telethon/equipe-api.js"></script>
 </head>
 <body>
 <div class="app">
@@ -85,26 +72,21 @@ a{color:var(--or)}button{font:inherit;color:inherit;cursor:pointer;touch-action:
 
  <section class="v" id="v-accueil">
   <div class="hero" id="h-now"></div>
-  <div id="h-actu"></div>
   <div class="tiles">
-   <button class="tile" type="button" data-go="actus"><i>📣</i><b>Actualités</b><small id="t-actus">Messages de l’équipe</small><span class="badge" id="b-actus" hidden></span></button>
    <button class="tile" type="button" data-go="maintenant"><i>⏱️</i><b>Maintenant</b><small>En cours et ensuite</small></button>
    <button class="tile" type="button" data-go="programme"><i>🗓️</i><b>Programme</b><small>Public et coulisses</small></button>
    <button class="tile" type="button" data-go="planning"><i>👥</i><b>Planning</b><small>Qui est à quel poste</small></button>
    <button class="tile" type="button" data-go="zones"><i>📍</i><b>Zones</b><small>Activités et référents</small></button>
-   <button class="tile" type="button" data-go="objets"><i>🧳</i><b>Objets trouvés</b><small id="t-objets">Déposés à la caisse</small></button>
    <button class="tile" type="button" data-go="contact"><i>🆘</i><b>Urgences</b><small>Numéros et adresse</small></button>
   </div>
   <a class="call" href="tel:+33670761026"><span>Contact pendant l’événement</span><b>06 70 76 10 26</b></a>
   <p class="sim"><label for="simu">Prévisualiser à une autre heure :</label><select id="simu"><option value="">Heure réelle</option><option value="2026-12-05T08:30">Samedi 8h30</option><option value="2026-12-05T11:00">Samedi 11h</option><option value="2026-12-05T15:30">Samedi 15h30</option><option value="2026-12-06T14:40">Dimanche 14h40</option><option value="2026-12-06T16:35">Dimanche 16h35</option></select></p>
  </section>
 
- <section class="v" id="v-actus" hidden><div class="card"><ul class="feed" id="feed"></ul></div><p class="maj" id="m-actus"></p></section>
  <section class="v" id="v-maintenant" hidden><h2>En ce moment</h2><div class="card"><ul class="tl" id="now-l"></ul></div><h2 id="nx-h">Ensuite</h2><div class="card"><ul class="tl" id="nx-l"></ul></div></section>
  <section class="v" id="v-programme" hidden><div class="seg" role="group" aria-label="Jour"><button type="button" data-j="sam" aria-pressed="true">Samedi 5</button><button type="button" data-j="dim" aria-pressed="false">Dimanche 6</button></div><div class="card"><ul class="tl" id="tl"></ul></div><p class="maj" id="sans"></p></section>
  <section class="v" id="v-planning" hidden><div class="seg" role="group" aria-label="Jour"><button type="button" data-pj="sam" aria-pressed="true">Samedi 5</button><button type="button" data-pj="dim" aria-pressed="false">Dimanche 6</button></div><div class="card"><ul class="rows" id="pl"></ul></div></section>
  <section class="v" id="v-zones" hidden><div class="card"><ul class="rows" id="zt"></ul></div></section>
- <section class="v" id="v-objets" hidden><input class="srch" id="osrch" type="search" placeholder="Rechercher : doudou, clés, écharpe…" autocomplete="off"><div class="seg" role="group" aria-label="Statut"><button type="button" data-os="garde" aria-pressed="true">En garde</button><button type="button" data-os="rendu" aria-pressed="false">Rendus</button><button type="button" data-os="tous" aria-pressed="false">Tous</button></div><div class="card"><ul class="rows" id="ol"></ul></div><p class="maj">Les objets sont gardés à la caisse centrale (accueil de la salle Ughetti).</p></section>
  <section class="v" id="v-contact" hidden>
   <a class="call" href="tel:+33670761026" style="margin-top:0"><span>Contact pendant l’événement</span><b>06 70 76 10 26</b></a>
   <h2>Numéros d’urgence</h2>
@@ -115,9 +97,9 @@ a{color:var(--or)}button{font:inherit;color:inherit;cursor:pointer;touch-action:
 </div>
 <nav class="tabs" aria-label="Navigation"><div>
  <a href="#accueil" data-t="accueil"><i>🏠</i>Accueil</a>
- <a href="#actus" data-t="actus"><i>📣</i>Actus<span class="badge" id="tb-actus" hidden></span></a>
+ <a href="#maintenant" data-t="maintenant"><i>⏱️</i>Maintenant</a>
  <a href="#programme" data-t="programme"><i>🗓️</i>Programme</a>
- <a href="#objets" data-t="objets"><i>🧳</i>Objets</a>
+ <a href="#planning" data-t="planning"><i>👥</i>Planning</a>
  <a href="#contact" data-t="contact"><i>🆘</i>Urgences</a>
 </div></nav>
 
@@ -157,10 +139,10 @@ const qs=new URLSearchParams(location.search).get("t");let SIM=qs?parseT(qs):nul
 const now=()=>SIM??Date.now(),heure=t=>new Date(t).toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit",timeZone:"Europe/Paris"});
 const jourDe=t=>new Date(t).toLocaleDateString("fr-FR",{weekday:"long",timeZone:"Europe/Paris"});
 const C={eq:"var(--eq)",pass:"var(--pass)",fort:"var(--fort)",jeton:"var(--jeton)",free:"var(--free)",tombola:"var(--tombola)"};
-let D=COULISSES.map(x=>[...x,"eq"]),SANS=[],ACTUS=[],OBJETS=[],jourP=Date.now()>=ts("dim","00:00")?"dim":"sam",jourPl=jourP,oStat="garde",premier=true;
+let D=COULISSES.map(x=>[...x,"eq"]),SANS=[],jourP=Date.now()>=ts("dim","00:00")?"dim":"sam",jourPl=jourP;
 
 /* ---------- navigation : une vue à la fois, comme une app ---------- */
-const TITRES={accueil:"",actus:"Actualités",maintenant:"Maintenant",programme:"Programme",planning:"Planning équipe",zones:"Zones et référents",objets:"Objets trouvés",contact:"Urgences"};
+const TITRES={accueil:"",maintenant:"Maintenant",programme:"Programme",planning:"Planning équipe",zones:"Zones et référents",contact:"Urgences"};
 const CHEV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
 const horloge=()=>{const c=$("clk");if(c)c.textContent=heure(now())};
 function vue(){let v=location.hash.slice(1);if(!(v in TITRES))v="accueil";
@@ -169,7 +151,7 @@ function vue(){let v=location.hash.slice(1);if(!(v in TITRES))v="accueil";
  $("top").innerHTML=v==="accueil"?`<img class="logo" src="/files/logos/favicon.png" alt=""><h1>Équipe Téléthon<small>Luynes · 5 et 6 décembre</small></h1><span class="clk" id="clk"></span>`
   :`<button class="back" type="button" id="back" aria-label="Retour à l’accueil">${CHEV}</button><h1>${TITRES[v]}</h1><span class="clk" id="clk"></span>`;
  if($("back"))$("back").onclick=()=>{location.hash="accueil"};
- if(v==="actus")lus();horloge();scrollTo(0,0)}
+ horloge();scrollTo(0,0)}
 addEventListener("hashchange",vue);
 
 /* ---------- programme public : lu sur la page principale (une seule source) ---------- */
@@ -205,36 +187,14 @@ function rendPlanning(){$("pl").innerHTML=PLANNING.filter(p=>p[0]===jourPl).sort
  document.querySelectorAll("[data-pj]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.pj===jourPl))}
 $("zt").innerHTML=ZONES.map(z=>`<li><b>${esc(z[0])}</b><small>${esc(z[1])}</small><small>Référent : ${z[2]?esc(z[2]):TODO}</small></li>`).join("");
 document.addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g){location.hash=g.dataset.go;return}
- const a=e.target.closest("button[data-j]"),b=e.target.closest("[data-pj]"),o=e.target.closest("[data-os]");
- if(a){jourP=a.dataset.j;rendProgramme();rendMaintenant()}if(b){jourPl=b.dataset.pj;rendPlanning();rendMaintenant()}if(o){oStat=o.dataset.os;rendObjets()}});
+ const a=e.target.closest("button[data-j]"),b=e.target.closest("[data-pj]");
+ if(a){jourP=a.dataset.j;rendProgramme();rendMaintenant()}if(b){jourPl=b.dataset.pj;rendPlanning();rendMaintenant()}});
 $("simu").addEventListener("change",e=>{SIM=e.target.value?parseT(e.target.value):null;if(SIM){jourP=jourPl=e.target.value.slice(0,10)===J.dim?"dim":"sam"}rendTout()});
 
-/* ---------- actualités et objets trouvés : passerelle avec la caisse ---------- */
-let vues=new Set();try{vues=new Set(JSON.parse(localStorage.getItem("telethon-actus-vues")||"[]"))}catch(_){}
-const cle=a=>a.id||String(a.quand)+a.texte;
-function lus(){ACTUS.forEach(a=>vues.add(cle(a)));try{localStorage.setItem("telethon-actus-vues",JSON.stringify([...vues].slice(-300)))}catch(_){}badges()}
-function badges(){const n=ACTUS.filter(a=>!vues.has(cle(a))).length;["b-actus","tb-actus"].forEach(i=>{$(i).textContent=n;$(i).hidden=!n});
- const g=OBJETS.filter(o=>o.statut!=="rendu").length;$("t-objets").textContent=g?g+" en garde à la caisse":"Déposés à la caisse";$("t-actus").textContent=ACTUS.length?ACTUS.length+" message"+(ACTUS.length>1?"s":""):"Messages de l’équipe"}
-function rendActus(){const L=ACTUS.slice().sort((a,b)=>parseT(b.quand)-parseT(a.quand));
- $("feed").innerHTML=L.length?L.map(a=>`<li class="${a.urgent?"urgent ":""}${vues.has(cle(a))?"":"neuf"}"><time>${esc(jourDe(parseT(a.quand)))} ${esc(heure(parseT(a.quand)))}${a.urgent?" · Urgent":""}</time><p>${esc(a.texte)}</p></li>`).join(""):'<li class="vide">Aucune actualité pour l’instant.</li>';
- const d=L[0];$("h-actu").innerHTML=d?`<button class="alerte${d.urgent?" urgent":""}" type="button" data-go="actus"><small>${d.urgent?"Urgent · ":""}Dernière actu · ${esc(heure(parseT(d.quand)))}</small>${esc(d.texte)}</button>`:"";badges()}
-const ICO=o=>/doudou|peluche/i.test(o)?"🧸":/cl[eé]s?\b/i.test(o)?"🔑":/t[eé]l[eé]phone|portable/i.test(o)?"📱":/lunettes/i.test(o)?"👓":/sac|cartable/i.test(o)?"👜":/portefeuille|porte-monnaie|carte/i.test(o)?"👛":/v[eê]tement|veste|manteau|[eé]charpe|bonnet|gant|pull|blouson/i.test(o)?"🧥":"📦";
-const nz=t=>String(t||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
-function rendObjets(){const q=nz($("osrch").value),L=OBJETS.filter(o=>(oStat==="tous"||(oStat==="rendu")===(o.statut==="rendu"))&&(!q||nz(o.objet+" "+(o.details||"")+" "+(o.lieu||"")).includes(q))).sort((a,b)=>parseT(b.quand)-parseT(a.quand));
- $("ol").innerHTML=L.length?L.map(o=>`<li class="obj"><i aria-hidden="true">${ICO(o.objet)}</i><div><b>${esc(o.objet)}</b>${o.details?`<small>${esc(o.details)}</small>`:""}<small>Trouvé ${o.lieu?": "+esc(o.lieu)+", ":""}${esc(jourDe(parseT(o.quand)))} à ${esc(heure(parseT(o.quand)))}</small><span class="st${o.statut==="rendu"?" rendu":""}">${o.statut==="rendu"?"Rendu"+(o.rendu_quand?" à "+esc(heure(parseT(o.rendu_quand))):""):"En garde à la caisse"}</span></div></li>`).join(""):`<li class="vide">${q?"Aucun objet ne correspond.":oStat==="garde"?"Aucun objet en garde.":"Aucun objet."}</li>`;
- document.querySelectorAll("[data-os]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.os===oStat));badges()}
-$("osrch").addEventListener("input",rendObjets);
-async function donnees(){
- try{const d=await equipeApi.lire();ACTUS=d.actus.filter(x=>x&&x.texte);OBJETS=d.objets
-  if(!premier&&ACTUS.some(a=>!vues.has(cle(a)))&&navigator.vibrate)navigator.vibrate(200);
-  $("m-actus").textContent="Vérifié à "+heure(Date.now())+" · actualisation automatique chaque minute";premier=false}
- catch(_){$("m-actus").textContent="Pas de connexion pour l’instant : nouvel essai dans une minute."}
- rendActus();rendObjets();if(!$("v-actus").hidden)lus()}
-
 function rendTout(){rendProgramme();rendPlanning();rendMaintenant()}
-vue();rendTout();programme();donnees();
-setInterval(rendMaintenant,30000);setInterval(()=>{if(!document.hidden)donnees()},60000);setInterval(programme,10*60000);
-document.addEventListener("visibilitychange",()=>{if(!document.hidden){donnees();rendMaintenant()}});
+vue();rendTout();programme();
+setInterval(rendMaintenant,30000);setInterval(programme,10*60000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)rendMaintenant()});
 }
 </script>
 </body>
