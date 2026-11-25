@@ -116,6 +116,22 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 .vtools .seg button{flex-direction:row;padding:10px 8px;border:0;border-radius:999px;background:transparent}.vtools .seg button.on{background:var(--brand-dark);color:#fff}
 .vtools .btn{padding:10px 16px;font-size:.92rem}
 
+dialog.cld{width:min(980px,calc(100% - 24px))}
+.clg{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px;align-items:start}
+.clb{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:#fff}.clb h4{margin:0 0 8px;color:var(--ink);font-size:1.1rem}
+.clr{display:grid;grid-template-columns:4.2em 44px 4.4em 44px 1fr;align-items:center;gap:6px;padding:4px 0}.clr span{font-weight:800;color:var(--ink)}
+.clr button{height:44px;border:1px solid var(--line);border-radius:12px;background:var(--brand-soft);font-size:1.3rem;font-weight:800;color:var(--ink)}
+.clr input,.clm input{width:100%;height:44px;border:1px solid var(--line);border-radius:12px;text-align:center;font:inherit;font-size:1.1rem;font-weight:700}
+.clr output{text-align:right;color:var(--muted);font-weight:600}.clr.on output{color:var(--ink)}
+.clt{display:flex;justify-content:space-between;margin-top:8px;padding-top:10px;border-top:1px solid var(--line);font-weight:800;color:var(--ink);font-size:1.15rem}
+.clm{display:grid;grid-template-columns:1fr 7em;align-items:center;gap:6px 10px;margin:0 0 10px}.clm label{font-weight:600;color:var(--ink)}.clm small{grid-column:1/-1;margin-top:-4px;color:var(--muted)}
+.cll{display:flex;justify-content:space-between;gap:10px;padding:5px 0}.cll b{color:var(--ink);white-space:nowrap}
+.cle{margin:10px 0;padding:14px 16px;border-radius:16px;background:#eef6ee;color:var(--ok);font-weight:800;font-size:1.2rem;text-align:center}.cle small{display:block;font-size:.85rem;font-weight:600}.cle.ko{background:#fdecea;color:var(--ko)}.cle.vide{background:var(--brand-soft);color:var(--ink)}
+.clrem{padding:12px 14px;border-radius:14px;background:var(--brand-dark);color:#fff;font-weight:700;display:flex;justify-content:space-between;gap:10px}
+.clb ul{margin:4px 0 0;padding-left:18px}.cln{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}.cln input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font:inherit}
+#clprint{display:none}
+@media print{body{background:#fff!important}body>*:not(#clprint){display:none!important}#clprint{display:block;color:#000;font:11pt/1.45 Outfit,Arial,sans-serif}#clprint h1{font-size:16pt;margin:0 0 2pt}#clprint h2{font-size:12pt;margin:12pt 0 4pt;border-bottom:1px solid #999}#clprint table{width:100%;border-collapse:collapse}#clprint td,#clprint th{padding:2pt 4pt;border-bottom:1px solid #ddd;text-align:left}#clprint td.n,#clprint th.n{text-align:right}#clprint .sig{display:grid;grid-template-columns:1fr 1fr;gap:20pt;margin-top:24pt}#clprint .sig div{border-top:1px solid #000;padding-top:3pt;min-height:40pt}@page{margin:14mm}}
+@media(max-width:860px){.clg{grid-template-columns:1fr}}
 @media(max-width:1000px){.hbx{display:none}.brand span{display:none}}
 /* ---------- Écrans étroits (iPad mini en portrait, téléphone) : un seul volet, pied du ticket fixé en bas ---------- */
 @media(max-width:760px){
@@ -154,7 +170,7 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 <header><div class="hbar">
  <a class="brand" href="/2026/12/telethon"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" /><span>Caisse centrale</span></a>
  <time class="clk" id="clk" aria-label="Heure actuelle"></time>
- <nav class="hact" aria-label="Outils de la caisse"><button class="hb" type="button" id="rc0" aria-label="Retrouver une commande"><span aria-hidden="true">🔎</span><span class="hbt">Retrouver<span class="hbx"> une commande</span></span></button><button class="hb" type="button" id="vh0" aria-label="Historique des ventes"><span aria-hidden="true">🧾</span><span class="hbt">Historique</span></button><button class="hb" type="button" id="cdp" aria-label="Code caisse"><span aria-hidden="true">🔒</span><span class="hbt" id="cdpt">Code caisse</span></button></nav>
+ <nav class="hact" aria-label="Outils de la caisse"><button class="hb" type="button" id="rc0" aria-label="Retrouver une commande"><span aria-hidden="true">🔎</span><span class="hbt">Retrouver<span class="hbx"> une commande</span></span></button><button class="hb" type="button" id="vh0" aria-label="Historique des ventes"><span aria-hidden="true">🧾</span><span class="hbt">Historique</span></button><button class="hb" type="button" id="cl0" aria-label="Clôture de caisse"><span aria-hidden="true">🧮</span><span class="hbt">Clôture</span></button><button class="hb" type="button" id="cdp" aria-label="Code caisse"><span aria-hidden="true">🔒</span><span class="hbt" id="cdpt">Code caisse</span></button></nav>
 </div></header>
 <div class="off" id="off" hidden role="status">📡 <b>Pas de connexion internet.</b> Les ventes ne peuvent pas être enregistrées pour l’instant : notez-les sur papier, ou attendez le retour du réseau.</div>
 
@@ -193,6 +209,25 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 <dialog class="pg" id="rc" aria-labelledby="rct"><div class="pgh"><h3 id="rct">Retrouver une commande en ligne</h3></div><div class="pgb"><p>Tapez les 4 derniers chiffres du numéro de commande HelloAsso (indiqués en gros dans le mail du client).</p><form class="rcf" id="rcfm"><input id="rci" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="4 derniers chiffres" /><button class="btn btn-p" type="submit" id="rcb">Chercher</button></form><p id="rcm" role="alert" style="color:#b3261e;font-weight:600"></p><div id="rcr"></div><div class="hs"><span id="hn"></span><button class="lnk" type="button" id="hall">Tout supprimer</button></div><ul class="hl" id="hl"></ul></div><div class="pgf"><button class="btn btn-s" type="button" id="rcx">Fermer</button></div></dialog>
 
 <dialog class="pg" id="vh" aria-labelledby="vht"><div class="pgh"><h3 id="vht">Historique des ventes en caisse</h3></div><div class="pgb"><div class="vtools"><div class="seg" id="vper" role="group" aria-label="Période"><button type="button" data-per="jour" class="on">Aujourd’hui</button><button type="button" data-per="tout">Tout</button></div><button class="btn btn-s" type="button" id="vcsv">Exporter (CSV)</button></div><div id="vs"></div><ul class="hl" id="vl"></ul><button class="lnk" type="button" id="vall">Tout supprimer</button></div><div class="pgf"><button class="btn btn-s" type="button" id="vx">Fermer</button></div></dialog>
+<dialog class="pg cld" id="cl" aria-labelledby="clh"><div class="pgh"><h3 id="clh">Clôture de caisse</h3></div><div class="pgb">
+ <div class="vtools"><div class="seg" id="clj" role="group" aria-label="Journée"></div></div>
+ <div class="clg">
+  <div class="clb"><h4>Espèces comptées dans le tiroir</h4><div id="clq"></div><div class="clt"><span>Total compté</span><span id="clc">0 €</span></div></div>
+  <div>
+   <div class="clb">
+    <div class="clm"><label for="clf">Fond de caisse au départ</label><input id="clf" type="text" inputmode="decimal" placeholder="0" autocomplete="off"><small>Monnaie mise dans le tiroir à l’ouverture</small></div>
+    <div class="cll"><span>Ventes en espèces (cet iPad)</span><b id="cle0">0 €</b></div>
+    <div class="cll"><span>Attendu dans le tiroir</span><b id="cla">0 €</b></div>
+    <div class="cle vide" id="cle">Comptez les espèces pour voir l’écart</div>
+    <div class="clm"><label for="cll">Fond laissé pour le lendemain</label><input id="cll" type="text" inputmode="decimal" placeholder="0" autocomplete="off"></div>
+    <div class="clrem"><span>À remettre au trésorier</span><span id="clrem">0 €</span></div>
+   </div>
+   <div class="clb" style="margin-top:12px"><h4>Récapitulatif des ventes</h4><div id="clv"></div></div>
+   <div class="clb" style="margin-top:12px"><h4>Signatures</h4><div class="cln"><input id="clp1" placeholder="Compté par" autocomplete="off"><input id="clp2" placeholder="Vérifié par" autocomplete="off"></div></div>
+  </div>
+ </div>
+ <button class="lnk" type="button" id="clz">Remettre le comptage à zéro</button>
+</div><div class="pgf"><button class="btn btn-s" type="button" id="clx">Fermer</button><button class="btn btn-p" type="button" id="clpr">Imprimer ou PDF</button></div></dialog>
 
 <script>
 const $=i=>document.getElementById(i);
@@ -325,6 +360,59 @@ $("vcsv").onclick=()=>{const v=vsel(),q=x=>'"'+String(x==null?"":x).replace(/"/g
   .concat(v.map(x=>{const d=new Date(x.t);return[x.ref,d.toLocaleDateString("fr-FR",{timeZone:"Europe/Paris"}),d.toLocaleTimeString("fr-FR",{hour:"2-digit",minute:"2-digit",timeZone:"Europe/Paris"}),x.n,x.mail,ML[x.m]||x.m,ce(x.c),x.m==="especes"?ce(x.r):"",x.m==="especes"?ce(x.r-x.c):"",(x.l||[]).join(" ; ")].map(q).join(";")}));
  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+L.join("\r\n")],{type:"text/csv;charset=utf-8"}));
  a.download="caisse-telethon-"+(VPER==="jour"?jourDe(Date.now()):"historique")+".csv";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1e3)};
+/* ---- Clôture de caisse : comptage du tiroir, écart avec les ventes en espèces, récap imprimable (tout reste sur l’iPad) ---- */
+(()=>{const CK="caisse-cloture",DENS=BIL.slice().reverse().concat(PIE);
+ const cget=()=>{try{return JSON.parse(localStorage.getItem(CK)||"{}")||{}}catch(_){return{}}},cset=v=>{try{localStorage.setItem(CK,JSON.stringify(v))}catch(_){}};
+ const cts=t=>{const n=parseFloat(String(t||"").replace(/\s|€/g,"").replace(",","."));return isNaN(n)?0:Math.round(n*100)};
+ const ent=c=>c?(c/100).toFixed(2).replace(".",",").replace(/,00$/,""):"";
+ const jl=j=>new Date(j+"T12:00:00+01:00").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",timeZone:"Europe/Paris"});
+ let J=jourDe(Date.now());
+ const st=()=>{const a=cget();return a[J]||(a[J]={q:{},f:0,l:0,p1:"",p2:""})};
+ const sav=o=>{const a=cget();a[J]=o;cset(a)};
+ function jours(){const s=new Set(vget().map(x=>jourDe(x.t)));s.add(jourDe(Date.now()));Object.keys(cget()).forEach(k=>s.add(k));return[...s].sort().slice(-4)}
+ function calc(){const o=st(),v=vget().filter(x=>jourDe(x.t)===J),by=k=>v.filter(x=>x.m===k),somme=a=>sum(a.map(x=>x.c));
+  const compte=sum(DENS.map(d=>d[0]*(o.q[d[0]]||0))),esp=somme(by("especes")),att=o.f+esp,ecart=compte-att;
+  const art={};v.forEach(x=>(x.l||[]).forEach(t=>{const m=/^(\d+) × (.*)$/.exec(t);if(m)art[m[2]]=(art[m[2]]||0)+ +m[1]}));
+  return{o,v,by,somme,compte,esp,att,ecart,art,touche:Object.values(o.q).some(n=>n>0)}}
+ function rend(){const R=calc(),o=R.o;
+  $("clj").style.gridTemplateColumns=`repeat(${jours().length},1fr)`;
+  $("clj").innerHTML=jours().map(j=>`<button type="button" data-cj="${j}" class="${j===J?"on":""}">${jl(j).replace(/ \d{4}$/,"")}</button>`).join("");
+  $("clq").innerHTML=DENS.map(d=>{const n=o.q[d[0]]||0;return`<div class="clr${n?" on":""}"><span>${d[1]}</span><button type="button" data-cm="${d[0]}" aria-label="Retirer un ${d[1]}">−</button><input type="text" inputmode="numeric" data-cq="${d[0]}" value="${n||""}" placeholder="0" aria-label="Nombre de ${d[1]}"><button type="button" data-cp="${d[0]}" aria-label="Ajouter un ${d[1]}">+</button><output>${n?eur(n*d[0]):""}</output></div>`}).join("");
+  if(document.activeElement!==$("clf"))$("clf").value=ent(o.f);if(document.activeElement!==$("cll"))$("cll").value=ent(o.l);
+  $("clp1").value=o.p1||"";$("clp2").value=o.p2||"";maj()}
+ function maj(){const R=calc(),o=R.o;
+  document.querySelectorAll("#clq .clr").forEach((r,i)=>{const d=DENS[i],n=o.q[d[0]]||0;r.classList.toggle("on",!!n);r.querySelector("output").textContent=n?eur(n*d[0]):""});
+  $("clc").textContent=eur(R.compte);$("cle0").textContent=eur(R.esp);$("cla").textContent=eur(R.att);
+  const e=$("cle");e.className="cle"+(!R.touche?" vide":R.ecart?" ko":"");
+  e.innerHTML=!R.touche?"Comptez les espèces pour voir l’écart":!R.ecart?"Caisse juste ✓":`${R.ecart<0?"Il manque":"Il y a"} ${eur(Math.abs(R.ecart))}${R.ecart>0?" de trop":""}<small>Recomptez, puis vérifiez les ventes en espèces dans l’Historique</small>`;
+  $("clrem").textContent=eur(Math.max(0,R.compte-o.l));
+  const ch=R.by("cheque");
+  $("clv").innerHTML=R.v.length?`<div class="cll"><span>${R.v.length} vente${R.v.length>1?"s":""}</span><b>${eur(R.somme(R.v))}</b></div>`+
+   [["especes","Espèces"],["cb","Carte bancaire"],["cheque","Chèques"]].map(([k,n])=>`<div class="cll"><span>${n} (${R.by(k).length})</span><b>${eur(R.somme(R.by(k)))}</b></div>`).join("")+
+   (ch.length?`<p style="margin:8px 0 0;font-weight:600;color:var(--ink)">Chèques à remettre</p><ul>${ch.map(x=>`<li>${esc(x.n)} · ${eur(x.c)} <small>(${esc(x.ref)})</small></li>`).join("")}</ul>`:"")+
+   `<p style="margin:8px 0 0;font-weight:600;color:var(--ink)">Articles vendus</p><ul>${Object.entries(R.art).map(([n,q])=>`<li>${q} × ${esc(n)}</li>`).join("")}</ul>`
+   :"<p>Aucune vente ce jour-là sur cet iPad.</p>"}
+ const setQ=(d,n)=>{const o=st();n=Math.max(0,Math.min(9999,n|0));if(n)o.q[d]=n;else delete o.q[d];sav(o)};
+ $("cl0").onclick=()=>{J=jourDe(Date.now());rend();$("cl").showModal()};$("clx").onclick=()=>$("cl").close();
+ $("cl").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+  if(d.cj){J=d.cj;rend()}
+  else if(d.cp||d.cm){const k=d.cp||d.cm,o=st();setQ(k,(o.q[k]||0)+(d.cp?1:-1));const i=document.querySelector(`[data-cq="${k}"]`);i.value=st().q[k]||"";maj()}
+  else if(b.id==="clz"&&confirm("Remettre à zéro le comptage de cette journée ?")){const o=st();o.q={};sav(o);rend()}});
+ $("cl").addEventListener("input",e=>{const t=e.target,o=st();
+  if(t.dataset.cq){setQ(t.dataset.cq,parseInt(t.value.replace(/\D/g,""),10)||0)}
+  else if(t.id==="clf"){o.f=cts(t.value);sav(o)}else if(t.id==="cll"){o.l=cts(t.value);sav(o)}
+  else if(t.id==="clp1"||t.id==="clp2"){o[t.id.slice(2)]=t.value;sav(o)}maj()});
+ $("cl").addEventListener("focusin",e=>{if(e.target.matches("input[data-cq],#clf,#cll"))e.target.select()});
+ $("clpr").onclick=()=>{const R=calc(),o=R.o,ligne=(a,b)=>`<tr><td>${a}</td><td class="n">${b}</td></tr>`;
+  $("clprint").innerHTML=`<h1>Téléthon 2026 à Luynes · Clôture de caisse</h1><p>Caisse centrale · ${esc(jl(J))} · imprimé le ${new Date().toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short",timeZone:"Europe/Paris"})}</p>
+  <h2>Comptage des espèces</h2><table><tr><th>Valeur</th><th class="n">Nombre</th><th class="n">Montant</th></tr>${DENS.filter(d=>o.q[d[0]]).map(d=>`<tr><td>${d[1]}</td><td class="n">${o.q[d[0]]}</td><td class="n">${eur(o.q[d[0]]*d[0])}</td></tr>`).join("")}<tr><th colspan="2">Total compté</th><th class="n">${eur(R.compte)}</th></tr></table>
+  <h2>Contrôle</h2><table>${ligne("Fond de caisse au départ",eur(o.f))}${ligne("Ventes en espèces",eur(R.esp))}${ligne("Attendu dans le tiroir",eur(R.att))}${ligne("Compté",eur(R.compte))}${ligne("<b>Écart</b>","<b>"+(R.ecart>0?"+":"")+eur(R.ecart)+"</b>")}${ligne("Fond laissé pour le lendemain",eur(o.l))}${ligne("<b>Espèces remises au trésorier</b>","<b>"+eur(Math.max(0,R.compte-o.l))+"</b>")}</table>
+  <h2>Ventes de la journée</h2><table>${ligne(R.v.length+" vente"+(R.v.length>1?"s":""),eur(R.somme(R.v)))}${[["especes","Espèces"],["cb","Carte bancaire"],["cheque","Chèques"]].map(([k,n])=>ligne(n+" ("+R.by(k).length+")",eur(R.somme(R.by(k))))).join("")}</table>
+  ${R.by("cheque").length?`<h2>Chèques</h2><table>${R.by("cheque").map(x=>ligne(esc(x.n)+" · "+esc(x.ref),eur(x.c))).join("")}</table>`:""}
+  <h2>Articles vendus</h2><table>${Object.entries(R.art).map(([n,q])=>ligne(esc(n),q)).join("")||ligne("Aucun","")}</table>
+  <div class="sig"><div>Compté par : ${esc(o.p1||"")}</div><div>Vérifié par : ${esc(o.p2||"")}</div></div>`;
+  window.print()};
+})();
 /* ---- Retrouver une commande en ligne : le flux cherche le mail de confirmation dans la boîte partagée ---- */
 const API_CMD="https://default403611541d9141c3b14ddd403256e1.be.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/07/workflows/9cd451be8db54573bfd8199d474255f2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bKay8rC9da6iQXNhUXjylN9sOkI-9PxD0ikvq8_hjjs";
 const HK="caisse-retraits";
@@ -384,5 +472,6 @@ $("rc").addEventListener("click",e=>{const o=e.target.closest("[data-hs]"),x=e.t
  else if(x){const h=hget();h.splice(+x.dataset.hx,1);hset(h);hrender()}
  else if(e.target.id==="hall"&&confirm("Supprimer tout l’historique des commandes retrouvées ?")){hset([]);hrender()}});
 </script>
+<div id="clprint" aria-hidden="true"></div>
 </body>
 </html>
