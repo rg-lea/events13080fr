@@ -322,9 +322,9 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 .contact p{margin:0;line-height:1.7;max-width:46ch}
 .cbtns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.cbtns #msg{width:100%;font-weight:600;color:var(--ink)}
 /* kit de communication : en-tête avec le ZIP, 4 supports identiques, 3 cartes pratiques identiques */
-.khead{display:grid;grid-template-columns:1fr minmax(280px,380px);gap:24px;align-items:end;margin-bottom:24px}.khead .lead{margin:0}
-.kzip{display:flex;flex-direction:column;gap:8px;padding:20px 22px;border-radius:24px;background:var(--ink);color:#fff;box-shadow:var(--shadow)}
-.kzip b{font-size:1.15rem}.kzip small{opacity:.8;line-height:1.45}.kzip .btn{margin-top:6px}.kzm{font-size:.88rem;opacity:.85}.kzm:empty{display:none}
+.khead{margin-bottom:24px}.khead .lead{margin:0 0 18px}
+.kzip{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;max-width:820px;padding:18px 22px;border-radius:24px;background:var(--ink);color:#fff;box-shadow:var(--shadow)}.kzip>div{flex:1 1 320px}
+.kzip b{display:block;font-size:1.15rem}.kzip small{display:block;margin-top:4px;opacity:.8;line-height:1.45}.kzip .btn{flex:none}.kzm{display:block;margin-top:6px;font-size:.88rem;opacity:.85}.kzm:empty{display:none}
 .kgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px}
 .km,.kp{display:flex;flex-direction:column;min-width:0;border:1px solid var(--line);border-radius:24px;background:#fff;overflow:hidden}
 .kth{position:relative;display:block;aspect-ratio:4/3;background:var(--brand-soft)}
@@ -370,7 +370,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 html.fin main>section:not(#merci),html.fin .fab,html.fin .sw,html.fin nav,html.fin .burger,html.fin .live,html.fin .reprise,html.fin .ft .ftg>div:nth-child(2),html.fin .ft a[href$=".ics"]{display:none!important}
 
 /* ---------- 16. Responsive ---------- */
-@media(max-width:1000px){.logos{--n:4}.kgrid{grid-template-columns:repeat(2,1fr)}.kgrid3{grid-template-columns:1fr 1fr}.kgrid3 .kp:last-child{grid-column:1/-1}.khead{grid-template-columns:1fr}}
+@media(max-width:1000px){.logos{--n:4}.kgrid{grid-template-columns:repeat(2,1fr)}.kgrid3{grid-template-columns:1fr 1fr}.kgrid3 .kp:last-child{grid-column:1/-1}}
 @media(max-width:900px){
  .burger{display:flex}
  nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:8px 16px 14px;background:rgba(255,249,242,.98);border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(63,40,16,.12)}
@@ -617,7 +617,7 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin .sw,html.fin nav,html.f
 <section class="sec" id="ressources"><div class="container">
  <div class="khead">
   <div><h2>Kit de communication</h2><p class="lead">Affiches, visuels, QR code et liens pour faire connaître le Téléthon autour de vous : à télécharger un par un, ou tout d’un coup.</p></div>
-  <div class="kzip"><b>Tout le kit en un fichier</b><small>Affiches JPEG et PDF, bannière, visuel, QR code (PNG et SVG), fichier agenda, liens et texte à partager. Fichier ZIP d’environ 6 Mo.</small><button class="btn btn-p" type="button" id="kzip">Télécharger le kit (ZIP)</button><span class="kzm" id="kzm" role="status"></span></div>
+  <div class="kzip"><div><b>Tout le kit en un fichier</b><small>Affiches JPEG et PDF, bannière, visuel, QR code (PNG et SVG), fichier agenda, liens et texte à partager.</small><span class="kzm" id="kzm" role="status"></span></div><button class="btn btn-p" type="button" id="kzip">Télécharger le kit (ZIP)</button></div>
  </div>
  <div class="kgrid">
   <article class="km"><a class="kth" href="/files/2026/12/telethon/affiche.jpeg" target="_blank" rel="noopener" aria-label="Ouvrir : Affiche"><img src="/files/2026/12/telethon/affiche.jpeg" alt="Aperçu de l’affiche du Téléthon 2026 à Luynes" loading="lazy" /><span class="tn">JPEG</span></a><div class="kb"><h3>Affiche</h3><p class="m">Pour les messages, les réseaux sociaux et les écrans.</p><div class="kact"><a class="btn btn-p" href="/files/2026/12/telethon/affiche.jpeg" download>Télécharger</a></div></div></article>
