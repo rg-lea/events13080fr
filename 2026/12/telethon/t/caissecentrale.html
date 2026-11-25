@@ -86,7 +86,10 @@ header{position:sticky;top:0;z-index:60;height:var(--hh);padding-top:env(safe-ar
 .esp{margin-top:12px}
 .rendu{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:14px 16px;border-radius:18px;background:var(--ink);color:#fff;font-weight:600}
 .rendu b{font-size:1.4rem}.rendu.ok{background:var(--ok)}.rendu.ko{background:var(--ko)}
-.rb{margin:8px 0 0;color:var(--ink);font-weight:700;font-size:1.05rem}.rb:empty{display:none}
+.rb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 0;color:var(--ink);font-weight:700;font-size:1.05rem}.rb:empty{display:none}
+.ch{display:inline-flex;align-items:baseline;gap:5px;padding:8px 14px;border:1px solid #b8d4b0;border-radius:8px;background:#e8f3e5;font-weight:800;font-size:1.1rem}.ch.pc{border-color:#ecd3a8;border-radius:99px;background:#fbf3e4}.ch i{font-style:normal;font-size:.9rem;font-weight:700;color:var(--muted)}
+.rbw{flex-basis:100%;margin:0;color:var(--ko);font-size:.92rem;font-weight:600}.rbs{flex-basis:100%;margin:0;color:var(--muted);font-size:.85rem;font-weight:600}
+.clmo{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;margin:0 0 6px;border-radius:999px;background:var(--brand-soft)}.clmo button{padding:9px 8px;border:0;border-radius:999px;background:transparent;font-weight:700;color:var(--ink)}.clmo button.on{background:var(--brand-dark);color:#fff}.clhint{margin:0 0 8px;color:var(--muted);font-size:.88rem}
 .dens{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.dens.pcs{grid-template-columns:repeat(4,1fr)}
 .dn{position:relative;min-height:56px;border:1px solid var(--line);border-radius:14px;background:#f3f7ef;color:var(--ink);font-weight:800;font-size:1.1rem}
 .dn.pc{min-height:50px;border-radius:99px;background:#fbf3e4;font-size:1rem}.dn:active{transform:scale(.95)}.dn.on{border-color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok)}
@@ -212,7 +215,7 @@ dialog.cld{width:min(980px,calc(100% - 24px))}
 <dialog class="pg cld" id="cl" aria-labelledby="clh"><div class="pgh"><h3 id="clh">Clôture de caisse</h3></div><div class="pgb">
  <div class="vtools"><div class="seg" id="clj" role="group" aria-label="Journée"></div></div>
  <div class="clg">
-  <div class="clb"><h4>Espèces comptées dans le tiroir</h4><div id="clq"></div><div class="clt"><span>Total compté</span><span id="clc">0 €</span></div></div>
+  <div class="clb"><div class="clmo" id="clmo" role="group" aria-label="Comptage"><button type="button" data-mo="fond">Fond du matin</button><button type="button" data-mo="fin">Fin de journée</button></div><p class="clhint" id="clhint"></p><div id="clq"></div><div class="clt"><span id="clct">Total compté</span><span id="clc">0 €</span></div></div>
   <div>
    <div class="clb">
     <div class="clm"><label for="clf">Fond de caisse au départ</label><input id="clf" type="text" inputmode="decimal" placeholder="0" autocomplete="off"><small>Monnaie mise dans le tiroir à l’ouverture</small></div>
@@ -265,7 +268,6 @@ $("cat").innerHTML=GR.map(g=>`<section class="cg t-${g[0]}"><h2><span class="tn"
 const den=(a,z)=>$(z).innerHTML=a.map(d=>`<button type="button" class="dn${z==="pie"?" pc":""}" data-e="${d[0]}" aria-label="${z==="bil"?"Billet":"Pièce"} de ${d[1]}">${d[1]}<span class="qb" data-eb="${d[0]}" aria-hidden="true"></span></button>`).join("");
 den(BIL,"bil");den(PIE,"pie");
 const DEN=[20000,10000,5000,2000,1000,500,200,100,50,20,10,5,2,1],DL=Object.fromEntries(BIL.concat(PIE));
-const rendre=c=>{const o=[];DEN.forEach(v=>{const n=Math.floor(c/v);if(n>0){o.push(n+" × "+DL[v]);c-=n*v}});return o.join(" + ")};
 const total=()=>sum(PR.map(p=>p.p*100*(Q[p.id+":"+p.j]||0)));
 const remis=()=>sum(Object.entries(E).map(([v,n])=>v*n));
 function upd(){const T=total(),R=remis(),L=PR.filter(p=>Q[K(p)]),nb=sum(L.map(p=>Q[K(p)]));
@@ -275,7 +277,7 @@ function upd(){const T=total(),R=remis(),L=PR.filter(p=>Q[K(p)]),nb=sum(L.map(p=
  $("nart").textContent=nb?nb+" article"+(nb>1?"s":""):"";$("rz").hidden=!nb&&!$("pre").value&&!$("nom").value;
  $("bt").textContent=eur(T);$("seg").querySelectorAll("button").forEach(b=>{b.classList.toggle("on",b.dataset.m===M);b.setAttribute("aria-pressed",b.dataset.m===M)});
  $("esp").hidden=M!=="especes";$("remis").textContent=eur(R);const short=R<T;$("rendu").classList.toggle("ko",short&&R>0);$("rendu").classList.toggle("ok",!short&&T>0);
- $("rb").textContent=!short&&R-T>0?"Rendre : "+rendre(R-T):"";$("eclr").hidden=!R;
+ $("rb").innerHTML=!short&&R-T>0?aRendre(R-T):"";$("eclr").hidden=!R;
  $("rl").innerHTML=!R?"Touchez les billets et pièces reçus":short?"Il manque <b>"+eur(T-R)+"</b>":R===T?"<b>Compte juste</b>":"À rendre <b>"+eur(R-T)+"</b>";
  $("bn").textContent=T?"Encaisser "+eur(T):"Encaisser"}
 document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b||busy)return;
@@ -312,7 +314,7 @@ $("bn").onclick=async()=>{const m=t=>$("bm").textContent=t,e=err();if(e)return m
   else if(r.status===400)m("Achat refusé par le flux : vérifiez les quantités, l’e-mail et les espèces.");
   else if(r.status===502)m("Le mail n’a pas pu partir, l’achat n’est pas enregistré dans la boîte. Notez-le sur papier et prévenez le comité.");
   else if(!r.ok||!d.envoye)m("Réponse inattendue. Avant de recommencer, vérifiez dans la boîte du Téléthon si le mail est arrivé.");
-  else{vadd(d.ref,body);fin("Achat enregistré",`<p><span class="ref">${esc(d.ref||"")}</span></p><p>${body.mail?`Confirmation envoyée à <b>${esc(body.mail)}</b>, avec copie à la boîte du Téléthon.`:"Pas d’e-mail pour l’acheteur : le mail est parti uniquement dans la boîte du Téléthon."}</p><p>${esc(ML[M])} · <b>${eur(total())}</b>${M==="especes"?` · remis ${eur(remis())}, à rendre <b>${eur(remis()-total())}</b><br>Rendre : ${rendre(remis()-total())||"rien"}`:""}</p>`)}}
+  else{vadd(d.ref,body);fin("Achat enregistré",`<p><span class="ref">${esc(d.ref||"")}</span></p><p>${body.mail?`Confirmation envoyée à <b>${esc(body.mail)}</b>, avec copie à la boîte du Téléthon.`:"Pas d’e-mail pour l’acheteur : le mail est parti uniquement dans la boîte du Téléthon."}</p><p>${esc(ML[M])} · <b>${eur(total())}</b>${M==="especes"?` · remis ${eur(remis())}, à rendre <b>${eur(remis()-total())}</b>`:""}</p>${M==="especes"&&remis()>total()?`<div class="rb">${puces(vget()[0].g)}</div>`:""}`)}}
  catch(_){m("Pas de réponse du serveur. Avant de recommencer, vérifiez dans la boîte du Téléthon si le mail est arrivé.")}
  busy=false;$("bn").disabled=false;upd()};
 try{$("code").value=sessionStorage.getItem("caisse-code")||""}catch(_){}
@@ -339,9 +341,26 @@ const VK="caisse-ventes";
 const vget=()=>{try{const v=JSON.parse(localStorage.getItem(VK)||"[]");return Array.isArray(v)?v:[]}catch(_){return[]}};
 const vset=v=>{try{localStorage.setItem(VK,JSON.stringify(v))}catch(_){}};
 function vadd(ref,b){const lab=l=>{const p=PR.find(x=>x.id===l.id&&x.j===l.jour);return l.qte+" × "+(p?nomLong(p):l.id)};
- const v=vget();v.unshift({ref:ref||"",t:Date.now(),n:b.prenom+" "+b.nom,mail:b.mail,m:b.paiement,c:total(),r:b.paiement==="especes"?remis():0,l:b.lignes.map(lab)});vset(v)}
+ const v=vget();v.unshift({ref:ref||"",t:Date.now(),n:b.prenom+" "+b.nom,mail:b.mail,m:b.paiement,c:total(),r:b.paiement==="especes"?remis():0,e:b.paiement==="especes"?{...E}:undefined,g:b.paiement==="especes"&&remis()>total()?(rendreMap(remis()-total())||undefined):undefined,l:b.lignes.map(lab)});vset(v)}
 /* période affichée : la journée en cours (heure de Paris) ou tout l’historique de l’appareil */
 let VPER="jour";const jourDe=t=>new Date(t).toLocaleDateString("fr-CA",{timeZone:"Europe/Paris"});
+/* ---- Monnaie à rendre : quoi donner, en tenant compte de ce qui reste dans le tiroir ----
+   Tiroir estimé = fond compté à l’ouverture (Clôture › Fond du matin) + espèces reçues − monnaie rendue (ventes du jour sur cet iPad). */
+function tiroir(){try{const j=jourDe(Date.now()),o=(JSON.parse(localStorage.getItem("caisse-cloture")||"{}")||{})[j];
+ if(!o||!o.fq||!Object.values(o.fq).some(n=>n>0))return null;const t={};DEN.forEach(v=>t[v]=o.fq[v]||0);
+ vget().filter(x=>jourDe(x.t)===j&&x.m==="especes").forEach(x=>{Object.entries(x.e||{}).forEach(([v,n])=>t[v]=(t[v]||0)+n);Object.entries(x.g||{}).forEach(([v,n])=>t[v]=(t[v]||0)-n)});
+ DEN.forEach(v=>t[v]=Math.max(0,t[v]||0));return t}catch(_){return null}}
+/* le moins de billets et pièces possible, sans dépasser ce qui est disponible */
+function monnaie(c,dispo){let best=null,it=0;
+ const go=(i,r,acc,n)=>{if(++it>50000||best&&n>=best.n)return;if(!r){best={m:{...acc},n};return}if(i>=DEN.length)return;
+  const v=DEN[i],max=Math.min(Math.floor(r/v),dispo?dispo[v]||0:1e9);for(let k=max;k>=0;k--){if(k)acc[v]=k;else delete acc[v];go(i+1,r-k*v,acc,n+k)}delete acc[v]};
+ go(0,c,{},0);return best&&best.m}
+function dispoRendu(){const t=tiroir();if(!t)return null;const d={...t};Object.entries(E).forEach(([v,n])=>d[v]=(d[v]||0)+n);return d}
+function rendreMap(c){const d=dispoRendu();return(d&&monnaie(c,d))||monnaie(c,null)}
+const puces=m=>DEN.filter(v=>m&&m[v]).map(v=>`<span class="ch${v<500?" pc":""}">${m[v]>1?`<i>${m[v]} ×</i>`:""}${DL[v]}</span>`).join("");
+function aRendre(c){const d=dispoRendu(),m=d?monnaie(c,d):null,ok=!d||!!m,mm=m||monnaie(c,null);
+ return puces(mm)+(!ok?`<p class="rbw">D’après le comptage du matin, le tiroir n’a pas assez de petite monnaie pour rendre exactement : demandez l’appoint ou de la monnaie à la caisse voisine.</p>`
+  :d?`<p class="rbs">Selon le tiroir estimé (fond du matin + ventes en espèces)</p>`:"")}
 const vsel=()=>{const v=vget().map((x,i)=>({...x,i}));if(VPER==="tout")return v;const j=jourDe(Date.now());return v.filter(x=>jourDe(x.t)===j)};
 function vrender(){const v=vsel(),S=sum(v.map(x=>x.c)),by=k=>sum(v.filter(x=>x.m===k).map(x=>x.c));
  document.querySelectorAll("#vper button").forEach(b=>b.classList.toggle("on",b.dataset.per===VPER));
@@ -366,38 +385,43 @@ $("vcsv").onclick=()=>{const v=vsel(),q=x=>'"'+String(x==null?"":x).replace(/"/g
  const cts=t=>{const n=parseFloat(String(t||"").replace(/\s|€/g,"").replace(",","."));return isNaN(n)?0:Math.round(n*100)};
  const ent=c=>c?(c/100).toFixed(2).replace(".",",").replace(/,00$/,""):"";
  const jl=j=>new Date(j+"T12:00:00+01:00").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",timeZone:"Europe/Paris"});
- let J=jourDe(Date.now());
+ let J=jourDe(Date.now()),MO="fin";
+ const G=o=>MO==="fond"?(o.fq||(o.fq={})):o.q,tot=q=>sum(DENS.map(d=>d[0]*((q||{})[d[0]]||0))),fond=o=>tot(o.fq)||o.f;
  const st=()=>{const a=cget();return a[J]||(a[J]={q:{},f:0,l:0,p1:"",p2:""})};
  const sav=o=>{const a=cget();a[J]=o;cset(a)};
  function jours(){const s=new Set(vget().map(x=>jourDe(x.t)));s.add(jourDe(Date.now()));Object.keys(cget()).forEach(k=>s.add(k));return[...s].sort().slice(-4)}
  function calc(){const o=st(),v=vget().filter(x=>jourDe(x.t)===J),by=k=>v.filter(x=>x.m===k),somme=a=>sum(a.map(x=>x.c));
-  const compte=sum(DENS.map(d=>d[0]*(o.q[d[0]]||0))),esp=somme(by("especes")),att=o.f+esp,ecart=compte-att;
+  const compte=sum(DENS.map(d=>d[0]*(o.q[d[0]]||0))),esp=somme(by("especes")),att=fond(o)+esp,ecart=compte-att;
   const art={};v.forEach(x=>(x.l||[]).forEach(t=>{const m=/^(\d+) × (.*)$/.exec(t);if(m)art[m[2]]=(art[m[2]]||0)+ +m[1]}));
   return{o,v,by,somme,compte,esp,att,ecart,art,touche:Object.values(o.q).some(n=>n>0)}}
  function rend(){const R=calc(),o=R.o;
   $("clj").style.gridTemplateColumns=`repeat(${jours().length},1fr)`;
   $("clj").innerHTML=jours().map(j=>`<button type="button" data-cj="${j}" class="${j===J?"on":""}">${jl(j).replace(/ \d{4}$/,"")}</button>`).join("");
-  $("clq").innerHTML=DENS.map(d=>{const n=o.q[d[0]]||0;return`<div class="clr${n?" on":""}"><span>${d[1]}</span><button type="button" data-cm="${d[0]}" aria-label="Retirer un ${d[1]}">−</button><input type="text" inputmode="numeric" data-cq="${d[0]}" value="${n||""}" placeholder="0" aria-label="Nombre de ${d[1]}"><button type="button" data-cp="${d[0]}" aria-label="Ajouter un ${d[1]}">+</button><output>${n?eur(n*d[0]):""}</output></div>`}).join("");
-  if(document.activeElement!==$("clf"))$("clf").value=ent(o.f);if(document.activeElement!==$("cll"))$("cll").value=ent(o.l);
+  document.querySelectorAll("#clmo button").forEach(b=>b.classList.toggle("on",b.dataset.mo===MO));
+  $("clhint").textContent=MO==="fond"?"Comptez la monnaie mise dans le tiroir à l’ouverture : la caisse saura alors quoi rendre à chaque vente.":"Comptez tout le tiroir à la fermeture.";$("clct").textContent=MO==="fond"?"Total du fond":"Total compté";
+  $("clq").innerHTML=DENS.map(d=>{const n=G(o)[d[0]]||0;return`<div class="clr${n?" on":""}"><span>${d[1]}</span><button type="button" data-cm="${d[0]}" aria-label="Retirer un ${d[1]}">−</button><input type="text" inputmode="numeric" data-cq="${d[0]}" value="${n||""}" placeholder="0" aria-label="Nombre de ${d[1]}"><button type="button" data-cp="${d[0]}" aria-label="Ajouter un ${d[1]}">+</button><output>${n?eur(n*d[0]):""}</output></div>`}).join("");
+  const fc=tot(o.fq);$("clf").readOnly=!!fc;if(document.activeElement!==$("clf")||fc)$("clf").value=ent(fond(o));if(document.activeElement!==$("cll"))$("cll").value=ent(o.l);
   $("clp1").value=o.p1||"";$("clp2").value=o.p2||"";maj()}
  function maj(){const R=calc(),o=R.o;
-  document.querySelectorAll("#clq .clr").forEach((r,i)=>{const d=DENS[i],n=o.q[d[0]]||0;r.classList.toggle("on",!!n);r.querySelector("output").textContent=n?eur(n*d[0]):""});
-  $("clc").textContent=eur(R.compte);$("cle0").textContent=eur(R.esp);$("cla").textContent=eur(R.att);
+  const fc=tot(o.fq);$("clf").readOnly=!!fc;if(fc)$("clf").value=ent(fc);
+  document.querySelectorAll("#clq .clr").forEach((r,i)=>{const d=DENS[i],n=G(o)[d[0]]||0;r.classList.toggle("on",!!n);r.querySelector("output").textContent=n?eur(n*d[0]):""});
+  $("clc").textContent=eur(MO==="fond"?tot(o.fq):R.compte);$("cle0").textContent=eur(R.esp);$("cla").textContent=eur(R.att);
   const e=$("cle");e.className="cle"+(!R.touche?" vide":R.ecart?" ko":"");
   e.innerHTML=!R.touche?"Comptez les espèces pour voir l’écart":!R.ecart?"Caisse juste ✓":`${R.ecart<0?"Il manque":"Il y a"} ${eur(Math.abs(R.ecart))}${R.ecart>0?" de trop":""}<small>Recomptez, puis vérifiez les ventes en espèces dans l’Historique</small>`;
-  $("clrem").textContent=eur(Math.max(0,R.compte-o.l));
+  $("clrem").textContent=eur(Math.max(0,R.compte-o.l));$("clz").textContent=MO==="fond"?"Remettre le fond à zéro":"Remettre le comptage à zéro";
   const ch=R.by("cheque");
   $("clv").innerHTML=R.v.length?`<div class="cll"><span>${R.v.length} vente${R.v.length>1?"s":""}</span><b>${eur(R.somme(R.v))}</b></div>`+
    [["especes","Espèces"],["cb","Carte bancaire"],["cheque","Chèques"]].map(([k,n])=>`<div class="cll"><span>${n} (${R.by(k).length})</span><b>${eur(R.somme(R.by(k)))}</b></div>`).join("")+
    (ch.length?`<p style="margin:8px 0 0;font-weight:600;color:var(--ink)">Chèques à remettre</p><ul>${ch.map(x=>`<li>${esc(x.n)} · ${eur(x.c)} <small>(${esc(x.ref)})</small></li>`).join("")}</ul>`:"")+
    `<p style="margin:8px 0 0;font-weight:600;color:var(--ink)">Articles vendus</p><ul>${Object.entries(R.art).map(([n,q])=>`<li>${q} × ${esc(n)}</li>`).join("")}</ul>`
    :"<p>Aucune vente ce jour-là sur cet iPad.</p>"}
- const setQ=(d,n)=>{const o=st();n=Math.max(0,Math.min(9999,n|0));if(n)o.q[d]=n;else delete o.q[d];sav(o)};
- $("cl0").onclick=()=>{J=jourDe(Date.now());rend();$("cl").showModal()};$("clx").onclick=()=>$("cl").close();
+ const setQ=(d,n)=>{const o=st(),q=G(o);n=Math.max(0,Math.min(9999,n|0));if(n)q[d]=n;else delete q[d];sav(o)};
+ $("cl0").onclick=()=>{J=jourDe(Date.now());const o=st();MO=!tot(o.fq)&&!tot(o.q)&&!vget().some(x=>jourDe(x.t)===J)?"fond":"fin";rend();$("cl").showModal()};$("clx").onclick=()=>$("cl").close();
  $("cl").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset;
   if(d.cj){J=d.cj;rend()}
-  else if(d.cp||d.cm){const k=d.cp||d.cm,o=st();setQ(k,(o.q[k]||0)+(d.cp?1:-1));const i=document.querySelector(`[data-cq="${k}"]`);i.value=st().q[k]||"";maj()}
-  else if(b.id==="clz"&&confirm("Remettre à zéro le comptage de cette journée ?")){const o=st();o.q={};sav(o);rend()}});
+  else if(d.mo){MO=d.mo;rend()}
+  else if(d.cp||d.cm){const k=d.cp||d.cm,o=st();setQ(k,(G(o)[k]||0)+(d.cp?1:-1));const i=document.querySelector(`[data-cq="${k}"]`);i.value=G(st())[k]||"";maj()}
+  else if(b.id==="clz"&&confirm(MO==="fond"?"Remettre à zéro le comptage du fond ?":"Remettre à zéro le comptage de fin de journée ?")){const o=st();if(MO==="fond")o.fq={};else o.q={};sav(o);rend()}});
  $("cl").addEventListener("input",e=>{const t=e.target,o=st();
   if(t.dataset.cq){setQ(t.dataset.cq,parseInt(t.value.replace(/\D/g,""),10)||0)}
   else if(t.id==="clf"){o.f=cts(t.value);sav(o)}else if(t.id==="cll"){o.l=cts(t.value);sav(o)}
@@ -406,7 +430,7 @@ $("vcsv").onclick=()=>{const v=vsel(),q=x=>'"'+String(x==null?"":x).replace(/"/g
  $("clpr").onclick=()=>{const R=calc(),o=R.o,ligne=(a,b)=>`<tr><td>${a}</td><td class="n">${b}</td></tr>`;
   $("clprint").innerHTML=`<h1>Téléthon 2026 à Luynes · Clôture de caisse</h1><p>Caisse centrale · ${esc(jl(J))} · imprimé le ${new Date().toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"short",timeZone:"Europe/Paris"})}</p>
   <h2>Comptage des espèces</h2><table><tr><th>Valeur</th><th class="n">Nombre</th><th class="n">Montant</th></tr>${DENS.filter(d=>o.q[d[0]]).map(d=>`<tr><td>${d[1]}</td><td class="n">${o.q[d[0]]}</td><td class="n">${eur(o.q[d[0]]*d[0])}</td></tr>`).join("")}<tr><th colspan="2">Total compté</th><th class="n">${eur(R.compte)}</th></tr></table>
-  <h2>Contrôle</h2><table>${ligne("Fond de caisse au départ",eur(o.f))}${ligne("Ventes en espèces",eur(R.esp))}${ligne("Attendu dans le tiroir",eur(R.att))}${ligne("Compté",eur(R.compte))}${ligne("<b>Écart</b>","<b>"+(R.ecart>0?"+":"")+eur(R.ecart)+"</b>")}${ligne("Fond laissé pour le lendemain",eur(o.l))}${ligne("<b>Espèces remises au trésorier</b>","<b>"+eur(Math.max(0,R.compte-o.l))+"</b>")}</table>
+  <h2>Contrôle</h2><table>${ligne("Fond de caisse au départ",eur(fond(o)))}${ligne("Ventes en espèces",eur(R.esp))}${ligne("Attendu dans le tiroir",eur(R.att))}${ligne("Compté",eur(R.compte))}${ligne("<b>Écart</b>","<b>"+(R.ecart>0?"+":"")+eur(R.ecart)+"</b>")}${ligne("Fond laissé pour le lendemain",eur(o.l))}${ligne("<b>Espèces remises au trésorier</b>","<b>"+eur(Math.max(0,R.compte-o.l))+"</b>")}</table>
   <h2>Ventes de la journée</h2><table>${ligne(R.v.length+" vente"+(R.v.length>1?"s":""),eur(R.somme(R.v)))}${[["especes","Espèces"],["cb","Carte bancaire"],["cheque","Chèques"]].map(([k,n])=>ligne(n+" ("+R.by(k).length+")",eur(R.somme(R.by(k))))).join("")}</table>
   ${R.by("cheque").length?`<h2>Chèques</h2><table>${R.by("cheque").map(x=>ligne(esc(x.n)+" · "+esc(x.ref),eur(x.c))).join("")}</table>`:""}
   <h2>Articles vendus</h2><table>${Object.entries(R.art).map(([n,q])=>ligne(esc(n),q)).join("")||ligne("Aucun","")}</table>
