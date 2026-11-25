@@ -2,7 +2,13 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Caisse Téléthon" />
+<meta name="theme-color" content="#fff9f2" />
+<link rel="apple-touch-icon" href="/files/logos/favicon.png" />
 <meta name="robots" content="noindex, nofollow" />
 <title>Caisse centrale | Téléthon 2026 à Luynes</title>
 <link rel="icon" type="image/png" href="/files/logos/favicon.png" />
@@ -10,71 +16,117 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
+/* =====================================================================
+   Caisse centrale — pensée pour l'iPad (paysage et portrait), utilisable sur téléphone
+   Deux volets : articles en grandes tuiles à gauche, ticket à droite (total et « Encaisser » toujours visibles)
+   ===================================================================== */
 :root{--brand-dark:#c2792a;--brand:#ffb763;--brand-soft:#f8e0c2;--ink:#2f2418;--text:#4b3a29;--muted:rgba(75,58,41,.72);--line:rgba(95,68,37,.16);--shadow:0 14px 36px rgba(63,40,16,.09);
---c-jeton:#9a5b26;--c-pass:#5d6b7a;--c-fort:#8a6500;--c-tombola:#8e5ea2;--ok:#2e7d32}
+--c-jeton:#9a5b26;--c-pass:#5d6b7a;--c-fort:#8a6500;--c-tombola:#8e5ea2;--ok:#2e7d32;--ko:#b3261e;--hh:64px}
 .t-jeton,.t-pass,.t-fort,.t-free,.t-tombola{--tc:#fff}
 .t-jeton{--t:var(--c-jeton)}.t-pass{--t:var(--c-pass)}.t-fort{--t:var(--c-fort)}.t-free{--t:var(--ok)}.t-tombola{--t:var(--c-tombola)}
-*{box-sizing:border-box}html{scrollbar-gutter:stable}html.lk{overflow:hidden}
-body{margin:0;font-family:"Outfit",sans-serif;color:var(--text);background:linear-gradient(180deg,#fffaf4,#fff6eb);overflow-x:hidden}
-a{color:inherit;text-decoration:none}img{display:block;max-width:100%}button{font:inherit;cursor:pointer}
-.container{width:min(calc(100% - 32px),780px);margin:0 auto}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;overscroll-behavior:none}html.lk{overflow:hidden}
+body{margin:0;font-family:"Outfit",sans-serif;color:var(--text);background:#fff6eb;overflow-x:hidden}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+/* tactile : pas de zoom au double toucher, pas de surbrillance grise, pas de sélection de texte sur les boutons */
+button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+input,textarea,select{font:inherit;font-size:17px}
 :focus-visible{outline:3px solid var(--brand-dark);outline-offset:2px}
-header{position:sticky;top:0;z-index:60;background:rgba(255,249,242,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-header .container{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:9px 0}
-.brand{display:flex;align-items:center;gap:12px;color:var(--ink);font-weight:700;letter-spacing:-.02em}
-.logo{width:46px;height:46px;border-radius:12px;object-fit:contain;background:var(--brand-dark);padding:4px}
-.hr{display:flex;align-items:center;gap:10px}
-.clk{padding:6px 14px;border-radius:999px;background:var(--ink);color:#fff;font-weight:800;font-size:1.15rem;letter-spacing:.02em;font-variant-numeric:tabular-nums}
-.tag{padding:7px 16px;border-radius:999px;background:var(--brand-soft);color:var(--ink);font-weight:700}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:600;border:0;transition:transform .2s}
-.btn:hover{transform:translateY(-1px)}.btn-p{background:var(--brand-dark);color:#fff;box-shadow:0 10px 22px rgba(194,121,42,.3)}.btn-s{background:var(--brand-soft);color:var(--ink)}
-main{padding:28px 0 40px}
-.top{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px}
-.wt{margin:0 0 6px;color:var(--ink);font-size:clamp(1.9rem,6vw,2.6rem);letter-spacing:-.045em;line-height:1.05;font-weight:800}
-.ws{margin:0 0 22px;color:var(--muted);font-size:1.05rem;line-height:1.5;max-width:60ch}
-h2.sh{margin:26px 0 10px;color:var(--ink);font-size:1.4rem;letter-spacing:-.03em}
-.grp{margin:0 0 14px;background:#fff;border:1px solid var(--line);border-left:8px solid var(--t);border-radius:22px;overflow:hidden}
-.gh{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;padding:14px 18px 8px}.gh small{color:var(--muted)}
-.tn{display:inline-block;padding:4px 14px;border-radius:999px;background:var(--t);color:var(--tc);font-weight:800;font-size:.85rem;letter-spacing:.04em}
-.rw{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-top:1px solid var(--line)}
-.rw b{display:block;color:var(--ink);font-size:1.08rem}.rw small{display:block;color:var(--muted);line-height:1.35}.rw .px{color:var(--brand-dark);font-weight:700}
-.st{display:flex;align-items:center;gap:8px;flex:none}.st button{width:44px;height:44px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:1.4rem;line-height:1}
-.st button:disabled{opacity:.3;cursor:default}.st output{min-width:30px;text-align:center;font-weight:800;color:var(--ink);font-size:1.2rem}
-.card{margin:0 0 14px;padding:16px 18px 6px;border:1px solid var(--line);border-radius:22px;background:#fff}
-.card label{display:block;margin-bottom:12px;font-weight:600;color:var(--ink)}
-.card textarea{display:block;width:100%;margin-top:6px;padding:14px;border:1px solid var(--line);border-radius:14px;font:inherit;font-size:1rem;background:#fffdfa;min-height:96px;resize:vertical}
-.card small{display:block;margin-top:4px;font-weight:400;color:var(--muted)}
-.card input{display:block;width:100%;margin-top:6px;padding:14px;border:1px solid var(--line);border-radius:14px;font:inherit;font-size:1rem;background:#fffdfa}
-.dbl{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 14px;padding:4px;border-radius:999px;background:var(--brand-soft)}
-.seg button{border:0;border-radius:999px;padding:14px 8px;background:transparent;color:var(--ink);font-weight:600}.seg button.on{background:var(--brand-dark);color:#fff}
-.dens{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;margin:0 0 14px}
-.den{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);color:var(--ink);font-weight:600}
-.den .st button{width:40px;height:40px}
-.sub{margin:6px 0 4px;color:var(--ink);font-weight:700}
-.tt{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:6px 0 14px;padding:16px 20px;border-radius:20px;background:var(--ink);color:#fff;font-weight:600}.tt b{font-size:1.8rem;letter-spacing:-.03em}
-.tt.ko{background:#b3261e}
 [hidden]{display:none!important}
-.off{position:sticky;top:64px;z-index:59;padding:12px 16px;background:#b3261e;color:#fff;text-align:center;line-height:1.4}
-.vsum{margin:0 0 12px;padding:12px 14px;border-radius:14px;background:#fff;border:1px solid var(--line)}.vsum p{margin:0 0 6px}.vsum ul{margin:4px 0 0;padding-left:20px}
-.vtools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px}.vtools .seg{margin:0;flex:1 1 220px;grid-template-columns:1fr 1fr}.vtools .seg button{padding:10px 8px}
-.vtools .btn{padding:10px 16px;font-size:.92rem}
-.wzf{position:sticky;bottom:0;z-index:50;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:14px 20px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:rgba(255,255,255,.96);backdrop-filter:blur(10px)}
-.wzf .tot{color:var(--ink);font-weight:600}.wzf .tot b{font-size:1.6rem;margin-left:6px}.wzf .btn{flex:1 1 220px;padding:16px 24px;font-size:1.05rem}.wzf .btn:disabled{opacity:.45;cursor:default}
-#bm{flex:1 0 100%;order:-1;margin:0;font-weight:600;color:#b3261e}#bm:empty{display:none}
-dialog.pg{width:min(560px,calc(100% - 24px));max-height:88svh;padding:0;border:0;border-radius:28px;background:#fffaf4;color:var(--text);box-shadow:0 30px 80px rgba(47,36,24,.4);overflow:hidden}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:700;border:0;transition:transform .15s}
+.btn:active{transform:scale(.97)}.btn-p{background:var(--brand-dark);color:#fff;box-shadow:0 10px 22px rgba(194,121,42,.3)}.btn-s{background:var(--brand-soft);color:var(--ink)}
+.lnk{border:0;background:none;color:var(--brand-dark);font-weight:700;text-decoration:underline;padding:8px}
+.tn{display:inline-block;padding:4px 14px;border-radius:999px;background:var(--t);color:var(--tc);font-weight:800;font-size:.85rem;letter-spacing:.04em}
+
+/* ---------- En-tête ---------- */
+header{position:sticky;top:0;z-index:60;height:var(--hh);padding-top:env(safe-area-inset-top,0px);background:rgba(255,249,242,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.hbar{display:flex;align-items:center;gap:14px;height:100%;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+.brand{display:flex;align-items:center;gap:12px;color:var(--ink);font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
+.logo{width:44px;height:44px;border-radius:12px;object-fit:contain;background:var(--brand-dark);padding:4px}
+.clk{padding:6px 14px;border-radius:999px;background:var(--ink);color:#fff;font-weight:800;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.hact{display:flex;gap:8px;margin-left:auto}
+.hb{display:inline-flex;align-items:center;gap:6px;min-height:46px;padding:0 16px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font-weight:700;font-size:.98rem}
+.hb:active{background:var(--brand-soft)}.hb.warn{background:#fff3e0;border-color:#f2d3a6}
+.off{position:sticky;top:var(--hh);z-index:59;padding:12px 16px;background:var(--ko);color:#fff;text-align:center;line-height:1.4}
+
+/* ---------- Deux volets ---------- */
+.pos{display:grid;grid-template-columns:1fr clamp(360px,38vw,460px);height:calc(100dvh - var(--hh));overflow:hidden}
+.cat{overflow:auto;overscroll-behavior:contain;padding:18px 18px 28px;-webkit-overflow-scrolling:touch}
+.cg{margin-bottom:22px}
+.cg h2{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0 0 10px;font-size:1rem;font-weight:400}.cg h2 small{color:var(--muted);font-size:.9rem}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px}
+/* tuile article : grande zone de toucher, pastille de quantité, contour quand l'article est au ticket */
+.tile{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:124px;padding:20px 16px 14px;border:2px solid transparent;border-radius:22px;background:#fff;box-shadow:inset 0 7px 0 var(--t),0 4px 14px rgba(63,40,16,.07);color:var(--ink);text-align:left;transition:transform .12s,box-shadow .2s,border-color .2s}
+.tile b{font-size:1.2rem;line-height:1.15;letter-spacing:-.02em}.tile small{color:var(--muted);font-size:.86rem;line-height:1.3}
+.tile .px{margin-top:auto;padding-top:6px;color:var(--brand-dark);font-weight:800;font-size:1.05rem}
+.tile:active{transform:scale(.96)}.tile.on{border-color:var(--t);box-shadow:inset 0 7px 0 var(--t),0 8px 22px rgba(63,40,16,.14)}
+.tile.pop .qb{animation:pop .35s ease-out}@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.35)}100%{transform:scale(1)}}
+.qb{position:absolute;top:10px;right:10px;min-width:34px;height:34px;padding:0 8px;border-radius:99px;background:var(--t,var(--brand-dark));color:#fff;font-weight:800;font-size:1.05rem;line-height:34px;text-align:center}
+.qb:empty{display:none}
+
+/* ---------- Ticket ---------- */
+.tk{display:flex;flex-direction:column;min-height:0;background:#fff;border-left:1px solid var(--line);box-shadow:-10px 0 30px rgba(63,40,16,.06)}
+.tkb{flex:1;overflow:auto;overscroll-behavior:contain;padding:16px 18px 18px;-webkit-overflow-scrolling:touch}
+.tkh{display:flex;align-items:baseline;gap:10px}.tkh h2{margin:0;color:var(--ink);font-size:1.5rem;letter-spacing:-.03em}.nart{color:var(--muted);font-weight:600}.tkh .lnk{margin-left:auto}
+.tk h3{margin:18px 0 8px;color:var(--ink);font-size:1.05rem}
+.lines{list-style:none;margin:10px 0 0;padding:0}
+.lines li{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}.lines li:first-child{border-top:0}
+.ld b{display:block;color:var(--ink);line-height:1.2}.ld small{display:block;color:var(--muted);font-size:.85rem;line-height:1.3}
+.lt{min-width:62px;text-align:right;color:var(--ink);font-weight:800}
+.lines .vide{display:block;padding:18px;border:2px dashed var(--line);border-radius:18px;color:var(--muted);text-align:center}
+.st{display:flex;align-items:center;gap:6px}.st button{width:44px;height:44px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:1.4rem;line-height:1}
+.st button:active{background:var(--brand-soft)}.st button:disabled{opacity:.3}.st output{min-width:26px;text-align:center;font-weight:800;color:var(--ink);font-size:1.15rem}
+.tk label{display:block;margin-bottom:10px;font-weight:600;color:var(--ink)}.tk label small{font-weight:400;color:var(--muted)}
+.tk input,.tk textarea{display:block;width:100%;margin-top:5px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#fffdfa;color:var(--ink)}
+.dbl{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ntd summary{cursor:pointer;color:var(--brand-dark);font-weight:700;padding:6px 0}.ntd textarea{min-height:84px;resize:vertical}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 6px;border:2px solid var(--line);border-radius:18px;background:#fff;color:var(--ink);font-weight:700}
+.seg button span{font-size:1.6rem;line-height:1}.seg button.on{border-color:var(--brand-dark);background:var(--brand-soft)}
+/* espèces */
+.esp{margin-top:12px}
+.rendu{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:14px 16px;border-radius:18px;background:var(--ink);color:#fff;font-weight:600}
+.rendu b{font-size:1.4rem}.rendu.ok{background:var(--ok)}.rendu.ko{background:var(--ko)}
+.rb{margin:8px 0 0;color:var(--ink);font-weight:700;font-size:1.05rem}.rb:empty{display:none}
+.dens{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.dens.pcs{grid-template-columns:repeat(4,1fr)}
+.dn{position:relative;min-height:56px;border:1px solid var(--line);border-radius:14px;background:#f3f7ef;color:var(--ink);font-weight:800;font-size:1.1rem}
+.dn.pc{min-height:50px;border-radius:99px;background:#fbf3e4;font-size:1rem}.dn:active{transform:scale(.95)}.dn.on{border-color:var(--ok);box-shadow:inset 0 0 0 1px var(--ok)}
+.dn .qb{top:-8px;right:-6px;min-width:30px;height:26px;line-height:26px;font-size:.82rem;background:var(--ok)}
+.eact{display:flex;gap:8px;margin-top:10px}
+/* pied du ticket : total et bouton, toujours visibles */
+.tkf{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;padding:14px 18px calc(14px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:#fffaf4}
+.tot{color:var(--ink);font-weight:600}.tot b{display:block;font-size:2rem;letter-spacing:-.03em;line-height:1}
+.tkf .btn{flex:1 1 180px;min-height:60px;font-size:1.15rem}.tkf .btn:disabled{opacity:.5}
+#bm{flex:1 0 100%;margin:0;font-weight:700;color:var(--ko)}#bm:empty{display:none}
+
+/* ---------- Fenêtres (confirmation, code, historique, retrouver) ---------- */
+dialog.pg{width:min(600px,calc(100% - 24px));max-height:88dvh;padding:0;border:0;border-radius:28px;background:#fffaf4;color:var(--text);box-shadow:0 30px 80px rgba(47,36,24,.4);overflow:hidden}
 dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{background:rgba(47,36,24,.6);backdrop-filter:blur(3px)}
 .pgh{padding:18px 24px;background:var(--brand-dark);color:#fff}.pgh h3{margin:0;font-size:1.5rem;letter-spacing:-.03em}
 .pgb{padding:20px 24px;line-height:1.6;overflow:auto}.pgb p{margin:0 0 10px}
-.pgf{display:flex;justify-content:flex-end;padding:14px 24px;border-top:1px solid var(--line);background:#fff}
-.rcf{display:flex;gap:8px;margin:0 0 12px}.rcf input{flex:1;min-width:0;padding:14px;border:2px solid var(--brand-dark);border-radius:14px;font:inherit;font-size:2rem;font-weight:800;letter-spacing:.3em;text-align:center}.rcf .btn{padding:14px 22px}
+.pgf{display:flex;justify-content:flex-end;gap:10px;padding:14px 24px;border-top:1px solid var(--line);background:#fff}
+#cdf .pgf{margin:16px -24px -20px}#code{display:block;width:100%;padding:16px;border:2px solid var(--brand-dark);border-radius:14px;font-size:1.4rem;letter-spacing:.2em;text-align:center}
+.ref{display:inline-block;margin:4px 0 12px;padding:8px 16px;border-radius:14px;background:var(--brand-soft);color:var(--ink);font-size:1.4rem;font-weight:800}
+.rcf{display:flex;gap:8px;margin:0 0 12px}.rcf input{flex:1;min-width:0;padding:14px;border:2px solid var(--brand-dark);border-radius:14px;font-size:2rem;font-weight:800;letter-spacing:.3em;text-align:center}.rcf .btn{padding:14px 22px}
 .rr{margin:0 0 14px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}.rr small{display:block;padding:8px 12px;background:var(--brand-soft);color:var(--ink);font-weight:600}.rr iframe{display:block;width:100%;border:0;min-height:200px}
-.cm{margin:0 0 14px;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:#fff}.cm h4{margin:0 0 2px;color:var(--ink);font-size:1.2rem}.cm .pp{margin:10px 0 0;padding:10px 12px;border-radius:12px;background:#fffaf4;border:1px solid var(--line)}.cm .pp b{color:var(--ink)}.cm ul{margin:6px 0 0;padding-left:20px}.cm .tot2{margin:10px 0;font-size:1.3rem;font-weight:800;color:var(--ink)}.cm .ok{color:var(--ok);font-weight:700}.cm label{display:block;font-weight:600;color:var(--ink);margin:10px 0 6px}.cm input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font:inherit}
+.cm{margin:0 0 14px;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:#fff}.cm h4{margin:0 0 2px;color:var(--ink);font-size:1.2rem}.cm .pp{margin:10px 0 0;padding:10px 12px;border-radius:12px;background:#fffaf4;border:1px solid var(--line)}.cm .pp b{color:var(--ink)}.cm ul{margin:6px 0 0;padding-left:20px}.cm .tot2{margin:10px 0;font-size:1.3rem;font-weight:800;color:var(--ink)}.cm label{display:block;margin:6px 0 10px;font-weight:600;color:var(--ink)}.cm input{display:block;width:100%;margin-top:6px;padding:12px;border:1px solid var(--line);border-radius:12px}.cm .ok{color:var(--ok);font-weight:700}
 .hs{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0 6px;color:var(--ink);font-weight:700}.hl{list-style:none;margin:0;padding:0}.hl li{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
-.hl button.o{flex:1;text-align:left;border:0;background:none;color:var(--ink);padding:4px 0}.hl button.o b{font-size:1.15rem;letter-spacing:.1em;margin-right:8px}.hl small{color:var(--muted)}.hl button.x{border:1px solid var(--line);background:#fff;border-radius:99px;width:36px;height:36px}.lnk{border:0;background:none;color:var(--brand-dark);font-weight:700;text-decoration:underline}
-.ref{display:inline-block;margin:4px 0 12px;padding:8px 16px;border-radius:14px;background:var(--brand-soft);color:var(--ink);font-size:1.4rem;font-weight:800;letter-spacing:.02em}
-@media(max-width:480px){.brand{font-size:0;gap:0}.tag{white-space:nowrap;padding:6px 12px;font-size:.9rem}.clk{font-size:1.05rem}.dbl{grid-template-columns:1fr;gap:0}.dens{grid-template-columns:1fr}.rw{flex-wrap:wrap}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.hl button.o{flex:1;text-align:left;border:0;background:none;color:var(--ink);padding:4px 0}.hl button.o b{font-size:1.15rem;letter-spacing:.1em;margin-right:8px}.hl small{color:var(--muted)}.hl button.x{border:1px solid var(--line);background:#fff;border-radius:99px;width:40px;height:40px}
+.vsum{margin:0 0 12px;padding:12px 14px;border-radius:14px;background:#fff;border:1px solid var(--line)}.vsum p{margin:0 0 6px}.vsum ul{margin:4px 0 0;padding-left:20px}
+.vtools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px}.vtools .seg{flex:1 1 220px;grid-template-columns:1fr 1fr;padding:4px;border-radius:999px;background:var(--brand-soft);gap:6px}
+.vtools .seg button{flex-direction:row;padding:10px 8px;border:0;border-radius:999px;background:transparent}.vtools .seg button.on{background:var(--brand-dark);color:#fff}
+.vtools .btn{padding:10px 16px;font-size:.92rem}
+
+@media(max-width:1000px){.hbx{display:none}.brand span{display:none}}
+/* ---------- Écrans étroits (iPad mini en portrait, téléphone) : un seul volet, pied du ticket fixé en bas ---------- */
+@media(max-width:760px){
+ .pos{display:block;height:auto;overflow:visible}.cat{overflow:visible;padding:14px 14px 8px}
+ .tiles{grid-template-columns:repeat(2,1fr);gap:10px}.tile{min-height:112px}
+ .tk{border-left:0;border-top:1px solid var(--line);box-shadow:none}.tkb{overflow:visible;padding-bottom:140px}
+ .tkf{position:fixed;left:0;right:0;bottom:0;z-index:50;box-shadow:0 -10px 30px rgba(63,40,16,.12)}
+ .hb{padding:0 13px;font-size:1.15rem}.hbt{display:none}.brand span{display:none}
+}
+@media(max-width:420px){.dbl{grid-template-columns:1fr;gap:0}.clk{font-size:1rem}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 <!-- Matomo -->
 <script>
@@ -99,44 +151,41 @@ dialog.pg[open]{display:flex;flex-direction:column}dialog.pg::backdrop{backgroun
 </script>
 </head>
 <body>
-<header><div class="container">
- <a class="brand" href="/2026/12/telethon"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" />Luynes en Fêtes</a>
- <span class="hr"><time class="clk" id="clk" aria-label="Heure actuelle"></time><span class="tag">Caisse centrale</span></span>
+<header><div class="hbar">
+ <a class="brand" href="/2026/12/telethon"><img class="logo" src="/files/logos/favicon.png" alt="Logo Luynes en Fêtes" /><span>Caisse centrale</span></a>
+ <time class="clk" id="clk" aria-label="Heure actuelle"></time>
+ <nav class="hact" aria-label="Outils de la caisse"><button class="hb" type="button" id="rc0" aria-label="Retrouver une commande"><span aria-hidden="true">🔎</span><span class="hbt">Retrouver<span class="hbx"> une commande</span></span></button><button class="hb" type="button" id="vh0" aria-label="Historique des ventes"><span aria-hidden="true">🧾</span><span class="hbt">Historique</span></button><button class="hb" type="button" id="cdp" aria-label="Code caisse"><span aria-hidden="true">🔒</span><span class="hbt" id="cdpt">Code caisse</span></button></nav>
 </div></header>
-
 <div class="off" id="off" hidden role="status">📡 <b>Pas de connexion internet.</b> Les ventes ne peuvent pas être enregistrées pour l’instant : notez-les sur papier, ou attendez le retour du réseau.</div>
-<main class="container" data-clarity-mask="True">
- <div class="top"><h1 class="wt">Achat en caisse centrale</h1><span style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-s" type="button" id="vh0">Historique des ventes</button><button class="btn btn-p" type="button" id="rc0">Retrouver une commande en ligne</button><button class="btn btn-s" type="button" id="rz">Tout effacer</button></span></div>
- <p class="ws">Pour un achat réglé sur place, sans commande en ligne. L’acheteur reçoit une confirmation par e-mail, et la boîte du Téléthon en garde une copie pour le bilan.</p>
 
- <div class="card"><label>Code caisse<small>Mot de passe de la caisse, donné par le comité. À saisir une fois.</small><input id="code" type="password" autocomplete="off" /></label></div>
+<main class="pos" data-clarity-mask="True">
+ <section class="cat" id="cat" aria-label="Articles"></section>
 
- <h2 class="sh">Acheteur</h2>
- <div class="card">
-  <div class="dbl"><label>Prénom<input id="pre" type="text" autocomplete="off" /></label><label>Nom<input id="nom" type="text" autocomplete="off" /></label></div>
-  <label>Adresse e-mail<small>Facultatif. Sans adresse, seule la boîte du Téléthon reçoit le mail.</small><input id="mel" type="email" autocomplete="off" /></label>
- </div>
+ <aside class="tk" aria-label="Ticket en cours">
+  <div class="tkb">
+   <div class="tkh"><h2>Ticket</h2><span class="nart" id="nart"></span><button class="lnk" type="button" id="rz" hidden>Tout effacer</button></div>
+   <ul class="lines" id="lines"></ul>
 
- <h2 class="sh">Achats</h2>
- <div id="achats"></div>
+   <h3>Acheteur</h3>
+   <div class="dbl"><label>Prénom<input id="pre" type="text" autocomplete="off" autocapitalize="words" enterkeyhint="next" /></label><label>Nom<input id="nom" type="text" autocomplete="off" autocapitalize="words" enterkeyhint="next" /></label></div>
+   <label>E-mail <small>(facultatif : sans adresse, seule la boîte du Téléthon reçoit le mail)</small><input id="mel" type="email" inputmode="email" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" /></label>
+   <details class="ntd" id="ntd"><summary>Ajouter une note</summary><textarea id="nt" maxlength="1000" placeholder="Par exemple : gratuité famille, remarque sur le paiement…"></textarea></details>
 
- <h2 class="sh">Note</h2>
- <div class="card"><label>Note (facultatif)<small>Apparaît dans le mail, par exemple : gratuité famille, remarque sur le paiement…</small><textarea id="nt" maxlength="1000"></textarea></label></div>
-
- <h2 class="sh">Paiement</h2>
- <div class="card">
-  <div class="seg" role="group" aria-label="Moyen de paiement" id="seg"><button type="button" data-m="cb">Carte bancaire</button><button type="button" data-m="especes">Espèces</button><button type="button" data-m="cheque">Chèque</button></div>
-  <div id="esp" hidden>
-   <p class="sub">Ce que l’acheteur a remis</p>
-   <div class="sub" style="font-weight:600;color:var(--muted)">Billets</div><div class="dens" id="bil"></div>
-   <div class="sub" style="font-weight:600;color:var(--muted)">Pièces</div><div class="dens" id="pie"></div>
-   <div class="tt" id="rendu"><span>Remis <span id="remis"></span></span><span id="rl"></span></div>
-   <p class="sub" id="rb" style="font-size:1.15rem"></p>
+   <h3>Paiement</h3>
+   <div class="seg" role="group" aria-label="Moyen de paiement" id="seg"><button type="button" data-m="cb" aria-pressed="false"><span aria-hidden="true">💳</span>Carte</button><button type="button" data-m="especes" aria-pressed="false"><span aria-hidden="true">💶</span>Espèces</button><button type="button" data-m="cheque" aria-pressed="false"><span aria-hidden="true">🧾</span>Chèque</button></div>
+   <div class="esp" id="esp" hidden>
+    <div class="rendu" id="rendu"><span>Remis <b id="remis"></b></span><span id="rl"></span></div>
+    <p class="rb" id="rb"></p>
+    <div class="dens" id="bil"></div>
+    <div class="dens pcs" id="pie"></div>
+    <div class="eact"><button class="hb" type="button" id="ejuste">Compte juste</button><button class="hb" type="button" id="eclr" hidden>Recommencer</button></div>
+   </div>
   </div>
- </div>
+  <div class="tkf" data-clarity-mask="True"><p id="bm" role="alert"></p><div class="tot">Total <b id="bt">0 €</b></div><button class="btn btn-p" type="button" id="bn">Encaisser</button></div>
+ </aside>
 </main>
 
-<div class="wzf" data-clarity-mask="True"><p id="bm" role="alert"></p><div class="tot">Total<b id="bt">0 €</b></div><button class="btn btn-p" type="button" id="bn">Enregistrer et envoyer la confirmation</button></div>
+<dialog class="pg" id="cdlg" aria-labelledby="cdt"><div class="pgh"><h3 id="cdt">Code caisse</h3></div><form class="pgb" id="cdf"><p>Le mot de passe de la caisse, donné par le comité. Il reste enregistré sur cet appareil jusqu’à la fermeture de l’onglet.</p><input id="code" type="password" autocomplete="off" enterkeyhint="done" aria-label="Code caisse" /><div class="pgf"><button class="btn btn-p" type="submit">Valider</button></div></form></dialog>
 
 <dialog class="pg" id="dg" data-clarity-mask="True" aria-labelledby="dgt"><div class="pgh"><h3 id="dgt"></h3></div><div class="pgb" id="dgb"></div><div class="pgf"><button class="btn btn-p" type="button" id="dgx">Nouvel achat</button></div></dialog>
 
@@ -171,36 +220,48 @@ let Q={},E={},M="",busy=false;
 const sum=a=>a.reduce((x,y)=>x+y,0);
 const eur=c=>(c/100).toLocaleString("fr-FR",c%100?{minimumFractionDigits:2,maximumFractionDigits:2}:{})+" €";
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const stp=(k,nom)=>`<div class="st"><button type="button" data-k="${k}|-1" aria-label="Retirer : ${esc(nom)}">−</button><output data-o="${k}" aria-label="${esc(nom)}">0</output><button type="button" data-k="${k}|1" aria-label="Ajouter : ${esc(nom)}">+</button></div>`;
-$("achats").innerHTML=GR.map(g=>`<section class="grp t-${g[0]}"><div class="gh"><span class="tn">${g[1]}</span><small>${g[2]}</small></div>`+PR.filter(p=>p.g===g[0]).map(p=>p.off?`<div class="rw"><div><b>${p.n}</b><small>${p.d}</small><span class="px">Bientôt disponible</span></div></div>`:`<div class="rw"><div><b>${p.n}</b><small>${p.d}</small><span class="px">${eur(p.p*100)}${p.u}</span></div>${stp("q"+p.id+":"+p.j,nomLong(p))}</div>`).join("")+`</section>`).join("");
-const den=(a,z)=>$(z).innerHTML=a.map(d=>`<div class="den"><span>${d[1]}</span>${stp("e"+d[0],(z==="bil"?"billet de ":"pièce de ")+d[1])}</div>`).join("");
+const cap=t=>t?t.charAt(0).toUpperCase()+t.slice(1):"",K=p=>p.id+":"+p.j;
+/* intitulé court (tuile, ligne du ticket) : [titre, précision] */
+const tuile=p=>p.g==="pass"?["Pass "+p.n.split(" ")[0].toLowerCase(),"Multi-activités · "+p.n.split(" ").slice(1).join(" ")]:p.g==="jeton"?["Jetons","1 jeton = 1 €"]:p.g==="tombola"?["Tombola","Ticket · tirage dimanche 16h45"]:[p.n.split(",")[0],cap((p.n.split(",")[1]||"").trim())];
+/* catalogue : une grande tuile par article, un toucher = +1 */
+$("cat").innerHTML=GR.map(g=>`<section class="cg t-${g[0]}"><h2><span class="tn">${g[1]}</span><small>${g[2]}</small></h2><div class="tiles">${PR.filter(p=>p.g===g[0]).map(p=>{const[t,st]=tuile(p);return `<button type="button" class="tile t-${p.g}" data-add="${K(p)}" aria-label="Ajouter : ${esc(nomLong(p))}"><b>${esc(t)}</b><small>${esc(st)}</small><span class="px">${eur(p.p*100)}${p.g==="pass"||p.g==="fort"?" / pers.":""}</span><span class="qb" data-qb="${K(p)}" aria-hidden="true"></span></button>`}).join("")}</div></section>`).join("");
+/* espèces : un toucher sur un billet ou une pièce = +1 */
+const den=(a,z)=>$(z).innerHTML=a.map(d=>`<button type="button" class="dn${z==="pie"?" pc":""}" data-e="${d[0]}" aria-label="${z==="bil"?"Billet":"Pièce"} de ${d[1]}">${d[1]}<span class="qb" data-eb="${d[0]}" aria-hidden="true"></span></button>`).join("");
 den(BIL,"bil");den(PIE,"pie");
 const DEN=[20000,10000,5000,2000,1000,500,200,100,50,20,10,5,2,1],DL=Object.fromEntries(BIL.concat(PIE));
 const rendre=c=>{const o=[];DEN.forEach(v=>{const n=Math.floor(c/v);if(n>0){o.push(n+" × "+DL[v]);c-=n*v}});return o.join(" + ")};
 const total=()=>sum(PR.map(p=>p.p*100*(Q[p.id+":"+p.j]||0)));
 const remis=()=>sum(Object.entries(E).map(([v,n])=>v*n));
-function upd(){const T=total(),R=remis();
- document.querySelectorAll("[data-o]").forEach(o=>{const k=o.dataset.o,n=(k[0]==="q"?Q[k.slice(1)]:E[k.slice(1)])||0;o.textContent=n;const b=o.parentNode.querySelectorAll("button");b[0].disabled=!n;b[1].disabled=n>=(k[0]==="q"?99:999)});
- $("bt").textContent=eur(T);$("seg").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.m===M));
- $("esp").hidden=M!=="especes";$("remis").textContent=eur(R);const short=R<T;$("rendu").classList.toggle("ko",short&&R>0);
- $("rb").textContent=!short&&R-T>0?"Rendre : "+rendre(R-T):"";
- $("rl").innerHTML=short?"Il manque <b>"+eur(T-R)+"</b>":"À rendre <b>"+eur(R-T)+"</b>"}
+function upd(){const T=total(),R=remis(),L=PR.filter(p=>Q[K(p)]),nb=sum(L.map(p=>Q[K(p)]));
+ document.querySelectorAll("[data-qb]").forEach(b=>{const n=Q[b.dataset.qb]||0;b.textContent=n||"";b.parentNode.classList.toggle("on",n>0)});
+ document.querySelectorAll("[data-eb]").forEach(b=>{const n=E[b.dataset.eb]||0;b.textContent=n?"×"+n:"";b.parentNode.classList.toggle("on",n>0)});
+ $("lines").innerHTML=L.length?L.map(p=>{const k=K(p),n=Q[k],[t,st]=tuile(p);return `<li><div class="ld"><b>${esc(t)}</b><small>${esc(st)} · ${eur(p.p*100)}</small></div><div class="st"><button type="button" data-k="q${k}|-1" aria-label="Retirer : ${esc(nomLong(p))}">−</button><output>${n}</output><button type="button" data-k="q${k}|1" aria-label="Ajouter : ${esc(nomLong(p))}"${n>=99?" disabled":""}>+</button></div><span class="lt">${eur(p.p*100*n)}</span></li>`}).join(""):`<li class="vide">Touchez un article pour l’ajouter au ticket.</li>`;
+ $("nart").textContent=nb?nb+" article"+(nb>1?"s":""):"";$("rz").hidden=!nb&&!$("pre").value&&!$("nom").value;
+ $("bt").textContent=eur(T);$("seg").querySelectorAll("button").forEach(b=>{b.classList.toggle("on",b.dataset.m===M);b.setAttribute("aria-pressed",b.dataset.m===M)});
+ $("esp").hidden=M!=="especes";$("remis").textContent=eur(R);const short=R<T;$("rendu").classList.toggle("ko",short&&R>0);$("rendu").classList.toggle("ok",!short&&T>0);
+ $("rb").textContent=!short&&R-T>0?"Rendre : "+rendre(R-T):"";$("eclr").hidden=!R;
+ $("rl").innerHTML=!R?"Touchez les billets et pièces reçus":short?"Il manque <b>"+eur(T-R)+"</b>":R===T?"<b>Compte juste</b>":"À rendre <b>"+eur(R-T)+"</b>";
+ $("bn").textContent=T?"Encaisser "+eur(T):"Encaisser"}
 document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b||busy)return;
- if(b.dataset.k){const[k,v]=b.dataset.k.split("|"),s=k.slice(1),o=k[0]==="q"?Q:E;o[s]=Math.max(0,Math.min(k[0]==="q"?99:999,(o[s]||0)+ +v));$("bm").textContent="";upd()}
+ if(b.dataset.add){Q[b.dataset.add]=Math.min(99,(Q[b.dataset.add]||0)+1);$("bm").textContent="";b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop");upd()}
+ else if(b.dataset.e){E[b.dataset.e]=Math.min(999,(E[b.dataset.e]||0)+1);$("bm").textContent="";upd()}
+ else if(b.id==="ejuste"){E={};let c=total();DEN.forEach(v=>{const n=Math.floor(c/v);if(n){E[v]=n;c-=n*v}});upd()}
+ else if(b.id==="eclr"){E={};upd()}
+ else if(b.dataset.k){const[k,v]=b.dataset.k.split("|"),s=k.slice(1),o=k[0]==="q"?Q:E;o[s]=Math.max(0,Math.min(k[0]==="q"?99:999,(o[s]||0)+ +v));$("bm").textContent="";upd()}
  else if(b.dataset.m){M=b.dataset.m;$("bm").textContent="";upd()}});
 const propre=v=>v.trim().replace(/\s+/g," ").replace(/’/g,"'");
 const nomOK=v=>/^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ' -]*$/.test(v);
 function err(){const a=propre($("pre").value),n=propre($("nom").value);
- if(!$("code").value.trim())return "Saisissez le code caisse.";
+ if(!$("code").value.trim()){codeOuvre();return "Saisissez le code caisse."}
  if(!nomOK(a)||!nomOK(n))return "Acheteur : indiquez le prénom et le nom (lettres uniquement).";
  if($("mel").value.trim()&&!/^[^\s@;,]+@[^\s@;,]+\.[^\s@;,]+$/.test($("mel").value.trim()))return "Acheteur : adresse e-mail invalide.";
  if(!total())return "Ajoutez au moins un achat.";
  if(!M)return "Choisissez le moyen de paiement.";
  if(M==="especes"&&remis()<total())return "Le montant remis ("+eur(remis())+") est inférieur au total ("+eur(total())+").";return ""}
 function fin(t,h){$("dgt").textContent=t;$("dgb").innerHTML=h;if(!$("dg").open)$("dg").showModal()}
-function raz(){Q={};E={};M="";["pre","nom","mel","nt"].forEach(i=>$(i).value="");$("bm").textContent="";upd()}
+function raz(){Q={};E={};M="";["pre","nom","mel","nt"].forEach(i=>$(i).value="");$("ntd").open=false;$("bm").textContent="";upd()}
 $("rz").onclick=()=>{if(!busy&&confirm("Effacer la saisie en cours ?"))raz()};
-$("dgx").onclick=()=>{$("dg").close();raz();window.scrollTo(0,0)};
+$("dgx").onclick=()=>{$("dg").close();raz();window.scrollTo(0,0);$("cat").scrollTop=0};
 $("dg").addEventListener("cancel",e=>e.preventDefault());
 $("bn").onclick=async()=>{const m=t=>$("bm").textContent=t,e=err();if(e)return m(e);m("");
  if(!API_URL)return m("Le flux de la caisse n’est pas encore branché (voir API_URL dans la page).");
@@ -217,8 +278,15 @@ $("bn").onclick=async()=>{const m=t=>$("bm").textContent=t,e=err();if(e)return m
   else if(!r.ok||!d.envoye)m("Réponse inattendue. Avant de recommencer, vérifiez dans la boîte du Téléthon si le mail est arrivé.");
   else{vadd(d.ref,body);fin("Achat enregistré",`<p><span class="ref">${esc(d.ref||"")}</span></p><p>${body.mail?`Confirmation envoyée à <b>${esc(body.mail)}</b>, avec copie à la boîte du Téléthon.`:"Pas d’e-mail pour l’acheteur : le mail est parti uniquement dans la boîte du Téléthon."}</p><p>${esc(ML[M])} · <b>${eur(total())}</b>${M==="especes"?` · remis ${eur(remis())}, à rendre <b>${eur(remis()-total())}</b><br>Rendre : ${rendre(remis()-total())||"rien"}`:""}</p>`)}}
  catch(_){m("Pas de réponse du serveur. Avant de recommencer, vérifiez dans la boîte du Téléthon si le mail est arrivé.")}
- busy=false;$("bn").disabled=false;$("bn").textContent="Enregistrer et envoyer la confirmation"};
+ busy=false;$("bn").disabled=false;upd()};
 try{$("code").value=sessionStorage.getItem("caisse-code")||""}catch(_){}
+/* code caisse : demandé à l’ouverture, modifiable depuis l’en-tête (pastille 🔒) */
+const codeEtat=()=>{const ok=!!$("code").value.trim();$("cdpt").textContent=ok?"Code saisi":"Code caisse";$("cdp").classList.toggle("warn",!ok)};
+function codeOuvre(){if(!$("cdlg").open)$("cdlg").showModal();setTimeout(()=>$("code").focus(),50)}
+$("cdp").onclick=codeOuvre;
+$("cdf").onsubmit=e=>{e.preventDefault();const v=$("code").value.trim();if(!v)return;try{sessionStorage.setItem("caisse-code",v)}catch(_){}codeEtat();$("cdlg").close()};
+$("code").addEventListener("input",codeEtat);codeEtat();setTimeout(()=>{if(!$("code").value.trim())codeOuvre()},0);
+["pre","nom"].forEach(i=>$(i).addEventListener("input",()=>{$("rz").hidden=false}));
 const lock=()=>document.documentElement.classList.toggle("lk",!!document.querySelector("dialog[open]"));
 document.querySelectorAll("dialog").forEach(d=>new MutationObserver(lock).observe(d,{attributes:true,attributeFilter:["open"]}));
 /* vente en cours de saisie : le navigateur demande confirmation avant de quitter ou recharger la page */
