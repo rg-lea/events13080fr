@@ -330,24 +330,26 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 .contact{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;padding:34px;border-radius:32px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}
 .contact p{margin:0;line-height:1.7;max-width:46ch}
 .cbtns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.cbtns #msg{width:100%;font-weight:600;color:var(--ink)}
-.kit{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:18px}
-.kcol{display:grid;gap:16px;grid-template-rows:auto 1fr}
-.kc{display:flex;flex-direction:column;min-width:0;border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:var(--shadow);overflow:hidden}
-.kv{position:relative;display:block;background:var(--brand-soft)}
-.kv img{width:100%;height:320px;object-fit:contain;padding:16px}.kv.og img{height:auto;aspect-ratio:1200/630;padding:0;object-fit:cover}
-.kc .tn{background:var(--brand-dark);color:#fff}.kv .tn{position:absolute;top:14px;left:14px}
-.kpdf{position:absolute;right:16px;bottom:16px;width:46px;height:auto;filter:drop-shadow(0 4px 8px rgba(47,36,24,.3))}
-.kb{display:flex;flex-direction:column;gap:8px;flex:1;padding:18px 22px 22px}
-.kb h3{margin:0;color:var(--ink);font-size:1.35rem;letter-spacing:-.03em}.kb p{margin:0;line-height:1.55}.kb .m{color:var(--muted)}.kb .t{color:var(--ink);font-weight:600}
-.kact{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:8px}
-.kact .btn,.kshare .btn{padding:11px 20px;font-size:.95rem}
-.kshare{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;padding:clamp(24px,4vw,40px);border-radius:32px;background:linear-gradient(135deg,var(--brand-soft),#fff);border:1px solid var(--line)}
-.kshare h3{margin:0 0 6px;color:var(--ink);font-size:1.5rem;letter-spacing:-.04em}.kshare p{margin:0 0 16px;line-height:1.6;color:var(--muted)}
-.klink{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin-bottom:14px;padding:8px 8px 8px 20px;border-radius:999px;background:#fff;border:1px solid var(--line);width:fit-content;max-width:100%}
-.klink b{color:var(--ink);font-size:clamp(1.1rem,3.6vw,1.5rem);letter-spacing:-.03em;word-break:break-all}.klink .btn{padding:9px 18px}
-.shr{display:flex;flex-wrap:wrap;gap:8px}.shr .btn{background:#fff;border:1px solid var(--line)}.shr .btn:hover{background:var(--brand-soft)}
-.kqr{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px;border:1px solid var(--line);border-radius:24px;background:#fff;color:var(--ink);font-weight:600;text-align:center}
-.kqr svg{width:160px;height:160px}.kqr .kact{justify-content:center;margin:0;padding:0}
+/* kit de communication : en-tête avec le ZIP, 4 supports identiques, 3 cartes pratiques identiques */
+.khead{display:grid;grid-template-columns:1fr minmax(280px,380px);gap:24px;align-items:end;margin-bottom:24px}.khead .lead{margin:0}
+.kzip{display:flex;flex-direction:column;gap:8px;padding:20px 22px;border-radius:24px;background:var(--ink);color:#fff;box-shadow:var(--shadow)}
+.kzip b{font-size:1.15rem}.kzip small{opacity:.8;line-height:1.45}.kzip .btn{margin-top:6px}.kzm{font-size:.88rem;opacity:.85}.kzm:empty{display:none}
+.kgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px}
+.km,.kp{display:flex;flex-direction:column;min-width:0;border:1px solid var(--line);border-radius:24px;background:#fff;overflow:hidden}
+.kth{position:relative;display:block;aspect-ratio:4/3;background:var(--brand-soft)}
+.kth img{width:100%;height:100%;object-fit:contain;padding:14px;transition:transform .3s}.kth:hover img{transform:scale(1.03)}
+.kth .tn{position:absolute;top:12px;left:12px;background:var(--brand-dark);color:#fff}
+.kb{display:flex;flex-direction:column;gap:6px;flex:1;padding:16px 18px 18px}
+.kb h3,.kp h3{margin:0;color:var(--ink);font-size:1.15rem;letter-spacing:-.02em}
+.kb .m,.kp .m{margin:0;color:var(--muted);line-height:1.45;font-size:.95rem}.kp .t{margin:0;color:var(--ink);font-weight:600;line-height:1.4}
+.kact{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:8px}
+.kact .btn,.kp .btn{padding:10px 18px;font-size:.92rem}
+.kgrid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.kp{gap:10px;padding:20px 22px}
+.klink{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 6px 6px 16px;border-radius:999px;background:var(--cream);border:1px solid var(--line)}
+.klink b{color:var(--ink);font-size:1.1rem;letter-spacing:-.02em;word-break:break-all}
+.shr{display:flex;flex-wrap:wrap;gap:6px}.shr .btn{padding:8px 14px;background:#fff;border:1px solid var(--line);color:var(--ink)}.shr .btn:hover{background:var(--brand-soft)}
+.kqr{align-items:center;text-align:center}.kqr svg{width:140px;height:140px}.kqr .kact{justify-content:center;margin-top:0}
 
 /* ---------- 13. Éléments flottants ---------- */
 .fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:55;display:inline-flex;align-items:center;gap:10px;padding:14px 22px 14px 18px;border:0;border-radius:999px;background:var(--brand-dark);color:#fff;font-weight:700;font-size:1.05rem;box-shadow:0 14px 30px rgba(63,40,16,.35);transition:transform .2s,opacity .2s}
@@ -371,7 +373,7 @@ fieldset.acc{border:0;padding:0;margin:0 0 12px;min-width:0}fieldset.acc legend{
 html.fin main>section:not(#merci),html.fin .fab,html.fin nav,html.fin .burger,html.fin .wip,html.fin .live,html.fin .reprise,html.fin .ft .ftg>div:nth-child(2),html.fin .ft a[href$=".ics"]{display:none!important}
 
 /* ---------- 16. Responsive ---------- */
-@media(max-width:1000px){.logos{--n:4}.kit{grid-template-columns:repeat(2,1fr)}.kcol{grid-column:1/-1;grid-template-columns:1fr 1fr;grid-template-rows:none}}
+@media(max-width:1000px){.logos{--n:4}.kgrid{grid-template-columns:repeat(2,1fr)}.kgrid3{grid-template-columns:1fr 1fr}.kgrid3 .kp:last-child{grid-column:1/-1}.khead{grid-template-columns:1fr}}
 @media(max-width:900px){
  .burger{display:flex}
  nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:8px 16px 14px;background:rgba(255,249,242,.98);border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(63,40,16,.12)}
@@ -383,13 +385,13 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin nav,html.fin .burger,ht
  .tarifs,.orgs,.pick,.free3 ul{grid-template-columns:1fr}.org-1{grid-column:auto;width:auto;justify-self:stretch}
  .lieu{grid-template-columns:1fr;gap:22px}.pw{justify-self:stretch;max-width:none}
  .logos,.logos.p{--n:2}.fs>img{aspect-ratio:3/2}.fb{padding:18px 18px 24px}
- .kit,.kcol{grid-template-columns:1fr}.kshare{grid-template-columns:1fr}.kqr{justify-self:start}.kv img{height:280px}
+ .kgrid3{grid-template-columns:1fr}.kgrid3 .kp:last-child{grid-column:auto}
  .contact{padding:22px}.ftg{grid-template-columns:1fr 1fr}.ftg>div:first-child{grid-column:1/-1}
  .plan .pin circle{r:34px;stroke-width:6px}.plan .pin path{stroke-width:8}
 }
 @media(max-width:480px){
  .visu{max-width:200px}.ag li{grid-template-columns:1fr;gap:6px;padding:16px 18px 16px 16px}.h{display:flex;flex-wrap:wrap;gap:0 14px}.pgf a{margin-left:0}
- .dbl{grid-template-columns:1fr;gap:0}.fab{padding:14px 18px 14px 14px}.ftg{grid-template-columns:1fr}
+ .dbl{grid-template-columns:1fr;gap:0}.kgrid{gap:10px}.kth img{padding:8px}.kth .tn{top:8px;left:8px;font-size:.72rem;padding:3px 10px}.kb{padding:12px 12px 14px}.kb h3{font-size:1rem}.kb .m{font-size:.85rem}.kb .kact .btn{width:100%;padding:9px 10px}.fab{padding:14px 18px 14px 14px}.ftg{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
@@ -623,29 +625,22 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin nav,html.fin .burger,ht
 </div></section>
 
 <section class="sec" id="ressources"><div class="container">
- <h2>Ressources</h2>
- <p class="lead">Le kit de communication du Téléthon 2026 : affiches, visuels et liens à télécharger et à partager autour de vous.</p>
- <div class="kit">
-  <article class="kc"><a class="kv" href="/files/2026/12/telethon/affiche.jpeg" target="_blank" rel="noopener" aria-label="Ouvrir l’affiche en grand"><span class="tn">JPEG</span><img src="/files/2026/12/telethon/affiche.jpeg" alt="Aperçu de l’affiche du Téléthon 2026 à Luynes" loading="lazy" /></a>
-   <div class="kb"><h3>Affiche, version image</h3><p class="m">Pour les messages, les réseaux sociaux et les écrans.</p>
-   <div class="kact"><a class="btn btn-p" href="/files/2026/12/telethon/affiche.jpeg" download>Télécharger</a><a class="btn btn-s" href="/files/2026/12/telethon/affiche.jpeg" target="_blank" rel="noopener">Voir en grand</a></div></div></article>
-  <article class="kc"><a class="kv" href="/files/2026/12/telethon/affiche.pdf" target="_blank" rel="noopener" aria-label="Ouvrir l’affiche au format PDF"><img src="/files/2026/12/telethon/affiche.jpeg" alt="Aperçu de l’affiche au format PDF" loading="lazy" /><svg class="kpdf" viewBox="0 0 40 48" aria-hidden="true"><path d="M5 0h22l13 13v30a5 5 0 0 1-5 5H5a5 5 0 0 1-5-5V5a5 5 0 0 1 5-5z" fill="#d93025"/><path d="M27 0l13 13H31a4 4 0 0 1-4-4z" fill="#f4a49e"/><text x="20" y="38" text-anchor="middle" font-family="Outfit,Arial,sans-serif" font-weight="800" font-size="13" fill="#fff">PDF</text></svg></a>
-   <div class="kb"><h3>Affiche, version PDF</h3><p class="m">Pour imprimer et afficher en vitrine, sur un panneau ou dans un hall.</p>
-   <div class="kact"><a class="btn btn-p" href="/files/2026/12/telethon/affiche.pdf" download>Télécharger</a><a class="btn btn-s" href="/files/2026/12/telethon/affiche.pdf" target="_blank" rel="noopener">Ouvrir le PDF</a></div></div></article>
-  <div class="kcol">
-   <article class="kc"><div class="kv og"><span class="tn">PNG</span><img src="/files/2026/12/telethon/opengraph.png" alt="Bannière Opengraph du Téléthon 2026" loading="lazy" /></div>
-    <div class="kb"><h3>Bannière « Opengraph »</h3><p class="m">C’est l’image qui s’affiche automatiquement quand on colle le lien de la page dans WhatsApp, Facebook, iMessage ou LinkedIn. Elle sert aussi de bannière ou de couverture.</p>
-    <div class="kact"><a class="btn btn-p" href="/files/2026/12/telethon/opengraph.png" download>Télécharger</a></div></div></article>
-   <article class="kc"><div class="kb"><span class="tn" style="align-self:flex-start">PRESSE</span><h3>Communiqué de presse</h3><p class="t">Les comités des fêtes et associations de Luynes s’associent pour le Téléthon 2026</p><p class="m">CIQ Luynes en action</p>
-    <div class="kact"><a class="btn btn-p" href="https://actus.13080.fr/2026/11/les-comites-des-fetes-et-associations-de-luynes-sassocient-pour-le-telethon-2026/" target="_blank" rel="noopener noreferrer">Lire</a><button class="btn btn-s" type="button" data-cp="https://actus.13080.fr/2026/11/les-comites-des-fetes-et-associations-de-luynes-sassocient-pour-le-telethon-2026/">Copier le lien</button></div></div></article>
-  </div>
+ <div class="khead">
+  <div><h2>Kit de communication</h2><p class="lead">Affiches, visuels, QR code et liens pour faire connaître le Téléthon autour de vous : à télécharger un par un, ou tout d’un coup.</p></div>
+  <div class="kzip"><b>Tout le kit en un fichier</b><small>Affiches JPEG et PDF, bannière, visuel, QR code (PNG et SVG), fichier agenda, liens et texte à partager. Fichier ZIP d’environ 6 Mo.</small><button class="btn btn-p" type="button" id="kzip">Télécharger le kit (ZIP)</button><span class="kzm" id="kzm" role="status"></span></div>
  </div>
- <div class="kshare">
-  <div><h3>Partager la page de l’événement</h3><p>Un seul lien court à diffuser : programme, billetterie et don.</p>
+ <div class="kgrid">
+  <article class="km"><a class="kth" href="/files/2026/12/telethon/affiche.jpeg" target="_blank" rel="noopener" aria-label="Ouvrir : Affiche"><img src="/files/2026/12/telethon/affiche.jpeg" alt="Aperçu de l’affiche du Téléthon 2026 à Luynes" loading="lazy" /><span class="tn">JPEG</span></a><div class="kb"><h3>Affiche</h3><p class="m">Pour les messages, les réseaux sociaux et les écrans.</p><div class="kact"><a class="btn btn-p" href="/files/2026/12/telethon/affiche.jpeg" download>Télécharger</a></div></div></article>
+  <article class="km"><a class="kth" href="/files/2026/12/telethon/affiche.pdf" target="_blank" rel="noopener" aria-label="Ouvrir : Affiche à imprimer"><img src="/files/2026/12/telethon/affiche.jpeg" alt="Aperçu de l’affiche au format PDF" loading="lazy" /><span class="tn">PDF</span></a><div class="kb"><h3>Affiche à imprimer</h3><p class="m">Pour une vitrine, un panneau ou un hall.</p><div class="kact"><a class="btn btn-p" href="/files/2026/12/telethon/affiche.pdf" download>Télécharger</a></div></div></article>
+  <article class="km"><a class="kth" href="/files/2026/12/telethon/opengraph.png" target="_blank" rel="noopener" aria-label="Ouvrir : Bannière de partage"><img src="/files/2026/12/telethon/opengraph.png" alt="Bannière de partage du Téléthon 2026" loading="lazy" /><span class="tn">PNG</span></a><div class="kb"><h3>Bannière de partage</h3><p class="m">L’image qui s’affiche quand on partage le lien ; aussi en couverture.</p><div class="kact"><a class="btn btn-p" href="/files/2026/12/telethon/opengraph.png" download>Télécharger</a></div></div></article>
+  <article class="km"><a class="kth" href="/files/2026/12/telethon/2026%20-%20Visuel_Te%CC%81le%CC%81thon%20renversant.png" target="_blank" rel="noopener" aria-label="Ouvrir : Visuel « Un Téléthon renversant »"><img src="/files/2026/12/telethon/2026%20-%20Visuel_Te%CC%81le%CC%81thon%20renversant.png" alt="Visuel « Un Téléthon renversant »" loading="lazy" /><span class="tn">PNG</span></a><div class="kb"><h3>Visuel « Un Téléthon renversant »</h3><p class="m">Le visuel de l’édition 2026, sur fond transparent.</p><div class="kact"><a class="btn btn-p" href="/files/2026/12/telethon/2026%20-%20Visuel_Te%CC%81le%CC%81thon%20renversant.png" download="Visuel Un Telethon renversant.png">Télécharger</a></div></div></article>
+ </div>
+ <div class="kgrid3">
+  <article class="kp"><h3>Partager la page</h3><p class="m">Un seul lien court : programme, billetterie et don.</p>
    <div class="klink"><b>s.13080.fr/telethon</b><button class="btn btn-p" type="button" data-cp="https://s.13080.fr/telethon">Copier</button></div>
-   <div class="shr"><a class="btn" id="kmail" href="#">E-mail</a><a class="btn" id="ksms" href="#">SMS</a><a class="btn" id="kwa" target="_blank" rel="noopener noreferrer" href="#">WhatsApp</a><a class="btn" id="kfb" target="_blank" rel="noopener noreferrer" href="#">Facebook</a><button class="btn" type="button" id="kns" hidden>Autres applications…</button></div></div>
-  <div class="kqr"><svg id="kqr" xmlns="http://www.w3.org/2000/svg" viewBox="-3 -3 35 35" shape-rendering="crispEdges" role="img" aria-label="QR code vers la page du Téléthon"><rect x="-3" y="-3" width="35" height="35" fill="#fff"/><path stroke="#2f2418" d="M0 0.5h7m2 0h1m1 0h4m3 0h3m1 0h7m-29 1h1m5 0h1m5 0h1m2 0h1m2 0h3m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h6m1 0h1m1 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m1 0h1m1 0h2m3 0h2m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h1m1 0h1m3 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m1 0h1m9 0h3m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-18 1h2m1 0h4m1 0h2m-20 1h1m2 0h1m1 0h1m1 0h3m7 0h1m1 0h2m1 0h2m1 0h1m-24 1h2m5 0h1m3 0h1m1 0h1m1 0h1m3 0h7m-29 1h3m1 0h1m1 0h2m1 0h3m3 0h2m3 0h2m1 0h1m2 0h1m1 0h1m-28 1h3m1 0h1m1 0h5m1 0h3m1 0h5m2 0h1m2 0h2m-29 1h4m1 0h5m1 0h1m2 0h2m1 0h2m1 0h1m2 0h1m1 0h1m2 0h1m-29 1h1m1 0h4m2 0h1m1 0h2m2 0h1m1 0h2m2 0h1m1 0h1m1 0h1m1 0h3m-29 1h1m3 0h3m1 0h2m2 0h1m1 0h1m3 0h1m1 0h1m1 0h1m1 0h1m3 0h1m-27 1h1m1 0h2m1 0h4m1 0h5m2 0h1m2 0h2m1 0h1m1 0h1m-28 1h2m1 0h1m1 0h3m1 0h2m2 0h1m1 0h2m2 0h3m5 0h1m-28 1h2m1 0h1m1 0h1m2 0h1m1 0h2m1 0h2m3 0h1m2 0h4m3 0h1m-27 1h3m1 0h1m2 0h2m3 0h2m1 0h1m7 0h2m1 0h1m-22 1h1m1 0h2m1 0h6m7 0h1m-26 1h10m1 0h1m5 0h2m1 0h5m3 0h1m-21 1h3m1 0h1m2 0h1m4 0h1m3 0h1m1 0h1m1 0h1m-29 1h7m3 0h1m1 0h1m1 0h4m1 0h2m1 0h1m1 0h1m3 0h1m-29 1h1m5 0h1m2 0h1m1 0h3m1 0h6m3 0h2m1 0h1m-28 1h1m1 0h3m1 0h1m1 0h2m3 0h1m4 0h7m2 0h2m-29 1h1m1 0h3m1 0h1m4 0h2m1 0h1m1 0h2m5 0h1m2 0h2m-28 1h1m1 0h3m1 0h1m4 0h2m1 0h1m1 0h2m1 0h3m5 0h2m-29 1h1m5 0h1m1 0h2m7 0h1m2 0h1m1 0h2m1 0h1m1 0h2m-29 1h7m2 0h3m1 0h6m1 0h1m3 0h2m1 0h1"/></svg>
-   QR code de la page<div class="kact"><button class="btn btn-s" type="button" id="kqp">PNG</button><button class="btn btn-s" type="button" id="kqv">SVG</button></div></div>
+   <div class="shr"><a class="btn" id="kmail" href="#">E-mail</a><a class="btn" id="ksms" href="#">SMS</a><a class="btn" id="kwa" target="_blank" rel="noopener noreferrer" href="#">WhatsApp</a><a class="btn" id="kfb" target="_blank" rel="noopener noreferrer" href="#">Facebook</a><button class="btn" type="button" id="kns" hidden>Autres…</button></div></article>
+  <article class="kp kqr"><h3>QR code de la page</h3><svg id="kqr" xmlns="http://www.w3.org/2000/svg" viewBox="-3 -3 35 35" shape-rendering="crispEdges" role="img" aria-label="QR code vers la page du Téléthon"><rect x="-3" y="-3" width="35" height="35" fill="#fff"/><path stroke="#2f2418" d="M0 0.5h7m2 0h1m1 0h4m3 0h3m1 0h7m-29 1h1m5 0h1m5 0h1m2 0h1m2 0h3m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h6m1 0h1m1 0h4m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m3 0h1m1 0h1m1 0h2m3 0h2m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h1m2 0h1m2 0h1m1 0h1m3 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m1 0h1m9 0h3m1 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-18 1h2m1 0h4m1 0h2m-20 1h1m2 0h1m1 0h1m1 0h3m7 0h1m1 0h2m1 0h2m1 0h1m-24 1h2m5 0h1m3 0h1m1 0h1m1 0h1m3 0h7m-29 1h3m1 0h1m1 0h2m1 0h3m3 0h2m3 0h2m1 0h1m2 0h1m1 0h1m-28 1h3m1 0h1m1 0h5m1 0h3m1 0h5m2 0h1m2 0h2m-29 1h4m1 0h5m1 0h1m2 0h2m1 0h2m1 0h1m2 0h1m1 0h1m2 0h1m-29 1h1m1 0h4m2 0h1m1 0h2m2 0h1m1 0h2m2 0h1m1 0h1m1 0h1m1 0h3m-29 1h1m3 0h3m1 0h2m2 0h1m1 0h1m3 0h1m1 0h1m1 0h1m1 0h1m3 0h1m-27 1h1m1 0h2m1 0h4m1 0h5m2 0h1m2 0h2m1 0h1m1 0h1m-28 1h2m1 0h1m1 0h3m1 0h2m2 0h1m1 0h2m2 0h3m5 0h1m-28 1h2m1 0h1m1 0h1m2 0h1m1 0h2m1 0h2m3 0h1m2 0h4m3 0h1m-27 1h3m1 0h1m2 0h2m3 0h2m1 0h1m7 0h2m1 0h1m-22 1h1m1 0h2m1 0h6m7 0h1m-26 1h10m1 0h1m5 0h2m1 0h5m3 0h1m-21 1h3m1 0h1m2 0h1m4 0h1m3 0h1m1 0h1m1 0h1m-29 1h7m3 0h1m1 0h1m1 0h4m1 0h2m1 0h1m1 0h1m3 0h1m-29 1h1m5 0h1m2 0h1m1 0h3m1 0h6m3 0h2m1 0h1m-28 1h1m1 0h3m1 0h1m1 0h2m3 0h1m4 0h7m2 0h2m-29 1h1m1 0h3m1 0h1m4 0h2m1 0h1m1 0h2m5 0h1m2 0h2m-28 1h1m1 0h3m1 0h1m4 0h2m1 0h1m1 0h2m1 0h3m5 0h2m-29 1h1m5 0h1m1 0h2m7 0h1m2 0h1m1 0h2m1 0h1m1 0h2m-29 1h7m2 0h3m1 0h6m1 0h1m3 0h2m1 0h1"/></svg><div class="kact"><button class="btn btn-s" type="button" id="kqp">PNG</button><button class="btn btn-s" type="button" id="kqv">SVG</button></div></article>
+  <article class="kp"><h3>Communiqué de presse</h3><p class="t">Les comités des fêtes et associations de Luynes s’associent pour le Téléthon 2026</p><p class="m">CIQ Luynes en action</p><div class="kact"><a class="btn btn-p" href="https://actus.13080.fr/2026/11/les-comites-des-fetes-et-associations-de-luynes-sassocient-pour-le-telethon-2026/" target="_blank" rel="noopener noreferrer">Lire</a><button class="btn btn-s" type="button" data-cp="https://actus.13080.fr/2026/11/les-comites-des-fetes-et-associations-de-luynes-sassocient-pour-le-telethon-2026/">Copier le lien</button></div></article>
  </div>
 </div></section>
 
@@ -1162,9 +1157,37 @@ const copy=async(txt,b)=>{try{await navigator.clipboard.writeText(txt)}catch(_){
 document.querySelectorAll("[data-cp]").forEach(b=>b.onclick=()=>copy(b.dataset.cp,b));
 const dl=(blob,name)=>{const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1e3)};
 const svg=()=>new XMLSerializer().serializeToString(g("kqr"));
+/* QR code en PNG (1 400 px) : utilisé par le bouton PNG et par le kit ZIP */
+const qrPng=()=>new Promise((ok,ko)=>{const im=new Image(),n=35*40;im.onload=()=>{const c=document.createElement("canvas");c.width=c.height=n;const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,n,n);x.imageSmoothingEnabled=false;x.drawImage(im,0,0,n,n);c.toBlob(b=>b?ok(b):ko())};im.onerror=ko;
+ im.src="data:image/svg+xml;charset=utf-8,"+e(svg().replace("<svg ",'<svg width="'+n+'" height="'+n+'" '))});
 g("kqv").onclick=()=>dl(new Blob([svg()],{type:"image/svg+xml"}),"telethon-2026-luynes-qrcode.svg");
-g("kqp").onclick=()=>{const im=new Image(),n=35*40;im.onload=()=>{const c=document.createElement("canvas");c.width=c.height=n;const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,n,n);x.imageSmoothingEnabled=false;x.drawImage(im,0,0,n,n);c.toBlob(b=>dl(b,"telethon-2026-luynes-qrcode.png"))};
- im.src="data:image/svg+xml;charset=utf-8,"+e(svg().replace("<svg ",'<svg width="'+n+'" height="'+n+'" '))};
+g("kqp").onclick=()=>qrPng().then(b=>dl(b,"telethon-2026-luynes-qrcode.png")).catch(()=>{});
+/* ---- Kit complet en ZIP, assemblé dans le navigateur à partir des fichiers en ligne : toujours à jour ---- */
+const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc=u=>{let c=0xFFFFFFFF;for(let i=0;i<u.length;i++)c=CRC[(c^u[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0};
+function zip(fs){const en=new TextEncoder(),P=[],C=[],d=new Date(),tm=(d.getHours()<<11)|(d.getMinutes()<<5)|(d.getSeconds()>>1),dt=((d.getFullYear()-1980)<<9)|((d.getMonth()+1)<<5)|d.getDate();let off=0,cs=0;
+ for(const f of fs){const nm=en.encode(f.n),c=crc(f.d),z=f.d.length,h=new DataView(new ArrayBuffer(30)),r=new DataView(new ArrayBuffer(46));
+  [[0,0x04034b50,4],[4,20,2],[6,0x0800,2],[10,tm,2],[12,dt,2],[14,c,4],[18,z,4],[22,z,4],[26,nm.length,2]].forEach(([o,v,l])=>l===4?h.setUint32(o,v,true):h.setUint16(o,v,true));
+  [[0,0x02014b50,4],[4,20,2],[6,20,2],[8,0x0800,2],[12,tm,2],[14,dt,2],[16,c,4],[20,z,4],[24,z,4],[28,nm.length,2],[42,off,4]].forEach(([o,v,l])=>l===4?r.setUint32(o,v,true):r.setUint16(o,v,true));
+  P.push(h,nm,f.d);C.push(r,nm);off+=30+nm.length+z;cs+=46+nm.length}
+ const E=new DataView(new ArrayBuffer(22));E.setUint32(0,0x06054b50,true);E.setUint16(8,fs.length,true);E.setUint16(10,fs.length,true);E.setUint32(12,cs,true);E.setUint32(16,off,true);
+ return new Blob([...P,...C,E],{type:"application/zip"})}
+const KF="/files/2026/12/telethon/",KD="Kit Téléthon 2026 Luynes/",CP="https://actus.13080.fr/2026/11/les-comites-des-fetes-et-associations-de-luynes-sassocient-pour-le-telethon-2026/",
+KIT=[[KF+"affiche.jpeg","Affiche.jpg","pour les messages, les réseaux sociaux et les écrans"],[KF+"affiche.pdf","Affiche à imprimer.pdf","pour une vitrine, un panneau ou un hall"],[KF+"opengraph.png","Bannière de partage.png","l’image qui s’affiche quand on partage le lien ; aussi en couverture"],
+ ['/files/2026/12/telethon/2026%20-%20Visuel_Te%CC%81le%CC%81thon%20renversant.png',"Visuel Un Téléthon renversant.png","le visuel de l’édition 2026, sur fond transparent"],[KF+"telethon-2026.ics","Ajouter à mon agenda.ics","à ouvrir pour ajouter le week-end à un agenda"]];
+g("kzip").onclick=async()=>{const b=g("kzip"),m=g("kzm"),o=b.textContent,en=new TextEncoder(),fs=[],manq=[];b.disabled=true;b.textContent="Préparation du kit…";m.textContent="";ck("event","kit_zip");
+ try{for(const[u,n] of KIT){try{const r=await fetch(u);if(!r.ok)throw 0;fs.push({n:KD+n,d:new Uint8Array(await r.arrayBuffer())})}catch(_){manq.push(n)}}
+  try{fs.push({n:KD+"QR code.png",d:new Uint8Array(await (await qrPng()).arrayBuffer())})}catch(_){manq.push("QR code.png")}
+  fs.push({n:KD+"QR code.svg",d:en.encode(svg())});
+  const L=["TÉLÉTHON 2026 À LUYNES","Samedi 5 et dimanche 6 décembre · Espace Ughetti, allée Serge Attard / rue André Claverie, Luynes, 13080 Aix-en-Provence","Au profit de l’AFM-Téléthon","",
+   "LIENS","Page de l’événement (lien court) : "+U,"Page de l’événement : https://events.13080.fr/2026/12/telethon","Faire un don : https://mapage.telethon.fr/animation/13080-2026","Communiqué de presse : "+CP,"Ajouter à mon agenda : https://events.13080.fr"+KF+"telethon-2026.ics","",
+   "TEXTE À PARTAGER",T+" Programme, billetterie et don : "+U,"",
+   "CONTENU DU KIT",...KIT.filter(k=>!manq.includes(k[1])).map(k=>"- "+k[1]+" : "+k[2]),"- QR code.png et QR code.svg : renvoient vers "+U+" (SVG pour l’impression grand format)","",
+   "Kit téléchargé le "+new Date().toLocaleString("fr-FR",{dateStyle:"long",timeStyle:"short",timeZone:"Europe/Paris"})+" depuis events.13080.fr"];
+  fs.push({n:KD+"Liens et texte à partager.txt",d:en.encode("\ufeff"+L.join("\r\n"))});
+  dl(zip(fs),"Kit Téléthon 2026 Luynes.zip");m.textContent=manq.length?"Kit téléchargé, sans : "+manq.join(", ")+" (réessayez plus tard).":"Kit téléchargé ✓"}
+ catch(_){m.textContent="Le kit n’a pas pu être préparé. Réessayez, ou téléchargez les éléments un par un."}
+ b.disabled=false;b.textContent=o};
 })();;
 /* modale ouverte : la page derrière ne défile plus */
 const lock=()=>document.documentElement.classList.toggle("lk",!!document.querySelector("dialog[open]"));
