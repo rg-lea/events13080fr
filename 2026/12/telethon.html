@@ -72,6 +72,20 @@ nav a.navdon{margin-left:8px;background:var(--brand-dark);color:#fff;font-weight
 .hero{position:sticky;top:64px;z-index:0;color:#fff;min-height:calc(100svh - var(--haut,64px));display:flex;align-items:center;background:linear-gradient(180deg,rgba(47,36,24,.4),rgba(47,36,24,.84)),url("https://actus.13080.fr/wp-content/uploads/2024/04/Banniere-scaled.png") center/cover #5a432b}
 .hero .container{width:min(calc(100% - 48px),max(1080px,64vw));padding:clamp(24px,6svh,80px) 0 clamp(40px,9svh,120px)}
 .hgrid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(24px,4vw,56px);align-items:center}
+/* compte à rebours : une tuile par unité, chiffres qui glissent à chaque changement, barre des secondes */
+.cd{margin-bottom:clamp(14px,2.6svh,30px)}
+.cdl{display:block;margin-bottom:8px;color:var(--brand);font-size:clamp(.78rem,min(1vw,1.6svh),1rem);font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.cdg{display:flex;gap:clamp(6px,.9vw,12px)}
+.cdu{position:relative;display:flex;flex-direction:column;align-items:center;min-width:clamp(60px,min(6vw,9.5svh),108px);padding:clamp(8px,1.4svh,14px) 8px clamp(8px,1.3svh,12px);border-radius:18px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(10px);overflow:hidden}
+.cdu[hidden]{display:none}
+.cdn{display:block;font-size:clamp(1.7rem,min(3.4vw,5.6svh),3.3rem);font-weight:800;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.cdn.go{animation:cdin .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes cdin{from{transform:translateY(-60%);opacity:0;filter:blur(3px)}to{transform:none;opacity:1;filter:none}}
+.cdu small{margin-top:5px;font-size:clamp(.64rem,min(.8vw,1.3svh),.82rem);font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.78}
+.cdu.u-s::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:var(--p,0%);background:var(--brand);transition:width .95s linear}
+.cdu.u-s.z::after{transition:none}
+.cdlive{display:inline-flex;align-items:center;gap:10px;padding:.5em 1.1em;border-radius:999px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);font-weight:700;font-size:clamp(1rem,min(1.4vw,2.2svh),1.4rem)}
+.cdlive .dot{width:11px;height:11px;border-radius:50%;background:#ff5a4e;animation:pulse 1.8s infinite}
 .pill{display:inline-block;padding:.45em 1.1em;border-radius:999px;background:rgba(255,255,255,.18);backdrop-filter:blur(8px);font-weight:600;font-size:clamp(.95rem,min(1.2vw,1.8svh),1.3rem);margin-bottom:clamp(12px,2svh,24px);font-variant-numeric:tabular-nums}
 h1{margin:0 0 clamp(8px,1.6svh,20px);font-size:clamp(2.6rem,min(7vw,11svh),9rem);line-height:.92;letter-spacing:-.055em;font-weight:800}
 .where{margin:0 0 clamp(6px,1.2svh,14px);font-size:clamp(1.1rem,min(2.2vw,2.8svh),2rem);font-weight:600}
@@ -449,7 +463,7 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin .sw,html.fin nav,html.f
 <main>
 <section class="hero"><div class="container hgrid">
  <div>
- <span class="pill" id="cd">Téléthon 2026</span>
+ <div class="cd" id="cd" role="timer" aria-label="Téléthon 2026"><span class="cdl">Téléthon 2026</span></div>
  <h1>Téléthon<br>à Luynes</h1>
  <p class="where">Samedi 5 et dimanche 6 décembre · Espace Ughetti</p>
  <p class="cause">Deux jours de mobilisation au profit de l’<b>AFM-Téléthon</b>, pour vaincre les maladies génétiques rares.</p>
@@ -865,13 +879,18 @@ nv.addEventListener("click",e=>{if(e.target.closest("a")){nv.classList.remove("o
  const f=()=>{document.documentElement.style.setProperty("--haut",hd.offsetHeight+"px");h.style.top=Math.min(hd.offsetHeight,innerHeight-h.offsetHeight)+"px"};
  f();addEventListener("resize",f);addEventListener("load",f);if("ResizeObserver" in window)new ResizeObserver(f).observe(hd)})();
 /* compte à rebours : mis à jour chaque seconde et au retour sur l’onglet */
-const T=Date.parse(EVT.debut),FIN=Date.parse(EVT.fin);
-let iv;
+const T=Date.parse(EVT.debut),FIN=Date.parse(EVT.fin),CDU=[["j","jours"],["h","heures"],["m","min"],["s","sec"]];
+let iv,cdMode="";
 function tick(){const n=now(),c=$("cd");
- if(n<T){const t=Math.floor((T-n)/1e3),j=Math.floor(t/86400),h=Math.floor(t%86400/3600),m=Math.floor(t%3600/60),sc=t%60,p=x=>String(x).padStart(2,"0");
-  c.textContent="Dans "+(j?j+" j ":"")+p(h)+" h "+p(m)+" min "+p(sc)+" s"}
- else if(n<FIN)c.textContent="C’est maintenant";
- else{c.textContent="Merci à tous";clearInterval(iv)}}
+ if(n<T){const t=Math.floor((T-n)/1e3),v={j:Math.floor(t/86400),h:Math.floor(t%86400/3600),m:Math.floor(t%3600/60),s:t%60};
+  if(cdMode!=="avant"){cdMode="avant";c.innerHTML=`<span class="cdl">Rendez-vous dans</span><div class="cdg" aria-hidden="true">${CDU.map(([k,l])=>`<span class="cdu u-${k}"><b class="cdn" data-u="${k}"></b><small>${l}</small></span>`).join("")}</div>`}
+  CDU.forEach(([k])=>{const el=c.querySelector(`[data-u="${k}"]`),x=String(v[k]).padStart(2,"0");if(el.textContent!==x){el.textContent=x;el.classList.remove("go");void el.offsetWidth;el.classList.add("go")}});
+  const dj=c.querySelector(".u-j");dj.hidden=!v.j;dj.querySelector("small").textContent=v.j>1?"jours":"jour";
+  /* barre des secondes : se remplit au fil de la minute, repart de zéro sans animation */
+  const ss=c.querySelector(".u-s"),pc=100*(60-v.s)/60;ss.classList.toggle("z",v.s===59);ss.style.setProperty("--p",pc+"%");
+  c.setAttribute("aria-label","Le Téléthon commence dans "+(v.j?v.j+" jour"+(v.j>1?"s":"")+", ":"")+v.h+" heures et "+v.m+" minutes")}
+ else if(n<FIN){if(cdMode!=="live"){cdMode="live";c.innerHTML=`<span class="cdlive"><i class="dot" aria-hidden="true"></i>C’est maintenant !</span>`;c.setAttribute("aria-label","Le Téléthon a commencé")}}
+ else{if(cdMode!=="fin"){cdMode="fin";c.innerHTML=`<span class="cdlive">Merci à tous</span>`;c.setAttribute("aria-label","Merci à tous")}clearInterval(iv)}}
 tick();iv=setInterval(tick,1e3);
 document.addEventListener("visibilitychange",tick);
 /* menu : le bouton de la section atteinte s’allume */
