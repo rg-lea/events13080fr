@@ -71,6 +71,18 @@ nav a.navdon{margin-left:8px;background:var(--brand-dark);color:#fff;font-weight
 /* le hero occupe exactement l’écran visible sous le bandeau et l’en-tête (--haut, calculé par le script) ; tailles indexées sur la largeur ET la hauteur */
 .hero{position:sticky;top:64px;z-index:0;color:#fff;min-height:calc(100svh - var(--haut,64px));display:flex;align-items:center;background:linear-gradient(180deg,rgba(47,36,24,.4),rgba(47,36,24,.84)),url("https://actus.13080.fr/wp-content/uploads/2024/04/Banniere-scaled.png") center/cover #5a432b}
 .hero .container{width:min(calc(100% - 48px),max(1080px,64vw));padding:clamp(24px,6svh,80px) 0 clamp(40px,9svh,120px)}
+/* bandeau défilant des logos, en bas du hero : tuiles identiques (blanches, ou sombres pour les logos clairs) */
+.hero:has(.hlogos){flex-direction:column;align-items:stretch}.hero:has(.hlogos)>.container{margin-block:auto;padding-bottom:clamp(20px,4svh,44px)}
+.hlogos{display:flex;align-items:center;gap:18px;width:min(calc(100% - 48px),max(1080px,64vw));margin:0 auto clamp(16px,3svh,32px);padding:10px 0 10px 20px;border:1px solid rgba(255,255,255,.18);border-radius:22px;background:rgba(255,255,255,.1);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff}
+.hlogos:hover{background:rgba(255,255,255,.16)}
+.hlt{flex:none;max-width:8.5em;color:var(--brand);font-size:.76rem;font-weight:700;letter-spacing:.12em;line-height:1.35;text-transform:uppercase}.hlt small{display:block;margin-top:3px;color:#fff;opacity:.75;font-size:.7rem;letter-spacing:.04em;text-transform:none;font-weight:600}
+.hlv{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.hlr{display:flex;width:max-content;animation:hl var(--d,80s) linear infinite}.hlogos:hover .hlr,.hlogos:focus-visible .hlr{animation-play-state:paused}
+@keyframes hl{to{transform:translateX(-50%)}}
+.hli{flex:none;display:flex;align-items:center;justify-content:center;width:120px;height:60px;margin-right:12px;padding:8px 12px;border-radius:14px;background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.2)}.hli.dk{background:var(--ink);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),0 6px 16px rgba(0,0,0,.2)}
+.hli img{max-width:100%;max-height:100%;object-fit:contain}
+@media(max-width:700px){.hlogos{flex-direction:column;align-items:stretch;gap:8px;padding:10px 0}.hlt{max-width:none;padding:0 16px}.hlt small{display:inline;margin-left:6px}.hli{width:96px;height:50px;margin-right:10px;padding:6px 10px}}
+@media(prefers-reduced-motion:reduce){.hlr{animation:none}.hlv{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.hli[aria-hidden]{display:none}}
 .hgrid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(24px,4vw,56px);align-items:center}
 /* compte à rebours : une tuile par unité, chiffres qui glissent à chaque changement, barre des secondes */
 .cd{margin-bottom:clamp(14px,2.6svh,30px)}
@@ -472,7 +484,9 @@ html.fin main>section:not(#merci),html.fin .fab,html.fin .sw,html.fin nav,html.f
  <div class="live" id="live" hidden aria-live="polite"></div>
  </div>
  <img class="visu" src="/files/2026/12/telethon/2026%20-%20Visuel_Te%CC%81le%CC%81thon%20renversant.png" alt="Visuel du Téléthon 2026" />
-</div></section>
+</div>
+<a class="hlogos" href="#organisations" aria-label="Organisations mobilisées : voir la liste"><span class="hlt">Ils se mobilisent<small>avec nous</small></span><span class="hlv"><span class="hlr" id="hlr"></span></span></a>
+</section>
 <section class="hero merci" id="merci" hidden><div class="container">
  <span class="pill">Téléthon 2026 · 5 et 6 décembre</span>
  <h1>Merci<br>à tous !</h1>
@@ -1215,6 +1229,25 @@ g("kzip").onclick=async()=>{const b=g("kzip"),m=g("kzm"),o=b.textContent,en=new 
 /* modale ouverte : la page derrière ne défile plus */
 const lock=()=>document.documentElement.classList.toggle("lk",!!document.querySelector("dialog[open]"));
 document.querySelectorAll("dialog").forEach(d=>new MutationObserver(lock).observe(d,{attributes:true,attributeFilter:["open"]}));
+</script>
+<script>
+/* Bandeau des logos du hero : construit à partir de la section Organisations (une seule liste à tenir à jour).
+   Tuile blanche par défaut ; tuile sombre pour les logos marqués « dk » ou détectés clairs (quand le site du logo l'autorise). */
+(()=>{const r=document.getElementById("hlr"),bloc=r&&r.closest(".hlogos");if(!r)return;
+ const L=[...document.querySelectorAll("#organisations .org,#organisations .lg")].map(a=>{const i=a.querySelector("img");return i&&{src:i.getAttribute("src"),nom:(a.querySelector("b")||a).textContent.trim(),dk:a.classList.contains("dk")}}).filter(Boolean);
+ if(L.length<3){bloc.remove();return}
+ const tuiles=L.map(()=>[]);
+ const fonce=k=>tuiles[k].forEach(t=>t.classList.add("dk"));
+ [0,1].forEach(dup=>L.forEach((o,k)=>{const t=document.createElement("span");t.className="hli"+(o.dk?" dk":"");if(dup)t.setAttribute("aria-hidden","true");
+  const im=new Image();im.src=o.src;im.alt=dup?"":"Logo "+o.nom;im.decoding="async";im.referrerPolicy="no-referrer";im.onerror=()=>tuiles[k].forEach(x=>x.remove());
+  t.appendChild(im);r.appendChild(t);tuiles[k].push(t)}));
+ r.style.setProperty("--d",Math.max(30,L.length*3.4)+"s");
+ /* logo clair sur fond transparent → tuile sombre */
+ L.forEach((o,k)=>{if(o.dk||/\.jpe?g(\?|$)/i.test(o.src))return;const im=new Image();im.crossOrigin="anonymous";im.referrerPolicy="no-referrer";
+  im.onload=()=>{try{const c=document.createElement("canvas");c.width=c.height=40;const x=c.getContext("2d",{willReadFrequently:true});x.drawImage(im,0,0,40,40);
+   const d=x.getImageData(0,0,40,40).data;let n=0,l=0,tr=0;for(let i=0;i<d.length;i+=4){if(d[i+3]<40){tr++;continue}n++;l+=.2126*d[i]+.7152*d[i+1]+.0722*d[i+2]}
+   if(tr>80&&n>20&&l/n>205)fonce(k)}catch(_){}};im.src=o.src});
+})();
 </script>
 </body>
 </html>
