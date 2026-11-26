@@ -77,8 +77,8 @@ nav a.navdon{margin-left:8px;background:var(--brand-dark);color:#fff;font-weight
 .hlogos:hover{background:rgba(255,255,255,.16)}
 .hlt{flex:none;max-width:8.5em;color:var(--brand);font-size:.76rem;font-weight:700;letter-spacing:.12em;line-height:1.35;text-transform:uppercase}.hlt small{display:block;margin-top:3px;color:#fff;opacity:.75;font-size:.7rem;letter-spacing:.04em;text-transform:none;font-weight:600}
 .hlv{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.hlr{display:flex;width:max-content;animation:hl var(--d,80s) linear infinite}.hlogos:hover .hlr,.hlogos:focus-visible .hlr{animation-play-state:paused}
-@keyframes hl{to{transform:translateX(-50%)}}
+.hlr{display:flex;width:max-content;animation:hlogos var(--d,80s) linear infinite}.hlogos:hover .hlr,.hlogos:focus-visible .hlr{animation-play-state:paused}
+@keyframes hlogos{to{transform:translateX(-50%)}}
 .hli{flex:none;display:flex;align-items:center;justify-content:center;width:120px;height:60px;margin-right:12px;padding:8px 12px;border-radius:14px;background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.2)}.hli.dk{background:var(--ink);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),0 6px 16px rgba(0,0,0,.2)}
 .hli img{max-width:100%;max-height:100%;object-fit:contain}
 @media(max-width:700px){.hlogos{flex-direction:column;align-items:stretch;gap:8px;padding:10px 0}.hlt{max-width:none;padding:0 16px}.hlt small{display:inline;margin-left:6px}.hli{width:96px;height:50px;margin-right:10px;padding:6px 10px}}
@@ -1234,7 +1234,7 @@ document.querySelectorAll("dialog").forEach(d=>new MutationObserver(lock).observ
 /* Bandeau des logos du hero : construit à partir de la section Organisations (une seule liste à tenir à jour).
    Tuile blanche par défaut ; tuile sombre pour les logos marqués « dk » ou détectés clairs (quand le site du logo l'autorise). */
 (()=>{const r=document.getElementById("hlr"),bloc=r&&r.closest(".hlogos");if(!r)return;
- const L=[...document.querySelectorAll("#organisations .org,#organisations .lg")].map(a=>{const i=a.querySelector("img");return i&&{src:i.getAttribute("src"),nom:(a.querySelector("b")||a).textContent.trim(),dk:a.classList.contains("dk")}}).filter(Boolean);
+ const L=[...document.querySelectorAll("#organisations .org:not(.org-1),#organisations .lg")].map(a=>{const i=a.querySelector("img");return i&&{src:i.getAttribute("src"),nom:(a.querySelector("b")||a).textContent.trim(),dk:a.classList.contains("dk")}}).filter(Boolean);
  if(L.length<3){bloc.remove();return}
  const tuiles=L.map(()=>[]);
  const fonce=k=>tuiles[k].forEach(t=>t.classList.add("dk"));
